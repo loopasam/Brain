@@ -5,7 +5,9 @@ package uk.ac.ebi.brain.core;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.OWLEntityChecker;
+import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
@@ -22,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import uk.ac.ebi.brain.error.ExistingClassException;
+import uk.ac.ebi.brain.error.NonExistingEntityException;
+import uk.ac.ebi.brain.error.NonExistingClassException;
 
 /**
  * @author Samuel Croset
@@ -109,17 +113,70 @@ public class Brain {
 
     /**
      * @param className
+     * @return 
      * @throws ExistingClassException 
      */
-    public void addOWLClass(String className) throws ExistingClassException {
+    public OWLClass addOWLClass(String className) throws ExistingClassException {
+	
+	//TODO check if expression if yes --> error
+	
 	if(this.ontology.containsClassInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + className))){
 	    throw new ExistingClassException("The class '"+ className +"' already exists in the ontology.");
 	}
 	OWLClass owlClass = this.factory.getOWLClass(className, this.prefixManager);
 	OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
 	manager.addAxiom(this.ontology, declarationAxiom);
+	return owlClass;
     }
-    
-    
+
+    /**
+     * @param string
+     * @param string2
+     * @throws ExistingClassException 
+     */
+    public void subClassOf(String subClassName, String superClassName) {
+
+	OWLClass subClass = null;
+	try {
+	    subClass = this.getOWLClass(subClassName);
+	} catch (NonExistingEntityException e) {
+	    try {
+		//TODO NAN !
+		subClass = this.addOWLClass(subClassName);
+	    } catch (ExistingClassException e1) {
+		e1.printStackTrace();
+	    }
+	}
+
+	OWLClass superClass = null;
+
+	try {
+	    superClass = this.getOWLClass(superClassName);
+	} catch (NonExistingEntityException e) {
+	    try {
+		superClass = this.addOWLClass(superClassName);
+	    } catch (ExistingClassException e1) {
+		e1.printStackTrace();
+	    }
+	}
+
+	OWLAxiom axiom = factory.getOWLSubClassOfAxiom(subClass, superClass);
+	AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+	manager.applyChange(addAxiom);
+    }
+
+    /**
+     * @param className
+     * @return
+     * @throws NonExistingEntityException 
+     */
+    public OWLClass getOWLClass(String className) throws NonExistingEntityException {
+
+	if(this.ontology.containsClassInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + className))){
+	    return this.factory.getOWLClass(className, this.prefixManager);
+	}else{
+	    throw new NonExistingClassException("The entity '"+ className +"' is not an OWL class");
+	}
+    }
 
 }
