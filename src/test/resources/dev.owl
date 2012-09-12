@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.example.org/dev.owl#"
+     xml:base="http://www.example.org/dev.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.example.org/dev.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/dev.owl#testing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/dev.owl#part-of -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/dev.owl#part-of">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/dev.owl#A -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#A">
+        <rdfs:label>pouet</rdfs:label>
+        <testing>whatever</testing>
+        <rdfs:seeAlso>foo</rdfs:seeAlso>
+        <rdfs:seeAlso>bar</rdfs:seeAlso>
+        <rdfs:comment>comment attached to the class</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#B -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#B">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#A"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#C -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#C">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#B"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#D -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#D">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#A"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#E -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#E">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#D"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#F -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#F">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#E"/>
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#H"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#G -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#G"/>
+    
+
+
+    <!-- http://www.example.org/dev.owl#H -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#H">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#G"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#I -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#I">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.example.org/dev.owl#part-of"/>
+                <owl:someValuesFrom rdf:resource="http://www.example.org/dev.owl#L"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#J -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#J">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#I"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#K -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#K">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#L -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#L">
+        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#K"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#M -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#M">
+        <owl:equivalentClass rdf:resource="http://www.example.org/dev.owl#N"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#N -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#N">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/dev.owl#O -->
+
+    <owl:Class rdf:about="http://www.example.org/dev.owl#O">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.example.org/dev.owl#part-of"/>
+                <owl:someValuesFrom rdf:resource="http://www.example.org/dev.owl#M"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+
