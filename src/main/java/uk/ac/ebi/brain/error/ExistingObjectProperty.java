@@ -8,10 +8,10 @@ package uk.ac.ebi.brain.error;
  *
  */
 @SuppressWarnings("serial")
-public class ExistingClassException extends ExistingEntityException {
+public class ExistingObjectProperty extends ExistingEntityException {
 
-    public ExistingClassException(String message) {
+    public ExistingObjectProperty(String message) {
 	super(message);
     }
-    
+
 }

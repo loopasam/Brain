@@ -9,18 +9,15 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 Ontology: <http://www.example.org#>
 
 
-ObjectProperty: <http://www.example.org#part-of>
+AnnotationProperty: rdfs:label
 
-    Characteristics: 
-        Transitive
     
+Datatype: xsd:string
+
     
 Class: <http://www.example.org#A>
 
-    SubClassOf: 
-        <http://www.example.org#part-of> some <http://www.example.org#B>
+    Annotations: 
+        rdfs:label "this is the content of the label"^^xsd:string
     
-    
-Class: <http://www.example.org#B>
-
     

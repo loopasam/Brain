@@ -8,10 +8,10 @@ package uk.ac.ebi.brain.error;
  *
  */
 @SuppressWarnings("serial")
-public class ExistingClassException extends ExistingEntityException {
+public class BadPrefixException extends  BrainException {
 
-    public ExistingClassException(String message) {
+    public BadPrefixException(String message) {
 	super(message);
     }
-    
+
 }

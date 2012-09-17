@@ -8,7 +8,7 @@ package uk.ac.ebi.brain.error;
  *
  */
 @SuppressWarnings("serial")
-public class NonExistingEntityException extends Exception {
+public class NonExistingEntityException extends BrainException {
 
     public NonExistingEntityException(String message) {
 	super(message);
