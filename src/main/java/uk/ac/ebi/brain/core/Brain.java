@@ -200,6 +200,7 @@ public class Brain {
      * @throws MalformedURLException 
      * @throws URISyntaxException 
      */
+    //TODO regarder avec la shortform - ne pas utiliser de prefix, seulement bidi mapper.
     public OWLClass addClass(String className) throws ExistingClassException, BadNameException {
 	try {
 	    this.getOWLClass(className);
@@ -282,6 +283,7 @@ public class Brain {
      * @throws NonExistingEntityException 
      */
     public OWLClass getOWLClass(String className) throws NonExistingClassException {
+	//TODO remplacer par un checking sur le bidi
 	if(this.ontology.containsClassInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + className))){
 	    return this.factory.getOWLClass(className, this.prefixManager);
 	}else{
@@ -591,6 +593,10 @@ public class Brain {
      * @param string
      * @throws NewOntologyException 
      */
+    //TODO faire un bidi sur la nouvelle ontology loaded. Comparer avec  this.bidi si id redondant throw new error.
+    //si tout bon, faire un merger avec le nom et utliser this.prefix comme prefix pour la merged ontology
+    //updateBidi
+    //TODO learn(prefix arg) pour specifier un prefix, utile pour quand on veut sauver en file.
     public void learn(String pathToOntology) throws NewOntologyException {
 
 	File file = new File(pathToOntology);
@@ -612,20 +618,20 @@ public class Brain {
 
 
 	updateShorForms();
-	
+
 	for (String sf : this.bidiShortFormProvider.getShortForms()) {
 	    System.out.println(sf);
-	    
+
 	    System.out.println(this.bidiShortFormProvider.getEntities(sf));
-	    
+
 	}
 
 	//	this.prefixManager.setPrefix("newDomain:", newOnto.getOntologyID().getOntologyIRI().getStart());
 	//
-		System.out.println("onto id: " + newOnto.getOntologyID());
-		System.out.println("onto IRI: " + newOnto.getOntologyID().getOntologyIRI());
-		System.out.println("onto frag: " + newOnto.getOntologyID().getOntologyIRI().getFragment());
-		System.out.println("onto start: " + newOnto.getOntologyID().getOntologyIRI().getStart());
+	System.out.println("onto id: " + newOnto.getOntologyID());
+	System.out.println("onto IRI: " + newOnto.getOntologyID().getOntologyIRI());
+	System.out.println("onto frag: " + newOnto.getOntologyID().getOntologyIRI().getFragment());
+	System.out.println("onto start: " + newOnto.getOntologyID().getOntologyIRI().getStart());
 
 
 
