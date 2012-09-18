@@ -16,7 +16,7 @@ import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLAnnotationSubject;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -24,6 +24,8 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
+import org.semanticweb.owlapi.model.OWLDataPropertyRangeAxiom;
+import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
 import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -61,10 +63,12 @@ import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
 import uk.ac.ebi.brain.error.DataPropertyExpressionException;
+import uk.ac.ebi.brain.error.ExistingAnnotationProperty;
 import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingDataProperty;
 import uk.ac.ebi.brain.error.ExistingObjectProperty;
 import uk.ac.ebi.brain.error.NewOntologyException;
+import uk.ac.ebi.brain.error.NonExistingAnnotationPropertyException;
 import uk.ac.ebi.brain.error.NonExistingDataPropertyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
 import uk.ac.ebi.brain.error.NonExistingClassException;
@@ -88,6 +92,9 @@ public class Brain {
     private OWLEntityChecker entityChecker;
     final Logger logger = LoggerFactory.getLogger(Brain.class);
     private PrefixManager prefixManager;
+    public final OWLDatatype INTEGER;
+    public final OWLDatatype FLOAT;
+    public final OWLDatatype BOOLEAN;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -163,6 +170,9 @@ public class Brain {
 	    throw new NewOntologyException(e);
 	}
 	this.prefixManager = new DefaultPrefixManager(prefix);
+	this.INTEGER = this.factory.getIntegerOWLDatatype();
+	this.FLOAT = this.factory.getFloatOWLDatatype();
+	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
     }
 
     /**
@@ -209,22 +219,18 @@ public class Brain {
 	}
     }
 
-    //TODO annotation
-//    public OWLDataProperty addAnnotation(String annotation) {
-//	try {
-//	    this.getOWLDataProperty(dataPropertyName);
-//	    throw new ExistingDataProperty("The data property '"+ dataPropertyName +"' already exists.");
-//	} catch (NonExistingDataPropertyException e) {
-//
-//	    this.factory.getOWLAnnotationProperty(annotation, this.prefixManager);
-//
-//	    OWLAnnotation owlAnnotation = this.factory.getOWLAnnotation(property, value)(dataPropertyName, this.prefixManager);
-//	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlDataProperty);
-//	    manager.addAxiom(this.ontology, declarationAxiom);
-//	    updateShorForms();
-//	    return owlDataProperty;
-//	}
-//    }
+    public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationProperty {
+	try {
+	    this.getOWLAnnotationProperty(annotationProperty);
+	    throw new ExistingAnnotationProperty("The annotation property '"+ annotationProperty +"' already exists.");
+	} catch (NonExistingAnnotationPropertyException e) {
+	    OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(annotationProperty, this.prefixManager);
+	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlAnnotationProperty);
+	    manager.addAxiom(this.ontology, declarationAxiom);
+	    updateShorForms();
+	    return owlAnnotationProperty;
+	}
+    }
 
 
     private void updateShorForms() {
@@ -244,6 +250,14 @@ public class Brain {
 	    return this.factory.getOWLClass(className, this.prefixManager);
 	}else{
 	    throw new NonExistingClassException("The entity '"+ className +"' does not exist or is not an OWL class.");
+	}
+    }
+
+    public OWLAnnotationProperty getOWLAnnotationProperty(String propertyName) throws NonExistingAnnotationPropertyException {
+	if(this.ontology.containsAnnotationPropertyInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + propertyName))){
+	    return this.factory.getOWLAnnotationProperty(propertyName, this.prefixManager);
+	}else{
+	    throw new NonExistingAnnotationPropertyException("The annotation property '"+ propertyName +"' does not exist.");
 	}
     }
 
@@ -342,11 +356,17 @@ public class Brain {
 	}
     }
 
-    //TODO does not deal with dataProperties ranges at the moment - an error is thrown
     public void range(String propertyExpression, String classExpression) throws ClassExpressionException, ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression owlPropertyExpression = parseObjectPropertyExpression(propertyExpression);
 	OWLClassExpression rangeExpression = parseClassExpression(classExpression);
 	OWLObjectPropertyRangeAxiom axiom = factory.getOWLObjectPropertyRangeAxiom(owlPropertyExpression, rangeExpression);
+	AddAxiom addAx = new AddAxiom(ontology, axiom);
+	manager.applyChange(addAx);
+    }
+
+    public void range(String propertyExpression, OWLDatatype dataType) throws DataPropertyExpressionException {
+	OWLDataPropertyExpression owlPropertyExpression = parseDataPropertyExpression(propertyExpression);
+	OWLDataPropertyRangeAxiom axiom = factory.getOWLDataPropertyRangeAxiom(owlPropertyExpression, dataType);
 	AddAxiom addAx = new AddAxiom(ontology, axiom);
 	manager.applyChange(addAx);
     }
@@ -399,16 +419,51 @@ public class Brain {
 	manager.applyChange(addAx);
     }
 
-    public void label(String entity, String label) throws NonExistingEntityException{
+    public void annotation(String entity, String annotationProperty, String content) throws NonExistingEntityException {
 	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
 	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
-	    OWLAnnotation labelAnnotation = this.factory.getOWLAnnotation(this.factory.getRDFSLabel(), this.factory.getOWLLiteral(label));
+	    OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
+	    OWLAnnotation labelAnnotation = this.factory.getOWLAnnotation(owlAnnotationProperty, this.factory.getOWLLiteral(content));
 	    OWLAxiom axiom = this.factory.getOWLAnnotationAssertionAxiom(owlEntity.getIRI(), labelAnnotation);
 	    this.manager.applyChange(new AddAxiom(this.ontology, axiom));	
 	}else{
 	    throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
 	}
     }
+
+    /**
+     * @param entity
+     * @param rdfsLabel
+     * @param label
+     * @throws NonExistingEntityException 
+     */
+    private void annotation(String entity, OWLAnnotationProperty annotationProperty, String content) throws NonExistingEntityException {
+	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
+	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
+	    OWLAnnotation labelAnnotation = this.factory.getOWLAnnotation(annotationProperty, this.factory.getOWLLiteral(content));
+	    OWLAxiom axiom = this.factory.getOWLAnnotationAssertionAxiom(owlEntity.getIRI(), labelAnnotation);
+	    this.manager.applyChange(new AddAxiom(this.ontology, axiom));	
+	}else{
+	    throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
+	}
+    }
+
+    public void label(String entity, String label) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSLabel(), label);
+    }
+
+    public void comment(String entity, String label) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSComment(), label);
+    }
+
+    public void isDefinedBy(String entity, String label) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSIsDefinedBy(), label);
+    }
+
+    public void seeAlso(String entity, String label) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSSeeAlso(), label);
+    }
+
 
 
     /**

@@ -183,12 +183,12 @@ public class BrainTest {
 	brain.range("part-of", "A");
     }
 
-    //TODO works only for Object properties at the moment
-    @Test(expected = ObjectPropertyExpressionException.class)
+    @Test
     public void rangeDataPropertyTest() throws BrainException {
 	brain.addClass("A");
 	brain.addDataProperty("has-age");
-	brain.range("has-age", "integer");
+	brain.range("has-age", brain.INTEGER);
+	brain.save("src/test/resources/output.owl");
     }
 
     @Test
@@ -265,13 +265,30 @@ public class BrainTest {
 	brain.label("A", "this is the content of the label");
 	brain.save("src/test/resources/output.owl");
     }
-    
-    //TODO deal with annotations
+
     @Test
     public void annotationTest() throws BrainException {
+	brain.addAnnotationProperty("definition");
 	brain.addClass("A");
-	
+	brain.annotation("A", "definition", "this is the definition of the entity");
+	brain.save("src/test/resources/output.owl");
     }
+
+    @Test(expected = NonExistingEntityException.class)
+    public void wrongAnnotationTest() throws BrainException {
+	brain.addAnnotationProperty("definition");
+	brain.annotation("A", "definitionCorrupted", "this is the definition of the entity");
+    }
+
+    @Test
+    public void builtInAnnotationTest() throws BrainException {
+	brain.addClass("A");
+	brain.comment("A", "his is a comment");
+	brain.seeAlso("A", "see also there");
+	brain.isDefinedBy("A", "is defined by that");
+	brain.save("src/test/resources/output.owl");
+    }
+
 
 
 }

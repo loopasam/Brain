@@ -9,7 +9,13 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 Ontology: <http://www.example.org#>
 
 
-AnnotationProperty: rdfs:label
+AnnotationProperty: rdfs:seeAlso
+
+    
+AnnotationProperty: rdfs:isDefinedBy
+
+    
+AnnotationProperty: rdfs:comment
 
     
 Datatype: xsd:string
@@ -18,6 +24,8 @@ Datatype: xsd:string
 Class: <http://www.example.org#A>
 
     Annotations: 
-        rdfs:label "this is the content of the label"^^xsd:string
+        rdfs:isDefinedBy "is defined by that"^^xsd:string,
+        rdfs:comment "his is a comment"^^xsd:string,
+        rdfs:seeAlso "see also there"^^xsd:string
     
     
