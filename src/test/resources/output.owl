@@ -6,26 +6,21 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
 
-Ontology: <http://www.example.org#>
+Ontology: <http://www.example.org/>
 
 
-AnnotationProperty: rdfs:seeAlso
-
-    
-AnnotationProperty: rdfs:isDefinedBy
+ObjectProperty: <http://www.example.org/part-of>
 
     
-AnnotationProperty: rdfs:comment
+Class: <http://www.example.org/Blood Coagulation>
 
     
-Datatype: xsd:string
+Class: <http://www.example.org/Wound Healing>
 
     
-Class: <http://www.example.org#A>
+Class: <http://www.example.org/Nucleus>
 
-    Annotations: 
-        rdfs:isDefinedBy "is defined by that"^^xsd:string,
-        rdfs:comment "his is a comment"^^xsd:string,
-        rdfs:seeAlso "see also there"^^xsd:string
     
+Class: <http://www.example.org/Cell>
+
     

@@ -25,7 +25,7 @@ import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
  * @author Samuel Croset
  *
  */
-public class BrainTest {
+public class BrainPopulationTest {
 
     Brain brain;
 
@@ -288,7 +288,5 @@ public class BrainTest {
 	brain.isDefinedBy("A", "is defined by that");
 	brain.save("src/test/resources/output.owl");
     }
-
-
 
 }

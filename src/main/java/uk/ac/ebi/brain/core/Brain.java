@@ -4,6 +4,9 @@
 package uk.ac.ebi.brain.core;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Set;
 
@@ -59,6 +62,7 @@ import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.ebi.brain.error.BadNameException;
 import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
@@ -92,9 +96,9 @@ public class Brain {
     private OWLEntityChecker entityChecker;
     final Logger logger = LoggerFactory.getLogger(Brain.class);
     private PrefixManager prefixManager;
-    public final OWLDatatype INTEGER;
-    public final OWLDatatype FLOAT;
-    public final OWLDatatype BOOLEAN;
+    public OWLDatatype INTEGER;
+    public OWLDatatype FLOAT;
+    public OWLDatatype BOOLEAN;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -179,18 +183,39 @@ public class Brain {
      * @param className
      * @return 
      * @throws ExistingClassException 
+     * @throws BadNameException 
+     * @throws MalformedURLException 
+     * @throws URISyntaxException 
      */
     public OWLClass addClass(String className) throws ExistingClassException {
 	try {
 	    this.getOWLClass(className);
 	    throw new ExistingClassException("The class '"+ className +"' already exists.");
 	} catch (NonExistingClassException e) {
+
+	    validate(className);
+
 	    OWLClass owlClass = this.factory.getOWLClass(className, this.prefixManager);
 	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
 	    manager.addAxiom(this.ontology, declarationAxiom);
 	    updateShorForms();
 	    return owlClass;
 	}
+    }
+
+    //TODO validation
+    private void validate(String entityName) {
+	URL u;
+	try {
+	    u = new URL(this.prefixManager.getDefaultPrefix() + entityName);
+	    u.toURI();
+	} catch (MalformedURLException e) {
+	    e.printStackTrace();
+	} catch (URISyntaxException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
     }
 
     public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty {
