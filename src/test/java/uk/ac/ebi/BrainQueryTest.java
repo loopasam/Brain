@@ -26,15 +26,13 @@ public class BrainQueryTest {
     Brain brain;
 
     @Before
-    public void bootstrap() throws BrainException, MalformedURLException, URISyntaxException {
-	brain = new Brain("http://www.example.org/");
-	brain.addClass("Nucleus");
-	brain.addClass("Cell");
-	brain.addClass("Blood Coagulation");
-	brain.addClass("Wound Healing");
-	brain.addObjectProperty("part-of");
-//	brain.subClassOf("Blood Coagulation", "part-of some Cell");
-	brain.save("src/test/resources/output.owl");
+    public void bootstrap() throws BrainException {
+	brain = new Brain("http://www.domain1.com/", "onto1.owl");
+	brain.addClass("A2");
+	brain.learn("src/test/resources/onto2.owl");
+	brain.label("A2", "labelled");
+//	brain.learn("src/test/resources/output.owl");
+	brain.save("src/test/resources/test.owl");
     }
 
     @Test

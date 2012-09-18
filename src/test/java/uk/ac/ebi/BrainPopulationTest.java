@@ -31,23 +31,23 @@ public class BrainPopulationTest {
 
     @Before
     public void bootstrap() throws BrainException {
-	brain = new Brain("http://www.example.org#");
+	brain = new Brain("http://www.example.org/", "bootstrap.owl");
     }
 
     @Test(expected = BadPrefixException.class)
     public void wrongPrefixTest() throws BrainException {
 	@SuppressWarnings("unused")
-	Brain brainTest = new Brain("http://www.example.org");
+	Brain brainTest = new Brain("htp://www.example.org/", "test.owl");
     }
 
     @Test
-    public void addClassTest() throws ExistingClassException{
+    public void addClassTest() throws BrainException{
 	brain.addClass("A");
 	assertEquals(true, brain.getOntology().containsClassInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "A")));
     }
 
     @Test(expected = ExistingClassException.class)
-    public void addExistingClassTest() throws ExistingClassException{
+    public void addExistingClassTest() throws BrainException{
 	brain.addClass("A");
 	assertEquals(true, brain.getOntology().containsClassInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "A")));
 	brain.addClass("A");
@@ -73,7 +73,7 @@ public class BrainPopulationTest {
     }
 
     @Test
-    public void equivalentClassesTest() throws ClassExpressionException, ExistingClassException{
+    public void equivalentClassesTest() throws BrainException{
 	brain.addClass("A");
 	brain.addClass("B");
 	brain.equivalentClasses("A", "B");
@@ -100,13 +100,13 @@ public class BrainPopulationTest {
     }
 
     @Test
-    public void objectPropertyTest() throws ExistingObjectProperty {
+    public void objectPropertyTest() throws BrainException {
 	brain.addObjectProperty("part-of");
 	assertEquals(true, brain.getOntology().containsObjectPropertyInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "part-of")));
     }
 
     @Test(expected = ExistingObjectProperty.class)
-    public void redundantObjectPropertyTest() throws ExistingObjectProperty {
+    public void redundantObjectPropertyTest() throws BrainException {
 	brain.addObjectProperty("part-of");
 	assertEquals(true, brain.getOntology().containsObjectPropertyInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "part-of")));
 	brain.addObjectProperty("part-of");
@@ -146,13 +146,13 @@ public class BrainPopulationTest {
     }
 
     @Test
-    public void functionalDataPropertyTest() throws ExistingDataProperty, DataPropertyExpressionException {
+    public void functionalDataPropertyTest() throws BrainException {
 	brain.addDataProperty("has-age");
 	brain.functional("has-age");
     }
 
     @Test(expected = DataPropertyExpressionException.class)
-    public void functionalDataPropertyAssertionTest() throws ExistingDataProperty, ExistingObjectProperty, DataPropertyExpressionException{
+    public void functionalDataPropertyAssertionTest() throws BrainException{
 	brain.addObjectProperty("part-of");
 	brain.addDataProperty("has-age");
 	brain.functional("part-of");

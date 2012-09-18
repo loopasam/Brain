@@ -57,6 +57,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
+import org.semanticweb.owlapi.util.OWLOntologyMerger;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 import org.slf4j.Logger;
@@ -95,7 +96,7 @@ public class Brain {
     private BidirectionalShortFormProvider bidiShortFormProvider;
     private OWLEntityChecker entityChecker;
     final Logger logger = LoggerFactory.getLogger(Brain.class);
-    private PrefixManager prefixManager;
+    private DefaultPrefixManager prefixManager;
     public OWLDatatype INTEGER;
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
@@ -149,7 +150,7 @@ public class Brain {
     public void setEntityChecker(OWLEntityChecker entityChecker) {
 	this.entityChecker = entityChecker;
     }
-    public void setPrefixManager(PrefixManager prefixManager) {
+    public void setPrefixManager(DefaultPrefixManager prefixManager) {
 	this.prefixManager = prefixManager;
     }
     public PrefixManager getPrefixManager() {
@@ -157,19 +158,31 @@ public class Brain {
     }
 
     /**
+     * @param separator 
      * @throws OWLOntologyCreationException 
      * @throws BadPrefixException 
      * @throws NewOntologyException 
      * 
      */
-    public Brain(String prefix) throws BadPrefixException, NewOntologyException {
-	if(!(prefix.endsWith("#") || prefix.endsWith("/"))){
-	    throw new BadPrefixException("The prefix must finish either with the symbol '/' or '#'");
+    public Brain(String prefix, String ontologyId) throws BadPrefixException, NewOntologyException {
+
+	//TODO assert ontology uri
+
+	try {
+	    @SuppressWarnings("unused")
+	    URL url = new URL(prefix);
+	} catch (MalformedURLException e) {
+	    throw new BadPrefixException(e);
 	}
+
+	if(!(prefix.endsWith("#") || prefix.endsWith("/"))){
+	    throw new BadPrefixException("The separator symbol must either be '/' or '#'");
+	}
+
 	this.manager = OWLManager.createOWLOntologyManager();
 	this.factory = manager.getOWLDataFactory();
 	try {
-	    this.ontology = manager.createOntology(IRI.create(prefix));
+	    this.ontology = manager.createOntology(IRI.create(prefix + ontologyId));
 	} catch (OWLOntologyCreationException e) {
 	    throw new NewOntologyException(e);
 	}
@@ -187,14 +200,12 @@ public class Brain {
      * @throws MalformedURLException 
      * @throws URISyntaxException 
      */
-    public OWLClass addClass(String className) throws ExistingClassException {
+    public OWLClass addClass(String className) throws ExistingClassException, BadNameException {
 	try {
 	    this.getOWLClass(className);
 	    throw new ExistingClassException("The class '"+ className +"' already exists.");
 	} catch (NonExistingClassException e) {
-
 	    validate(className);
-
 	    OWLClass owlClass = this.factory.getOWLClass(className, this.prefixManager);
 	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
 	    manager.addAxiom(this.ontology, declarationAxiom);
@@ -203,26 +214,24 @@ public class Brain {
 	}
     }
 
-    //TODO validation
-    private void validate(String entityName) {
-	URL u;
+    private void validate(String entityName) throws BadNameException {
+	URL url;
 	try {
-	    u = new URL(this.prefixManager.getDefaultPrefix() + entityName);
-	    u.toURI();
+	    url = new URL(this.prefixManager.getDefaultPrefix() + entityName);
+	    url.toURI();
 	} catch (MalformedURLException e) {
-	    e.printStackTrace();
+	    throw new BadNameException(e);
 	} catch (URISyntaxException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    throw new BadNameException(e);
 	}
-
     }
 
-    public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty {
+    public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty, BadNameException {
 	try {
 	    this.getOWLObjectProperty(objectPropertyName);
 	    throw new ExistingObjectProperty("The object property '"+ objectPropertyName +"' already exists.");
 	} catch (NonExistingObjectPropertyException e) {
+	    validate(objectPropertyName);
 	    OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(objectPropertyName, this.prefixManager);
 	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlObjectProperty);
 	    manager.addAxiom(this.ontology, declarationAxiom);
@@ -231,11 +240,12 @@ public class Brain {
 	}
     }
 
-    public OWLDataProperty addDataProperty(String dataPropertyName) throws ExistingDataProperty {
+    public OWLDataProperty addDataProperty(String dataPropertyName) throws ExistingDataProperty, BadNameException {
 	try {
 	    this.getOWLDataProperty(dataPropertyName);
 	    throw new ExistingDataProperty("The data property '"+ dataPropertyName +"' already exists.");
 	} catch (NonExistingDataPropertyException e) {
+	    validate(dataPropertyName);
 	    OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(dataPropertyName, this.prefixManager);
 	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlDataProperty);
 	    manager.addAxiom(this.ontology, declarationAxiom);
@@ -244,11 +254,12 @@ public class Brain {
 	}
     }
 
-    public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationProperty {
+    public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationProperty, BadNameException {
 	try {
 	    this.getOWLAnnotationProperty(annotationProperty);
 	    throw new ExistingAnnotationProperty("The annotation property '"+ annotationProperty +"' already exists.");
 	} catch (NonExistingAnnotationPropertyException e) {
+	    validate(annotationProperty);
 	    OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(annotationProperty, this.prefixManager);
 	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlAnnotationProperty);
 	    manager.addAxiom(this.ontology, declarationAxiom);
@@ -567,13 +578,58 @@ public class Brain {
 	OWLOntologyFormat format = manager.getOntologyFormat(this.ontology);
 	ManchesterOWLSyntaxOntologyFormat manSyntaxFormat = new ManchesterOWLSyntaxOntologyFormat();
 	if (format.isPrefixOWLOntologyFormat()) {
-	    manSyntaxFormat.copyPrefixesFrom(format.asPrefixOWLOntologyFormat());
+	    manSyntaxFormat.copyPrefixesFrom(this.prefixManager);
 	}
 	try {
 	    manager.saveOntology(this.ontology, manSyntaxFormat, IRI.create(file));
 	} catch (OWLOntologyStorageException e) {
 	    throw new StorageException(e);
 	}
+    }
+
+    /**
+     * @param string
+     * @throws NewOntologyException 
+     */
+    public void learn(String pathToOntology) throws NewOntologyException {
+
+	File file = new File(pathToOntology);
+	OWLOntology newOnto;
+	try {
+	    newOnto = this.manager.loadOntologyFromOntologyDocument(file);
+	} catch (OWLOntologyCreationException e) {
+	    throw new NewOntologyException(e);
+	}
+
+
+	OWLOntologyMerger merger = new OWLOntologyMerger(this.manager);
+	try {
+	    this.ontology = merger.createMergedOntology(this.manager, IRI.create(this.prefixManager.getDefaultPrefix() + "ontoId.owl"));
+	} catch (OWLOntologyCreationException e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
+
+
+	updateShorForms();
+	
+	for (String sf : this.bidiShortFormProvider.getShortForms()) {
+	    System.out.println(sf);
+	    
+	    System.out.println(this.bidiShortFormProvider.getEntities(sf));
+	    
+	}
+
+	//	this.prefixManager.setPrefix("newDomain:", newOnto.getOntologyID().getOntologyIRI().getStart());
+	//
+		System.out.println("onto id: " + newOnto.getOntologyID());
+		System.out.println("onto IRI: " + newOnto.getOntologyID().getOntologyIRI());
+		System.out.println("onto frag: " + newOnto.getOntologyID().getOntologyIRI().getFragment());
+		System.out.println("onto start: " + newOnto.getOntologyID().getOntologyIRI().getStart());
+
+
+
+
     }
 
 }

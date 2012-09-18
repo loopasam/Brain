@@ -1,3 +1,4 @@
+Prefix: : <http://www.example.org/>
 Prefix: owl: <http://www.w3.org/2002/07/owl#>
 Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix: xml: <http://www.w3.org/XML/1998/namespace>
@@ -6,21 +7,26 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
 
-Ontology: <http://www.example.org/>
+Ontology: <http://www.example.org/bootstrap.owl>
 
 
-ObjectProperty: <http://www.example.org/part-of>
-
-    
-Class: <http://www.example.org/Blood Coagulation>
+AnnotationProperty: rdfs:seeAlso
 
     
-Class: <http://www.example.org/Wound Healing>
+AnnotationProperty: rdfs:isDefinedBy
 
     
-Class: <http://www.example.org/Nucleus>
+AnnotationProperty: rdfs:comment
 
     
-Class: <http://www.example.org/Cell>
+Datatype: xsd:string
 
+    
+Class: A
+
+    Annotations: 
+        rdfs:isDefinedBy "is defined by that"^^xsd:string,
+        rdfs:comment "his is a comment"^^xsd:string,
+        rdfs:seeAlso "see also there"^^xsd:string
+    
     
