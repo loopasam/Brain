@@ -7,11 +7,16 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxOntologyFormat;
+import org.semanticweb.elk.owlapi.ElkReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.OWLEntityChecker;
 import org.semanticweb.owlapi.expression.ParserException;
@@ -52,16 +57,17 @@ import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.PrefixManager;
+import org.semanticweb.owlapi.profiles.OWL2ELProfile;
+import org.semanticweb.owlapi.profiles.OWLProfileReport;
+import org.semanticweb.owlapi.profiles.OWLProfileViolation;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
-import org.semanticweb.owlapi.util.OWLOntologyMerger;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import uk.ac.ebi.brain.error.BadNameException;
 import uk.ac.ebi.brain.error.BadPrefixException;
@@ -71,6 +77,7 @@ import uk.ac.ebi.brain.error.DataPropertyExpressionException;
 import uk.ac.ebi.brain.error.ExistingAnnotationProperty;
 import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingDataProperty;
+import uk.ac.ebi.brain.error.ExistingEntityException;
 import uk.ac.ebi.brain.error.ExistingObjectProperty;
 import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingAnnotationPropertyException;
@@ -95,8 +102,8 @@ public class Brain {
     private ShortFormProvider shortFormProvider;
     private BidirectionalShortFormProvider bidiShortFormProvider;
     private OWLEntityChecker entityChecker;
-    final Logger logger = LoggerFactory.getLogger(Brain.class);
     private DefaultPrefixManager prefixManager;
+    private String ontologyLocation;
     public OWLDatatype INTEGER;
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
@@ -157,6 +164,13 @@ public class Brain {
 	return prefixManager;
     }
 
+    public void setOntologyLocation(String ontologyLocation) {
+	this.ontologyLocation = ontologyLocation;
+    }
+    public String getOntologyLocation() {
+	return ontologyLocation;
+    }
+
     /**
      * @param separator 
      * @throws OWLOntologyCreationException 
@@ -164,9 +178,7 @@ public class Brain {
      * @throws NewOntologyException 
      * 
      */
-    public Brain(String prefix, String ontologyId) throws BadPrefixException, NewOntologyException {
-
-	//TODO assert ontology uri
+    public Brain(String prefix, String ontologyLocation) throws BadPrefixException, NewOntologyException {
 
 	try {
 	    @SuppressWarnings("unused")
@@ -179,17 +191,22 @@ public class Brain {
 	    throw new BadPrefixException("The separator symbol must either be '/' or '#'");
 	}
 
+	this.ontologyLocation = ontologyLocation;
 	this.manager = OWLManager.createOWLOntologyManager();
 	this.factory = manager.getOWLDataFactory();
 	try {
-	    this.ontology = manager.createOntology(IRI.create(prefix + ontologyId));
+	    this.ontology = manager.createOntology(IRI.create(prefix + ontologyLocation));
 	} catch (OWLOntologyCreationException e) {
 	    throw new NewOntologyException(e);
 	}
+	Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
+	this.reasonerFactory = new ElkReasonerFactory();
+	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
 	this.prefixManager = new DefaultPrefixManager(prefix);
 	this.INTEGER = this.factory.getIntegerOWLDatatype();
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
+	updateShorForms();
     }
 
     /**
@@ -200,7 +217,6 @@ public class Brain {
      * @throws MalformedURLException 
      * @throws URISyntaxException 
      */
-    //TODO regarder avec la shortform - ne pas utiliser de prefix, seulement bidi mapper.
     public OWLClass addClass(String className) throws ExistingClassException, BadNameException {
 	try {
 	    this.getOWLClass(className);
@@ -283,17 +299,18 @@ public class Brain {
      * @throws NonExistingEntityException 
      */
     public OWLClass getOWLClass(String className) throws NonExistingClassException {
-	//TODO remplacer par un checking sur le bidi
-	if(this.ontology.containsClassInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + className))){
-	    return this.factory.getOWLClass(className, this.prefixManager);
+	OWLEntity entity = this.bidiShortFormProvider.getEntity(className);
+	if(entity != null && entity.isOWLClass()){
+	    return (OWLClass) entity;
 	}else{
 	    throw new NonExistingClassException("The entity '"+ className +"' does not exist or is not an OWL class.");
 	}
     }
 
     public OWLAnnotationProperty getOWLAnnotationProperty(String propertyName) throws NonExistingAnnotationPropertyException {
-	if(this.ontology.containsAnnotationPropertyInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + propertyName))){
-	    return this.factory.getOWLAnnotationProperty(propertyName, this.prefixManager);
+	OWLEntity entity = this.bidiShortFormProvider.getEntity(propertyName);
+	if(entity != null && entity.isOWLAnnotationProperty()){
+	    return (OWLAnnotationProperty) entity;
 	}else{
 	    throw new NonExistingAnnotationPropertyException("The annotation property '"+ propertyName +"' does not exist.");
 	}
@@ -306,18 +323,20 @@ public class Brain {
      * @throws NonExistingEntityException 
      */
     public OWLObjectProperty getOWLObjectProperty(String objectPropertyName) throws NonExistingObjectPropertyException {
-	if(this.ontology.containsObjectPropertyInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + objectPropertyName))){
-	    return this.factory.getOWLObjectProperty(objectPropertyName, this.prefixManager);
+	OWLEntity entity = this.bidiShortFormProvider.getEntity(objectPropertyName);
+	if(entity != null && entity.isOWLObjectProperty()){
+	    return (OWLObjectProperty) entity;
 	}else{
-	    throw new NonExistingObjectPropertyException("The entity '"+ objectPropertyName +"' does not exist or is not an object property.");
+	    throw new NonExistingObjectPropertyException("The object property '"+ objectPropertyName +"' does not exist.");
 	}
     }
 
     public OWLDataProperty getOWLDataProperty(String dataPropertyName) throws NonExistingDataPropertyException {
-	if(this.ontology.containsDataPropertyInSignature(IRI.create(this.prefixManager.getDefaultPrefix() + dataPropertyName))){
-	    return this.factory.getOWLDataProperty(dataPropertyName, this.prefixManager);
+	OWLEntity entity = this.bidiShortFormProvider.getEntity(dataPropertyName);
+	if(entity != null && entity.isOWLDataProperty()){
+	    return (OWLDataProperty) entity;
 	}else{
-	    throw new NonExistingDataPropertyException("The entity '"+ dataPropertyName +"' does not exist or is not a data property.");
+	    throw new NonExistingDataPropertyException("The data property '"+ dataPropertyName +"' does not exist.");
 	}
     }
 
@@ -502,8 +521,6 @@ public class Brain {
 	this.annotation(entity, this.factory.getRDFSSeeAlso(), label);
     }
 
-
-
     /**
      * Converts a string into an OWLExpression. If a problem is encountered, an error is thrown which can be catched-up
      * in order to know more about the error.
@@ -592,12 +609,9 @@ public class Brain {
     /**
      * @param string
      * @throws NewOntologyException 
+     * @throws ExistingEntityException 
      */
-    //TODO faire un bidi sur la nouvelle ontology loaded. Comparer avec  this.bidi si id redondant throw new error.
-    //si tout bon, faire un merger avec le nom et utliser this.prefix comme prefix pour la merged ontology
-    //updateBidi
-    //TODO learn(prefix arg) pour specifier un prefix, utile pour quand on veut sauver en file.
-    public void learn(String pathToOntology) throws NewOntologyException {
+    public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
 
 	File file = new File(pathToOntology);
 	OWLOntology newOnto;
@@ -607,35 +621,93 @@ public class Brain {
 	    throw new NewOntologyException(e);
 	}
 
-
-	OWLOntologyMerger merger = new OWLOntologyMerger(this.manager);
-	try {
-	    this.ontology = merger.createMergedOntology(this.manager, IRI.create(this.prefixManager.getDefaultPrefix() + "ontoId.owl"));
-	} catch (OWLOntologyCreationException e1) {
-	    // TODO Auto-generated catch block
-	    e1.printStackTrace();
+	SimpleShortFormProvider sf = new SimpleShortFormProvider();
+	Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
+	BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, sf);
+	for (String shortFromNewOnto : bidiShortFormProvider.getShortForms()) {
+	    if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
+		throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
+	    }
 	}
 
-
+	for (OWLAxiom newAxiom : newOnto.getAxioms()) {
+	    this.manager.addAxiom(this.ontology, newAxiom);
+	}
 	updateShorForms();
-
-	for (String sf : this.bidiShortFormProvider.getShortForms()) {
-	    System.out.println(sf);
-
-	    System.out.println(this.bidiShortFormProvider.getEntities(sf));
-
-	}
-
-	//	this.prefixManager.setPrefix("newDomain:", newOnto.getOntologyID().getOntologyIRI().getStart());
-	//
-	System.out.println("onto id: " + newOnto.getOntologyID());
-	System.out.println("onto IRI: " + newOnto.getOntologyID().getOntologyIRI());
-	System.out.println("onto frag: " + newOnto.getOntologyID().getOntologyIRI().getFragment());
-	System.out.println("onto start: " + newOnto.getOntologyID().getOntologyIRI().getStart());
-
-
-
-
     }
+
+    public void learn(String pathToOntology, String prefix, String abbreviation) throws NewOntologyException, ExistingEntityException {
+	learn(pathToOntology);
+	this.prefixManager.setPrefix(abbreviation + ":", prefix);
+    }
+
+    /**
+     * @return 
+     * 
+     */
+    public boolean hasElProfile() {
+	OWL2ELProfile profile = new OWL2ELProfile();
+	OWLProfileReport report = profile.checkOntology(this.ontology);
+	if(report.getViolations().size() == 0){
+	    return true;
+	}else{
+	    return false;
+	}
+    }
+
+    /**
+     * @return
+     */
+    public List<String> getElProfileViolations() {
+	OWL2ELProfile profile = new OWL2ELProfile();
+	OWLProfileReport report = profile.checkOntology(this.ontology);
+	ArrayList<String> violations = new ArrayList<String>();
+	if(report.getViolations().size() != 0){
+	    for (OWLProfileViolation violation : report.getViolations()) {
+		violations.add(violation.toString());
+	    }
+	}	
+	return violations;
+    }
+    /**
+     * @param string
+     * @param b
+     * @return
+     * @throws ClassExpressionException 
+     */
+    public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
+	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+	Set<OWLClass> subClasses = null;
+	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
+	if(owlClassExpression.isAnonymous()){
+	    //TODO deal with anon expressions
+	    //	    OWLClass anonymousClass = getTemporaryAnonymousClass(classExpression);
+	    //	    subClasses = reasoner.getSubClasses(anonymousClass, direct).getFlattened();
+	    //	    removeTemporaryAnonymousClass(anonymousClass);
+	}else{
+	    subClasses = this.reasoner.getSubClasses(owlClassExpression, direct).getFlattened();
+	}
+	this.reasoner.dispose();
+	return sortClasses(subClasses);
+    }
+
+
+
+    /**
+     * Sort the classes based on their shortForms.
+     * @param classes
+     * @return sortedClasses
+     */
+    private List<String> sortClasses(Set<OWLClass> classes) {
+	List<String> listClasses = new ArrayList<String>();
+	for (OWLClass owlClass : classes) {
+	    if(!owlClass.isOWLNothing()){
+		listClasses.add(this.bidiShortFormProvider.getShortForm(owlClass));
+	    }
+	}
+	Collections.sort(listClasses);
+	return listClasses;
+    }
+
 
 }

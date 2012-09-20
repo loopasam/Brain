@@ -1,210 +1,138 @@
-<?xml version="1.0"?>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: : <http://www.example.org/>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
-<!DOCTYPE rdf:RDF [
-    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
-    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-]>
+
+Ontology: <http://www.example.org/public/example.owl>
 
 
-<rdf:RDF xmlns="http://www.example.org/dev.owl#"
-     xml:base="http://www.example.org/dev.owl"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <owl:Ontology rdf:about="http://www.example.org/dev.owl"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <owl:AnnotationProperty rdf:about="http://www.example.org/dev.owl#testing"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Datatypes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+AnnotationProperty: rdfs:seeAlso
 
     
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+AnnotationProperty: rdfs:label
 
     
-
-
-    <!-- http://www.example.org/dev.owl#part-of -->
-
-    <owl:ObjectProperty rdf:about="http://www.example.org/dev.owl#part-of">
-        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+AnnotationProperty: testing
 
     
+AnnotationProperty: rdfs:comment
 
-
-    <!-- http://www.example.org/dev.owl#A -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#A">
-        <rdfs:label>pouet</rdfs:label>
-        <testing>whatever</testing>
-        <rdfs:seeAlso>foo</rdfs:seeAlso>
-        <rdfs:seeAlso>bar</rdfs:seeAlso>
-        <rdfs:comment>comment attached to the class</rdfs:comment>
-    </owl:Class>
     
+Datatype: xsd:string
 
-
-    <!-- http://www.example.org/dev.owl#B -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#B">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#A"/>
-    </owl:Class>
     
+ObjectProperty: part-of
 
-
-    <!-- http://www.example.org/dev.owl#C -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#C">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#B"/>
-    </owl:Class>
+    Characteristics: 
+        Transitive
     
-
-
-    <!-- http://www.example.org/dev.owl#D -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#D">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#A"/>
-    </owl:Class>
     
+Class: owl:Thing
 
-
-    <!-- http://www.example.org/dev.owl#E -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#E">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#D"/>
-    </owl:Class>
     
+Class: O
 
-
-    <!-- http://www.example.org/dev.owl#F -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#F">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#E"/>
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#H"/>
-    </owl:Class>
+    EquivalentTo: 
+        part-of some M
     
-
-
-    <!-- http://www.example.org/dev.owl#G -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#G"/>
     
+Class: public/example.owl#Q
 
-
-    <!-- http://www.example.org/dev.owl#H -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#H">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#G"/>
-    </owl:Class>
+    SubClassOf: 
+        part-of some K
     
-
-
-    <!-- http://www.example.org/dev.owl#I -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#I">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.example.org/dev.owl#part-of"/>
-                <owl:someValuesFrom rdf:resource="http://www.example.org/dev.owl#L"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
     
+Class: M
 
-
-    <!-- http://www.example.org/dev.owl#J -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#J">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#I"/>
-    </owl:Class>
+    EquivalentTo: 
+        N
     
-
-
-    <!-- http://www.example.org/dev.owl#K -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#K">
-        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
-    </owl:Class>
     
+Class: N
 
-
-    <!-- http://www.example.org/dev.owl#L -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#L">
-        <rdfs:subClassOf rdf:resource="http://www.example.org/dev.owl#K"/>
-    </owl:Class>
+    EquivalentTo: 
+        M
     
-
-
-    <!-- http://www.example.org/dev.owl#M -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#M">
-        <owl:equivalentClass rdf:resource="http://www.example.org/dev.owl#N"/>
-    </owl:Class>
+    SubClassOf: 
+        owl:Thing
     
-
-
-    <!-- http://www.example.org/dev.owl#N -->
-
-    <owl:Class rdf:about="http://www.example.org/dev.owl#N">
-        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
-    </owl:Class>
     
+Class: K
 
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: L
 
-    <!-- http://www.example.org/dev.owl#O -->
+    SubClassOf: 
+        K
+    
+    
+Class: I
 
-    <owl:Class rdf:about="http://www.example.org/dev.owl#O">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.example.org/dev.owl#part-of"/>
-                <owl:someValuesFrom rdf:resource="http://www.example.org/dev.owl#M"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-    </owl:Class>
-</rdf:RDF>
+    SubClassOf: 
+        part-of some L
+    
+    
+Class: J
 
+    SubClassOf: 
+        I
+    
+    
+Class: G
 
+    
+Class: H
 
-<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+    SubClassOf: 
+        G
+    
+    
+Class: F
 
+    SubClassOf: 
+        E,
+        H
+    
+    
+Class: E
+
+    SubClassOf: 
+        D
+    
+    
+Class: D
+
+    SubClassOf: 
+        A
+    
+    
+Class: C
+
+    SubClassOf: 
+        B
+    
+    
+Class: B
+
+    SubClassOf: 
+        A
+    
+    
+Class: A
+
+    Annotations: 
+        rdfs:seeAlso "bar"^^xsd:string,
+        rdfs:seeAlso "foo"^^xsd:string,
+        rdfs:label "pouet"^^xsd:string,
+        testing "whatever"^^xsd:string,
+        rdfs:comment "comment attached to the class"^^xsd:string
+    
+    
