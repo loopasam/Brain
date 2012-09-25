@@ -31,13 +31,14 @@ public class BrainPopulationTest {
 
     @Before
     public void bootstrap() throws BrainException {
-	brain = new Brain("http://www.example.org/", "bootstrap.owl");
+	brain = new Brain();
+	brain.setPrefix("http://www.example.org/");
+	brain.setOntologyLocation("public/bootstrap.owl");
     }
 
     @Test(expected = BadPrefixException.class)
     public void wrongPrefixTest() throws BrainException {
-	@SuppressWarnings("unused")
-	Brain brainTest = new Brain("htp://www.example.org/", "test.owl");
+	brain.setPrefix("htp://www.example.org/");
     }
 
     @Test

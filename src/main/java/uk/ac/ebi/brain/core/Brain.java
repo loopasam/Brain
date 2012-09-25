@@ -103,10 +103,12 @@ public class Brain {
     private BidirectionalShortFormProvider bidiShortFormProvider;
     private OWLEntityChecker entityChecker;
     private DefaultPrefixManager prefixManager;
-    private String ontologyLocation;
+    private String suffix;
     public OWLDatatype INTEGER;
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
+    public static final String DEFAULT_PREFIX = "brain#";
+    private String prefix;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -147,8 +149,7 @@ public class Brain {
     public BidirectionalShortFormProvider getBidiShortFormProvider() {
 	return bidiShortFormProvider;
     }
-    public void setBidiShortFormProvider(
-	    BidirectionalShortFormProvider bidiShortFormProvider) {
+    public void setBidiShortFormProvider(BidirectionalShortFormProvider bidiShortFormProvider) {
 	this.bidiShortFormProvider = bidiShortFormProvider;
     }
     public OWLEntityChecker getEntityChecker() {
@@ -163,13 +164,26 @@ public class Brain {
     public PrefixManager getPrefixManager() {
 	return prefixManager;
     }
+    public String getPrefix() {
+	return prefix;
+    }
+    public void setPrefix(String prefix) throws BadPrefixException {
+	if(!prefix.equals(DEFAULT_PREFIX)){
+	    try {
+		@SuppressWarnings("unused")
+		URL url = new URL(prefix);
+	    } catch (MalformedURLException e) {
+		throw new BadPrefixException(e);
+	    }
+	    if(!(prefix.endsWith("#") || prefix.endsWith("/"))){
+		throw new BadPrefixException("The separator symbol must either be '/' or '#'");
+	    }
+	}
+	this.prefix = prefix;
+	this.prefixManager = new DefaultPrefixManager(prefix);	
+    }
 
-    public void setOntologyLocation(String ontologyLocation) {
-	this.ontologyLocation = ontologyLocation;
-    }
-    public String getOntologyLocation() {
-	return ontologyLocation;
-    }
+
 
     /**
      * @param separator 
@@ -178,36 +192,31 @@ public class Brain {
      * @throws NewOntologyException 
      * 
      */
-    public Brain(String prefix, String ontologyLocation) throws BadPrefixException, NewOntologyException {
-
-	try {
-	    @SuppressWarnings("unused")
-	    URL url = new URL(prefix);
-	} catch (MalformedURLException e) {
-	    throw new BadPrefixException(e);
-	}
-
-	if(!(prefix.endsWith("#") || prefix.endsWith("/"))){
-	    throw new BadPrefixException("The separator symbol must either be '/' or '#'");
-	}
-
-	this.ontologyLocation = ontologyLocation;
+    public Brain(String prefix, String suffix) throws NewOntologyException, BadPrefixException {
+	this.setPrefix(prefix);
 	this.manager = OWLManager.createOWLOntologyManager();
 	this.factory = manager.getOWLDataFactory();
 	try {
-	    this.ontology = manager.createOntology(IRI.create(prefix + ontologyLocation));
+	    this.ontology = manager.createOntology(IRI.create(prefix + suffix));
 	} catch (OWLOntologyCreationException e) {
 	    throw new NewOntologyException(e);
 	}
+
 	Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 	this.reasonerFactory = new ElkReasonerFactory();
 	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
-	this.prefixManager = new DefaultPrefixManager(prefix);
+
 	this.INTEGER = this.factory.getIntegerOWLDatatype();
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
 	updateShorForms();
     }
+
+    public Brain() throws NewOntologyException, BadPrefixException {
+	this(DEFAULT_PREFIX, "brain.owl");
+    }
+
+
 
     /**
      * @param className
@@ -232,15 +241,24 @@ public class Brain {
     }
 
     private void validate(String entityName) throws BadNameException {
+
 	URL url;
+	String prefix = null;
+	if(this.getPrefix().equals(DEFAULT_PREFIX)){
+	    prefix = "http://www.example.org/";
+	}else{
+	    prefix = this.prefixManager.getDefaultPrefix();
+	}
+
 	try {
-	    url = new URL(this.prefixManager.getDefaultPrefix() + entityName);
+	    url = new URL(prefix + entityName);
 	    url.toURI();
 	} catch (MalformedURLException e) {
 	    throw new BadNameException(e);
 	} catch (URISyntaxException e) {
-	    throw new BadNameException(e);
+	    throw new BadNameException("'"+entityName+"' is not valid valid name for an OWL entity. Use only characters that are valid for a URI (no space, etc...).");
 	}
+
     }
 
     public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty, BadNameException {
