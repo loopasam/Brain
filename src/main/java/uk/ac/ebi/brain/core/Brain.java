@@ -103,12 +103,11 @@ public class Brain {
     private BidirectionalShortFormProvider bidiShortFormProvider;
     private OWLEntityChecker entityChecker;
     private DefaultPrefixManager prefixManager;
-    private String suffix;
     public OWLDatatype INTEGER;
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
     public static final String DEFAULT_PREFIX = "brain#";
-    private String prefix;
+    //    private String prefix;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -164,10 +163,17 @@ public class Brain {
     public PrefixManager getPrefixManager() {
 	return prefixManager;
     }
-    public String getPrefix() {
-	return prefix;
-    }
-    public void setPrefix(String prefix) throws BadPrefixException {
+
+
+    /**
+     * @param separator 
+     * @throws OWLOntologyCreationException 
+     * @throws BadPrefixException 
+     * @throws NewOntologyException 
+     * 
+     */
+    public Brain(String prefix, String ontologyIri) throws NewOntologyException, BadPrefixException {
+
 	if(!prefix.equals(DEFAULT_PREFIX)){
 	    try {
 		@SuppressWarnings("unused")
@@ -179,25 +185,12 @@ public class Brain {
 		throw new BadPrefixException("The separator symbol must either be '/' or '#'");
 	    }
 	}
-	this.prefix = prefix;
-	this.prefixManager = new DefaultPrefixManager(prefix);	
-    }
 
-
-
-    /**
-     * @param separator 
-     * @throws OWLOntologyCreationException 
-     * @throws BadPrefixException 
-     * @throws NewOntologyException 
-     * 
-     */
-    public Brain(String prefix, String suffix) throws NewOntologyException, BadPrefixException {
-	this.setPrefix(prefix);
+	this.prefixManager = new DefaultPrefixManager(prefix);
 	this.manager = OWLManager.createOWLOntologyManager();
 	this.factory = manager.getOWLDataFactory();
 	try {
-	    this.ontology = manager.createOntology(IRI.create(prefix + suffix));
+	    this.ontology = manager.createOntology(IRI.create(ontologyIri));
 	} catch (OWLOntologyCreationException e) {
 	    throw new NewOntologyException(e);
 	}
@@ -216,7 +209,9 @@ public class Brain {
 	this(DEFAULT_PREFIX, "brain.owl");
     }
 
-
+    public void prefix(String longForm, String abbreviation) {
+	this.prefixManager.setPrefix(abbreviation + ":", longForm);
+    }
 
     /**
      * @param className
@@ -240,11 +235,28 @@ public class Brain {
 	}
     }
 
+    public OWLClass addExternalClass(String externalClassName) throws ExistingClassException, BadNameException {
+	try {
+	    //TODO more test on that like passing external class without prefixes, etc...
+	    this.getOWLClass(externalClassName);
+	    throw new ExistingClassException("The class '"+ externalClassName +"' already exists.");
+	} catch (NonExistingClassException e) {
+	    //TODO validate avec une nouvelle methode special external classes
+	    validate(externalClassName);
+	    OWLClass owlClass = this.factory.getOWLClass(IRI.create(externalClassName));
+	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
+	    manager.addAxiom(this.ontology, declarationAxiom);
+	    updateShorForms();
+	    return owlClass;
+	}
+    }
+
+
     private void validate(String entityName) throws BadNameException {
 
 	URL url;
 	String prefix = null;
-	if(this.getPrefix().equals(DEFAULT_PREFIX)){
+	if(this.prefixManager.getDefaultPrefix().equals(DEFAULT_PREFIX)){
 	    prefix = "http://www.example.org/";
 	}else{
 	    prefix = this.prefixManager.getDefaultPrefix();
@@ -654,10 +666,10 @@ public class Brain {
 	updateShorForms();
     }
 
-    public void learn(String pathToOntology, String prefix, String abbreviation) throws NewOntologyException, ExistingEntityException {
-	learn(pathToOntology);
-	this.prefixManager.setPrefix(abbreviation + ":", prefix);
-    }
+    //    public void learn(String pathToOntology, String prefix, String abbreviation) throws NewOntologyException, ExistingEntityException {
+    //	learn(pathToOntology);
+    //	this.prefixManager.setPrefix(abbreviation + ":", prefix);
+    //    }
 
     /**
      * @return 

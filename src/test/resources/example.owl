@@ -11,9 +11,6 @@ Prefix: chebi: <http://www.chebi.org/>
 Ontology: <http://www.example.org/public/example.owl>
 
 
-Class: A
-
-    
-Class: chebi:ID45
+Class: <http://www.chebi.org/CHEBI:45>
 
     
