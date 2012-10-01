@@ -41,6 +41,7 @@ import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentDataPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLFunctionalDataPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
@@ -668,16 +669,43 @@ public class Brain {
 	}
     }
 
+    private String getAnnotation(String entity, OWLAnnotationProperty annotationProperty) throws NonExistingEntityException {
+	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
+	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
+	    for (OWLAnnotation annotation : owlEntity.getAnnotations(this.ontology, annotationProperty)) {
+		if (annotation.getValue() instanceof OWLLiteral) {
+		    OWLLiteral val = (OWLLiteral) annotation.getValue();
+		    return val.getLiteral();
+		}
+	    }
+	}else{
+	    throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
+	}
+	throw new NonExistingEntityException("The entity '"+entity+"' has no annotation of this type attached to it.");
+    }
+
     public void label(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSLabel(), label);
+    }
+
+    public String getLabel(String entity) throws NonExistingEntityException {
+	return this.getAnnotation(entity, this.factory.getRDFSLabel());
     }
 
     public void comment(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSComment(), label);
     }
+    
+    public String getComment(String entity) throws NonExistingEntityException {
+	return this.getAnnotation(entity, this.factory.getRDFSComment());
+    }
 
     public void isDefinedBy(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSIsDefinedBy(), label);
+    }
+    
+    public String getIsDefinedBy(String entity) throws NonExistingEntityException {
+	return this.getAnnotation(entity, this.factory.getRDFSIsDefinedBy());
     }
 
     public void seeAlso(String entity, String label) throws NonExistingEntityException {
@@ -958,6 +986,21 @@ public class Brain {
 	boolean contained = subClasses.contains(presumedSubClass);
 	return contained;
     }
+
+    /**
+     * Test whether an OWLClass is the super class of an other.
+     * @param owlClassToTest
+     * @param owlClassToTestAgainst
+     * @param direct
+     * @return isASubClass
+     * @throws ClassExpressionException 
+     */
+    public boolean isSuperClass(String presumedSuperClass, String presumedSubClass, boolean direct) throws ClassExpressionException {
+	List<String> superClasses = this.getSubClasses(presumedSuperClass, direct);
+	boolean contained = superClasses.contains(presumedSubClass);
+	return contained;
+    }
+
 
 
 }

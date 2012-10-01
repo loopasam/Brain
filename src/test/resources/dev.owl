@@ -14,6 +14,9 @@ Ontology: <http://www.example.org/public/example.owl>
 AnnotationProperty: rdfs:seeAlso
 
     
+AnnotationProperty: rdfs:isDefinedBy
+
+    
 AnnotationProperty: rdfs:label
 
     
@@ -35,16 +38,16 @@ ObjectProperty: part-of
 Class: owl:Thing
 
     
-Class: O
-
-    EquivalentTo: 
-        part-of some M
-    
-    
 Class: Q
 
     SubClassOf: 
         part-of some K
+    
+    
+Class: O
+
+    EquivalentTo: 
+        part-of some M
     
     
 Class: M
@@ -133,6 +136,7 @@ Class: A
         rdfs:seeAlso "foo"^^xsd:string,
         rdfs:label "pouet"^^xsd:string,
         testing "whatever"^^xsd:string,
-        rdfs:comment "comment attached to the class"^^xsd:string
+        rdfs:comment "comment attached to the class"^^xsd:string,
+        rdfs:isDefinedBy "something"^^xsd:string
     
     
