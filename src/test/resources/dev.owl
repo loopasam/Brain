@@ -133,7 +133,6 @@ Class: A
 
     Annotations: 
         rdfs:seeAlso "bar"^^xsd:string,
-        rdfs:seeAlso "foo"^^xsd:string,
         rdfs:label "pouet"^^xsd:string,
         testing "whatever"^^xsd:string,
         rdfs:comment "comment attached to the class"^^xsd:string,

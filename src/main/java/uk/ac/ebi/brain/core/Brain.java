@@ -684,6 +684,11 @@ public class Brain {
 	throw new NonExistingEntityException("The entity '"+entity+"' has no annotation of this type attached to it.");
     }
 
+    public String getAnnotation(String entity, String annotationProperty) throws NonExistingEntityException {
+	OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
+	return this.getAnnotation(entity, owlAnnotationProperty);
+    }
+
     public void label(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSLabel(), label);
     }
@@ -695,7 +700,7 @@ public class Brain {
     public void comment(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSComment(), label);
     }
-    
+
     public String getComment(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSComment());
     }
@@ -703,7 +708,7 @@ public class Brain {
     public void isDefinedBy(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSIsDefinedBy(), label);
     }
-    
+
     public String getIsDefinedBy(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSIsDefinedBy());
     }
@@ -711,6 +716,11 @@ public class Brain {
     public void seeAlso(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSSeeAlso(), label);
     }
+
+    public String getSeeAlso(String entity) throws NonExistingEntityException {
+	return this.getAnnotation(entity, this.factory.getRDFSSeeAlso());
+    }
+
 
     /**
      * Converts a string into an OWLExpression. If a problem is encountered, an error is thrown which can be catched-up

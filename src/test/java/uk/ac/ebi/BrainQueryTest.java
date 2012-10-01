@@ -8,17 +8,12 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.ebi.brain.core.Brain;
-import uk.ac.ebi.brain.error.BadNameException;
-import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
-import uk.ac.ebi.brain.error.ExistingClassException;
-import uk.ac.ebi.brain.error.NewOntologyException;
 
 /**
  * @author Samuel Croset
@@ -108,7 +103,7 @@ public class BrainQueryTest {
 	boolean isSubClass2 = brain.isSubClass("part-of some K", "Q", false);
 	assertEquals(false, isSubClass2);
     }
-    
+
     @Test
     public void isSuperClassTest() throws BrainException {
 	boolean isSuperClass = brain.isSuperClass("Thing", "D", false);
@@ -118,7 +113,7 @@ public class BrainQueryTest {
 	boolean isSuperClass2 = brain.isSuperClass("part-of some K", "Q", false);
 	assertEquals(true, isSuperClass2);
     }
-    
+
     @Test
     public void getLabelTest() throws BrainException {
 	String label = brain.getLabel("A");
@@ -127,7 +122,10 @@ public class BrainQueryTest {
 	assertEquals("comment attached to the class", comment);
 	String isDefinedBy = brain.getIsDefinedBy("A");
 	assertEquals("something", isDefinedBy);
-	//TODO testing annot property
+	String seeAlso = brain.getSeeAlso("A");
+	assertEquals("bar", seeAlso);
+	String testing = brain.getAnnotation("A", "testing");
+	assertEquals("whatever", testing);
     }
 
 
