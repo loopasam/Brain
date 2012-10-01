@@ -8,12 +8,12 @@ package uk.ac.ebi.brain.error;
  *
  */
 @SuppressWarnings("serial")
-public class ExistingDataProperty extends ExistingEntityException {
+public class ExistingDataPropertyException extends ExistingEntityException {
 
     /**
      * @param message
      */
-    public ExistingDataProperty(String message) {
+    public ExistingDataPropertyException(String message) {
 	super(message);
 	// TODO Auto-generated constructor stub
     }

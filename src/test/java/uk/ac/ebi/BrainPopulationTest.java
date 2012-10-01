@@ -17,9 +17,8 @@ import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
 import uk.ac.ebi.brain.error.DataPropertyExpressionException;
 import uk.ac.ebi.brain.error.ExistingClassException;
-import uk.ac.ebi.brain.error.ExistingDataProperty;
-import uk.ac.ebi.brain.error.ExistingObjectProperty;
-import uk.ac.ebi.brain.error.NewOntologyException;
+import uk.ac.ebi.brain.error.ExistingDataPropertyException;
+import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
 import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
 
@@ -118,11 +117,18 @@ public class BrainPopulationTest {
 	assertEquals(true, brain.getOntology().containsObjectPropertyInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "part-of")));
     }
 
-    @Test(expected = ExistingObjectProperty.class)
+    @Test(expected = ExistingObjectPropertyException.class)
     public void redundantObjectPropertyTest() throws BrainException {
 	brain.addObjectProperty("part-of");
 	assertEquals(true, brain.getOntology().containsObjectPropertyInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "part-of")));
 	brain.addObjectProperty("part-of");
+    }
+
+    @Test
+    public void addExternalObjectPropertyTest() throws BrainException{
+	brain.addObjectProperty("http://www.example.org/part-of");
+	assertEquals(true, brain.getOntology().containsObjectPropertyInSignature(IRI.create("http://www.example.org/part-of")));
+	assertNotNull(brain.getOWLObjectProperty("part-of"));
     }
 
     @Test
@@ -152,10 +158,17 @@ public class BrainPopulationTest {
 	brain.save("src/test/resources/output.owl");
     }
 
-    @Test(expected = ExistingDataProperty.class)
+    @Test(expected = ExistingDataPropertyException.class)
     public void existingDataPropertyTest() throws BrainException {
 	brain.addDataProperty("has-age");
 	brain.addDataProperty("has-age");
+    }
+
+    @Test
+    public void addExternalDataPropertyTest() throws BrainException{
+	brain.addDataProperty("http://www.example.org/has-age");
+	assertEquals(true, brain.getOntology().containsDataPropertyInSignature(IRI.create("http://www.example.org/has-age")));
+	assertNotNull(brain.getOWLDataProperty("has-age"));
     }
 
     @Test
@@ -277,6 +290,13 @@ public class BrainPopulationTest {
 	brain.addClass("A");
 	brain.label("A", "this is the content of the label");
 	brain.save("src/test/resources/output.owl");
+    }
+    
+    @Test
+    public void externalAnnotationTest() throws BrainException {
+	brain.addAnnotationProperty("http://example.org/definition");
+	brain.addClass("A");
+	brain.annotation("A", "definition", "this is the definition of the entity");
     }
 
     @Test

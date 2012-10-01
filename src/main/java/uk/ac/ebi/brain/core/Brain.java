@@ -51,7 +51,6 @@ import org.semanticweb.owlapi.model.OWLOntologyFormat;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLReflexiveObjectPropertyAxiom;
-import org.semanticweb.owlapi.model.OWLRuntimeException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
@@ -61,7 +60,6 @@ import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
-import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
@@ -76,11 +74,11 @@ import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
 import uk.ac.ebi.brain.error.DataPropertyExpressionException;
-import uk.ac.ebi.brain.error.ExistingAnnotationProperty;
+import uk.ac.ebi.brain.error.ExistingAnnotationPropertyException;
 import uk.ac.ebi.brain.error.ExistingClassException;
-import uk.ac.ebi.brain.error.ExistingDataProperty;
+import uk.ac.ebi.brain.error.ExistingDataPropertyException;
 import uk.ac.ebi.brain.error.ExistingEntityException;
-import uk.ac.ebi.brain.error.ExistingObjectProperty;
+import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
 import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingAnnotationPropertyException;
 import uk.ac.ebi.brain.error.NonExistingDataPropertyException;
@@ -223,7 +221,6 @@ public class Brain {
      * @throws URISyntaxException 
      */
     public OWLClass addClass(String className) throws BadNameException, ExistingClassException {
-	//TODO update the other owl entities the same way as this class
 	if(isExternalEntity(className)){
 	    return addExternalClass(className);
 	}else{
@@ -245,7 +242,7 @@ public class Brain {
 	}
     }
 
-    private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {	    
+    private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {
 	validateExternalEntity(className);
 	OWLClass owlClass = this.factory.getOWLClass(IRI.create(className));
 	SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -314,45 +311,143 @@ public class Brain {
     }
 
 
-    public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty, BadNameException {
+    public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectPropertyException, BadNameException {
+	if(isExternalEntity(objectPropertyName)){
+	    return addExternalObjectProperty(objectPropertyName);
+	}else{
+	    try {
+		this.getOWLObjectProperty(objectPropertyName);
+		throw new ExistingObjectPropertyException("The object property '"+ objectPropertyName +"' already exists.");
+	    } catch (NonExistingObjectPropertyException e) {
+		validate(objectPropertyName);
+		OWLObjectProperty owlObjectProperty = null;
+		try{
+		    owlObjectProperty = this.factory.getOWLObjectProperty(objectPropertyName, this.prefixManager);
+		} catch(RuntimeException re) {
+		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
+		}
+		declare(owlObjectProperty);
+		updateShorForms();
+		return owlObjectProperty;
+	    }
+	}
+    }
+
+    private OWLObjectProperty addExternalObjectProperty(String objectPropertyName) throws BadNameException, ExistingObjectPropertyException {
+	validateExternalEntity(objectPropertyName);
+	OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(IRI.create(objectPropertyName));
+	SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+	String sf = shortFormProvider.getShortForm(owlObjectProperty);
 	try {
-	    this.getOWLObjectProperty(objectPropertyName);
-	    throw new ExistingObjectProperty("The object property '"+ objectPropertyName +"' already exists.");
+	    this.getOWLObjectProperty(sf);
+	    removeExternalObjectProperty(objectPropertyName);
+	    throw new ExistingObjectPropertyException("An object property as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingObjectPropertyException e) {
-	    validate(objectPropertyName);
-	    OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(objectPropertyName, this.prefixManager);
 	    declare(owlObjectProperty);
 	    updateShorForms();
 	    return owlObjectProperty;
 	}
     }
 
-    public OWLDataProperty addDataProperty(String dataPropertyName) throws ExistingDataProperty, BadNameException {
+    private void removeExternalObjectProperty(String externalObjectProperty) {
+	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
+	OWLObjectProperty owlObjectPropertyToRemove = this.factory.getOWLObjectProperty(IRI.create(externalObjectProperty));
+	owlObjectPropertyToRemove.accept(remover);
+	this.manager.applyChanges(remover.getChanges());
+	remover.reset();
+    }
+
+    public OWLDataProperty addDataProperty(String dataPropertyName) throws ExistingDataPropertyException, BadNameException {
+	if(isExternalEntity(dataPropertyName)){
+	    return addExternalDataProperty(dataPropertyName);
+	}else{
+	    try {
+		this.getOWLDataProperty(dataPropertyName);
+		throw new ExistingDataPropertyException("The data property '"+ dataPropertyName +"' already exists.");
+	    } catch (NonExistingDataPropertyException e) {
+		validate(dataPropertyName);
+		OWLDataProperty owlDataProperty = null;
+		try{
+		    owlDataProperty = this.factory.getOWLDataProperty(dataPropertyName, this.prefixManager);
+		} catch(RuntimeException re) {
+		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
+		}
+		declare(owlDataProperty);
+		updateShorForms();
+		return owlDataProperty;
+	    }
+	}
+    }
+
+    private OWLDataProperty addExternalDataProperty(String dataPropertyName) throws BadNameException, ExistingDataPropertyException {
+	validateExternalEntity(dataPropertyName);
+	OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(IRI.create(dataPropertyName));
+	SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+	String sf = shortFormProvider.getShortForm(owlDataProperty);
 	try {
-	    this.getOWLDataProperty(dataPropertyName);
-	    throw new ExistingDataProperty("The data property '"+ dataPropertyName +"' already exists.");
+	    this.getOWLDataProperty(sf);
+	    removeExternalDataProperty(dataPropertyName);
+	    throw new ExistingDataPropertyException("An entity as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingDataPropertyException e) {
-	    validate(dataPropertyName);
-	    OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(dataPropertyName, this.prefixManager);
 	    declare(owlDataProperty);
 	    updateShorForms();
 	    return owlDataProperty;
 	}
     }
 
-    public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationProperty, BadNameException {
+    private void removeExternalDataProperty(String externalDataProperty) {
+	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
+	OWLDataProperty owlDataPropertyToRemove = this.factory.getOWLDataProperty(IRI.create(externalDataProperty));
+	owlDataPropertyToRemove.accept(remover);
+	this.manager.applyChanges(remover.getChanges());
+	remover.reset();
+    }
+
+    public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationPropertyException, BadNameException {
+	if(isExternalEntity(annotationProperty)){
+	    return addExternalAnnotationProperty(annotationProperty);
+	}else{
+	    try {
+		this.getOWLAnnotationProperty(annotationProperty);
+		throw new ExistingAnnotationPropertyException("The annotation property '"+ annotationProperty +"' already exists.");
+	    } catch (NonExistingAnnotationPropertyException e) {
+		validate(annotationProperty);
+		OWLAnnotationProperty owlAnnotationProperty = null;
+		try{
+		    owlAnnotationProperty = this.factory.getOWLAnnotationProperty(annotationProperty, this.prefixManager);
+		} catch(RuntimeException re) {
+		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
+		}
+		declare(owlAnnotationProperty);
+		updateShorForms();
+		return owlAnnotationProperty;
+	    }
+	}
+    }
+
+    private OWLAnnotationProperty addExternalAnnotationProperty(String annotationPropertyName) throws BadNameException, ExistingAnnotationPropertyException {
+	validateExternalEntity(annotationPropertyName);
+	OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(IRI.create(annotationPropertyName));
+	SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+	String sf = shortFormProvider.getShortForm(owlAnnotationProperty);
 	try {
-	    this.getOWLAnnotationProperty(annotationProperty);
-	    throw new ExistingAnnotationProperty("The annotation property '"+ annotationProperty +"' already exists.");
+	    this.getOWLAnnotationProperty(sf);
+	    removeExternalAnnotationProperty(annotationPropertyName);
+	    throw new ExistingAnnotationPropertyException("An entity as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingAnnotationPropertyException e) {
-	    validate(annotationProperty);
-	    OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(annotationProperty, this.prefixManager);
 	    declare(owlAnnotationProperty);
 	    updateShorForms();
 	    return owlAnnotationProperty;
 	}
     }
 
+    private void removeExternalAnnotationProperty(String externalAnnotationProperty) {
+	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
+	OWLAnnotationProperty owlAnnotationPropertyToRemove = this.factory.getOWLAnnotationProperty(IRI.create(externalAnnotationProperty));
+	owlAnnotationPropertyToRemove.accept(remover);
+	this.manager.applyChanges(remover.getChanges());
+	remover.reset();
+    }
 
     private void updateShorForms() {
 	this.shortFormProvider = new SimpleShortFormProvider();
