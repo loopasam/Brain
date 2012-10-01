@@ -51,6 +51,7 @@ import org.semanticweb.owlapi.model.OWLOntologyFormat;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLReflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLRuntimeException;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
@@ -66,6 +67,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
+import org.semanticweb.owlapi.util.OWLEntityRemover;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 
@@ -107,7 +109,6 @@ public class Brain {
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
     public static final String DEFAULT_PREFIX = "brain#";
-    //    private String prefix;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -221,47 +222,75 @@ public class Brain {
      * @throws MalformedURLException 
      * @throws URISyntaxException 
      */
-    public OWLClass addClass(String className) throws ExistingClassException, BadNameException {
-	try {
-	    this.getOWLClass(className);
-	    throw new ExistingClassException("The class '"+ className +"' already exists.");
-	} catch (NonExistingClassException e) {
-	    validate(className);
-	    OWLClass owlClass = this.factory.getOWLClass(className, this.prefixManager);
-	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
-	    manager.addAxiom(this.ontology, declarationAxiom);
-	    updateShorForms();
-	    return owlClass;
+    public OWLClass addClass(String className) throws BadNameException, ExistingClassException {
+	//TODO update the other owl entities the same way as this class
+	if(isExternalEntity(className)){
+	    return addExternalClass(className);
+	}else{
+	    try {
+		this.getOWLClass(className);
+		throw new ExistingClassException("The class '"+ className +"' already exists.");
+	    } catch (NonExistingClassException e) {
+		validate(className);
+		OWLClass owlClass = null;
+		try{
+		    owlClass = this.factory.getOWLClass(className, this.prefixManager);
+		} catch(RuntimeException re) {
+		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
+		}
+		declare(owlClass);
+		updateShorForms();
+		return owlClass;
+	    }
 	}
     }
 
-    public OWLClass addExternalClass(String externalClassName) throws ExistingClassException, BadNameException {
+    private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {	    
+	validateExternalEntity(className);
+	OWLClass owlClass = this.factory.getOWLClass(IRI.create(className));
+	SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+	String sf = shortFormProvider.getShortForm(owlClass);
 	try {
-	    //TODO more test on that like passing external class without prefixes, etc...
-	    this.getOWLClass(externalClassName);
-	    throw new ExistingClassException("The class '"+ externalClassName +"' already exists.");
+	    this.getOWLClass(sf);
+	    removeExternalClass(className);
+	    throw new ExistingClassException("A class as already the short form '"+ sf +"'. A class name as to be unique.");
 	} catch (NonExistingClassException e) {
-	    //TODO validate avec une nouvelle methode special external classes
-	    validate(externalClassName);
-	    OWLClass owlClass = this.factory.getOWLClass(IRI.create(externalClassName));
-	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlClass);
-	    manager.addAxiom(this.ontology, declarationAxiom);
+	    declare(owlClass);
 	    updateShorForms();
 	    return owlClass;
 	}
+    }    
+
+    private boolean isExternalEntity(String entityName) {
+	try {
+	    new URL(entityName);
+	    return true;
+	} catch (MalformedURLException e) {
+	    return false;
+	}
     }
 
+    private void removeExternalClass(String externalClass) {
+	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
+	OWLClass owlClassToRemove = this.factory.getOWLClass(IRI.create(externalClass));
+	owlClassToRemove.accept(remover);
+	this.manager.applyChanges(remover.getChanges());
+	remover.reset();
+    }
+
+    private void declare(OWLEntity owlEntity) {
+	OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlEntity);
+	manager.addAxiom(this.ontology, declarationAxiom);
+    }
 
     private void validate(String entityName) throws BadNameException {
-
 	URL url;
 	String prefix = null;
 	if(this.prefixManager.getDefaultPrefix().equals(DEFAULT_PREFIX)){
-	    prefix = "http://www.example.org/";
+	    prefix = "http://localhost/";
 	}else{
 	    prefix = this.prefixManager.getDefaultPrefix();
 	}
-
 	try {
 	    url = new URL(prefix + entityName);
 	    url.toURI();
@@ -270,8 +299,20 @@ public class Brain {
 	} catch (URISyntaxException e) {
 	    throw new BadNameException("'"+entityName+"' is not valid valid name for an OWL entity. Use only characters that are valid for a URI (no space, etc...).");
 	}
-
     }
+
+    private void validateExternalEntity(String entityIri) throws BadNameException {
+	URL url;
+	try {
+	    url = new URL(entityIri);
+	    url.toURI();
+	} catch (MalformedURLException e) {
+	    throw new BadNameException(e);
+	} catch (URISyntaxException e) {
+	    throw new BadNameException("'"+entityIri+"' is not valid valid name for an OWL entity. Use only characters that are valid for a URI (no space, etc...).");
+	}
+    }
+
 
     public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectProperty, BadNameException {
 	try {
@@ -280,8 +321,7 @@ public class Brain {
 	} catch (NonExistingObjectPropertyException e) {
 	    validate(objectPropertyName);
 	    OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(objectPropertyName, this.prefixManager);
-	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlObjectProperty);
-	    manager.addAxiom(this.ontology, declarationAxiom);
+	    declare(owlObjectProperty);
 	    updateShorForms();
 	    return owlObjectProperty;
 	}
@@ -294,8 +334,7 @@ public class Brain {
 	} catch (NonExistingDataPropertyException e) {
 	    validate(dataPropertyName);
 	    OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(dataPropertyName, this.prefixManager);
-	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlDataProperty);
-	    manager.addAxiom(this.ontology, declarationAxiom);
+	    declare(owlDataProperty);
 	    updateShorForms();
 	    return owlDataProperty;
 	}
@@ -308,8 +347,7 @@ public class Brain {
 	} catch (NonExistingAnnotationPropertyException e) {
 	    validate(annotationProperty);
 	    OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(annotationProperty, this.prefixManager);
-	    OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlAnnotationProperty);
-	    manager.addAxiom(this.ontology, declarationAxiom);
+	    declare(owlAnnotationProperty);
 	    updateShorForms();
 	    return owlAnnotationProperty;
 	}
@@ -665,11 +703,6 @@ public class Brain {
 	}
 	updateShorForms();
     }
-
-    //    public void learn(String pathToOntology, String prefix, String abbreviation) throws NewOntologyException, ExistingEntityException {
-    //	learn(pathToOntology);
-    //	this.prefixManager.setPrefix(abbreviation + ":", prefix);
-    //    }
 
     /**
      * @return 

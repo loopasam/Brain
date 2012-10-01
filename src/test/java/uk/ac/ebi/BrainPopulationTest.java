@@ -11,6 +11,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import uk.ac.ebi.brain.core.Brain;
+import uk.ac.ebi.brain.error.BadNameException;
 import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
@@ -18,6 +19,7 @@ import uk.ac.ebi.brain.error.DataPropertyExpressionException;
 import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingDataProperty;
 import uk.ac.ebi.brain.error.ExistingObjectProperty;
+import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
 import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
 
@@ -32,19 +34,29 @@ public class BrainPopulationTest {
     @Before
     public void bootstrap() throws BrainException {
 	brain = new Brain();
-	brain.setPrefix("http://www.example.org/");
-	brain.setOntologyLocation("public/bootstrap.owl");
     }
 
     @Test(expected = BadPrefixException.class)
     public void wrongPrefixTest() throws BrainException {
-	brain.setPrefix("htp://www.example.org/");
+	brain = new Brain("htt://www.example.org/", "http://www.example.org/demo.owl");
     }
 
     @Test
     public void addClassTest() throws BrainException{
 	brain.addClass("A");
 	assertEquals(true, brain.getOntology().containsClassInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "A")));
+    }
+
+    @Test
+    public void addExternalClassTest() throws BrainException{
+	brain.addClass("http://www.example.org/A");
+	assertEquals(true, brain.getOntology().containsClassInSignature(IRI.create("http://www.example.org/A")));
+	assertNotNull(brain.getOWLClass("A"));
+    }
+
+    @Test(expected = BadNameException.class)
+    public void addClassWithBadNameTest() throws BrainException {
+	brain.addClass("Blood Coagulation");
     }
 
     @Test(expected = ExistingClassException.class)
@@ -289,5 +301,24 @@ public class BrainPopulationTest {
 	brain.isDefinedBy("A", "is defined by that");
 	brain.save("src/test/resources/output.owl");
     }
+
+    @Test
+    public void prefixTest() throws BrainException {
+	Brain brain = new Brain("http://www.example.com/", "http://www.example.com/example.owl");
+	brain.addClass("A");
+	brain.addClass("http://www.example.com/B");
+	brain.save("src/test/resources/prefix.owl");	
+    }
+
+    @Test
+    public void addClassBivalentHandling() throws BrainException {
+	Brain brain = new Brain();
+	brain.addClass("http://www.example.org/A");
+	brain.addClass("B");
+	brain.subClassOf("A", "B");
+	brain.prefix("http://www.example.org/", "example");
+	brain.save("src/test/resources/prefix.owl");
+    }
+
 
 }

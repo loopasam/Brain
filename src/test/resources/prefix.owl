@@ -1,19 +1,22 @@
-Prefix: : <http://www.example.org/>
+Prefix: : <brain#>
 Prefix: owl: <http://www.w3.org/2002/07/owl#>
 Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix: xml: <http://www.w3.org/XML/1998/namespace>
 Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-Prefix: chebi: <http://www.chebi.org/>
+Prefix: example: <http://www.example.org/>
 
 
 
-Ontology: <http://www.example.org/public/example.owl>
+Ontology: <brain.owl>
 
 
-Class: A
+Class: B
 
     
-Class: chebi:ID45
+Class: example:A
 
+    SubClassOf: 
+        B
+    
     
