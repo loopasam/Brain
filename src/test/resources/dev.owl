@@ -41,7 +41,7 @@ Class: O
         part-of some M
     
     
-Class: public/example.owl#Q
+Class: Q
 
     SubClassOf: 
         part-of some K

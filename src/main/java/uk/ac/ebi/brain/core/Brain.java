@@ -827,6 +827,7 @@ public class Brain {
 	}	
 	return violations;
     }
+
     /**
      * @param string
      * @param b
@@ -835,13 +836,13 @@ public class Brain {
      */
     public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+	this.reasoner = reasonerFactory.createReasoner(this.ontology);
 	Set<OWLClass> subClasses = null;
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
-	    //TODO deal with anon expressions
-	    //	    OWLClass anonymousClass = getTemporaryAnonymousClass(classExpression);
-	    //	    subClasses = reasoner.getSubClasses(anonymousClass, direct).getFlattened();
-	    //	    removeTemporaryAnonymousClass(anonymousClass);
+	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    subClasses = this.reasoner.getSubClasses(anonymousClass, direct).getFlattened();
+	    removeTemporaryAnonymousClass(anonymousClass);
 	}else{
 	    subClasses = this.reasoner.getSubClasses(owlClassExpression, direct).getFlattened();
 	}
@@ -849,7 +850,83 @@ public class Brain {
 	return sortClasses(subClasses);
     }
 
+    /**
+     * @param string
+     * @param b
+     * @return
+     * @throws ClassExpressionException 
+     */
+    public List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
+	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+	this.reasoner = reasonerFactory.createReasoner(this.ontology);
+	Set<OWLClass> superClasses = null;
+	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
+	if(owlClassExpression.isAnonymous()){
+	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    superClasses = this.reasoner.getSuperClasses(anonymousClass, direct).getFlattened();
+	    removeTemporaryAnonymousClass(anonymousClass);
+	}else{
+	    superClasses = this.reasoner.getSuperClasses(owlClassExpression, direct).getFlattened();
+	}
+	this.reasoner.dispose();
+	return sortClasses(superClasses);
+    }
 
+    /**
+     * Retrieves the named equivalent classes corresponding to the class expression
+     * @param expression
+     * @param direct
+     * @return equivalentClasses
+     * @throws ClassExpressionException 
+     * @throws ParserException 
+     */
+    public List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
+	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+	this.reasoner = reasonerFactory.createReasoner(this.ontology);
+	Set<OWLClass> equivalentClasses = null;
+	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
+	if(owlClassExpression.isAnonymous()){
+	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    equivalentClasses = this.reasoner.getEquivalentClasses(anonymousClass).getEntitiesMinus(anonymousClass);
+	    removeTemporaryAnonymousClass(anonymousClass);
+	}else{
+	    equivalentClasses = this.reasoner.getEquivalentClasses(owlClassExpression).getEntitiesMinus((OWLClass) owlClassExpression);
+	}
+	this.reasoner.dispose();
+	return sortClasses(equivalentClasses);
+    }
+
+
+    /**
+     * Removes any class. Should be used to remove temporary classes used for expressions only at the moment.
+     * @param anonymousClass
+     */
+    private void removeTemporaryAnonymousClass(OWLClass anonymousClass) {
+	OWLEntityRemover remover = new OWLEntityRemover(manager, Collections.singleton(ontology));
+	anonymousClass.accept(remover);
+	manager.applyChanges(remover.getChanges());
+	remover.reset();
+    }
+
+    /**
+     * Add a temporary class to the ontology based on the expression. Helpful because Elk doesn't support
+     * anonymous queries at the moment. To be removed in the future.
+     * @param classExpression
+     */
+    private OWLClass getTemporaryAnonymousClass(OWLClassExpression classExpression) {
+	IRI anonymousIri = IRI.create("temp");
+	int counter = 0;
+	while (ontology.containsClassInSignature(anonymousIri)) {
+	    anonymousIri = IRI.create("temp" + counter);
+	    counter++;
+	}
+	OWLClass anonymousClass = factory.getOWLClass(anonymousIri);
+	OWLEquivalentClassesAxiom equivalenceAxiom = factory.getOWLEquivalentClassesAxiom(anonymousClass, classExpression);
+	AddAxiom addAx = new AddAxiom(ontology, equivalenceAxiom);
+	manager.applyChange(addAx);
+	reasoner.flush();
+	return anonymousClass;
+    }
 
     /**
      * Sort the classes based on their shortForms.
@@ -865,6 +942,21 @@ public class Brain {
 	}
 	Collections.sort(listClasses);
 	return listClasses;
+    }
+
+
+    /**
+     * Test whether an OWLClass is the subClass of an other.
+     * @param owlClassToTest
+     * @param owlClassToTestAgainst
+     * @param direct
+     * @return isASubClass
+     * @throws ClassExpressionException 
+     */
+    public boolean isSubClass(String presumedSubClass, String presumedSuperClass, boolean direct) throws ClassExpressionException {
+	List<String> subClasses = this.getSubClasses(presumedSuperClass, direct);
+	boolean contained = subClasses.contains(presumedSubClass);
+	return contained;
     }
 
 

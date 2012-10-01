@@ -6,15 +6,17 @@ package uk.ac.ebi;
 import static org.junit.Assert.*;
 
 import java.util.List;
-import java.util.Set;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.ebi.brain.core.Brain;
+import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
+import uk.ac.ebi.brain.error.NewOntologyException;
 
 /**
  * @author Samuel Croset
@@ -26,7 +28,7 @@ public class BrainQueryTest {
 
     @Before
     public void bootstrap() throws BrainException {
-	brain = new Brain("http://www.test.org/", "public/test.owl");
+	brain = new Brain("http://localhost/", "http://localhost/test.owl");
 	brain.learn("src/test/resources/dev.owl");
     }
 
@@ -37,23 +39,73 @@ public class BrainQueryTest {
 	List<String> violations = brain.getElProfileViolations();
 	assertEquals(0, violations.size());
     }
-    
+
     @Test
-    public void getSubClassesTest() throws ClassExpressionException{
+    public void getDirectSubClassesTest() throws ClassExpressionException{
 	List<String> subClasses = brain.getSubClasses("I", true);
 	assertEquals(1, subClasses.size());
-	List<String> subClasses1 = brain.getSubClasses("G", false);
-	assertEquals(2, subClasses1.size());
-    }
-    
-    @Test
-    public void getSuperClassesTest(){
-	
     }
 
     @Test
-    public void getEquivalentClassesTest(){
-	
+    public void getIndirectSubClassesTest() throws BrainException {	
+	List<String> subClasses = brain.getSubClasses("G", false);
+	assertEquals(2, subClasses.size());
     }
+
+    @Test
+    public void getDirectAnonymousSubClassesTest() throws BrainException {	
+	List<String> subClasses = brain.getSubClasses("part-of some L", true);
+	assertEquals(1, subClasses.size());
+    }
+
+    @Test
+    public void getIndirectAnonymousSubClassesTest() throws BrainException {	
+	List<String> subClasses = brain.getSubClasses("part-of some L", false);
+	assertEquals(2, subClasses.size());
+    }
+
+    @Test
+    public void getAnonymousClassesNewOntology() throws BrainException {
+	Brain brain = new Brain();
+	brain.addClass("A");
+	brain.addClass("B");
+	brain.addObjectProperty("part-of");
+	brain.subClassOf("B", "part-of some A");
+	List<String> subClasses = brain.getSubClasses("part-of some A", true);
+	assertEquals(1, subClasses.size());
+    }
+
+    @Test
+    public void getSuperClassesTest() throws BrainException {
+	List<String> superClasses = brain.getSuperClasses("C", false);
+	assertEquals(3, superClasses.size());
+	List<String> superClasses1 = brain.getSuperClasses("C", true);
+	assertEquals(1, superClasses1.size());
+    }
+
+    @Test
+    public void getEquivalentClassesTest() throws BrainException {
+	List<String> equivalentClasses = brain.getEquivalentClasses("M");
+	assertEquals(1, equivalentClasses.size());
+	assertEquals("N", equivalentClasses.get(0));
+    }
+
+    @Test
+    public void getEquivalentAnonClassesTest() throws BrainException {
+	List<String> equivalentClasses = brain.getEquivalentClasses("part-of some M");
+	assertEquals(1, equivalentClasses.size());
+	assertEquals("O", equivalentClasses.get(0));
+    }
+
+    @Test
+    public void isSubClassTest() throws BrainException {
+	boolean isSubClass = brain.isSubClass("D", "Thing", false);
+	assertEquals(true, isSubClass);
+	boolean isSubClass1 = brain.isSubClass("Q", "part-of some K", false);
+	assertEquals(true, isSubClass1);
+	boolean isSubClass2 = brain.isSubClass("part-of some K", "Q", false);
+	assertEquals(false, isSubClass2);
+    }
+
 
 }
