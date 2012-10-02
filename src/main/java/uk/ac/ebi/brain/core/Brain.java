@@ -94,6 +94,9 @@ import uk.ac.ebi.brain.error.StorageException;
  *
  */
 public class Brain {
+    //TODO get thing
+    //TODO check consistency
+    //TODO workers
 
     private OWLOntology ontology;
     private OWLReasoner reasoner;
