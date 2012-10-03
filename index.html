@@ -34,20 +34,29 @@
 
 <p>
 Brain is a facade for the OWL-API, wrapping the Elk reasoner for reasoning task, such as query
- or consistency checking. Brain has been designed with biomedical knowledge in mind, which can expressed
+ or consistency checking.
+ </p>
+ <p>
+ Brain has been designed with biomedical knowledge in mind, which can expressed
   as an OWL ontology or knowledge-base. In this domain, knowledge bases are usually very large and mostly focused 
   on the TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following an OWL 2 EL 
-  profile, suitable for fast reasoning (decidable in polynomial time). The initial goal of Brain is to provide a simplified 
-  interaction with the OWL-API. Classes and expressions are entered using the intuitive Manchester syntax.
+  profile, suitable for fast reasoning (decidable in polynomial time).
+  </p>
+  <p>
+  The initial goal of Brain is to provide a simplified 
+  interaction with the OWL-API. Entities are handled using the intuitive Manchester syntax.
 </p>
 
 <h3>Example of axiom</h3>
 
 Natural language: <code>A nucleus is part of some cells.</code>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code>
+OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code>
+Brain implementation:
+<pre><code>
+public static void main(String[] args) throws BrainException {
+  Brain brain = new Brain();
+}
 </code></pre>
 
         </section>
