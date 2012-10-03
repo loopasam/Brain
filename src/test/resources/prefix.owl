@@ -11,6 +11,9 @@ Prefix: example: <http://www.example.org/>
 Ontology: <brain.owl>
 
 
+Class: owl:Thing
+
+    
 Class: B
 
     

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package uk.ac.ebi.brain.core;
 
 import java.io.File;
@@ -90,13 +87,10 @@ import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
 import uk.ac.ebi.brain.error.StorageException;
 
 /**
+ * Facade class to access the OWL-API
  * @author Samuel Croset
- *
  */
 public class Brain {
-    //TODO check consistency
-    //TODO workers
-    //TODO remove
 
     private OWLOntology ontology;
     private OWLReasoner reasoner;
@@ -169,11 +163,11 @@ public class Brain {
 
 
     /**
-     * @param separator 
-     * @throws OWLOntologyCreationException 
+     * Creates a Brain instance with the specified prefix and ontology IRI
+     * @param prefix
+     * @param ontologyIri
      * @throws BadPrefixException 
      * @throws NewOntologyException 
-     * 
      */
     public Brain(String prefix, String ontologyIri) throws NewOntologyException, BadPrefixException {
 
@@ -206,7 +200,6 @@ public class Brain {
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
 	updateShorForms();
-	//TODO add also top level props
 	try {
 	    this.addClass("http://www.w3.org/2002/07/owl#Thing");
 	} catch (BrainException e) {
@@ -214,21 +207,30 @@ public class Brain {
 	}
     }
 
+    /**
+     * Creates a Brain instance with the a default prefix and ontology IRI.
+     * @throws BadPrefixException 
+     * @throws NewOntologyException 
+     */
     public Brain() throws NewOntologyException, BadPrefixException {
 	this(DEFAULT_PREFIX, "brain.owl");
     }
 
+    /**
+     * Declare a prefix mapping.
+     * @param longForm
+     * @param abbreviation
+     */
     public void prefix(String longForm, String abbreviation) {
 	this.prefixManager.setPrefix(abbreviation + ":", longForm);
     }
 
     /**
+     * Add an OWL class to the ontology.
      * @param className
-     * @return 
+     * @return owlClass
      * @throws ExistingClassException 
      * @throws BadNameException 
-     * @throws MalformedURLException 
-     * @throws URISyntaxException 
      */
     public OWLClass addClass(String className) throws BadNameException, ExistingClassException {
 	if(isExternalEntity(className)){
@@ -252,6 +254,13 @@ public class Brain {
 	}
     }
 
+    /**
+     * Add an OWL class to the ontology. The class refers to an external class (external ontology).
+     * @param className
+     * @return owlClass
+     * @throws ExistingClassException 
+     * @throws BadNameException 
+     */
     private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {
 	validateExternalEntity(className);
 	OWLClass owlClass = this.factory.getOWLClass(IRI.create(className));
@@ -268,6 +277,11 @@ public class Brain {
 	}
     }    
 
+    /**
+     * Check whether an entity is an external entity (URL present) or not.
+     * @param entityName
+     * @return isExternalEntity
+     */
     private boolean isExternalEntity(String entityName) {
 	try {
 	    new URL(entityName);
@@ -277,6 +291,10 @@ public class Brain {
 	}
     }
 
+    /**
+     * Remove an OWL class from the ontology. The class refers to an external class (external ontology).
+     * @param externalClass
+     */
     private void removeExternalClass(String externalClass) {
 	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
 	OWLClass owlClassToRemove = this.factory.getOWLClass(IRI.create(externalClass));
@@ -285,11 +303,20 @@ public class Brain {
 	remover.reset();
     }
 
+    /**
+     * Declare an OWL entity in the ontology.
+     * @param owlEntity
+     */
     private void declare(OWLEntity owlEntity) {
 	OWLDeclarationAxiom declarationAxiom = this.factory.getOWLDeclarationAxiom(owlEntity);
 	manager.addAxiom(this.ontology, declarationAxiom);
     }
 
+    /**
+     * Validate an OWL entity.
+     * @param entityName
+     * @throws BadNameException
+     */
     private void validate(String entityName) throws BadNameException {
 	URL url;
 	String prefix = null;
@@ -308,6 +335,11 @@ public class Brain {
 	}
     }
 
+    /**
+     * Validate an external OWL entity.
+     * @param entityIri
+     * @throws BadNameException
+     */
     private void validateExternalEntity(String entityIri) throws BadNameException {
 	URL url;
 	try {
@@ -320,7 +352,13 @@ public class Brain {
 	}
     }
 
-
+    /**
+     * Add an OWL object property to the ontology.
+     * @param objectPropertyName
+     * @return owlObjectProperty
+     * @throws ExistingObjectPropertyException 
+     * @throws BadNameException 
+     */
     public OWLObjectProperty addObjectProperty(String objectPropertyName) throws ExistingObjectPropertyException, BadNameException {
 	if(isExternalEntity(objectPropertyName)){
 	    return addExternalObjectProperty(objectPropertyName);
@@ -343,6 +381,13 @@ public class Brain {
 	}
     }
 
+    /**
+     * Add an external OWL object property to the ontology.
+     * @param objectPropertyName
+     * @return owlObjectProperty
+     * @throws ExistingObjectPropertyException 
+     * @throws BadNameException 
+     */
     private OWLObjectProperty addExternalObjectProperty(String objectPropertyName) throws BadNameException, ExistingObjectPropertyException {
 	validateExternalEntity(objectPropertyName);
 	OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(IRI.create(objectPropertyName));
@@ -359,6 +404,10 @@ public class Brain {
 	}
     }
 
+    /**
+     * Remove an external OWL object property to the ontology.
+     * @param externalObjectProperty
+     */
     private void removeExternalObjectProperty(String externalObjectProperty) {
 	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
 	OWLObjectProperty owlObjectPropertyToRemove = this.factory.getOWLObjectProperty(IRI.create(externalObjectProperty));
@@ -367,6 +416,13 @@ public class Brain {
 	remover.reset();
     }
 
+    /**
+     * Add an OWL data property to the ontology.
+     * @param dataPropertyName
+     * @return owlDataProperty
+     * @throws ExistingDataPropertyException 
+     * @throws BadNameException 
+     */
     public OWLDataProperty addDataProperty(String dataPropertyName) throws ExistingDataPropertyException, BadNameException {
 	if(isExternalEntity(dataPropertyName)){
 	    return addExternalDataProperty(dataPropertyName);
@@ -389,6 +445,13 @@ public class Brain {
 	}
     }
 
+    /**
+     * Add an external OWL data property to the ontology.
+     * @param dataPropertyName
+     * @return owlDataProperty
+     * @throws ExistingDataPropertyException 
+     * @throws BadNameException 
+     */
     private OWLDataProperty addExternalDataProperty(String dataPropertyName) throws BadNameException, ExistingDataPropertyException {
 	validateExternalEntity(dataPropertyName);
 	OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(IRI.create(dataPropertyName));
@@ -405,6 +468,10 @@ public class Brain {
 	}
     }
 
+    /**
+     * Remove an external OWL data property to the ontology.
+     * @param externalDataProperty
+     */
     private void removeExternalDataProperty(String externalDataProperty) {
 	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
 	OWLDataProperty owlDataPropertyToRemove = this.factory.getOWLDataProperty(IRI.create(externalDataProperty));
@@ -413,6 +480,13 @@ public class Brain {
 	remover.reset();
     }
 
+    /**
+     * Add an OWL annotation property to the ontology.
+     * @param annotationProperty
+     * @return owlAnnotationProperty
+     * @throws ExistingDataPropertyException 
+     * @throws BadNameException 
+     */
     public OWLAnnotationProperty addAnnotationProperty(String annotationProperty) throws ExistingAnnotationPropertyException, BadNameException {
 	if(isExternalEntity(annotationProperty)){
 	    return addExternalAnnotationProperty(annotationProperty);
@@ -435,6 +509,13 @@ public class Brain {
 	}
     }
 
+    /**
+     * Add an external OWL annotation property to the ontology.
+     * @param annotationPropertyName
+     * @return owlAnnotationProperty
+     * @throws ExistingAnnotationPropertyException 
+     * @throws BadNameException 
+     */
     private OWLAnnotationProperty addExternalAnnotationProperty(String annotationPropertyName) throws BadNameException, ExistingAnnotationPropertyException {
 	validateExternalEntity(annotationPropertyName);
 	OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(IRI.create(annotationPropertyName));
@@ -451,6 +532,10 @@ public class Brain {
 	}
     }
 
+    /**
+     * Remove an external OWL annotation property to the ontology.
+     * @param externalAnnotationProperty
+     */
     private void removeExternalAnnotationProperty(String externalAnnotationProperty) {
 	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
 	OWLAnnotationProperty owlAnnotationPropertyToRemove = this.factory.getOWLAnnotationProperty(IRI.create(externalAnnotationProperty));
@@ -459,6 +544,9 @@ public class Brain {
 	remover.reset();
     }
 
+    /**
+     * Update the shortform registry (this.bidiShortFormProvider).
+     */
     private void updateShorForms() {
 	this.shortFormProvider = new SimpleShortFormProvider();
 	Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
@@ -467,12 +555,12 @@ public class Brain {
     }
 
     /**
+     * Returns the OWL class corresponding to the input string.
      * @param className
-     * @return
-     * @throws NonExistingEntityException 
+     * @return entity
+     * @throws NonExistingClassException 
      */
     public OWLClass getOWLClass(String className) throws NonExistingClassException {
-
 	OWLEntity entity = this.bidiShortFormProvider.getEntity(className);
 	if(entity != null && entity.isOWLClass()){
 	    return (OWLClass) entity;
@@ -481,6 +569,12 @@ public class Brain {
 	}
     }
 
+    /**
+     * Returns the OWL annotation property corresponding to the input string.
+     * @param propertyName
+     * @return entity
+     * @throws NonExistingAnnotationPropertyException 
+     */
     public OWLAnnotationProperty getOWLAnnotationProperty(String propertyName) throws NonExistingAnnotationPropertyException {
 	OWLEntity entity = this.bidiShortFormProvider.getEntity(propertyName);
 	if(entity != null && entity.isOWLAnnotationProperty()){
@@ -491,10 +585,10 @@ public class Brain {
     }
 
     /**
-     * @param className
-     * @return
+     * Returns the OWL object property corresponding to the input string.
+     * @param objectPropertyName
+     * @return entity
      * @throws NonExistingObjectPropertyException 
-     * @throws NonExistingEntityException 
      */
     public OWLObjectProperty getOWLObjectProperty(String objectPropertyName) throws NonExistingObjectPropertyException {
 	OWLEntity entity = this.bidiShortFormProvider.getEntity(objectPropertyName);
@@ -505,6 +599,12 @@ public class Brain {
 	}
     }
 
+    /**
+     * Returns the OWL data property corresponding to the input string.
+     * @param dataPropertyName
+     * @return entity
+     * @throws NonExistingDataPropertyException 
+     */
     public OWLDataProperty getOWLDataProperty(String dataPropertyName) throws NonExistingDataPropertyException {
 	OWLEntity entity = this.bidiShortFormProvider.getEntity(dataPropertyName);
 	if(entity != null && entity.isOWLDataProperty()){
@@ -514,142 +614,212 @@ public class Brain {
 	}
     }
 
-
     /**
-     * @param string
-     * @param string2
+     * Declare a subClassOf axiom.
+     * @param subClass
+     * @param superClass
      * @throws ClassExpressionException 
-     * @throws ParserException 
-     * @throws NonExistingEntityException 
      */
     public void subClassOf(String subClass, String superClass) throws ClassExpressionException {
 	OWLClassExpression subClassExpression = parseClassExpression(subClass);
 	OWLClassExpression superClassExpression = parseClassExpression(superClass);
-	OWLSubClassOfAxiom subClassAxiom = factory.getOWLSubClassOfAxiom(subClassExpression, superClassExpression);
-	AddAxiom addAx = new AddAxiom(ontology, subClassAxiom);
-	manager.applyChange(addAx);
+	OWLSubClassOfAxiom subClassAxiom = this.factory.getOWLSubClassOfAxiom(subClassExpression, superClassExpression);
+	AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an equivalence axiom.
+     * @param class1
+     * @param class2
+     * @throws ClassExpressionException 
+     */
     public void equivalentClasses(String class1, String class2) throws ClassExpressionException {
 	OWLClassExpression classExpression1 = parseClassExpression(class1);
 	OWLClassExpression classExpression2 = parseClassExpression(class2);
-	OWLEquivalentClassesAxiom equivalentClassAxiom = factory.getOWLEquivalentClassesAxiom(classExpression1, classExpression2);
-	AddAxiom addAx = new AddAxiom(ontology, equivalentClassAxiom);
-	manager.applyChange(addAx);
+	OWLEquivalentClassesAxiom equivalentClassAxiom = this.factory.getOWLEquivalentClassesAxiom(classExpression1, classExpression2);
+	AddAxiom addAx = new AddAxiom(this.ontology, equivalentClassAxiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an disjoint axiom.
+     * @param class1
+     * @param class2
+     * @throws ClassExpressionException 
+     */
     public void disjointClasses(String class1, String class2) throws ClassExpressionException {
 	OWLClassExpression classExpression1 = parseClassExpression(class1);
 	OWLClassExpression classExpression2 = parseClassExpression(class2);
-	OWLDisjointClassesAxiom equivalentClassAxiom = factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
-	AddAxiom addAx = new AddAxiom(ontology, equivalentClassAxiom);
-	manager.applyChange(addAx);
+	OWLDisjointClassesAxiom equivalentClassAxiom = this.factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
+	AddAxiom addAx = new AddAxiom(this.ontology, equivalentClassAxiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an transitive axiom.
+     * @param propertyExpression
+     * @throws ObjectPropertyExpressionException 
+     */
     public void transitive(String propertyExpression) throws ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression expression = parseObjectPropertyExpression(propertyExpression);
-	OWLTransitiveObjectPropertyAxiom axiom = factory.getOWLTransitiveObjectPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	OWLTransitiveObjectPropertyAxiom axiom = this.factory.getOWLTransitiveObjectPropertyAxiom(expression);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an reflexive axiom.
+     * @param propertyExpression
+     * @throws ObjectPropertyExpressionException 
+     */
     public void reflexive(String propertyExpression) throws ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression expression = parseObjectPropertyExpression(propertyExpression);
-	OWLReflexiveObjectPropertyAxiom axiom = factory.getOWLReflexiveObjectPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	OWLReflexiveObjectPropertyAxiom axiom = this.factory.getOWLReflexiveObjectPropertyAxiom(expression);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an functional axiom.
+     * @param propertyExpression
+     * @throws DataPropertyExpressionException 
+     */
     public void functional(String propertyExpression) throws DataPropertyExpressionException {
 	OWLDataPropertyExpression expression = parseDataPropertyExpression(propertyExpression);
-	OWLFunctionalDataPropertyAxiom axiom = factory.getOWLFunctionalDataPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	OWLFunctionalDataPropertyAxiom axiom = this.factory.getOWLFunctionalDataPropertyAxiom(expression);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an domain axiom.
+     * @param propertyExpression
+     * @param classExpression
+     * @throws ClassExpressionException
+     * @throws NonExistingEntityException
+     */
     public void domain(String propertyExpression, String classExpression) throws ClassExpressionException, NonExistingEntityException{
 	OWLClassExpression domainExpression = parseClassExpression(classExpression);
 	try {
 	    OWLObjectPropertyExpression owlPropertyExpression = parseObjectPropertyExpression(propertyExpression);
-	    OWLObjectPropertyDomainAxiom axiom = factory.getOWLObjectPropertyDomainAxiom(owlPropertyExpression, domainExpression);
-	    AddAxiom addAx = new AddAxiom(ontology, axiom);
-	    manager.applyChange(addAx);
+	    OWLObjectPropertyDomainAxiom axiom = this.factory.getOWLObjectPropertyDomainAxiom(owlPropertyExpression, domainExpression);
+	    AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	    this.manager.applyChange(addAx);
 	} catch (ObjectPropertyExpressionException e) {
 	    OWLDataPropertyExpression owlPropertyExpression;
 	    try {
 		owlPropertyExpression = parseDataPropertyExpression(propertyExpression);
-		OWLDataPropertyDomainAxiom axiom = factory.getOWLDataPropertyDomainAxiom(owlPropertyExpression, domainExpression);
-		AddAxiom addAx = new AddAxiom(ontology, axiom);
-		manager.applyChange(addAx);
+		OWLDataPropertyDomainAxiom axiom = this.factory.getOWLDataPropertyDomainAxiom(owlPropertyExpression, domainExpression);
+		AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+		this.manager.applyChange(addAx);
 	    } catch (DataPropertyExpressionException e1) {
 		throw new NonExistingEntityException("The property '"+propertyExpression+"' does not exist.");
 	    }
 	}
     }
 
+    /**
+     * Declare an range axiom.
+     * @param propertyExpression
+     * @param classExpression
+     * @throws ClassExpressionException
+     * @throws ObjectPropertyExpressionException
+     */
     public void range(String propertyExpression, String classExpression) throws ClassExpressionException, ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression owlPropertyExpression = parseObjectPropertyExpression(propertyExpression);
 	OWLClassExpression rangeExpression = parseClassExpression(classExpression);
-	OWLObjectPropertyRangeAxiom axiom = factory.getOWLObjectPropertyRangeAxiom(owlPropertyExpression, rangeExpression);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	OWLObjectPropertyRangeAxiom axiom = this.factory.getOWLObjectPropertyRangeAxiom(owlPropertyExpression, rangeExpression);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an range axiom.
+     * @param propertyExpression
+     * @param dataType
+     * @throws DataPropertyExpressionException
+     */
     public void range(String propertyExpression, OWLDatatype dataType) throws DataPropertyExpressionException {
 	OWLDataPropertyExpression owlPropertyExpression = parseDataPropertyExpression(propertyExpression);
-	OWLDataPropertyRangeAxiom axiom = factory.getOWLDataPropertyRangeAxiom(owlPropertyExpression, dataType);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	OWLDataPropertyRangeAxiom axiom = this.factory.getOWLDataPropertyRangeAxiom(owlPropertyExpression, dataType);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an equivalentProperties axiom.
+     * @param property1
+     * @param property2
+     * @throws BrainException
+     */
     public void equivalentProperties(String property1, String property2) throws BrainException {
 	try {
 	    OWLObjectPropertyExpression owlProperty1 = parseObjectPropertyExpression(property1);
 	    OWLObjectPropertyExpression owlProperty2 = parseObjectPropertyExpression(property2);
-	    OWLEquivalentObjectPropertiesAxiom axiom = factory.getOWLEquivalentObjectPropertiesAxiom(owlProperty1, owlProperty2);
-	    AddAxiom addAx = new AddAxiom(ontology, axiom);
-	    manager.applyChange(addAx);
+	    OWLEquivalentObjectPropertiesAxiom axiom = this.factory.getOWLEquivalentObjectPropertiesAxiom(owlProperty1, owlProperty2);
+	    AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	    this.manager.applyChange(addAx);
 	} catch (ObjectPropertyExpressionException e) {
 	    try{
 		OWLDataPropertyExpression owlProperty1 = parseDataPropertyExpression(property1);
 		OWLDataPropertyExpression owlProperty2 = parseDataPropertyExpression(property2);
-		OWLEquivalentDataPropertiesAxiom axiom = factory.getOWLEquivalentDataPropertiesAxiom(owlProperty1, owlProperty2);
-		AddAxiom addAx = new AddAxiom(ontology, axiom);
-		manager.applyChange(addAx);
+		OWLEquivalentDataPropertiesAxiom axiom = this.factory.getOWLEquivalentDataPropertiesAxiom(owlProperty1, owlProperty2);
+		AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+		this.manager.applyChange(addAx);
 	    } catch (DataPropertyExpressionException e1) {
 		throw new BrainException("One of the properties ('"+property1+"' or '"+property2+"') does not exist or the properties have different types.");
 	    }
 	}
     }
 
+    /**
+     * Declare an subPropertyOf axiom.
+     * @param subProperty
+     * @param superProperty
+     * @throws BrainException
+     */
     public void subPropertyOf(String subProperty, String superProperty) throws BrainException {
 	try{
 	    OWLObjectPropertyExpression subPropertyExpression = parseObjectPropertyExpression(subProperty);
 	    OWLObjectPropertyExpression superPropertyExpression = parseObjectPropertyExpression(superProperty);
-	    OWLSubObjectPropertyOfAxiom subClassAxiom = factory.getOWLSubObjectPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
-	    AddAxiom addAx = new AddAxiom(ontology, subClassAxiom);
-	    manager.applyChange(addAx);
+	    OWLSubObjectPropertyOfAxiom subClassAxiom = this.factory.getOWLSubObjectPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
+	    AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
+	    this.manager.applyChange(addAx);
 	} catch(ObjectPropertyExpressionException e){
 	    try{
 		OWLDataPropertyExpression subPropertyExpression = parseDataPropertyExpression(subProperty);
 		OWLDataPropertyExpression superPropertyExpression = parseDataPropertyExpression(superProperty);
-		OWLSubDataPropertyOfAxiom subClassAxiom = factory.getOWLSubDataPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
-		AddAxiom addAx = new AddAxiom(ontology, subClassAxiom);
-		manager.applyChange(addAx);
+		OWLSubDataPropertyOfAxiom subClassAxiom = this.factory.getOWLSubDataPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
+		AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
+		this.manager.applyChange(addAx);
 	    }catch (DataPropertyExpressionException e1) {
 		throw new BrainException("One of the properties ('"+subProperty+"' or '"+superProperty+"') does not exist or the properties have different types.");
 	    }
 	}
     }
 
+    /**
+     * Declare an chain axiom.
+     * @param chain
+     * @param superProperty
+     * @throws ObjectPropertyExpressionException
+     */
     public void chain(String chain, String superProperty) throws ObjectPropertyExpressionException {
 	List<OWLObjectPropertyExpression> chainExpression = parseObjectPropertyChain(chain);
 	OWLObjectPropertyExpression superPropertyExpression = parseObjectPropertyExpression(superProperty);
 	OWLSubPropertyChainOfAxiom axiom = this.factory.getOWLSubPropertyChainOfAxiom(chainExpression, superPropertyExpression);
-	AddAxiom addAx = new AddAxiom(ontology, axiom);
-	manager.applyChange(addAx);
+	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
+	this.manager.applyChange(addAx);
     }
 
+    /**
+     * Declare an annotation axiom.
+     * @param entity
+     * @param annotationProperty
+     * @param content
+     * @throws NonExistingEntityException
+     */
     public void annotation(String entity, String annotationProperty, String content) throws NonExistingEntityException {
 	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
 	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
@@ -663,10 +833,11 @@ public class Brain {
     }
 
     /**
+     * Declare an annotation axiom.
      * @param entity
-     * @param rdfsLabel
-     * @param label
-     * @throws NonExistingEntityException 
+     * @param annotationProperty
+     * @param content
+     * @throws NonExistingEntityException
      */
     private void annotation(String entity, OWLAnnotationProperty annotationProperty, String content) throws NonExistingEntityException {
 	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
@@ -679,6 +850,13 @@ public class Brain {
 	}
     }
 
+    /**
+     * Retrieve the content of an annotation.
+     * @param entity
+     * @param annotationProperty
+     * @throws NonExistingEntityException
+     * @return content
+     */
     private String getAnnotation(String entity, OWLAnnotationProperty annotationProperty) throws NonExistingEntityException {
 	if(this.bidiShortFormProvider.getEntity(entity) !=  null){
 	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
@@ -694,51 +872,103 @@ public class Brain {
 	throw new NonExistingEntityException("The entity '"+entity+"' has no annotation of this type attached to it.");
     }
 
+    /**
+     * Retrieve the content of an annotation.
+     * @param entity
+     * @param annotationProperty
+     * @throws NonExistingEntityException
+     * @return content
+     */
     public String getAnnotation(String entity, String annotationProperty) throws NonExistingEntityException {
 	OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
 	return this.getAnnotation(entity, owlAnnotationProperty);
     }
 
+    /**
+     * Set the content of the label.
+     * @param entity
+     * @param label
+     * @throws NonExistingEntityException
+     */
     public void label(String entity, String label) throws NonExistingEntityException {
 	this.annotation(entity, this.factory.getRDFSLabel(), label);
     }
 
+    /**
+     * Get the content of the label.
+     * @param entity
+     * @throws NonExistingEntityException
+     * @return label
+     */
     public String getLabel(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSLabel());
     }
 
-    public void comment(String entity, String label) throws NonExistingEntityException {
-	this.annotation(entity, this.factory.getRDFSComment(), label);
+    /**
+     * Set the content of the comment.
+     * @param entity
+     * @param comment
+     * @throws NonExistingEntityException
+     */
+    public void comment(String entity, String comment) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSComment(), comment);
     }
 
+    /**
+     * Get the content of the comment.
+     * @param entity
+     * @throws NonExistingEntityException
+     * @return comment
+     */
     public String getComment(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSComment());
     }
 
-    public void isDefinedBy(String entity, String label) throws NonExistingEntityException {
-	this.annotation(entity, this.factory.getRDFSIsDefinedBy(), label);
+    /**
+     * Set the content of rdfs:isDefinedBy.
+     * @param entity
+     * @param isDefinedBy
+     * @throws NonExistingEntityException
+     */
+    public void isDefinedBy(String entity, String isDefinedBy) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSIsDefinedBy(), isDefinedBy);
     }
 
+    /**
+     * Get the content of the rdfs:isDefinedBy.
+     * @param entity
+     * @throws NonExistingEntityException
+     * @return rdfs:isDefinedBy
+     */
     public String getIsDefinedBy(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSIsDefinedBy());
     }
 
-    public void seeAlso(String entity, String label) throws NonExistingEntityException {
-	this.annotation(entity, this.factory.getRDFSSeeAlso(), label);
+    /**
+     * Set the content of rdfs:seeAlso.
+     * @param entity
+     * @param seeAlso
+     * @throws NonExistingEntityException
+     */
+    public void seeAlso(String entity, String seeAlso) throws NonExistingEntityException {
+	this.annotation(entity, this.factory.getRDFSSeeAlso(), seeAlso);
     }
 
+    /**
+     * Get the content of the rdfs:seeAlso.
+     * @param entity
+     * @throws NonExistingEntityException
+     * @return rdfs:isDefinedBy
+     */
     public String getSeeAlso(String entity) throws NonExistingEntityException {
 	return this.getAnnotation(entity, this.factory.getRDFSSeeAlso());
     }
 
-
     /**
-     * Converts a string into an OWLExpression. If a problem is encountered, an error is thrown which can be catched-up
-     * in order to know more about the error.
+     * Converts a string into an OWLClassExpression. If a problem is encountered, an error is thrown.
      * @param expression
-     * @return owlExpression
+     * @return owlClassExpression
      * @throws ClassExpressionException 
-     * @throws ParserException 
      */
     private OWLClassExpression parseClassExpression(String expression) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = null;
@@ -751,7 +981,12 @@ public class Brain {
 	return owlClassExpression;
     }
 
-
+    /**
+     * Converts a string into an OWLObjectPropertyExpression. If a problem is encountered, an error is thrown.
+     * @param objectPropertyExpression
+     * @return owlObjectPropertyExpression
+     * @throws ObjectPropertyExpressionException 
+     */
     private OWLObjectPropertyExpression parseObjectPropertyExpression(String objectPropertyExpression) throws ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression owlObjectPropertyExpression = null;
 	ManchesterOWLSyntaxEditorParser parser = getParser(objectPropertyExpression);
@@ -763,7 +998,12 @@ public class Brain {
 	return owlObjectPropertyExpression;
     }
 
-
+    /**
+     * Converts a string into an OWLDataPropertyExpression. If a problem is encountered, an error is thrown.
+     * @param dataPropertyExpression
+     * @return owlDataPropertyExpression
+     * @throws DataPropertyExpressionException 
+     */
     private OWLDataPropertyExpression parseDataPropertyExpression(String dataPropertyExpression) throws DataPropertyExpressionException {
 	OWLDataPropertyExpression owlDataPropertyExpression = null;
 	ManchesterOWLSyntaxEditorParser parser = getParser(dataPropertyExpression);
@@ -775,6 +1015,12 @@ public class Brain {
 	return owlDataPropertyExpression;
     }
 
+    /**
+     * Converts a string into a list of OWLObjectPropertyExpression. If a problem is encountered, an error is thrown.
+     * @param chainExpression
+     * @return owlObjectPropertyExpressions
+     * @throws ObjectPropertyExpressionException 
+     */
     private List<OWLObjectPropertyExpression> parseObjectPropertyChain(String chainExpression) throws ObjectPropertyExpressionException {
 	List<OWLObjectPropertyExpression> owlObjectPropertyExpressions = null;
 	ManchesterOWLSyntaxEditorParser parser = getParser(chainExpression);
@@ -788,20 +1034,21 @@ public class Brain {
 
 
     /**
-     * @param expression 
-     * @return
+     * Instantiate a new Manchester syntax parser.
+     * @param expression
+     * @return parser
      */
     private ManchesterOWLSyntaxEditorParser getParser(String expression) {	
-	ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(factory, expression);
-	parser.setDefaultOntology(ontology);
-	parser.setOWLEntityChecker(entityChecker);
+	ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(this.factory, expression);
+	parser.setDefaultOntology(this.ontology);
+	parser.setOWLEntityChecker(this.entityChecker);
 	return parser;
     }
 
     /**
-     * @param string
+     * Save the ontology at the specified location.
+     * @param path
      * @throws StorageException 
-     * @throws OWLOntologyStorageException 
      */
     public void save(String path) throws StorageException {
 	File file = new File(path);
@@ -818,15 +1065,14 @@ public class Brain {
     }
 
     /**
-     * @param string
+     * Load an external ontology from it's IRI or from a local file.
+     * @param pathToOntology
      * @throws NewOntologyException 
      * @throws ExistingEntityException 
      */
     public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
-	
 	OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();
 	OWLOntology newOnto;
-
 	if(isExternalEntity(pathToOntology)){
 	    IRI iriOnto = IRI.create(pathToOntology);
 	    try {
@@ -842,7 +1088,7 @@ public class Brain {
 		throw new NewOntologyException(e);
 	    }
 	}
-	
+
 	SimpleShortFormProvider sf = new SimpleShortFormProvider();
 	Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
 	BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
@@ -862,8 +1108,8 @@ public class Brain {
     }
 
     /**
-     * @return 
-     * 
+     * Test whether the ontology is following an OWL 2 EL profile or not.
+     * @return hasElProfile
      */
     public boolean hasElProfile() {
 	OWL2ELProfile profile = new OWL2ELProfile();
@@ -876,7 +1122,8 @@ public class Brain {
     }
 
     /**
-     * @return
+     * Returns the list of violations of the OWL 2 EL profile.
+     * @return violations
      */
     public List<String> getElProfileViolations() {
 	OWL2ELProfile profile = new OWL2ELProfile();
@@ -891,9 +1138,12 @@ public class Brain {
     }
 
     /**
-     * @param string
-     * @param b
-     * @return
+     * Returns the list of subclasses from the expression.
+     * The second parameter is a flag telling whether only the direct classes
+     * should be returned.
+     * @param classExpression
+     * @param direct
+     * @return subClasses
      * @throws ClassExpressionException 
      */
     public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
@@ -913,9 +1163,12 @@ public class Brain {
     }
 
     /**
-     * @param string
-     * @param b
-     * @return
+     * Returns the list of super classes from the expression.
+     * The second parameter is a flag telling whether only the direct classes
+     * should be returned.
+     * @param classExpression
+     * @param direct
+     * @return superClasses
      * @throws ClassExpressionException 
      */
     public List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
@@ -936,11 +1189,9 @@ public class Brain {
 
     /**
      * Retrieves the named equivalent classes corresponding to the class expression
-     * @param expression
-     * @param direct
      * @return equivalentClasses
      * @throws ClassExpressionException 
-     * @throws ParserException 
+     * @throws ClassExpressionException 
      */
     public List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
@@ -993,7 +1244,7 @@ public class Brain {
     /**
      * Sort the classes based on their shortForms.
      * @param classes
-     * @return sortedClasses
+     * @return listClasses
      */
     private List<String> sortClasses(Set<OWLClass> classes) {
 	List<String> listClasses = new ArrayList<String>();
@@ -1008,9 +1259,9 @@ public class Brain {
 
 
     /**
-     * Test whether an OWLClass is the subClass of an other.
-     * @param owlClassToTest
-     * @param owlClassToTestAgainst
+     * Test whether an OWLClass is the subclass of an other.
+     * @param presumedSubClass
+     * @param presumedSuperClass
      * @param direct
      * @return isASubClass
      * @throws ClassExpressionException 
@@ -1023,10 +1274,10 @@ public class Brain {
 
     /**
      * Test whether an OWLClass is the super class of an other.
-     * @param owlClassToTest
-     * @param owlClassToTestAgainst
+     * @param presumedSuperClass
+     * @param presumedSubClass
      * @param direct
-     * @return isASubClass
+     * @return isASuperClass
      * @throws ClassExpressionException 
      */
     public boolean isSuperClass(String presumedSuperClass, String presumedSubClass, boolean direct) throws ClassExpressionException {
