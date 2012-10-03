@@ -157,11 +157,11 @@ a.button span {
 }
 
 #documentation span {
-  background: transparent url(../images/jar-icon.png) 12px 50% no-repeat;
+  background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
 }
 
-#download-tar-gz span {
-  background: transparent url(../images/tar-gz-icon.png) 12px 50% no-repeat;
+#download-jar span {
+  background: transparent url(../images/jar-icon.png) 12px 50% no-repeat;
 }
 #view-on-github span {
   background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
@@ -360,7 +360,7 @@ footer a:hover {
   #downloads {
     margin-bottom: 25px;
   }
-  #download-zip, #download-tar-gz, #documentation {
+  #download-zip, #download-jar, #documentation {
     display: none;
   }
   .inner {
