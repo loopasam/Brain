@@ -1,13 +1,13 @@
 Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
 Prefix: owl: <http://www.w3.org/2002/07/owl#>
-Prefix: : <brain#>
+Prefix: : <https://raw.github.com/loopasam/Brain/master/src/test/resources/>
 Prefix: xml: <http://www.w3.org/XML/1998/namespace>
 Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
 
-Ontology: <brain.owl>
+Ontology: <https://raw.github.com/loopasam/Brain/master/src/test/resources/demo.owl>
 
 
 ObjectProperty: part-of

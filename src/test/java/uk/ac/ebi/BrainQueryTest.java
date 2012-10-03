@@ -135,8 +135,8 @@ public class BrainQueryTest {
     @Test
     public void learnOntologyFromTheWeb() throws BrainException {
 	Brain brain = new Brain();
-	brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/dev.owl");
-	assertNotNull(brain.getOWLClass("A"));
+	brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/demo.owl");
+	assertNotNull(brain.getOWLClass("Cell"));
     }
     
     @Test
