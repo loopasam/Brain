@@ -94,9 +94,9 @@ import uk.ac.ebi.brain.error.StorageException;
  *
  */
 public class Brain {
-    //TODO get thing
     //TODO check consistency
     //TODO workers
+    //TODO remove
 
     private OWLOntology ontology;
     private OWLReasoner reasoner;
@@ -206,6 +206,11 @@ public class Brain {
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
 	updateShorForms();
+	try {
+	    this.addClass("http://www.w3.org/2002/07/owl#Thing");
+	} catch (BrainException e) {
+	    e.printStackTrace();
+	}
     }
 
     public Brain() throws NewOntologyException, BadPrefixException {
@@ -466,6 +471,7 @@ public class Brain {
      * @throws NonExistingEntityException 
      */
     public OWLClass getOWLClass(String className) throws NonExistingClassException {
+
 	OWLEntity entity = this.bidiShortFormProvider.getEntity(className);
 	if(entity != null && entity.isOWLClass()){
 	    return (OWLClass) entity;
@@ -817,12 +823,22 @@ public class Brain {
      */
     public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
 
-	File file = new File(pathToOntology);
 	OWLOntology newOnto;
-	try {
-	    newOnto = this.manager.loadOntologyFromOntologyDocument(file);
-	} catch (OWLOntologyCreationException e) {
-	    throw new NewOntologyException(e);
+
+	if(isExternalEntity(pathToOntology)){
+	    IRI iriOnto = IRI.create(pathToOntology);
+	    try {
+		newOnto = this.manager.loadOntologyFromOntologyDocument(iriOnto);
+	    } catch (OWLOntologyCreationException e) {
+		throw new NewOntologyException(e);
+	    }
+	}else{
+	    File file = new File(pathToOntology);
+	    try {
+		newOnto = this.manager.loadOntologyFromOntologyDocument(file);
+	    } catch (OWLOntologyCreationException e) {
+		throw new NewOntologyException(e);
+	    }
 	}
 
 	SimpleShortFormProvider sf = new SimpleShortFormProvider();
@@ -830,7 +846,10 @@ public class Brain {
 	BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, sf);
 	for (String shortFromNewOnto : bidiShortFormProvider.getShortForms()) {
 	    if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
-		throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
+		if(!shortFromNewOnto.equals("Thing")){
+		    throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
+		}
+		
 	    }
 	}
 

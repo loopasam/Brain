@@ -10,23 +10,6 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 Ontology: <brain.owl>
 
 
-AnnotationProperty: rdfs:seeAlso
+Class: owl:Thing
 
-    
-AnnotationProperty: rdfs:isDefinedBy
-
-    
-AnnotationProperty: rdfs:comment
-
-    
-Datatype: xsd:string
-
-    
-Class: A
-
-    Annotations: 
-        rdfs:isDefinedBy "is defined by that"^^xsd:string,
-        rdfs:comment "his is a comment"^^xsd:string,
-        rdfs:seeAlso "see also there"^^xsd:string
-    
     

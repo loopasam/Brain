@@ -12,8 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.ebi.brain.core.Brain;
+import uk.ac.ebi.brain.error.BadPrefixException;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
+import uk.ac.ebi.brain.error.ExistingEntityException;
+import uk.ac.ebi.brain.error.NewOntologyException;
 
 /**
  * @author Samuel Croset
@@ -28,6 +31,7 @@ public class BrainQueryTest {
 	brain = new Brain("http://localhost/", "http://localhost/test.owl");
 	brain.learn("src/test/resources/dev.owl");
     }
+    
 
     @Test
     public void owlProfileTest() throws BrainException {
@@ -126,6 +130,20 @@ public class BrainQueryTest {
 	assertEquals("bar", seeAlso);
 	String testing = brain.getAnnotation("A", "testing");
 	assertEquals("whatever", testing);
+    }
+
+    @Test
+    public void learnOntologyFromTheWeb() throws BrainException {
+	Brain brain = new Brain();
+	brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/dev.owl");
+	assertNotNull(brain.getOWLClass("A"));
+    }
+    
+    @Test
+    public void getTopClass() throws BrainException {
+	Brain brain = new Brain();
+	assertNotNull(brain.getOWLClass("Thing"));
+	brain.save("src/test/resources/output.owl");
     }
 
 
