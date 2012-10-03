@@ -6,6 +6,7 @@ package uk.ac.ebi.brain.error;
 import java.net.MalformedURLException;
 
 /**
+ * Exception thrown in case of problematic prefix
  * @author Samuel Croset
  *
  */

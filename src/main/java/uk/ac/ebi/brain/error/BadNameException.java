@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 /**
+ * Exception thrown in case of problematic name for OWL entities.
  * @author Samuel Croset
  *
  */
@@ -18,14 +19,12 @@ public class BadNameException extends BrainException {
      */
     public BadNameException(String message) {
 	super(message);
-	// TODO Auto-generated constructor stub
     }
 
     /**
      * @param e
      */
     public BadNameException(MalformedURLException e) {
-	// TODO Auto-generated constructor stub
 	super(e);
     }
 
@@ -33,7 +32,6 @@ public class BadNameException extends BrainException {
      * @param e
      */
     public BadNameException(URISyntaxException e) {
-	// TODO Auto-generated constructor stub
 	super(e);
     }
 

@@ -4,6 +4,7 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Exception thrown in case of a data property is already present.
  * @author Samuel Croset
  *
  */
@@ -15,7 +16,6 @@ public class ExistingDataPropertyException extends ExistingEntityException {
      */
     public ExistingDataPropertyException(String message) {
 	super(message);
-	// TODO Auto-generated constructor stub
     }
 
 }

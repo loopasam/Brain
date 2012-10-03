@@ -4,6 +4,7 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Exception thrown in case of a class is already present.
  * @author Samuel Croset
  *
  */

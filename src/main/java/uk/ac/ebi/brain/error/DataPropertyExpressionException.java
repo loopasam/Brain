@@ -4,6 +4,7 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Exception thrown in case a data property couldn't be parsed.
  * @author Samuel Croset
  *
  */
@@ -15,7 +16,6 @@ public class DataPropertyExpressionException extends BrainException {
      */
     public DataPropertyExpressionException(Exception e) {
 	super(e);
-	// TODO Auto-generated constructor stub
     }
 
 }

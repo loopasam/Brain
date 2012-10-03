@@ -4,6 +4,7 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Generic type of expression
  * @author Samuel Croset
  *
  */

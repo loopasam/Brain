@@ -4,8 +4,8 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Exception thrown in case of an annotation property is already present.
  * @author Samuel Croset
- *
  */
 @SuppressWarnings("serial")
 public class ExistingAnnotationPropertyException extends ExistingEntityException {
@@ -15,7 +15,6 @@ public class ExistingAnnotationPropertyException extends ExistingEntityException
      */
     public ExistingAnnotationPropertyException(String message) {
 	super(message);
-	// TODO Auto-generated constructor stub
     }
 
 }

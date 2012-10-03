@@ -4,6 +4,7 @@
 package uk.ac.ebi.brain.error;
 
 /**
+ * Exception thrown in case of problem while creating a new ontology.
  * @author Samuel Croset
  *
  */
