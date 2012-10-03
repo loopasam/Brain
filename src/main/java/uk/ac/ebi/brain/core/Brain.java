@@ -206,6 +206,7 @@ public class Brain {
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
 	updateShorForms();
+	//TODO add also top level props
 	try {
 	    this.addClass("http://www.w3.org/2002/07/owl#Thing");
 	} catch (BrainException e) {
@@ -822,34 +823,35 @@ public class Brain {
      * @throws ExistingEntityException 
      */
     public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
-
+	
+	OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();
 	OWLOntology newOnto;
 
 	if(isExternalEntity(pathToOntology)){
 	    IRI iriOnto = IRI.create(pathToOntology);
 	    try {
-		newOnto = this.manager.loadOntologyFromOntologyDocument(iriOnto);
+		newOnto = newManager.loadOntologyFromOntologyDocument(iriOnto);
 	    } catch (OWLOntologyCreationException e) {
 		throw new NewOntologyException(e);
 	    }
 	}else{
 	    File file = new File(pathToOntology);
 	    try {
-		newOnto = this.manager.loadOntologyFromOntologyDocument(file);
+		newOnto = newManager.loadOntologyFromOntologyDocument(file);
 	    } catch (OWLOntologyCreationException e) {
 		throw new NewOntologyException(e);
 	    }
 	}
-
+	
 	SimpleShortFormProvider sf = new SimpleShortFormProvider();
 	Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
-	BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, sf);
+	BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
 	for (String shortFromNewOnto : bidiShortFormProvider.getShortForms()) {
 	    if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
 		if(!shortFromNewOnto.equals("Thing")){
 		    throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
 		}
-		
+
 	    }
 	}
 

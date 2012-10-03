@@ -131,6 +131,14 @@ public class BrainQueryTest {
 	String testing = brain.getAnnotation("A", "testing");
 	assertEquals("whatever", testing);
     }
+    
+    @Test
+    public void learnFromLocalFile() throws BrainException {
+	Brain brain = new Brain();
+	brain.learn("src/test/resources/demo.owl");
+	brain.addClass("A");
+	brain.save("src/test/resources/output.owl");	
+    }
 
     @Test
     public void learnOntologyFromTheWeb() throws BrainException {
@@ -144,7 +152,6 @@ public class BrainQueryTest {
     public void getTopClass() throws BrainException {
 	Brain brain = new Brain();
 	assertNotNull(brain.getOWLClass("Thing"));
-	brain.save("src/test/resources/output.owl");
     }
 
 
