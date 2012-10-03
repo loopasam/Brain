@@ -137,6 +137,7 @@ public class BrainQueryTest {
 	Brain brain = new Brain();
 	brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/demo.owl");
 	assertNotNull(brain.getOWLClass("Cell"));
+	
     }
     
     @Test
