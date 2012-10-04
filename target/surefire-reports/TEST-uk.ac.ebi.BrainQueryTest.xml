@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="2.884" errors="0" skipped="0" tests="15" name="uk.ac.ebi.BrainQueryTest">
+<testsuite failures="0" time="2.86" errors="0" skipped="0" tests="15" name="uk.ac.ebi.BrainQueryTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386"/>
@@ -7,7 +7,6 @@
     <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
     <property name="java.vendor.url" value="http://java.sun.com/"/>
     <property name="path.separator" value=":"/>
-    <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="user.country" value="GB"/>
@@ -17,40 +16,42 @@
     <property name="user.dir" value="/home/samuel/git/Brain"/>
     <property name="java.runtime.version" value="1.6.0_26-b03"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/samuel/git/Brain"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/endorsed"/>
     <property name="os.arch" value="i386"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter5472002781240913641.jar"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/samuel/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf6044679053433100281.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/../lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/client:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="surefire.test.class.path" value="/home/samuel/git/Brain/target/test-classes:/home/samuel/git/Brain/target/classes:/home/samuel/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/samuel/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-api/3.4/owlapi-api-3.4.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owlapi/0.3.1/elk-owlapi-0.3.1.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-apibinding/3.4/owlapi-apibinding-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-impl/3.4/owlapi-impl-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-parsers/3.4/owlapi-parsers-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-tools/3.4/owlapi-tools-3.4.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owl-model/0.3.1/elk-owl-model-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owl-implementation/0.3.1/elk-owl-implementation-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-hashing/0.3.1/elk-util-hashing-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-reasoner/0.3.1/elk-reasoner-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-collections/0.3.1/elk-util-collections-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-concurrent/0.3.1/elk-util-concurrent-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-logging/0.3.1/elk-util-logging-0.3.1.jar:/home/samuel/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-common/0.3.1/elk-util-common-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-io/0.3.1/elk-util-io-0.3.1.jar:"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="50.0"/>
     <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
     <property name="os.version" value="3.0.0-17-generic-pae"/>
     <property name="user.home" value="/home/samuel"/>
-    <property name="user.timezone" value="Europe/London"/>
+    <property name="user.timezone" value=""/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.6"/>
     <property name="user.name" value="samuel"/>
-    <property name="java.class.path" value="/home/samuel/eclipse/plugins/org.eclipse.m2e.maven.runtime_1.1.0.20120529-1956/jars/plexus-classworlds-2.4.jar"/>
+    <property name="java.class.path" value="/home/samuel/git/Brain/target/test-classes:/home/samuel/git/Brain/target/classes:/home/samuel/.m2/repository/junit/junit/4.10/junit-4.10.jar:/home/samuel/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-api/3.4/owlapi-api-3.4.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owlapi/0.3.1/elk-owlapi-0.3.1.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-apibinding/3.4/owlapi-apibinding-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-impl/3.4/owlapi-impl-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-parsers/3.4/owlapi-parsers-3.4.jar:/home/samuel/.m2/repository/net/sourceforge/owlapi/owlapi-tools/3.4/owlapi-tools-3.4.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owl-model/0.3.1/elk-owl-model-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-owl-implementation/0.3.1/elk-owl-implementation-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-hashing/0.3.1/elk-util-hashing-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-reasoner/0.3.1/elk-reasoner-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-collections/0.3.1/elk-util-collections-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-concurrent/0.3.1/elk-util-concurrent-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-logging/0.3.1/elk-util-logging-0.3.1.jar:/home/samuel/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-common/0.3.1/elk-util-common-0.3.1.jar:/home/samuel/.m2/repository/org/semanticweb/elk/elk-util-io/0.3.1/elk-util-io-0.3.1.jar:"/>
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -s /home/samuel/.m2/settings.xml clean deploy"/>
+    <property name="sun.java.command" value="/tmp/surefirebooter5472002781240913641.jar /tmp/surefire6156717435085200054tmp /tmp/surefire8093647771105986193tmp"/>
+    <property name="entityExpansionLimit" value="100000000"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.6.0_26"/>
     <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/ext:/usr/java/packages/lib/ext"/>
-    <property name="securerandom.source" value="file:/dev/./urandom"/>
     <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/resources.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/rt.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/jsse.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/jce.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/charsets.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/classes"/>
     <property name="java.vendor" value="Sun Microsystems Inc."/>
-    <property name="maven.home" value="/home/samuel/git/Brain/EMBEDDED"/>
+    <property name="localRepository" value="/home/samuel/.m2/repository"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -58,19 +59,19 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.29" classname="uk.ac.ebi.BrainQueryTest" name="owlProfileTest"/>
-  <testcase time="0.119" classname="uk.ac.ebi.BrainQueryTest" name="getDirectSubClassesTest"/>
-  <testcase time="0.039" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectSubClassesTest"/>
-  <testcase time="0.037" classname="uk.ac.ebi.BrainQueryTest" name="getDirectAnonymousSubClassesTest"/>
-  <testcase time="0.028" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectAnonymousSubClassesTest"/>
-  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesNewOntology"/>
-  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesTest"/>
-  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesTest"/>
-  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentAnonClassesTest"/>
-  <testcase time="0.06" classname="uk.ac.ebi.BrainQueryTest" name="isSubClassTest"/>
-  <testcase time="0.052" classname="uk.ac.ebi.BrainQueryTest" name="isSuperClassTest"/>
-  <testcase time="0.01" classname="uk.ac.ebi.BrainQueryTest" name="getLabelTest"/>
-  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnFromLocalFile"/>
-  <testcase time="2.1" classname="uk.ac.ebi.BrainQueryTest" name="learnOntologyFromTheWeb"/>
-  <testcase time="0.015" classname="uk.ac.ebi.BrainQueryTest" name="getTopClass"/>
+  <testcase time="0.258" classname="uk.ac.ebi.BrainQueryTest" name="owlProfileTest"/>
+  <testcase time="0.128" classname="uk.ac.ebi.BrainQueryTest" name="getDirectSubClassesTest"/>
+  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectSubClassesTest"/>
+  <testcase time="0.032" classname="uk.ac.ebi.BrainQueryTest" name="getDirectAnonymousSubClassesTest"/>
+  <testcase time="0.029" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectAnonymousSubClassesTest"/>
+  <testcase time="0.035" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesNewOntology"/>
+  <testcase time="0.031" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentAnonClassesTest"/>
+  <testcase time="0.05" classname="uk.ac.ebi.BrainQueryTest" name="isSubClassTest"/>
+  <testcase time="0.048" classname="uk.ac.ebi.BrainQueryTest" name="isSuperClassTest"/>
+  <testcase time="0.011" classname="uk.ac.ebi.BrainQueryTest" name="getLabelTest"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="learnFromLocalFile"/>
+  <testcase time="2.103" classname="uk.ac.ebi.BrainQueryTest" name="learnOntologyFromTheWeb"/>
+  <testcase time="0.016" classname="uk.ac.ebi.BrainQueryTest" name="getTopClass"/>
 </testsuite>
