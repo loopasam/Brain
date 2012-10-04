@@ -19,6 +19,7 @@
     <connection>scm:git:git@github.com:loopasam/Brain.git</connection>
     <developerConnection>scm:git:git@github.com:loopasam/Brain.git</developerConnection>
     <url>git@github.com:loopasam/Brain.git</url>
+    <tag>HEAD</tag>
   </scm>
     <developers>
     <developer>
@@ -45,14 +46,12 @@
 		<dependency>
 			<groupId>org.semanticweb.elk</groupId>
 			<artifactId>elk-owlapi</artifactId>
-			<version>0.3.1-SNAPSHOT</version>
+			<version>0.3.1</version>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>Sonatype snapshots repository</id>
-			<name>Sonatype's Maven snapshots repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 </project>
