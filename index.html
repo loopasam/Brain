@@ -65,18 +65,18 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
   //Declare the axiom
   brain.subClassOf("Nucleus", "part-of some Cell");
   //Query the knowledge-base for indirect subclasses of an expression
-  List<String> subClasses = brain.getSubClasses("part-of some Cell", false);
+  List&lt;String&gt; subClasses = brain.getSubClasses("part-of some Cell", false);
 }
 </code></pre>
 
-<div class="highlight"><pre>Prefix: xsd: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2001/XMLSchema#</span><span class="nt">&gt;</span>
-Prefix: owl: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2002/07/owl#</span><span class="nt">&gt;</span>
-Prefix: : <span class="nt">&lt;brain</span><span class="err">#</span><span class="nt">&gt;</span>
-Prefix: xml: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/XML/1998/namespace</span><span class="nt">&gt;</span>
-Prefix: rdf: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/1999/02/22-rdf-syntax-ns#</span><span class="nt">&gt;</span>
-Prefix: rdfs: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2000/01/rdf-schema#</span><span class="nt">&gt;</span>
+<pre><code>Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+Prefix: : &lt;brain#&gt;
+Prefix: xml: &lt;http://www.w3.org/XML/1998/namespace&gt;
+Prefix: rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+Prefix: rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
-Ontology: <span class="nt">&lt;brain.owl&gt;</span>
+Ontology: &lt;brain.owl&gt;
 
 ObjectProperty: part-of
 
@@ -88,7 +88,7 @@ Class: Nucleus
 
     SubClassOf: 
         part-of some Cell
-</pre></div>
+</code></pre>
 
         </section>
 
