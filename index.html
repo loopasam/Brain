@@ -32,6 +32,9 @@
 
         <section id="main_content">
 
+
+
+<h3>Summary</h3>
 <p>
 Brain is a facade for the <a href="http://owlapi.sourceforge.net/">OWL-API</a>, wrapping 
 the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reasoning task, such as query
@@ -54,7 +57,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
 <p>Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code></p>
 <p>OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code></p>
 
-<h3>Brain implementation:</h3>
+<h3>Brain implementation</h3>
 <pre><code>public static void main(String[] args) throws BrainException {
   //You will always need a Brain object
   Brain brain = new Brain();
@@ -72,7 +75,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
 }
 </code></pre>
 
-<h3>Serialised OWL file (Manchester syntax):</h3>
+<h3>Serialised OWL file (Manchester syntax)</h3>
 <pre><code>Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 Prefix: : &lt;brain#&gt;
@@ -94,7 +97,7 @@ Class: Nucleus
         part-of some Cell
 </code></pre>
 
-<h3>Serialised RDF file (Turtle):</h3>
+<h3>Serialised RDF file (Turtle)</h3>
 <pre><code>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix : &lt;brain#&gt; .
