@@ -33,29 +33,39 @@
         <section id="main_content">
 
 <p>
-Brain is a facade for the OWL-API, wrapping the Elk reasoner for reasoning task, such as query
+Brain is a facade for the <a href="http://owlapi.sourceforge.net/">OWL-API</a>, wrapping 
+the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reasoning task, such as query
  or consistency checking.
  </p>
  <p>
  Brain has been designed with biomedical knowledge in mind, which can expressed
-  as an OWL ontology or knowledge-base. In this domain, knowledge bases are usually very large and mostly focused 
+  as an OWL ontology or knowledge-base. Biomedical knowledge bases are usually very large and mostly focused 
   on the TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following an OWL 2 EL 
   profile, suitable for fast reasoning (decidable in polynomial time).
   </p>
   <p>
   The initial goal of Brain is to provide a simplified 
-  interaction with the OWL-API. Entities are handled using the intuitive Manchester syntax.
+  interaction with the OWL-API to analyse biological data-sets and ontologies. Entities are handled using the intuitive Manchester syntax.
 </p>
 
 <h3>Example of axiom</h3>
 
-Natural language: <code>A nucleus is part of some cells.</code>
-Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code>
-OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code>
+<p>Natural language: <code>A nucleus is part of some cells.</code></p>
+<p>Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code></p>
+<p>OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code></p>
 Brain implementation:
-<pre><code>
-public static void main(String[] args) throws BrainException {
+<pre><code>public static void main(String[] args) throws BrainException {
+  //You will always need a Brain object
   Brain brain = new Brain();
+  //Add the OWL classes
+  brain.addClass("Nucleus");
+  brain.addClass("Cell");
+  //Add the OWL object property
+  brain.addObjectProperty("part-of");
+  //Assert the axiom
+  brain.subClassOf("Nucleus", "part-of some Cell");
+  //Query the knowledge-base for indirect subclasses of an expression
+  List<String> subClasses = brain.getSubClasses("part-of some Cell", false);
 }
 </code></pre>
 
