@@ -53,7 +53,8 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
 <p>Natural language: <code>A nucleus is part of some cells.</code></p>
 <p>Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code></p>
 <p>OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code></p>
-<p>Brain implementation:</p>
+
+<h3>Brain implementation:</h3>
 <pre><code>public static void main(String[] args) throws BrainException {
   //You will always need a Brain object
   Brain brain = new Brain();
@@ -71,7 +72,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
 }
 </code></pre>
 
-<p>Serialised OWL file (Manchester syntax):</p>
+<h3>Serialised OWL file (Manchester syntax):</h3>
 <pre><code>Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 Prefix: : &lt;brain#&gt;
@@ -93,7 +94,7 @@ Class: Nucleus
         part-of some Cell
 </code></pre>
 
-<p>Serialised RDF file (Turtle):</p>
+<h3>Serialised RDF file (Turtle):</h3>
 <pre><code>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix : &lt;brain#&gt; .
