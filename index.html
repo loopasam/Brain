@@ -39,7 +39,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
  </p>
  <p>
  Brain has been designed with biomedical knowledge in mind, which can expressed
-  as an OWL ontology or knowledge-base. Biomedical knowledge bases are usually very large and mostly focused 
+  as an OWL ontology (also called knowledge-base). Biomedical knowledge-bases are usually very large and mostly focused 
   on the TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following an OWL 2 EL 
   profile, suitable for fast reasoning (decidable in polynomial time).
   </p>
@@ -53,7 +53,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
 <p>Natural language: <code>A nucleus is part of some cells.</code></p>
 <p>Description logic: <code>Nucleus ⊆ ∃part-of.Cell</code></p>
 <p>OWL (Manchester syntax): <code>Nucleus subClassOf part-of some Cell</code></p>
-Brain implementation:
+<p>Brain implementation:</p>
 <pre><code>public static void main(String[] args) throws BrainException {
   //You will always need a Brain object
   Brain brain = new Brain();
@@ -62,12 +62,33 @@ Brain implementation:
   brain.addClass("Cell");
   //Add the OWL object property
   brain.addObjectProperty("part-of");
-  //Assert the axiom
+  //Declare the axiom
   brain.subClassOf("Nucleus", "part-of some Cell");
   //Query the knowledge-base for indirect subclasses of an expression
   List<String> subClasses = brain.getSubClasses("part-of some Cell", false);
 }
 </code></pre>
+
+<div class="highlight"><pre>Prefix: xsd: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2001/XMLSchema#</span><span class="nt">&gt;</span>
+Prefix: owl: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2002/07/owl#</span><span class="nt">&gt;</span>
+Prefix: : <span class="nt">&lt;brain</span><span class="err">#</span><span class="nt">&gt;</span>
+Prefix: xml: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/XML/1998/namespace</span><span class="nt">&gt;</span>
+Prefix: rdf: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/1999/02/22-rdf-syntax-ns#</span><span class="nt">&gt;</span>
+Prefix: rdfs: <span class="nt">&lt;http:</span><span class="err">//www.w3.org/2000/01/rdf-schema#</span><span class="nt">&gt;</span>
+
+Ontology: <span class="nt">&lt;brain.owl&gt;</span>
+
+ObjectProperty: part-of
+
+Class: owl:Thing
+    
+Class: Cell
+
+Class: Nucleus
+
+    SubClassOf: 
+        part-of some Cell
+</pre></div>
 
         </section>
 
