@@ -39,7 +39,7 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
  </p>
  <p>
  Brain has been designed with biomedical knowledge in mind, which can expressed
-  as an OWL ontology (also called knowledge-base). Biomedical knowledge-bases are usually very large and mostly focused 
+  as ontology or knowledge-base using the <a href="http://en.wikipedia.org/wiki/Web_Ontology_Language">Web Ontology Language</a> (OWL). Biomedical knowledge-bases are usually very large and mostly focused 
   on the TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following an OWL 2 EL 
   profile, suitable for fast reasoning (decidable in polynomial time).
   </p>
@@ -66,9 +66,12 @@ the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reaso
   brain.subClassOf("Nucleus", "part-of some Cell");
   //Query the knowledge-base for indirect subclasses of an expression
   List&lt;String&gt; subClasses = brain.getSubClasses("part-of some Cell", false);
+  //Save the ontology
+  brain.save("your/path/to/ontology.owl");
 }
 </code></pre>
 
+<p>Serialised OWL file (Manchester syntax):</p>
 <pre><code>Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
 Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 Prefix: : &lt;brain#&gt;
@@ -88,6 +91,32 @@ Class: Nucleus
 
     SubClassOf: 
         part-of some Cell
+</code></pre>
+
+<p>Serialised RDF file (Turtle):</p>
+<pre><code>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix : &lt;brain#&gt; .
+@prefix xml: &lt;http://www.w3.org/XML/1998/namespace&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@base &lt;brain.owl&gt; .
+
+&lt;brain.owl&gt; rdf:type owl:Ontology .
+
+:part-of rdf:type owl:ObjectProperty .
+
+:Cell rdf:type owl:Class .
+
+:Nucleus rdf:type owl:Class ;
+         
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :part-of ;
+                           owl:someValuesFrom :Cell
+                         ] .
+
+owl:Thing rdf:type owl:Class .
 </code></pre>
 
         </section>
