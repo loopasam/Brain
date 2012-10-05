@@ -157,7 +157,7 @@ a.button span {
 }
 
 #documentation span {
-  background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
+  background: transparent url(../images/octocat-doc-icon.png) 12px 50% no-repeat;
 }
 
 #download-jar span {
