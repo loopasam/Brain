@@ -20,10 +20,10 @@ AnnotationProperty: rdfs:isDefinedBy
 AnnotationProperty: rdfs:label
 
     
-AnnotationProperty: testing
+AnnotationProperty: rdfs:comment
 
     
-AnnotationProperty: rdfs:comment
+AnnotationProperty: testing
 
     
 Datatype: xsd:string
@@ -37,11 +37,20 @@ ObjectProperty: part-of
     
 Class: owl:Thing
 
+    DisjointWith: 
+        R
+    
     
 Class: Q
 
     SubClassOf: 
         part-of some K
+    
+    
+Class: R
+
+    DisjointWith: 
+        owl:Thing
     
     
 Class: O
