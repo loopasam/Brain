@@ -223,16 +223,18 @@ em {
 
 table {
   width: 100%;
-  border: 2px solid #000;
+  border: 1px solid #000;
 }
 
 th {
+	padding: 15px;
+  border: 1px solid #000;
   font-weight: 500;
   color: #D5000D;
 }
 
 td {
-  border: 2px solid #000;
+  border: 1px solid #000;
   text-align: center; 
   font-weight: 300;
 }
