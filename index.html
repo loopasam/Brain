@@ -123,6 +123,186 @@ Class: Nucleus
 owl:Thing rdf:type owl:Class .
 </code></pre>
 
+<h3>Translation between Description Logic to OWL</h3>
+
+<table>
+    <tr>
+       <th></th>
+        <th>Description Logic (DL) Syntax</th>
+        <th>OWL Functional-Style Syntax</th>
+        <th>OWL Manchester Syntax</th>
+        <th>Example of Brain Implementation</th>
+    </tr>
+    <tr>
+    <th colspan="5">Individuals</th>
+    </tr>
+        <tr>
+        <td>individual name</td>
+        <td>a</td>
+        <td>Declaration(NamedIndividual(a))</td>
+        <td>Individual:&nbsp;a</td>
+        <td>Not supported (To be implemented in a future version)</td>
+    </tr>
+    <tr>
+    <th colspan="5">Roles</th>
+    </tr>
+    <tr>
+        <td>atomic role</td>
+        <td>R</td>
+        <td>Declaration(ObjectProperty(P))</td>
+        <td>ObjectProperty:&nbsp;P</td>
+        <td>brain.addObjectProperty("P");</td>
+    </tr>
+     <tr>
+    <th colspan="5">Concepts</th>
+    </tr>
+    <tr>
+        <td>atomic concept</td>
+        <td>A</td>
+        <td>Declaration(Class(A))</td>
+        <td>Class:&nbsp;A</td>
+        <td>brain.addClass("A");</td>
+    </tr>
+    <tr>
+        <td>intersection</td>
+        <td>C⊓D</td>
+        <td>ObjectIntersectionOf(C&nbsp;D)</td>
+        <td>C&nbsp;and&nbsp;D</td>
+        <td>brain.equivalentClasses("A",&nbsp;"C&nbsp;and&nbsp;D");</td>
+    </tr>
+     <tr>
+        <td>top concept</td>
+        <td>⊤</td>
+        <td>owl:Thing</td>
+        <td>owl:Thing</td>
+        <td>brain.getOWLClass("Thing");</td>
+    </tr>
+     <tr>
+        <td>top concept</td>
+        <td>⊥</td>
+        <td>owl:Nothing</td>
+        <td>owl:Nothing</td>
+        <td>brain.getUnsatisfiableClasses();</td>
+    </tr>
+     <tr>
+        <td>existential restriction</td>
+        <td>∃R.C</td>
+        <td>ObjectSomeValuesFrom(P C)</td>
+        <td>P&nbsp;some&nbsp;C</td>
+        <td>brain.subClassOf("X", "P some C");</td>
+    </tr>
+    <tr>
+        <td>union</td>
+        <td>C⊔D</td>
+        <td>ObjectUnionOf(C&nbsp;D)</td>
+        <td>C&nbsp;or&nbsp;D</td>
+        <td>Not supported (Not in EL profile)</td>
+    </tr>
+      <tr>
+        <td>complement</td>
+        <td>¬C</td>
+        <td>ObjectComplementOf(C)</td>
+        <td>not&nbsp;C</td>
+        <td>Not supported (Not in EL profile)</td>
+    </tr>
+     <tr>
+        <td>universal restriction</td>
+        <td>∀R.C</td>
+        <td>ObjectAllValuesFrom(P C)</td>
+        <td>P&nbsp;only&nbsp;C</td>
+        <td>Not supported (Not in EL profile)</td>
+    </tr>
+    <tr>
+    <th colspan="5">Axioms</th>
+    </tr>
+    <tr>
+    <th colspan="5">ABox (assertional axioms)</th>
+    </tr>
+     <tr>
+        <td>concept assertion</td>
+        <td>C(a)</td>
+        <td>ClassAssertion(C a)</td>
+        <td>Individual:&nbsp;a<br />Types:&nbsp;C</td>
+        <td>Not supported (To be implemented in a future version)</td>
+    </tr>
+     <tr>
+        <td>role assertion</td>
+        <td>R(a, b)</td>
+        <td>ObjectPropertyAssertion(P&nbsp;a&nbsp;b)</td>
+        <td>Individual:&nbsp;a<br />Facts:&nbsp;R&nbsp;b</td>
+        <td>Not supported (To be implemented in a future version)</td>
+    </tr>
+     <tr>
+        <td>individual equality</td>
+        <td>a≈b</td>
+        <td>SameIndividual(a b)</td>
+        <td>Individual:&nbsp;a<br />SameAs:&nbsp;b</td>
+        <td>Not supported (To be implemented in a future version)</td>
+    </tr>
+     <tr>
+        <td>individual inequality</td>
+        <td>a≠b</td>
+        <td>DifferentIndividuals(a b)</td>
+        <td>Individual:&nbsp;a<br />DifferentFrom:&nbsp;b</td>
+        <td>Not supported (To be implemented in a future version)</td>
+    </tr>
+    <tr>
+    <th colspan="5">TBox (terminological axioms)</th>
+    </tr>
+     <tr>
+        <td>concept inclusion</td>
+        <td>C⊑D</td>
+        <td>SubClassOf(C D)</td>
+        <td>Class:&nbsp;C<br />SubClassOf:&nbsp;D</td>
+        <td>brain.subClassOf("C",&nbsp;"D");</td>
+    </tr>
+     <tr>
+        <td>concept equivalence</td>
+        <td>C≡D</td>
+        <td>EquivalentClasses(C D)</td>
+        <td>Class:&nbsp;C<br />EquivalentTo:&nbsp;D</td>
+        <td>brain.equivalentClasses("C",&nbsp;"D");</td>
+    </tr>
+     <tr>
+        <td>concept disjointness</td>
+        <td>C⊓D⊑⊥</td>
+        <td>DisjointClasses(C D)</td>
+        <td>Class:&nbsp;C<br />DisjointWith:&nbsp;D</td>
+        <td>brain.disjointClasses("C",&nbsp;"D");</td>
+    </tr>
+    <tr>
+    <th colspan="5">RBox (relational axioms)</th>
+    </tr>
+     <tr>
+        <td>role inclusion</td>
+        <td>R⊑S</td>
+        <td>SubObjectPropertyOf(R&nbsp;S)</td>
+        <td>ObjectProperty:&nbsp;R<br />SubPropertyOf:&nbsp;S</td>
+        <td>brain.subPropertyOf("R",&nbsp;"S");</td>
+    </tr>
+     <tr>
+        <td>role equivalence</td>
+        <td>R≡S</td>
+        <td>EquivalentObjectProperties(C&nbsp;D)</td>
+        <td>ObjectProperty:&nbsp;R<br />EquivalentTo:&nbsp;S</td>
+        <td>brain.equivalentProperties("R",&nbsp;"S");</td>
+    </tr>
+     <tr>
+        <td>complex role inclusion</td>
+        <td>R1◦R2⊑S</td>
+        <td>EquivalentObjectProperties(C&nbsp;D)</td>
+        <td>ObjectProperty:&nbsp;S<br />SubPropertyChain:&nbsp;R1&nbsp;o&nbsp;R2</td>
+        <td>brain.chain("R1 o R2",&nbsp;"S");</td>
+    </tr>
+     <tr>
+        <td>role transitivity</td>
+        <td>R◦R⊑R</td>
+        <td>TransitiveObjectProperty(R)</td>
+        <td>ObjectProperty:&nbsp;R<br />Characteristics:&nbsp;Transitive</td>
+        <td>brain.transitive("R");</td>
+    </tr>
+</table>
+
         </section>
 
         <footer>
