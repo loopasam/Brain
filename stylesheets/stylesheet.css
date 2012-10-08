@@ -342,6 +342,14 @@ footer a:hover {
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 
+/* Custom styles
+================================================== */
+.table-summary {
+	margin-right: 10%;
+	margin-left: 10%;
+}
+
+
 /* #Media Queries
 ================================================== */
 
