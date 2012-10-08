@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: uk.ac.ebi.BrainQueryTest
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.616 sec
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.873 sec
