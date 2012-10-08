@@ -235,7 +235,7 @@ th {
 }
 
 td {
-  border: 1px solid #303030
+  border: 1px solid #303030;
   text-align: center; 
   font-weight: 300;
 }
@@ -351,6 +351,10 @@ footer a:hover {
 .table-summary {
 	margin-right: 10%;
 	margin-left: 10%;
+}
+
+.top-header{
+	background-color: orange;
 }
 
 
