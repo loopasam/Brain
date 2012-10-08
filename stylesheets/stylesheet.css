@@ -350,8 +350,12 @@ footer a:hover {
 /* Custom styles
 ================================================== */
 .table-summary {
-	margin-right: 10%;
-	margin-left: 10%;
+	margin-right: 5%;
+	margin-left: 5%;
+}
+
+.top-header{
+	color: #D5000D;
 }
 
 
