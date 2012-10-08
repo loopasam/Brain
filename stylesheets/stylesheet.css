@@ -232,6 +232,7 @@ th {
   border: 1px solid #F2F2F2;
   font-weight: 500;
   color: #F2F2F2;
+  text-shadow: none;
 }
 
 td {
