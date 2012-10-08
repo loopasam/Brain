@@ -236,6 +236,7 @@ th {
 }
 
 td {
+  padding: 13px;
   border: 1px solid #303030;
   text-align: center; 
   font-weight: 300;
