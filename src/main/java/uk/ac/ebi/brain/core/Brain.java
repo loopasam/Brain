@@ -13,7 +13,9 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxOntologyFormat;
+import org.semanticweb.elk.owlapi.ElkReasonerConfiguration;
 import org.semanticweb.elk.owlapi.ElkReasonerFactory;
+import org.semanticweb.elk.reasoner.config.ReasonerConfiguration;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.OWLEntityChecker;
 import org.semanticweb.owlapi.expression.ParserException;
@@ -58,7 +60,9 @@ import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
@@ -170,6 +174,26 @@ public class Brain {
      * @throws NewOntologyException 
      */
     public Brain(String prefix, String ontologyIri) throws NewOntologyException, BadPrefixException {
+	this(prefix, ontologyIri, -1);
+    }
+
+    /**
+     * Creates a Brain instance with the a default prefix and ontology IRI.
+     * @throws BadPrefixException 
+     * @throws NewOntologyException 
+     */
+    public Brain() throws NewOntologyException, BadPrefixException {
+	this(DEFAULT_PREFIX, "brain.owl", -1);
+    }
+
+    /**
+     * @param string
+     * @param string2
+     * @param i
+     * @throws BadPrefixException 
+     * @throws NewOntologyException 
+     */
+    public Brain(String prefix, String ontologyIri, int numberOfWorkers) throws NewOntologyException, BadPrefixException {
 
 	if(!prefix.equals(DEFAULT_PREFIX)){
 	    try {
@@ -193,27 +217,25 @@ public class Brain {
 	}
 
 	Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
+
+	if(numberOfWorkers != -1){
+	    //TODO do the config bit
+	}
+
+//	OWLReasonerConfiguration configuration = new OWLReasonerConfiguration();
+//	configuration.setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(numberOfWorkers));
 	this.reasonerFactory = new ElkReasonerFactory();
-	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, configuration);
 
 	this.INTEGER = this.factory.getIntegerOWLDatatype();
 	this.FLOAT = this.factory.getFloatOWLDatatype();
 	this.BOOLEAN = this.factory.getBooleanOWLDatatype();
-	updateShorForms();
+	update();
 	try {
 	    this.addClass("http://www.w3.org/2002/07/owl#Thing");
 	} catch (BrainException e) {
 	    e.printStackTrace();
 	}
-    }
-
-    /**
-     * Creates a Brain instance with the a default prefix and ontology IRI.
-     * @throws BadPrefixException 
-     * @throws NewOntologyException 
-     */
-    public Brain() throws NewOntologyException, BadPrefixException {
-	this(DEFAULT_PREFIX, "brain.owl");
     }
 
     /**
@@ -248,7 +270,7 @@ public class Brain {
 		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
 		}
 		declare(owlClass);
-		updateShorForms();
+		update();
 		return owlClass;
 	    }
 	}
@@ -272,7 +294,7 @@ public class Brain {
 	    throw new ExistingClassException("A class as already the short form '"+ sf +"'. A class name as to be unique.");
 	} catch (NonExistingClassException e) {
 	    declare(owlClass);
-	    updateShorForms();
+	    update();
 	    return owlClass;
 	}
     }    
@@ -375,7 +397,7 @@ public class Brain {
 		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
 		}
 		declare(owlObjectProperty);
-		updateShorForms();
+		update();
 		return owlObjectProperty;
 	    }
 	}
@@ -399,7 +421,7 @@ public class Brain {
 	    throw new ExistingObjectPropertyException("An object property as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingObjectPropertyException e) {
 	    declare(owlObjectProperty);
-	    updateShorForms();
+	    update();
 	    return owlObjectProperty;
 	}
     }
@@ -439,7 +461,7 @@ public class Brain {
 		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
 		}
 		declare(owlDataProperty);
-		updateShorForms();
+		update();
 		return owlDataProperty;
 	    }
 	}
@@ -463,7 +485,7 @@ public class Brain {
 	    throw new ExistingDataPropertyException("An entity as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingDataPropertyException e) {
 	    declare(owlDataProperty);
-	    updateShorForms();
+	    update();
 	    return owlDataProperty;
 	}
     }
@@ -503,7 +525,7 @@ public class Brain {
 		    throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
 		}
 		declare(owlAnnotationProperty);
-		updateShorForms();
+		update();
 		return owlAnnotationProperty;
 	    }
 	}
@@ -527,7 +549,7 @@ public class Brain {
 	    throw new ExistingAnnotationPropertyException("An entity as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
 	} catch (NonExistingAnnotationPropertyException e) {
 	    declare(owlAnnotationProperty);
-	    updateShorForms();
+	    update();
 	    return owlAnnotationProperty;
 	}
     }
@@ -547,11 +569,13 @@ public class Brain {
     /**
      * Update the shortform registry (this.bidiShortFormProvider).
      */
-    private void updateShorForms() {
+    private void update() {
 	this.shortFormProvider = new SimpleShortFormProvider();
 	Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 	this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 	this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
+	this.reasoner.flush();
+	this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
     }
 
     /**
@@ -1052,13 +1076,13 @@ public class Brain {
      */
     public void save(String path) throws StorageException {
 	File file = new File(path);
-	OWLOntologyFormat format = manager.getOntologyFormat(this.ontology);
+	OWLOntologyFormat format = this.manager.getOntologyFormat(this.ontology);
 	ManchesterOWLSyntaxOntologyFormat manSyntaxFormat = new ManchesterOWLSyntaxOntologyFormat();
 	if (format.isPrefixOWLOntologyFormat()) {
 	    manSyntaxFormat.copyPrefixesFrom(this.prefixManager);
 	}
 	try {
-	    manager.saveOntology(this.ontology, manSyntaxFormat, IRI.create(file));
+	    this.manager.saveOntology(this.ontology, manSyntaxFormat, IRI.create(file));
 	} catch (OWLOntologyStorageException e) {
 	    throw new StorageException(e);
 	}
@@ -1104,7 +1128,7 @@ public class Brain {
 	for (OWLAxiom newAxiom : newOnto.getAxioms()) {
 	    this.manager.addAxiom(this.ontology, newAxiom);
 	}
-	updateShorForms();
+	update();
     }
 
     /**
@@ -1146,9 +1170,9 @@ public class Brain {
      * @return subClasses
      * @throws ClassExpressionException 
      */
+    //TODO
     public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
-	this.reasoner = reasonerFactory.createReasoner(this.ontology);
 	Set<OWLClass> subClasses = null;
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
@@ -1158,7 +1182,6 @@ public class Brain {
 	}else{
 	    subClasses = this.reasoner.getSubClasses(owlClassExpression, direct).getFlattened();
 	}
-	this.reasoner.dispose();
 	return sortClasses(subClasses);
     }
 
@@ -1173,7 +1196,6 @@ public class Brain {
      */
     public List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
-	this.reasoner = reasonerFactory.createReasoner(this.ontology);
 	Set<OWLClass> superClasses = null;
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
@@ -1183,7 +1205,6 @@ public class Brain {
 	}else{
 	    superClasses = this.reasoner.getSuperClasses(owlClassExpression, direct).getFlattened();
 	}
-	this.reasoner.dispose();
 	return sortClasses(superClasses);
     }
 
@@ -1195,7 +1216,6 @@ public class Brain {
      */
     public List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
-	this.reasoner = reasonerFactory.createReasoner(this.ontology);
 	Set<OWLClass> equivalentClasses = null;
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
@@ -1205,7 +1225,6 @@ public class Brain {
 	}else{
 	    equivalentClasses = this.reasoner.getEquivalentClasses(owlClassExpression).getEntitiesMinus((OWLClass) owlClassExpression);
 	}
-	this.reasoner.dispose();
 	return sortClasses(equivalentClasses);
     }
 
@@ -1215,9 +1234,9 @@ public class Brain {
      * @param anonymousClass
      */
     private void removeTemporaryAnonymousClass(OWLClass anonymousClass) {
-	OWLEntityRemover remover = new OWLEntityRemover(manager, Collections.singleton(ontology));
+	OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
 	anonymousClass.accept(remover);
-	manager.applyChanges(remover.getChanges());
+	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
     }
 
@@ -1229,15 +1248,15 @@ public class Brain {
     private OWLClass getTemporaryAnonymousClass(OWLClassExpression classExpression) {
 	IRI anonymousIri = IRI.create("temp");
 	int counter = 0;
-	while (ontology.containsClassInSignature(anonymousIri)) {
+	while (this.ontology.containsClassInSignature(anonymousIri)) {
 	    anonymousIri = IRI.create("temp" + counter);
 	    counter++;
 	}
-	OWLClass anonymousClass = factory.getOWLClass(anonymousIri);
-	OWLEquivalentClassesAxiom equivalenceAxiom = factory.getOWLEquivalentClassesAxiom(anonymousClass, classExpression);
-	AddAxiom addAx = new AddAxiom(ontology, equivalenceAxiom);
-	manager.applyChange(addAx);
-	reasoner.flush();
+	OWLClass anonymousClass = this.factory.getOWLClass(anonymousIri);
+	OWLEquivalentClassesAxiom equivalenceAxiom = this.factory.getOWLEquivalentClassesAxiom(anonymousClass, classExpression);
+	AddAxiom addAx = new AddAxiom(this.ontology, equivalenceAxiom);
+	this.manager.applyChange(addAx);
+	this.reasoner.flush();
 	return anonymousClass;
     }
 
@@ -1292,10 +1311,16 @@ public class Brain {
      * @throws ClassExpressionException 
      */
     public List<String> getUnsatisfiableClasses() {
-	this.reasoner = reasonerFactory.createReasoner(this.ontology);
 	Set<OWLClass> unsatisfiableClasses = this.reasoner.getUnsatisfiableClasses().getEntitiesMinusBottom();
-	this.reasoner.dispose();
 	return sortClasses(unsatisfiableClasses);
+    }
+
+    /**
+     * Free the resources used by the reasoner.
+     * Once this method is called, the reasoner is not available any more.
+     */
+    public void shutdown() {
+	this.reasoner.dispose();
     }
 
 }

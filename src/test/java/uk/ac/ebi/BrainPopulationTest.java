@@ -5,6 +5,7 @@ package uk.ac.ebi;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.IRI;
@@ -33,6 +34,11 @@ public class BrainPopulationTest {
     @Before
     public void bootstrap() throws BrainException {
 	brain = new Brain();
+    }
+    
+    @After
+    public void dispose() {
+	brain.shutdown();
     }
 
     @Test(expected = BadPrefixException.class)

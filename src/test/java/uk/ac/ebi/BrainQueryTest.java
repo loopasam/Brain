@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +30,10 @@ public class BrainQueryTest {
 	brain.learn("src/test/resources/dev.owl");
     }
 
+    @After
+    public void dispose() {
+	brain.shutdown();
+    }
 
     @Test
     public void owlProfileTest() throws BrainException {
@@ -157,6 +162,11 @@ public class BrainQueryTest {
 	List<String> unsatisfiableClasses = brain.getUnsatisfiableClasses();
 	assertEquals(1, unsatisfiableClasses.size());
 	assertEquals("R", unsatisfiableClasses.get(0));
+    }
+
+    @Test
+    public void manageWorkers() throws BrainException {
+	Brain brain = new Brain("http://www.example.org", "http://www.example.org/public/ontology.owl", 4);
     }
 
 }
