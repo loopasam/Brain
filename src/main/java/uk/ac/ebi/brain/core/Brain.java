@@ -62,7 +62,6 @@ import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
@@ -219,13 +218,14 @@ public class Brain {
 	Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
 	if(numberOfWorkers != -1){
-	    //TODO do the config bit
+	    final ElkReasonerConfiguration configuration = new ElkReasonerConfiguration();
+	    configuration.getElkConfiguration().setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(numberOfWorkers));
+	    this.reasonerFactory = new ElkReasonerFactory();
+	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, configuration);
+	}else{
+	    this.reasonerFactory = new ElkReasonerFactory();
+	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
 	}
-
-//	OWLReasonerConfiguration configuration = new OWLReasonerConfiguration();
-//	configuration.setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(numberOfWorkers));
-	this.reasonerFactory = new ElkReasonerFactory();
-	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, configuration);
 
 	this.INTEGER = this.factory.getIntegerOWLDatatype();
 	this.FLOAT = this.factory.getFloatOWLDatatype();

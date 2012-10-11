@@ -164,9 +164,4 @@ public class BrainQueryTest {
 	assertEquals("R", unsatisfiableClasses.get(0));
     }
 
-    @Test
-    public void manageWorkers() throws BrainException {
-	Brain brain = new Brain("http://www.example.org", "http://www.example.org/public/ontology.owl", 4);
-    }
-
 }
