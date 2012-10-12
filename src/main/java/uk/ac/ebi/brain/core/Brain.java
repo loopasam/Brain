@@ -1143,7 +1143,7 @@ public class Brain {
      * Classify the ontology. It is usually the most expensive
      * operation, so use it carefully!
      */
-    private void classify() {
+    public void classify() {
 	this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 	this.isClassified = true;
     }

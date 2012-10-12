@@ -44,6 +44,11 @@ public class BrainQueryTest {
     }
 
     @Test
+    public void classifyTest() {
+	brain.classify();
+    }
+
+    @Test
     public void getDirectSubClassesTest() throws ClassExpressionException{
 	List<String> subClasses = brain.getSubClasses("I", true);
 	assertEquals(1, subClasses.size());
