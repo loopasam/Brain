@@ -108,6 +108,7 @@ public class Brain {
     public OWLDatatype FLOAT;
     public OWLDatatype BOOLEAN;
     public static final String DEFAULT_PREFIX = "brain#";
+    private boolean isClassified;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -164,6 +165,12 @@ public class Brain {
 	return prefixManager;
     }
 
+    public void setClassified(boolean isClassified) {
+	this.isClassified = isClassified;
+    }
+    public boolean isClassified() {
+	return isClassified;
+    }
 
     /**
      * Creates a Brain instance with the specified prefix and ontology IRI
@@ -226,6 +233,8 @@ public class Brain {
 	    this.reasonerFactory = new ElkReasonerFactory();
 	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
 	}
+
+	this.isClassified = false;
 
 	this.INTEGER = this.factory.getIntegerOWLDatatype();
 	this.FLOAT = this.factory.getFloatOWLDatatype();
@@ -323,6 +332,7 @@ public class Brain {
 	owlClassToRemove.accept(remover);
 	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
+	update();
     }
 
     /**
@@ -372,6 +382,16 @@ public class Brain {
 	} catch (URISyntaxException e) {
 	    throw new BadNameException("'"+entityIri+"' is not valid valid name for an OWL entity. Use only characters that are valid for a URI (no space, etc...).");
 	}
+    }
+
+    /**
+     * Add the axiom to the ontology.
+     * @param owlAxiom 
+     */
+    private void addAxiom(OWLAxiom owlAxiom) {
+	AddAxiom addAx = new AddAxiom(this.ontology, owlAxiom);
+	this.manager.applyChange(addAx);
+	this.isClassified = false;
     }
 
     /**
@@ -436,6 +456,7 @@ public class Brain {
 	owlObjectPropertyToRemove.accept(remover);
 	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
+	update();
     }
 
     /**
@@ -500,6 +521,7 @@ public class Brain {
 	owlDataPropertyToRemove.accept(remover);
 	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
+	update();
     }
 
     /**
@@ -564,6 +586,7 @@ public class Brain {
 	owlAnnotationPropertyToRemove.accept(remover);
 	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
+	update();
     }
 
     /**
@@ -575,7 +598,7 @@ public class Brain {
 	this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 	this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 	this.reasoner.flush();
-	this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+	this.isClassified = false;
     }
 
     /**
@@ -648,8 +671,7 @@ public class Brain {
 	OWLClassExpression subClassExpression = parseClassExpression(subClass);
 	OWLClassExpression superClassExpression = parseClassExpression(superClass);
 	OWLSubClassOfAxiom subClassAxiom = this.factory.getOWLSubClassOfAxiom(subClassExpression, superClassExpression);
-	AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
-	this.manager.applyChange(addAx);
+	addAxiom(subClassAxiom);
     }
 
     /**
@@ -662,8 +684,7 @@ public class Brain {
 	OWLClassExpression classExpression1 = parseClassExpression(class1);
 	OWLClassExpression classExpression2 = parseClassExpression(class2);
 	OWLEquivalentClassesAxiom equivalentClassAxiom = this.factory.getOWLEquivalentClassesAxiom(classExpression1, classExpression2);
-	AddAxiom addAx = new AddAxiom(this.ontology, equivalentClassAxiom);
-	this.manager.applyChange(addAx);
+	addAxiom(equivalentClassAxiom);
     }
 
     /**
@@ -675,9 +696,8 @@ public class Brain {
     public void disjointClasses(String class1, String class2) throws ClassExpressionException {
 	OWLClassExpression classExpression1 = parseClassExpression(class1);
 	OWLClassExpression classExpression2 = parseClassExpression(class2);
-	OWLDisjointClassesAxiom equivalentClassAxiom = this.factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
-	AddAxiom addAx = new AddAxiom(this.ontology, equivalentClassAxiom);
-	this.manager.applyChange(addAx);
+	OWLDisjointClassesAxiom disjointClassAxiom = this.factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
+	addAxiom(disjointClassAxiom);
     }
 
     /**
@@ -688,8 +708,7 @@ public class Brain {
     public void transitive(String propertyExpression) throws ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression expression = parseObjectPropertyExpression(propertyExpression);
 	OWLTransitiveObjectPropertyAxiom axiom = this.factory.getOWLTransitiveObjectPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -700,8 +719,7 @@ public class Brain {
     public void reflexive(String propertyExpression) throws ObjectPropertyExpressionException {
 	OWLObjectPropertyExpression expression = parseObjectPropertyExpression(propertyExpression);
 	OWLReflexiveObjectPropertyAxiom axiom = this.factory.getOWLReflexiveObjectPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -712,8 +730,7 @@ public class Brain {
     public void functional(String propertyExpression) throws DataPropertyExpressionException {
 	OWLDataPropertyExpression expression = parseDataPropertyExpression(propertyExpression);
 	OWLFunctionalDataPropertyAxiom axiom = this.factory.getOWLFunctionalDataPropertyAxiom(expression);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -728,15 +745,13 @@ public class Brain {
 	try {
 	    OWLObjectPropertyExpression owlPropertyExpression = parseObjectPropertyExpression(propertyExpression);
 	    OWLObjectPropertyDomainAxiom axiom = this.factory.getOWLObjectPropertyDomainAxiom(owlPropertyExpression, domainExpression);
-	    AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	    this.manager.applyChange(addAx);
+	    addAxiom(axiom);
 	} catch (ObjectPropertyExpressionException e) {
 	    OWLDataPropertyExpression owlPropertyExpression;
 	    try {
 		owlPropertyExpression = parseDataPropertyExpression(propertyExpression);
 		OWLDataPropertyDomainAxiom axiom = this.factory.getOWLDataPropertyDomainAxiom(owlPropertyExpression, domainExpression);
-		AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-		this.manager.applyChange(addAx);
+		addAxiom(axiom);
 	    } catch (DataPropertyExpressionException e1) {
 		throw new NonExistingEntityException("The property '"+propertyExpression+"' does not exist.");
 	    }
@@ -754,8 +769,7 @@ public class Brain {
 	OWLObjectPropertyExpression owlPropertyExpression = parseObjectPropertyExpression(propertyExpression);
 	OWLClassExpression rangeExpression = parseClassExpression(classExpression);
 	OWLObjectPropertyRangeAxiom axiom = this.factory.getOWLObjectPropertyRangeAxiom(owlPropertyExpression, rangeExpression);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -767,8 +781,7 @@ public class Brain {
     public void range(String propertyExpression, OWLDatatype dataType) throws DataPropertyExpressionException {
 	OWLDataPropertyExpression owlPropertyExpression = parseDataPropertyExpression(propertyExpression);
 	OWLDataPropertyRangeAxiom axiom = this.factory.getOWLDataPropertyRangeAxiom(owlPropertyExpression, dataType);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -782,15 +795,13 @@ public class Brain {
 	    OWLObjectPropertyExpression owlProperty1 = parseObjectPropertyExpression(property1);
 	    OWLObjectPropertyExpression owlProperty2 = parseObjectPropertyExpression(property2);
 	    OWLEquivalentObjectPropertiesAxiom axiom = this.factory.getOWLEquivalentObjectPropertiesAxiom(owlProperty1, owlProperty2);
-	    AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	    this.manager.applyChange(addAx);
+	    addAxiom(axiom);
 	} catch (ObjectPropertyExpressionException e) {
 	    try{
 		OWLDataPropertyExpression owlProperty1 = parseDataPropertyExpression(property1);
 		OWLDataPropertyExpression owlProperty2 = parseDataPropertyExpression(property2);
 		OWLEquivalentDataPropertiesAxiom axiom = this.factory.getOWLEquivalentDataPropertiesAxiom(owlProperty1, owlProperty2);
-		AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-		this.manager.applyChange(addAx);
+		addAxiom(axiom);
 	    } catch (DataPropertyExpressionException e1) {
 		throw new BrainException("One of the properties ('"+property1+"' or '"+property2+"') does not exist or the properties have different types.");
 	    }
@@ -807,16 +818,14 @@ public class Brain {
 	try{
 	    OWLObjectPropertyExpression subPropertyExpression = parseObjectPropertyExpression(subProperty);
 	    OWLObjectPropertyExpression superPropertyExpression = parseObjectPropertyExpression(superProperty);
-	    OWLSubObjectPropertyOfAxiom subClassAxiom = this.factory.getOWLSubObjectPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
-	    AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
-	    this.manager.applyChange(addAx);
+	    OWLSubObjectPropertyOfAxiom subPropertyAxiom = this.factory.getOWLSubObjectPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
+	    addAxiom(subPropertyAxiom);
 	} catch(ObjectPropertyExpressionException e){
 	    try{
 		OWLDataPropertyExpression subPropertyExpression = parseDataPropertyExpression(subProperty);
 		OWLDataPropertyExpression superPropertyExpression = parseDataPropertyExpression(superProperty);
-		OWLSubDataPropertyOfAxiom subClassAxiom = this.factory.getOWLSubDataPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
-		AddAxiom addAx = new AddAxiom(this.ontology, subClassAxiom);
-		this.manager.applyChange(addAx);
+		OWLSubDataPropertyOfAxiom subPropertyAxiom = this.factory.getOWLSubDataPropertyOfAxiom(subPropertyExpression, superPropertyExpression);
+		addAxiom(subPropertyAxiom);
 	    }catch (DataPropertyExpressionException e1) {
 		throw new BrainException("One of the properties ('"+subProperty+"' or '"+superProperty+"') does not exist or the properties have different types.");
 	    }
@@ -833,8 +842,7 @@ public class Brain {
 	List<OWLObjectPropertyExpression> chainExpression = parseObjectPropertyChain(chain);
 	OWLObjectPropertyExpression superPropertyExpression = parseObjectPropertyExpression(superProperty);
 	OWLSubPropertyChainOfAxiom axiom = this.factory.getOWLSubPropertyChainOfAxiom(chainExpression, superPropertyExpression);
-	AddAxiom addAx = new AddAxiom(this.ontology, axiom);
-	this.manager.applyChange(addAx);
+	addAxiom(axiom);
     }
 
     /**
@@ -850,7 +858,7 @@ public class Brain {
 	    OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
 	    OWLAnnotation labelAnnotation = this.factory.getOWLAnnotation(owlAnnotationProperty, this.factory.getOWLLiteral(content));
 	    OWLAxiom axiom = this.factory.getOWLAnnotationAssertionAxiom(owlEntity.getIRI(), labelAnnotation);
-	    this.manager.applyChange(new AddAxiom(this.ontology, axiom));	
+	    addAxiom(axiom);
 	}else{
 	    throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
 	}
@@ -868,7 +876,7 @@ public class Brain {
 	    OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
 	    OWLAnnotation labelAnnotation = this.factory.getOWLAnnotation(annotationProperty, this.factory.getOWLLiteral(content));
 	    OWLAxiom axiom = this.factory.getOWLAnnotationAssertionAxiom(owlEntity.getIRI(), labelAnnotation);
-	    this.manager.applyChange(new AddAxiom(this.ontology, axiom));	
+	    addAxiom(axiom);
 	}else{
 	    throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
 	}
@@ -1132,6 +1140,15 @@ public class Brain {
     }
 
     /**
+     * Classify the ontology. It is usually the most expensive
+     * operation, so use it carefully!
+     */
+    private void classify() {
+	this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+	this.isClassified = true;
+    }
+
+    /**
      * Test whether the ontology is following an OWL 2 EL profile or not.
      * @return hasElProfile
      */
@@ -1170,16 +1187,19 @@ public class Brain {
      * @return subClasses
      * @throws ClassExpressionException 
      */
-    //TODO
     public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
 	OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 	Set<OWLClass> subClasses = null;
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
 	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    this.classify();
 	    subClasses = this.reasoner.getSubClasses(anonymousClass, direct).getFlattened();
 	    removeTemporaryAnonymousClass(anonymousClass);
 	}else{
+	    if(!this.isClassified){
+		this.classify();
+	    }
 	    subClasses = this.reasoner.getSubClasses(owlClassExpression, direct).getFlattened();
 	}
 	return sortClasses(subClasses);
@@ -1200,9 +1220,13 @@ public class Brain {
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
 	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    this.classify();
 	    superClasses = this.reasoner.getSuperClasses(anonymousClass, direct).getFlattened();
 	    removeTemporaryAnonymousClass(anonymousClass);
 	}else{
+	    if(!this.isClassified){
+		this.classify();
+	    }
 	    superClasses = this.reasoner.getSuperClasses(owlClassExpression, direct).getFlattened();
 	}
 	return sortClasses(superClasses);
@@ -1220,9 +1244,13 @@ public class Brain {
 	//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 	if(owlClassExpression.isAnonymous()){
 	    OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+	    this.classify();
 	    equivalentClasses = this.reasoner.getEquivalentClasses(anonymousClass).getEntitiesMinus(anonymousClass);
 	    removeTemporaryAnonymousClass(anonymousClass);
 	}else{
+	    if(!this.isClassified){
+		this.classify();
+	    }
 	    equivalentClasses = this.reasoner.getEquivalentClasses(owlClassExpression).getEntitiesMinus((OWLClass) owlClassExpression);
 	}
 	return sortClasses(equivalentClasses);
@@ -1238,6 +1266,7 @@ public class Brain {
 	anonymousClass.accept(remover);
 	this.manager.applyChanges(remover.getChanges());
 	remover.reset();
+	update();
     }
 
     /**
@@ -1254,8 +1283,7 @@ public class Brain {
 	}
 	OWLClass anonymousClass = this.factory.getOWLClass(anonymousIri);
 	OWLEquivalentClassesAxiom equivalenceAxiom = this.factory.getOWLEquivalentClassesAxiom(anonymousClass, classExpression);
-	AddAxiom addAx = new AddAxiom(this.ontology, equivalenceAxiom);
-	this.manager.applyChange(addAx);
+	addAxiom(equivalenceAxiom);
 	this.reasoner.flush();
 	return anonymousClass;
     }
@@ -1311,6 +1339,9 @@ public class Brain {
      * @throws ClassExpressionException 
      */
     public List<String> getUnsatisfiableClasses() {
+	if(!this.isClassified){
+	    this.classify();
+	}
 	Set<OWLClass> unsatisfiableClasses = this.reasoner.getUnsatisfiableClasses().getEntitiesMinusBottom();
 	return sortClasses(unsatisfiableClasses);
     }
