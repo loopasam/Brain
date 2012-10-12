@@ -109,6 +109,7 @@ public class Brain {
     public OWLDatatype BOOLEAN;
     public static final String DEFAULT_PREFIX = "brain#";
     private boolean isClassified;
+    private ElkReasonerConfiguration configuration;
 
     public OWLOntology getOntology() {
 	return ontology;
@@ -225,10 +226,10 @@ public class Brain {
 	Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
 	if(numberOfWorkers != -1){
-	    final ElkReasonerConfiguration configuration = new ElkReasonerConfiguration();
-	    configuration.getElkConfiguration().setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(numberOfWorkers));
+	    this.configuration = new ElkReasonerConfiguration();
+	    this.configuration.getElkConfiguration().setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(numberOfWorkers));
 	    this.reasonerFactory = new ElkReasonerFactory();
-	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, configuration);
+	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
 	}else{
 	    this.reasonerFactory = new ElkReasonerFactory();
 	    this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
@@ -1348,10 +1349,12 @@ public class Brain {
 
     /**
      * Free the resources used by the reasoner.
-     * Once this method is called, the reasoner is not available any more.
+     * Once this method is called, the reasoner is destroyed and replaced
+     * by a fresh one. Re-classification is needed before re-querying.
      */
-    public void shutdown() {
+    public void sleep() {
 	this.reasoner.dispose();
+	this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
     }
 
 }

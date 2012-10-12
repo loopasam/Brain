@@ -32,7 +32,14 @@ public class BrainQueryTest {
 
     @After
     public void dispose() {
-	brain.shutdown();
+	brain.sleep();
+    }
+
+    @Test
+    public void reStart() throws BrainException {
+	brain.sleep();
+	List<String> subClasses = brain.getSubClasses("I", false);
+	assertEquals(2, subClasses.size());
     }
 
     @Test

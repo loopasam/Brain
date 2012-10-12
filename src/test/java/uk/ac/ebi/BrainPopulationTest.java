@@ -35,10 +35,10 @@ public class BrainPopulationTest {
     public void bootstrap() throws BrainException {
 	brain = new Brain();
     }
-    
+
     @After
     public void dispose() {
-	brain.shutdown();
+	brain.sleep();
     }
 
     @Test(expected = BadPrefixException.class)
@@ -297,7 +297,7 @@ public class BrainPopulationTest {
 	brain.label("A", "this is the content of the label");
 	brain.save("src/test/resources/output.owl");
     }
-    
+
     @Test
     public void externalAnnotationTest() throws BrainException {
 	brain.addAnnotationProperty("http://example.org/definition");
