@@ -1,23 +1,23 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: document.aux
 The style file: natbib.bst
-Illegal, another \bibstyle command---line 36 of file document.aux
+Illegal, another \bibstyle command---line 32 of file document.aux
  : \bibstyle
  :          {achemnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 37 of file document.aux
+Illegal, another \bibstyle command---line 33 of file document.aux
  : \bibstyle
  :          {plainnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 38 of file document.aux
+Illegal, another \bibstyle command---line 34 of file document.aux
  : \bibstyle
  :          {abbrv}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 39 of file document.aux
+Illegal, another \bibstyle command---line 35 of file document.aux
  : \bibstyle
  :          {bioinformatics}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 40 of file document.aux
+Illegal, another \bibstyle command---line 36 of file document.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
