@@ -1,0 +1,16 @@
+\begin{thebibliography}{}
+
+\bibitem[Bauer {\em et~al.}(2007)Bauer, Klau, and Reinert]{Boffelli03}
+Bauer, M., Klau, G.~W., and Reinert, K. (2007).
+\newblock {Accurate multiple sequence-structure alignment of RNA sequences
+  using combinatorial optimization.}
+\newblock {\em BMC Bioinformatics\/}, {\bf 8}, 271.
+
+\bibitem[Friedrich {\em et~al.}(2005)Friedrich, Dandekar, Wolf, and
+  Müller]{Bag01}
+Friedrich, J., Dandekar, T., Wolf, M., and Müller, T. (2005).
+\newblock {ProfDist: a tool for the construction of large phylogenetic trees
+  based on profile distances.}
+\newblock {\em Bionformatics\/}, {\bf 21}(9), 2108--2109.
+
+\end{thebibliography}
