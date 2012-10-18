@@ -6,7 +6,7 @@
 \firstpage{1}
 
 \title[short Title]{Brain: Biomedical Knowledge Manipulation}
-\author[Sample \textit{et~al}]{Samuel \,$^{1,\footnote{to whom correspondence should be addressed}}$, JPO\,$^{2}$ and DRS\,$^{2}$}
+\author[Sample \textit{et~al}]{Samuel Croset\,$^{1,\footnote{to whom correspondence should be addressed}}$, JPO\,$^{2}$ and DRS\,$^{2}$}
 \address{$^{1}$Department of XXXXXXX, Address XXXX etc.\\
 $^{2}$Department of XXXXXXXX, Address XXXX etc.}
 
@@ -41,7 +41,22 @@ Links to additional figures/data available on a web site, or
 reference to online-only Supplementary data available at the journal's web site.
 
 \end{abstract}
+Relational databases and ontologies hold most of the available structured biomedical information. The content of these repositories is often
+extracted from scientific literature by manual curation with the help of text-mining tools. The transformation from raw text into
+structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
+the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. 
+The availability of structured data enables the formulation of queries with the Structured Query Language (SQL) in order to retrieve the desired 
+information over relational databases. For instance, it is possible to
+quickly find the cellular location of a protein just by looking at its entry on Uniprot and without having to read several scientific articles
+on the topic. The query language used and the structure of the database are the factors limiting the complexity of the questions that can be 
+formulated over the biomedical information. For example, relational databases are powerful to store values about instance data such as the
+sequence or the name of a gene product, but are daunting to use to represent hierarchical structures (ref) such as the Gene Ontology.
+Unfortunaltely, taxonomies a large part of the biomedical knowledge 
 
+
+Ontologies and databases in biology are somehow used differently than in other fields. They essentially serve as read-only 
+resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
+are hapenning as opposed to services such as Amazon or Ebay.
 
 - The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources.
 OWL provide the means to do this, databases don't.
@@ -52,23 +67,6 @@ Support complex queries via inference. Fast and suitable to be used in productio
 - Evaluation: MySQL build of Go is compared versus OWL build of GO (identical content - different representation).
 A series of biomedical questions will be answered in SQL and OWL respectively on the MySQL and on the OWL ontology.
 Comparison of performances --> Brain is fast and scalable (thread friendly implementation).
-
-
-Databases and ontologies hold most of the available structured biomedical information. The content of these repositories is often
-extracted from scientific literature by manual curation, possibly assisted by text-mining tools. The transformation from raw text into
-structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
-the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. For instance, it is possible to
-quickly search for the cellular location of a protein just by browsing its entry on Uniprot without having to read several scientific articles
-on the topic.
-
-The presence of structured data enables the formulation of queries which retrieve the desired information over the content.
-Traditionnaly the Structured Query Language (SQL) retrieves content from a realational database.
-
-
-
-Ontologies and databases in biology are somehow used differently than in other fields. They essentially serve as read-only 
-resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
-are hapenning as opposed to implementation for websites such as Amazon or Ebay. 
 
 Problems:
 - Need to be able to formulate complex queries --> hidden/implicit knowledge - inference.
