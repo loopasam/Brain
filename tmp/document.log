@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  18 OCT 2012 11:32
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  18 OCT 2012 14:05
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -323,35 +323,49 @@ Underfull \hbox (badness 4569) in paragraph at lines 39--42
 figures/data
  []
 
+
+Underfull \hbox (badness 1028) in paragraph at lines 46--55
+\OT1/ptm/m/n/9 API. Fast classification time (Elk reasoner). Support complex
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 46--55
+\OT1/ptm/m/n/9 of biomedical questions will be answered in SQL and OWL
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 64--66
+[][]\OT1/ptm/m/n/9 The presence of structured data enables the formulation of
+ []
+
+
+Underfull \hbox (badness 1675) in paragraph at lines 64--66
+\OT1/ptm/m/n/9 Traditionnaly the Structured Query Language (SQL) retrieves
+ []
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 69--72
+[][]\OT1/ptm/m/n/9 Ontologies and databases in biology are somehow used
+ []
+
+
+Underfull \hbox (badness 2662) in paragraph at lines 73--81
+\OT1/ptm/m/n/9 among resources --> semantic web technologies. - Need to
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 73--81
+\OT1/ptm/m/n/9 be able to leverage resources --> benefit from integration -
+ []
+
+
+Underfull \hbox (badness 1484) in paragraph at lines 93--97
+[][]\OT1/ptm/m/n/9 - relation with description logic - tracktability argument +
+
+ []
+
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 45.
-Missing character: There is no ï in font ptmr7t!
-Missing character: There is no ¿ in font ptmr7t!
-Missing character: There is no ½ in font ptmr7t!
-Missing character: There is no ï in font ptmr7t!
-Missing character: There is no ¿ in font ptmr7t!
-Missing character: There is no ½ in font ptmr7t!
-Missing character: There is no ï in font ptmr7t!
-Missing character: There is no ¿ in font ptmr7t!
-Missing character: There is no ½ in font ptmr7t!
-Missing character: There is no ï in font ptmr7t!
-Missing character: There is no ¿ in font ptmr7t!
-Missing character: There is no ½ in font ptmr7t!
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 122.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
-File: omsphv.fd 
-)
-LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 100.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
@@ -364,50 +378,58 @@ Missing character: There is no ™ in font ptmr7t!
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
- (./document.bbl
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
-Missing character: There is no ü in font ptmr7t!
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 118.
+
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
+File: omsphv.fd 
+)
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 118.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+] (./document.bbl
+
+Package natbib Warning: Empty `thebibliography' environment on input line 3.
+
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:10.0pt when 153.12122pt
+Extra height:10.0pt when 95.09247pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:10.0pt when 154.12122pt
+Extra height:10.0pt when 96.09247pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:10.0pt when 155.12122pt
+Extra height:10.0pt when 97.09247pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:10.0pt when 156.12122pt
+Extra height:0.0pt when 98.09247pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:10.0pt when 157.12122pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:0.0pt when 158.12122pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-(2)Left:158.12122pt Right:157.24243pt Output:158.12122pt
+(2)Left:98.09247pt Right:91.18494pt Output:98.09247pt
 - LAST -
 Extra skip:0.0pt
-Left:158.12122pt
-Right:157.24243pt
-Output:158.12122pt
+Left:98.09247pt
+Right:91.18494pt
+Output:98.09247pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 145.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 129.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 145.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 129.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -430,29 +452,27 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2684 strings out of 493848
- 31209 string characters out of 1152822
- 93243 words of memory out of 3000000
- 5901 multiletter control sequences out of 15000+50000
- 49018 words of font info for 101 fonts, out of 3000000 for 9000
+ 2661 strings out of 493848
+ 30991 string characters out of 1152822
+ 93078 words of memory out of 3000000
+ 5884 multiletter control sequences out of 15000+50000
+ 40687 words of font info for 89 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
- 36i,13n,26p,347b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,13n,26p,268b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
-helvetic/uhvbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.
-pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/
-texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/
-type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr
-i8a.pfb>
-Output written on document.pdf (2 pages, 132866 bytes).
+ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
+6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-
+texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/typ
+e1/urw/helvetic/uhvbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
+/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on document.pdf (2 pages, 111825 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
+ 58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

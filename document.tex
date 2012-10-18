@@ -42,76 +42,60 @@ reference to online-only Supplementary data available at the journal's web site.
 
 \end{abstract}
 
-\section{Introduction}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure~\ref{fig:01} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citep{Bag01} wants to know about �� text follows.
-
-\begin{equation}
-\sum x+ y =Z\label{eq:01}
-\end{equation}
-
-\section{Approach}
-
-Equation~(\ref{eq:01}) Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method  Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text ��
-
-
-\begin{methods}
-\section{Methods}
-
-Text Text Text Text Text Text. Figure \ref{fig:02} shows that the above method
-Text Text Text Text  Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want
-
-\begin{itemize}
-\item for bulleted list, use itemize
-\item for bulleted list, use itemize
-\end{itemize}
-
-\begin{table}[!t]
-\processtable{This is table caption\label{Tab:01}}
-{\begin{tabular}{llll}\toprule
-head1 & head2 & head3 & head4\\\midrule
-row1 & row1 & row1 & row1\\
-row2 & row2 & row2 & row2\\
-row3 & row3 & row3 & row3\\
-row4 & row4 & row4 & row4\\\botrule
-\end{tabular}}{This is a footnote}
-\end{table}
-
-\end{methods}
-
-\begin{figure}[!tpb]%figure1
-%\centerline{\includegraphics{fig01.eps}}
-\caption{Caption, caption.}\label{fig:01}
-\end{figure}
-
-\begin{figure}[!tpb]%figure2
-%\centerline{\includegraphics{fig02.eps}}
-\caption{Caption, caption.}\label{fig:02}
-\end{figure}
-
-\section{Discussion}
-
-discussion goes there
+- The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources.
+OWL provide the means to do this, databases don't.
+- Features: Creation and storage of OWL knowledge-bases. 
+Import of external knowledge-bases/ontologies. 
+Simplification of interaction in regards to OWL-API. Fast classification time (Elk reasoner). 
+Support complex queries via inference. Fast and suitable to be used in production.
+- Evaluation: MySQL build of Go is compared versus OWL build of GO (identical content - different representation).
+A series of biomedical questions will be answered in SQL and OWL respectively on the MySQL and on the OWL ontology.
+Comparison of performances --> Brain is fast and scalable (thread friendly implementation).
 
 
-Table~\ref{Tab:01} shows that Text Text Text Text 
+Databases and ontologies hold most of the available structured biomedical information. The content of these repositories is often
+extracted from scientific literature by manual curation, possibly assisted by text-mining tools. The transformation from raw text into
+structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
+the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. For instance, it is possible to
+quickly search for the cellular location of a protein just by browsing its entry on Uniprot without having to read several scientific articles
+on the topic.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%     please remove the " % " symbol from \centerline{\includegraphics{fig01.eps}}
-%     as it may ignore the figures.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The presence of structured data enables the formulation of queries which retrieve the desired information over the content.
+Traditionnaly the Structured Query Language (SQL) retrieves content from a realational database.
 
-\section{Conclusion}
 
-(Table~\ref{Tab:01}) Text Text Text Text Text Text
 
-\begin{enumerate}
-\item this is item, use enumerate
-\item this is item, use enumerate
-\item this is item, use enumerate
-\end{enumerate}
+Ontologies and databases in biology are somehow used differently than in other fields. They essentially serve as read-only 
+resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
+are hapenning as opposed to implementation for websites such as Amazon or Ebay. 
+
+Problems:
+- Need to be able to formulate complex queries --> hidden/implicit knowledge - inference.
+- Need for interoperability among resources --> semantic web technologies.
+- Need to be able to leverage resources --> benefit from integration
+- Relational databases are struggling with biomedical hierarchical representations. Instance versus classes
+- Databases in biology are used as read-only resources
+- Databases don't support inference natively but it could be overcome by a
+ pre-processing step (similar to a classification for a knowledge base).
+
+Solution:
+- Semantic Web technologies could be slow --> OWL 2 EL.
+- Advantages of triple -stores --> none, they still are relational flat data.
+- Simplying interaction on OWL-API, tracktable problem. Focusing on biology, not computer science.
+- More and more ontologies are represented in OWL.
+
+OWL 2 EL building blocks:
+- Individual, properties, classes
+- Axioms
+- Reasoner
+
+- relation with description logic
+- tracktability argument + definition
+- OWL --> query and representation language
+- table comparison query + times
+
+
 
 \section*{Acknowledgement}
 These should be included at the end of the text and not in footnotes. Please ensure you acknowledge all 
