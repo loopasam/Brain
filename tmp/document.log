@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  15 OCT 2012 17:24
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  18 OCT 2012 11:32
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -311,8 +311,20 @@ Underfull \hbox (badness 10000) detected at line 17
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 21.
+
+Underfull \hbox (badness 2735) in paragraph at lines 21--23
+[]\OT1/phv/b/n/8 Summary: \OT1/phv/m/n/8 This section should summarize the purp
+ose/novel
+ []
+
+
+Underfull \hbox (badness 4569) in paragraph at lines 39--42
+[]\OT1/phv/b/n/8 Supplementary information: \OT1/phv/m/n/8 Links to additional 
+figures/data
+ []
+
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 45.
 Missing character: There is no ï in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 Missing character: There is no ½ in font ptmr7t!
@@ -326,39 +338,76 @@ Missing character: There is no ï in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 Missing character: There is no ½ in font ptmr7t!
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 118.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 122.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 118.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-] (./document.bbl
+]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ¦ in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ˜ in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no “ in font ptmr7t!
+ (./document.bbl
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 7.
 Missing character: There is no ü in font ptmr7t!
 )
-Extra height:0.0pt when 475.12674pt
-(2)Left:475.12674pt Right:471.51135pt Output:475.12674pt
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:10.0pt when 153.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:10.0pt when 154.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:10.0pt when 155.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:10.0pt when 156.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:10.0pt when 157.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:0.0pt when 158.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+(2)Left:158.12122pt Right:157.24243pt Output:158.12122pt
 - LAST -
 Extra skip:0.0pt
-Left:475.12674pt
-Right:471.51135pt
-Output:475.12674pt
+Left:158.12122pt
+Right:157.24243pt
+Output:158.12122pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 194.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 145.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 194.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 145.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -372,7 +421,9 @@ Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][] 
  []
 
-[2] (./document.aux)
+[2
+
+] (./document.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
@@ -381,7 +432,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  2684 strings out of 493848
  31209 string characters out of 1152822
- 112243 words of memory out of 3000000
+ 93243 words of memory out of 3000000
  5901 multiletter control sequences out of 15000+50000
  49018 words of font info for 101 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -399,7 +450,7 @@ pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/
 texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/
 type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on document.pdf (2 pages, 129346 bytes).
+Output written on document.pdf (2 pages, 132866 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
