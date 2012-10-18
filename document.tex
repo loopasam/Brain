@@ -50,8 +50,12 @@ information over relational databases. For instance, it is possible to
 quickly find the cellular location of a protein just by looking at its entry on Uniprot and without having to read several scientific articles
 on the topic. The query language used and the structure of the database are the factors limiting the complexity of the questions that can be 
 formulated over the biomedical information. For example, relational databases are powerful to store values about instance data such as the
-sequence or the name of a gene product, but are daunting to use to represent hierarchical structures (ref) such as the Gene Ontology.
-Unfortunaltely, taxonomies a large part of the biomedical knowledge 
+sequence or the name of a gene product, but are daunting to use to represent hierarchical structures (ref) such as the Gene Ontology. Therefore
+queries resolving around hierarchies are going to be complicated to formulate using SQL and will not necessarly deliver a complete answer. For
+instance, simple queries such as retrieving the list of all the mammals from the NCBI taxonomy involves retrieving first the direct descendants
+of the mammals and for each of them recursively retrieving their descendants. This type of construct is not trivial to implement
+and is not yet supported by open-source solution like MySQL or PostgreSQL.
+
 
 
 Ontologies and databases in biology are somehow used differently than in other fields. They essentially serve as read-only 
