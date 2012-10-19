@@ -41,7 +41,7 @@ Links to additional figures/data available on a web site, or
 reference to online-only Supplementary data available at the journal's web site.
 
 \end{abstract}
-Relational databases and ontologies hold most of the available structured biomedical information. The content of these repositories is often
+Relational databases hold most of the available structured biomedical information. The content of these repositories is often
 extracted from scientific literature by manual curation with the help of text-mining tools. The transformation from raw text into
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
 the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up.
@@ -56,10 +56,30 @@ are traditionally formulated with the Structured Query Language (SQL). As databa
 gather quickly results coming from different sources. In practice this is however not the case because of the discrepencies in 
 structures and schemas, the technical difficulties to run federated queries and simply because relational databases were not design to 
 accomplish this task in the first place. Finally, the biological information is not necessarly best represented as relational tables. 
-In particular hierarchical structures such as taxonomies or ontologies, are known to be challenging and unintuitive to represent in relational 
-databases.  
+In particular hierarchical structures such as taxonomies or ontologies such as the Gene Ontology are known to be challenging 
+to represent in relational databases. 
 
-Because of this series of features, the bomedical domain is particularly attractive for Semantic Web technologies. 
+Because of these particular features, the biomedical domain is particularly attractive for semantic web technologies. First coined by 
+Berners-Lee, the semantic web is a set of standards promoting the interoperability and integration of information at the scope of the World Wide
+Web. Data are represented as triples using the Resource Description Framework (RDF) which explicitly expose the relations and types between
+entities, in contrast to relational databases where it is part of the schema. RDF triples are kept in a triplestore
+which can be queried using a language very similar to SQL called SPARQL. Triplestores are usually much slower than relational databases and
+provide very little added value to the original content alone in practice. We argue here that the main benefit from semantic web in the scope 
+of life science comes from the Web Ontology Language (OWL). OWL grew from mathematics and description logic as a mean to formally represent some 
+knowledge. It has then been adapted for the semantic web in order to express the ontologies supposed to represent the possible types of RDF 
+triples. Despite being best known for its role in semantic web, OWL could also be used by itself to build knowledgebases, namely a collection 
+of OWL statements. Knowledgebases provide some clear advantages over relational databases and triplestores.
+
+expressivity of OWL --> problems --> OWL 2 EL to the rescue
+
+accurate representation as class
+relations can be combined
+taxonomies represented
+reasoner
+table of definition for knowledge bases
+Abox tbox
+leverage of resources
+new definitions from simple concepts
 
 
 
