@@ -46,9 +46,20 @@ extracted from scientific literature by manual curation with the help of text-mi
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
 the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up.
 
-Life science databases have particular features that make them unique in regards to other domains. They essentially serve as read-only 
-resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
-are hapenning as opposed to services such as Amazon or Ebay. It is therefore critical to be able to 
+Life science databases have particular features making them unique in regards to other domains. First, they essentially serve as read-only 
+resources where the researchers come to browse or download the content from. The majority of the time, no transactions or updates 
+are hapenning as opposed to services such as Amazon or Ebay. Second, biomedical databases are highly interconnected via the Internet. 
+It is really easy for a user to move from one repository to an other via the hyperlinks present on web interfaces. This distribution of workload 
+and information is likely to increase in the future, driven by large projects such as ELIXIR for instance.
+Third, biomedical repositories have to be able to answer increasingly complex questions which 
+are traditionally formulated with the Structured Query Language (SQL). As databases are well interlinked, one would expect to be able to
+gather quickly results coming from different sources. In practice this is however not the case because of the discrepencies in 
+structures and schemas, the technical difficulties to run federated queries and simply because relational databases were not design to 
+accomplish this task in the first place. Finally, the biological information is not necessarly best represented as relational tables. 
+In particular hierarchical structures such as taxonomies or ontologies, are known to be challenging and unintuitive to represent in relational 
+databases.  
+
+Because of this series of features, the bomedical domain is particularly attractive for Semantic Web technologies. 
 
 
 
