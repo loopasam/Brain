@@ -44,7 +44,14 @@ reference to online-only Supplementary data available at the journal's web site.
 Relational databases and ontologies hold most of the available structured biomedical information. The content of these repositories is often
 extracted from scientific literature by manual curation with the help of text-mining tools. The transformation from raw text into
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
-the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. 
+the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up.
+
+Life science databases have particular features that make them unique in regards to other domains. They essentially serve as read-only 
+resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
+are hapenning as opposed to services such as Amazon or Ebay. It is therefore critical to be able to 
+
+
+
 The availability of structured data enables the formulation of queries with the Structured Query Language (SQL) in order to retrieve the desired 
 information over relational databases. For instance, it is possible to
 quickly find the cellular location of a protein just by looking at its entry on Uniprot and without having to read several scientific articles
@@ -54,18 +61,22 @@ sequence or the name of a gene product, but are daunting to use to represent hie
 queries resolving around hierarchies are going to be complicated to formulate using SQL and will not necessarly deliver a complete answer. For
 instance, simple queries such as retrieving the list of all the mammals from the NCBI taxonomy involves retrieving first the direct descendants
 of the mammals and for each of them recursively retrieving their descendants. This type of construct is not trivial to implement
-and is not yet supported natively by open-source solution like MySQL or PostgreSQL. 
+and is not yet supported natively by open-source solution like MySQL or PostgreSQL.
+Biomedical databases are not designed for interoperability. Combining the information present in
+two separate repositories can indeed be a painful task as the underlying schemas supporting the databases often differ.
 
 
-//interoperability
-//leverage
-//
+The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources
+Knowledge bases
+Complicated queries
+
+knowledge versus information
 
 
 
-Ontologies and databases in biology are somehow used differently than in other fields. They essentially serve as read-only 
-resources where the researchers come to browse or download the content. The majority of the time, no transactions or updates 
-are hapenning as opposed to services such as Amazon or Ebay.
+
+
+Ontologies and databases in biology are somehow used differently than in other fields. 
 
 - The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources.
 OWL provide the means to do this, databases don't.
