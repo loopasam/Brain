@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  19 OCT 2012 15:21
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  23 OCT 2012 17:10
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -324,68 +324,74 @@ figures/data
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 44--48
+Underfull \hbox (badness 5374) in paragraph at lines 44--54
 []\OT1/ptm/m/n/9 Relational databases hold most of the available structured
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 49--61
-\OT1/ptm/m/n/9 as read-only resources where the researchers come to browse
+Underfull \hbox (badness 1117) in paragraph at lines 44--54
+\OT1/ptm/m/n/9 is at data integration and interoperability, large projects such
+
  []
 
 
-Underfull \hbox (badness 1910) in paragraph at lines 75--83
-[][]\OT1/ptm/m/n/9 accurate representation as class relations can be combined
+Underfull \hbox (badness 1005) in paragraph at lines 63--75
+\OT1/ptm/m/n/9 as read-only resources where the researchers come to browse
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 98.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 86.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 98.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 5274) in paragraph at lines 110--111
+Underfull \hbox (badness 1910) in paragraph at lines 89--97
+[][]\OT1/ptm/m/n/9 accurate representation as class relations can be combined
+ []
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 124--125
 [][]\OT1/ptm/m/n/9 Ontologies and databases in biology are somehow used
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 112--121
+Underfull \hbox (badness 1028) in paragraph at lines 126--135
 \OT1/ptm/m/n/9 API. Fast classification time (Elk reasoner). Support complex
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 112--121
+Underfull \hbox (badness 1168) in paragraph at lines 126--135
 \OT1/ptm/m/n/9 of biomedical questions will be answered in SQL and OWL
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 122--130
+Underfull \hbox (badness 2662) in paragraph at lines 136--144
 \OT1/ptm/m/n/9 among resources --> semantic web technologies. - Need to
  []
 
 
-Underfull \hbox (badness 2556) in paragraph at lines 122--130
+Underfull \hbox (badness 2556) in paragraph at lines 136--144
 \OT1/ptm/m/n/9 be able to leverage resources --> benefit from integration -
  []
 
 
-Underfull \hbox (badness 1484) in paragraph at lines 142--146
+Underfull \hbox (badness 1484) in paragraph at lines 156--160
 [][]\OT1/ptm/m/n/9 - relation with description logic - tracktability argument +
 
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 149.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 163.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
@@ -408,41 +414,41 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:14.18494pt when 436.56668pt
+Extra height:14.18494pt when 530.06668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:14.18494pt when 437.56668pt
+Extra height:14.18494pt when 531.06668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:14.18494pt when 438.56668pt
+Extra height:14.18494pt when 532.06668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:0.0pt when 439.56668pt
+Extra height:0.0pt when 533.06668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-(2)Left:439.56668pt Right:433.13336pt Output:439.56668pt
+(2)Left:533.06668pt Right:532.13336pt Output:533.06668pt
 - LAST -
 Extra skip:0.0pt
-Left:439.56668pt
-Right:433.13336pt
-Output:439.56668pt
+Left:533.06668pt
+Right:532.13336pt
+Output:533.06668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 178.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 192.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 178.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 192.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -465,7 +471,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  2661 strings out of 493848
  30991 string characters out of 1152822
- 99078 words of memory out of 3000000
+ 102619 words of memory out of 3000000
  5884 multiletter control sequences out of 15000+50000
  40687 words of font info for 89 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -481,7 +487,7 @@ e1/urw/helvetic/uhvbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/
 uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 114843 bytes).
+Output written on document.pdf (2 pages, 115554 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
