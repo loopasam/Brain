@@ -6,9 +6,10 @@
 \firstpage{1}
 
 \title[short Title]{Brain: Biomedical Knowledge Manipulation}
-\author[Sample \textit{et~al}]{Samuel Croset\,$^{1,\footnote{to whom correspondence should be addressed}}$, JPO\,$^{2}$ and DRS\,$^{2}$}
-\address{$^{1}$Department of XXXXXXX, Address XXXX etc.\\
-$^{2}$Department of XXXXXXXX, Address XXXX etc.}
+\author[Sample \textit{et~al}]{Samuel Croset\,$^{1,\footnote{to whom correspondence should be addressed}}$, 
+Robert Hoehndorf\,$^{2}$, John Overington\,$^{1}$ and Dietrich Rebholz-Schuhmann\,$^{1}$}
+\address{$^{1}$European Bioinformatics Institute, Wellcome Trust Genome Campus, Cambridge, CB10 1SD UK\\
+$^{2}$Department of Genetics, University of Cambridge, Downing Street, Cambridge, CB2 3EH, UK}
 
 \history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
@@ -19,19 +20,13 @@ $^{2}$Department of XXXXXXXX, Address XXXX etc.}
 \begin{abstract}
 
 \section{Summary:}
-This section should summarize the purpose/novel features of the program in one or two sentences.
+Brain is a library optimizing the creation and manipulation of OWL 2EL ontologies and knowledge bases.
+It relies on the OWL-API and uses Elk for reasoning tasks.
 
 \section{Availability and Implementation:}
-This section should state software availability if the paper focuses mainly on 
-software development or on the implementation of an algorithm. Examples are:
-Freely available on the web at http://www.example.org. Website implemented in Perl, MySQL and 
-Apache, with all major browsers supported'; or 'Source code and binaries freely available for download at URL, 
-implemented in C++ and supported on linux and MS Windows'. The complete address (URL) should be given. If the manuscript 
-describes new software tools or the implementation of novel algorithms the software must be freely available to non-commercial 
-users. Authors must also ensure that the software is available for a full TWO YEARS following publication. The editors of 
-Bioinformatics encourage authors to make their source code available and, if possible, to provide access through an open source 
-license see www.opensource.org for examples.
-
+The Java source code and the library are freely available at https://github.com/loopasam/Brain
+and on the Maven Central repository (GroupId: uk.ac.ebi.brain).
+The documentation is available at https://github.com/loopasam/Brain/wiki.
 
 \section{Contact:}
 \href{croset@ebi.ac.uk}{croset@ebi.ac.uk}
@@ -64,7 +59,7 @@ advantages in regards to data integration and interoperability.
 Brain, the library presented in this manuscript aims at facilitating the contruction and manipulation of 
 such knowledge bases (refered in the manuscript also as ontologies), rather than being oriented towards the consumption of RDF data. 
 We will present first the biomedical motivation for the particular subset of OWL supported by Brain so called OWL 2EL. 
-The will be discussed the main features of Brain in regards to this profile.
+The will be discussed the main features implemented by Brain in regards to this profile.
 
 OWL 2EL is a profile of OWL as it features only a subset of the constructs available in the original language. This profile is
 designed to be \emph{tractable}, meaning that the constructs available have a polynomial complexity which is easier to compute than the full 
@@ -74,64 +69,61 @@ Based on the logical structure of the axioms, the reasoner is indeed capable of 
 some implicit information, enabling powerful query mecanisms surpassing the Structured Query Language (SQL) expressivity. 
 A reasoner can also check the consistency of an ontology and report back the axioms violating a particular profile. Because of 
 these computational properties, OWL 2EL is suitable for real-life bomedical applications, where millions of axioms are potentially present.
-Moreover, the profile is expressive enough for the biomedical knowledge: Most of the ontologies such as the Gene Ontology or Chebi
-are already respecting this profile and any relational model can be easely converted and represented using OWL 2EL. OWL knowledge representation
-also separates \emph{individuals} known as Assertional Box (ABox) from \emph{classes} and concepts, the Terminological Box (TBox). In life
-science, most of the entries of databases are to be considered as classes rather than instances, as they describe the generic version of
+Moreover, the profile is expressive enough for a good portion of the biomedical knowledge: Most of the ontologies such as the Gene Ontology or 
+Chebi
+are already included in this profile and any relational model can be easely converted and represented using OWL 2EL. OWL knowledge representation
+also separates \emph{individuals} known as Assertional Box (ABox) from \emph{classes}, the Terminological Box (TBox). In life
+science, most of the entries of databases describing molecular concepts are to be considered as classes rather than instances, as they describe 
+the generic version of
 a molecular entity, such as a protein which has a lot of materialization in practice, namely the actual proteins. 
-This representation differs a lot from the one used in the relational model or with RDF, where database entries are considered as instance 
+This representation differs a lot from the one used in the relational model or with RDF, where entries are considered as instance 
 records rather than as actual biological objects.
-While working this OWL this distinction is important to make, as it influences the inferences mades by the reasoner. Fortunately OWL 2EL focuses
-on this aspect and enables the handling of knowledge bases with a large number of classes.
-
-- scalability - paralellism
-- interoperability
+While working with OWL this distinction is important to make, as it influences the inferences mades by the reasoner. Fortunately OWL 2EL focuses
+on this aspect and enables the handling of knowledge bases with a large number of classes. Another important feature of OWL 2EL comes from the
+possibility to run some reasoning tasks in parallel. Clusters or multicore settings can therefore scale the speed of reasoning as more data 
+are added to the knowledge base.
 
 In practice, the implementation of OWL ontologies and knowledge bases can be done either in a programmatic way via the OWL-API or with the
-help of a graphical tool such as Protege.
+help of a visual tool such as Protege. The graphical interface of Protege allows the user to focus more on the OWL constructs themselves 
+rather than on the programmatic implementation. OWL axioms and expressions can indeed be entered with the user-friendly Manchester syntax 
+and the name of the classes are displayed without their URL prefixes for instance. Applications requiring a deeper control over the ontology
+can employ the OWL-API itself but it requires a fairly good understanding of Java. The API deals in great details with all the aspects
+around ontology generation but the level of detail can be cumbersome for some applications. Brain aims at filling the gap between the OWL-API
+and graphical interfaces: It is designed as a facade, providing a series of convenience methods for the common
+use-cases. Table \ref{Tab:constructs} highlights such constructs, with their equivalent in description logic and OWL 2EL.
 
+\begin{table}[!h]
+\processtable{Example of some common OWL 2EL constructs written using the
+Manchester syntax alonside an example of implementation using Brain.\label{Tab:constructs}}
+{\begin{tabular}{llll}\toprule
+OWL & Brain implementation\\\midrule
+Class: A & brain.addClass("A");\\
+ObjectProperty: P & brain.addObjectProperty("P");\\
+C and D & brain.getEquivalentClasses("C and D");\\
+owl:Thing & brain.getOWLClass("Thing");\\
+P some C & brain.subClassOf("X", "P some C");\\
+C SubClassOf: D & brain.subClassOf("C", "D");\\
+S SubPropertyChain: R1 o R2 & brain.chain("R1 o R2", "S");\\
+R Characteristics: Transitive & brain.transitive("R");\\\botrule
+\end{tabular}}{}
+\end{table}
 
-how does one implement a knowledge base?
-need to use the OWL-API and a specific reasoner or Protege
-ok, what's the problem with that?
-extremlely conprehensive solution for the API but heavy. Protege is a good GUI but not suitable for programatic access.
-Need for a lightweight solution specific for OWL 2 EL, in order to build web service and OWL end-points.
-ok, what is the solution?
-Brain, a facade for the owl api and the ELk reasoner.
-what are the main features of brain?
-brain deals with one ontology at a time only
-focusing on the biology, less the computer science.
-brain deals only with unique names non redundant names for entites
-string based interaction to build classes and class expression using the intuitive manchester syntax
-error-handling driven
-convenience method for import/export of stuff, management of prefixes
-list of the contruct and implementation as table (copy pasta from website).
-scalable because of Elk.
-creration and iomport of external ontologies (learn)
-consistency checking
-
+Brain builds on the top of the fast Elk reasonner specialised for OWL 2EL ontologies for reasoning tasks.
+Elk shows very good performances at classifying large datasets and ontologies and is implemented in a multi-thread friendly way.
+Brain relies on the intuitive Manchester syntax to formulate queries and class expressions. The interaction with the OWL-API
+resolves around strings, making Brain suitable to parse and answer requests in the context of a web service or an OWL end-point for instance.
+The library supports the loading and referring of external ontologies or knowledge bases in order to integrate and reason in a 
+scalable way over data coming from different sources, such as independant biomedical repositories.
+Conclusion
 Why is brain interesting for the community
 tool to build KB scalable solution in order to preapre the next stage of data integration with KB reasoner driven and semantic web.
 
+
 \section*{Acknowledgement}
-These should be included at the end of the text and not in footnotes. Please ensure you acknowledge all 
-sources of funding, see funding section below.
-Details of all funding sources for the work in question should be given 
-in a separate section entitled 'Funding'. This should appear before the 'Acknowledgements' section.
-
+blabalba
 \paragraph{Funding\textcolon}
-The following rules should be followed:
-The sentence should begin: This work was supported by …
+This work was supported by …
  
-The full official funding agency name should be given, i.e. National Institutes of Health, not NIH 
-(full RIN-approved list of UK funding agencies) Grant numbers should be given in brackets as follows: grant number xxxx 
-Multiple grant numbers should be separated by a comma as follows: grant numbers xxxx, yyyy 
-Agencies should be separated by a semi-colon (plus ‘and’ before the last funding agency) 
-Where individuals need to be specified for certain sources of funding the following text should be added after the
-relevant agency or grant number to author initials.
-Oxford Journals will deposit all NIH-funded articles in PubMed Central. See Depositing articles in repositories – 
-information for authors for details. Authors must ensure that manuscripts are clearly indicated as NIH-funded using the guidelines above.
-
 \bibliographystyle{natbib}
 \bibliographystyle{achemnat}
 \bibliographystyle{plainnat}
