@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  24 OCT 2012 10:43
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  24 OCT 2012 11:43
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -356,12 +356,12 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 
 
 ]
-Underfull \hbox (badness 4060) in paragraph at lines 87--89
+Underfull \hbox (badness 4060) in paragraph at lines 90--92
 [][]\OT1/ptm/m/n/9 In practice, the implementation of OWL ontologies and
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 113.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 116.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
@@ -384,34 +384,76 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:14.18494pt when 331.56668pt
+Extra height:14.18494pt when 348.56668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:14.18494pt when 332.56668pt
+Extra height:14.18494pt when 349.56668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:0.0pt when 333.56668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-(2)Left:333.56668pt Right:333.13336pt Output:333.56668pt
+Extra height:14.18494pt when 350.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:14.18494pt when 351.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:14.18494pt when 352.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:14.18494pt when 353.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:14.18494pt when 354.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:14.18494pt when 355.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:0.0pt when 356.56668pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+(2)Left:356.56668pt Right:356.13336pt Output:356.56668pt
 - LAST -
 Extra skip:0.0pt
-Left:333.56668pt
-Right:333.13336pt
-Output:333.56668pt
+Left:356.56668pt
+Right:356.13336pt
+Output:356.56668pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 142.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 145.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 142.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 145.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -450,7 +492,7 @@ e1/urw/helvetic/uhvbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/
 uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 118428 bytes).
+Output written on document.pdf (2 pages, 118463 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
