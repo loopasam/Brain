@@ -46,7 +46,7 @@ extracted from scientific literature by manual curation with the help of text-mi
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
 the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. In order to leverage further 
 more the existing information, the current trend is at data integration and interoperability, with large projects such as ELIXIR leading the way.
-The underlying idea assumes that increasingly complex biomedical problems such as finding new treatments for diseases could be addressed 
+The underlying idea assumes that increasingly complex biomedical challenges such as finding new treatments for diseases could be addressed 
 by combining the content of independant repositories via the Internet. 
 Traditional relational databases are however an obstacle to realize this vision, mostly because of their lack of support for interoperability:
 The schema structuring the data is indeed very repository-specific which limits the combination of the native content with external data in an
@@ -58,111 +58,50 @@ transitive relations can be further expressed via another standard, the Web Onto
 is used to capture the knowledge of a domain of interest in the form of a structured vocabulary. This feature makes it particularly 
 interesting from the point of view of life science, as a lot of ontologies and classification have been devellopped since the origin of 
 the discipline. OWL is often expressed in combination with RDF data in order to reveal the underlying schema, but 
-it can also be used as such as an implemetation of description logic. Knowledge bases can therefore be built this way without being
-necessarly expressed as RDF triples. Brain, the library presented in this manuscript aims at facilitating the contruction and manipulation of 
+it can also be used as such as an implemetation of a part of description logic. 
+Knowledge bases can therefore be built without being necessarly expressed as RDF triples while still preserving all the advantages in regards 
+to data integration and interoperability.
+Brain, the library presented in this manuscript aims at facilitating the contruction and manipulation of 
 such knowledge bases, rather than being oriented towards the consumption of RDF data. We will present first the biomedical motivation for 
-the particular subset of OWL supported by Brain so called OWL 2EL. We will then discuss the main features of Brain in regards to this profile.
+the particular subset of OWL supported by Brain so called OWL 2EL. The will be discussed the main features of Brain in regards to this profile.
 
+what is owl 2el?
+owl 2el is a subset of owl that is focused on trackacle profile of owl.
+what's a trackable profile?
+axioms that are not too complicated to understand and that are fast to compute.
+What are axioms?
+axioms are one of the fundamental block of description logic, it's assertion about facts present in the knowledge base. A reasoner
+is capable of understanding them and conclude new facts from it, it implicit knowledge retrieval.
+what's a reasoner?
+reasoner is a tool that is going to classifiy an ontology based on the type of constructs faced. it is also used to query the ontology or to
+check the consistency.
+Why is OWL 2 EL interesting for us?
+most biomedical ontologies are following this profile (citations).
+Biomedical knowledge representation resolves around classes more than instances, as opposite to the RDF or relational representation,
+which is in the scope of OWL 2el.
+KB are decomposed in tbox and abox and rbox, classes belong to the tbox, which is large in biology.
 
-Life science databases have particular features making them unique in regards to other domains. First, they essentially serve as read-only 
-resources where the researchers come to browse or download the content from. The majority of the time, no transactions or updates 
-are hapenning as opposed to services such as Amazon or Ebay. Second, biomedical databases are highly interconnected via the Internet. 
-It is really easy for a user to move from one repository to an other via the hyperlinks present on web interfaces. This distribution of workload 
-and information is likely to increase in the future, driven by large projects such as ELIXIR for instance.
-Third, biomedical repositories have to be able to answer increasingly complex questions which 
-are traditionally formulated with the Structured Query Language (SQL). As databases are well interlinked, one would expect to be able to
-gather quickly results coming from different sources. In practice this is however not the case because of the discrepencies in 
-structures and schemas, the technical difficulties to run federated queries and simply because relational databases were not design to 
-accomplish this task in the first place. Finally, the biological information is not necessarly best represented as relational tables. 
-In particular hierarchical structures such as taxonomies or ontologies such as the Gene Ontology are known to be challenging 
-to represent in relational databases. 
+how does one implement a knowledge base?
+need to use the OWL-API and a specific reasoner or Protege
+ok, what's the problem with that?
+extremlely conprehensive solution for the API but heavy. Protege is a good GUI but not suitable for programatic access.
+Need for a lightweight solution specific for OWL 2 EL, in order to build web service and OWL end-points.
+ok, what is the solution?
+Brain, a facade for the owl api and the ELk reasoner.
+what are the main features of brain?
+brain deals with one ontology at a time only
+focusing on the biology, less the computer science.
+brain deals only with unique names non redundant names for entites
+string based interaction to build classes and class expression using the intuitive manchester syntax
+error-handling driven
+convenience method for import/export of stuff, management of prefixes
+list of the contruct and implementation as table (copy pasta from website).
+scalable because of Elk.
+creration and iomport of external ontologies (learn)
+consistency checking
 
-Because of these particular features, the biomedical domain is particularly attractive for semantic web technologies. First coined by 
-Berners-Lee, the semantic web is a set of standards promoting the interoperability and integration of information at the scope of the World Wide
-Web. Data are represented as triples using the Resource Description Framework (RDF) which explicitly expose the relations and types between
-entities, in contrast to relational databases where it is part of the schema. RDF triples are kept in a triplestore
-which can be queried using a language very similar to SQL called SPARQL. Triplestores are usually much slower than relational databases and
-provide very little added value to the original content alone in practice. We argue here that the main benefit from semantic web in the scope 
-of life science comes from the Web Ontology Language (OWL). OWL grew from mathematics and description logic as a mean to formally represent some 
-knowledge. It has then been adapted for the semantic web in order to express the ontologies supposed to represent the possible types of RDF 
-triples. Despite being best known for its role in semantic web, OWL could also be used by itself to build knowledgebases, namely a collection 
-of OWL statements. Knowledgebases provide some clear advantages over relational databases and triplestores.
-
-expressivity of OWL --> problems --> OWL 2 EL to the rescue
-
-accurate representation as class
-relations can be combined
-taxonomies represented
-reasoner
-table of definition for knowledge bases
-Abox tbox
-leverage of resources
-new definitions from simple concepts
-
-
-
-The availability of structured data enables the formulation of queries with the Structured Query Language (SQL) in order to retrieve the desired 
-information over relational databases. For instance, it is possible to
-quickly find the cellular location of a protein just by looking at its entry on Uniprot and without having to read several scientific articles
-on the topic. The query language used and the structure of the database are the factors limiting the complexity of the questions that can be 
-formulated over the biomedical information. For example, relational databases are powerful to store values about instance data such as the
-sequence or the name of a gene product, but are daunting to use to represent hierarchical structures (ref) such as the Gene Ontology. Therefore
-queries resolving around hierarchies are going to be complicated to formulate using SQL and will not necessarly deliver a complete answer. For
-instance, simple queries such as retrieving the list of all the mammals from the NCBI taxonomy involves retrieving first the direct descendants
-of the mammals and for each of them recursively retrieving their descendants. This type of construct is not trivial to implement
-and is not yet supported natively by open-source solution like MySQL or PostgreSQL.
-Biomedical databases are not designed for interoperability. Combining the information present in
-two separate repositories can indeed be a painful task as the underlying schemas supporting the databases often differ.
-
-
-The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources
-Knowledge bases
-Complicated queries
-
-knowledge versus information
-
-
-
-
-
-Ontologies and databases in biology are somehow used differently than in other fields. 
-
-- The future of biomedical databases (ELIXIR) is leverage of their content via interoperability with other resources.
-OWL provide the means to do this, databases don't.
-- Features: Creation and storage of OWL knowledge-bases. 
-Import of external knowledge-bases/ontologies. 
-Simplification of interaction in regards to OWL-API. Fast classification time (Elk reasoner). 
-Support complex queries via inference. Fast and suitable to be used in production.
-- Evaluation: MySQL build of Go is compared versus OWL build of GO (identical content - different representation).
-A series of biomedical questions will be answered in SQL and OWL respectively on the MySQL and on the OWL ontology.
-Comparison of performances --> Brain is fast and scalable (thread friendly implementation).
-
-Problems:
-- Need to be able to formulate complex queries --> hidden/implicit knowledge - inference.
-- Need for interoperability among resources --> semantic web technologies.
-- Need to be able to leverage resources --> benefit from integration
-- Relational databases are struggling with biomedical hierarchical representations. Instance versus classes
-- Databases in biology are used as read-only resources
-- Databases don't support inference natively but it could be overcome by a
- pre-processing step (similar to a classification for a knowledge base).
-
-Solution:
-- Semantic Web technologies could be slow --> OWL 2 EL.
-- Advantages of triple -stores --> none, they still are relational flat data.
-- Simplying interaction on OWL-API, tracktable problem. Focusing on biology, not computer science.
-- More and more ontologies are represented in OWL.
-
-OWL 2 EL building blocks:
-- Individual, properties, classes
-- Axioms
-- Reasoner
-
-- relation with description logic
-- tracktability argument + definition
-- OWL --> query and representation language
-- table comparison query + times
-
-
+Why is brain interesting for the community
+tool to build KB scalable solution in order to preapre the next stage of data integration with KB reasoner driven and semantic web.
 
 \section*{Acknowledgement}
 These should be included at the end of the text and not in footnotes. Please ensure you acknowledge all 
