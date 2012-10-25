@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 15:18
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 17:02
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -319,33 +319,64 @@ figures/data
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 39.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 
-Underfull \hbox (badness 5374) in paragraph at lines 40--50
+Package natbib Warning: Citation `elixir' on page 1 undefined on input line 45.
+
+
+
+Package natbib Warning: Citation `DL primer' on page 1 undefined on input line 
+48.
+
+
+Underfull \hbox (badness 5374) in paragraph at lines 40--52
 []\OT1/ptm/m/n/9 Relational databases hold most of the available structured
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 72--91
+Package natbib Warning: Citation `rdf' on page 1 undefined on input line 58.
+
+
+Package natbib Warning: Citation `owl' on page 1 undefined on input line 62.
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 54--73
+\OT1/ptm/m/n/9 as part of the data themselves (\OT1/ptm/b/n/9 ?\OT1/ptm/m/n/9 )
+. This representation relies
+ []
+
+
+Underfull \hbox (badness 1496) in paragraph at lines 54--73
+\OT1/ptm/m/n/9 logic and has been designed to capture the knowledge of a
+ []
+
+
+Package natbib Warning: Citation `el profiles' on page 1 undefined on input lin
+e 77.
+
+
+Underfull \hbox (badness 1097) in paragraph at lines 75--94
 \OT1/ptm/m/n/9 the full version of OWL. These constructs are called \OT1/ptm/m/
 it/9 axioms
  []
 
 
-Underfull \hbox (badness 1509) in paragraph at lines 72--91
+Underfull \hbox (badness 1509) in paragraph at lines 75--94
 \OT1/ptm/m/n/9 query mechanisms surpassing the Structured Query Language
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 72--91
+Underfull \hbox (badness 1005) in paragraph at lines 75--94
 \OT1/ptm/m/n/9 offers the possibility to run some reasoning tasks in parallel.
  []
 
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 91.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 94.
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 94.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
@@ -353,7 +384,7 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 123.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -361,23 +392,20 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
-(./document.bbl
-
-Package natbib Warning: Empty `thebibliography' environment on input line 3.
-
-)
-Extra height:0.0pt when 535.14767pt
-(2)Left:535.14767pt Right:538.29535pt Output:535.14767pt
-(2)Left:538.29535pt Right:538.29535pt Output:538.29535pt
+Extra height:11.94843pt when 528.02942pt
+Extra height:11.94843pt when 529.02942pt
+Extra height:0.0pt when 530.02942pt
+(2)Left:530.02942pt Right:535.05884pt Output:530.02942pt
+(2)Left:535.05884pt Right:524.05884pt Output:535.05884pt
 - LAST -
 Extra skip:0.0pt
-Left:538.29535pt
-Right:538.29535pt
-Output:538.29535pt
+Left:535.05884pt
+Right:524.05884pt
+Output:535.05884pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 152.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 156.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 152.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 156.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -391,18 +419,22 @@ Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][] 
  []
 
-[2] (./document.aux)
+[2]
+
+Package natbib Warning: There were undefined citations.
+
+(./document.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 2670 strings out of 493848
- 31088 string characters out of 1152822
+ 2673 strings out of 493848
+ 31101 string characters out of 1152822
  103086 words of memory out of 3000000
- 5891 multiletter control sequences out of 15000+50000
- 42946 words of font info for 94 fonts, out of 3000000 for 9000
+ 5896 multiletter control sequences out of 15000+50000
+ 44572 words of font info for 96 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
  36i,13n,26p,268b,300s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
@@ -417,7 +449,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 124355 bytes).
+Output written on document.pdf (2 pages, 126787 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
