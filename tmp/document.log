@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 10:02
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 12:12
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -317,56 +317,60 @@ Underfull \hbox (badness 4569) in paragraph at lines 34--37
 figures/data
  []
 
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 39.
 
-Underfull \hbox (badness 5374) in paragraph at lines 39--63
+Underfull \hbox (badness 5374) in paragraph at lines 40--50
 []\OT1/ptm/m/n/9 Relational databases hold most of the available structured
  []
 
 
-Underfull \hbox (badness 1184) in paragraph at lines 39--63
-\OT1/ptm/m/n/9 is at data integration and interoperability, with large projects
-
+Underfull \hbox (badness 4132) in paragraph at lines 52--69
+[]\OT1/ptm/m/n/9 Traditional relational databases are however an obstacle to
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 64--85
-\OT1/ptm/m/n/9 as classes rather than instances, as they describe the generic
+Underfull \hbox (badness 1194) in paragraph at lines 52--69
+\OT1/ptm/m/n/9 repository-specific which limits the combination of the native
+ []
+
+
+Underfull \hbox (badness 1275) in paragraph at lines 70--86
+\OT1/ptm/m/n/9 can therefore scale the speed of reasoning as more data are
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 85.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 86.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 85.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 4060) in paragraph at lines 86--94
+Underfull \hbox (badness 4060) in paragraph at lines 87--95
 [][]\OT1/ptm/m/n/9 In practice, the implementation of OWL ontologies and
  []
 
 
-Underfull \hbox (badness 1303) in paragraph at lines 86--94
+Underfull \hbox (badness 1303) in paragraph at lines 87--95
 \OT1/ptm/m/n/9 knowledge bases can be done either in a programmatic way
  []
 
 
-Underfull \hbox (badness 1038) in paragraph at lines 86--94
+Underfull \hbox (badness 1038) in paragraph at lines 87--95
 \OT1/ptm/m/n/9 via the OWL-API or with the help of a visual tool such as
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 108.
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 109.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
@@ -380,335 +384,101 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 379.64767pt
+Extra height:14.18494pt when 361.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 380.64767pt
+Extra height:14.18494pt when 362.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 381.64767pt
+Extra height:14.18494pt when 363.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 382.64767pt
+Extra height:14.18494pt when 364.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 383.64767pt
+Extra height:14.18494pt when 365.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 384.64767pt
+Extra height:14.18494pt when 366.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:79.18494pt when 385.64767pt
+Extra height:14.18494pt when 367.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 386.64767pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 387.64767pt
+Extra height:14.18494pt when 368.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 388.64767pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 389.64767pt
+Extra height:14.18494pt when 369.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 390.64767pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 391.64767pt
+Extra height:14.18494pt when 370.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 392.64767pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 393.64767pt
+Extra height:14.18494pt when 371.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 394.64767pt
+Extra height:0.0pt when 372.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 395.64767pt
+(2)Left:372.7364pt Right:374.5244pt Output:372.7364pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:48.18494pt when 396.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 397.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 398.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 399.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 400.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 401.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:48.18494pt when 402.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 403.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 404.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 405.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 406.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 407.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 408.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 409.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 410.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 411.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 412.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 413.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 414.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 415.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 416.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 417.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 418.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 419.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 420.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 421.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 422.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 423.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 424.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 425.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 426.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 427.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 428.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 429.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 430.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 431.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 432.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 433.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 434.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 435.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 436.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 437.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 438.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 439.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 440.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:0.0pt when 441.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-(2)Left:441.64767pt Right:443.34692pt Output:441.64767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-(2)Left:443.34692pt Right:443.34692pt Output:443.34692pt
+(2)Left:374.5244pt Right:374.5244pt Output:374.5244pt
 - LAST -
 Extra skip:0.0pt
-Left:443.34692pt
-Right:443.34692pt
-Output:443.34692pt
+Left:374.5244pt
+Right:374.5244pt
+Output:374.5244pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 137.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 136.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 137.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 136.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -731,7 +501,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  2670 strings out of 493848
  31088 string characters out of 1152822
- 98086 words of memory out of 3000000
+ 97086 words of memory out of 3000000
  5891 multiletter control sequences out of 15000+50000
  42946 words of font info for 94 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -748,7 +518,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 122608 bytes).
+Output written on document.pdf (2 pages, 122033 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
