@@ -20,8 +20,8 @@ $^{2}$Department of Genetics, University of Cambridge, Downing Street, Cambridge
 \begin{abstract}
 
 \section{Summary:}
-Brain is a library optimizing the creation and manipulation of OWL 2EL ontologies and knowledge bases.
-It relies on the OWL-API and uses Elk for reasoning tasks.
+Brain is a library facilitating the creation and manipulation of ontologies and knowledge bases represented in the
+Web Ontology Language (OWL).
 
 \section{Availability and Implementation:}
 The Java source code and the library are freely available at https://github.com/loopasam/Brain
@@ -47,9 +47,9 @@ Traditional relational databases are however an obstacle to realize this vision,
 The schema structuring the data is indeed very repository-specific which limits the combination of the native content with external data in an
 efficient and meaningful fashion. In order to address this issue, a series a standard forming the semantic web have been developped. One of them,
 the Resources Description Framework (RDF) enables the exposition of the underlying structure as part of the data themselves. This
-representation relies on triples as building block, composed as \emph{subject - relation - object} and where 
-the types of the data are identified with a special relation called \emph{rdf:type}. More complicated data structures, such as sub-classes or
-transitive relations can be further expressed via another standard, the Web Ontology Language (OWL). OWL derives from Description logic and
+representation relies on triples as building block, composed as \emph{subject - relation - object} which serves to
+describe the data as well as their types. More complicated data structures, such as sub-class or
+transitive relationships can be further expressed via another standard, the Web Ontology Language (OWL). OWL derives from Description logic and
 is used to capture the knowledge of a domain of interest in the form of a structured vocabulary. This feature makes it particularly 
 interesting from the point of view of life science, as a lot of ontologies and classification have been devellopped since the origin of 
 the discipline. OWL is often expressed in combination with RDF data in order to reveal the underlying schema, but 
