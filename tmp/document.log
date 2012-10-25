@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 14:43
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 15:18
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -353,7 +353,7 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 119.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -366,24 +366,18 @@ Missing character: There is no ¦ in font ptmr7t!
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 485.14767pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:14.18494pt when 486.14767pt
-Extra height:0.0pt when 487.14767pt
-(2)Left:487.14767pt Right:482.29535pt Output:487.14767pt
+Extra height:0.0pt when 535.14767pt
+(2)Left:535.14767pt Right:538.29535pt Output:535.14767pt
+(2)Left:538.29535pt Right:538.29535pt Output:538.29535pt
 - LAST -
 Extra skip:0.0pt
-Left:487.14767pt
-Right:482.29535pt
-Output:487.14767pt
+Left:538.29535pt
+Right:538.29535pt
+Output:538.29535pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 150.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 152.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 150.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 152.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -406,7 +400,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  2670 strings out of 493848
  31088 string characters out of 1152822
- 101086 words of memory out of 3000000
+ 103086 words of memory out of 3000000
  5891 multiletter control sequences out of 15000+50000
  42946 words of font info for 94 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -423,7 +417,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 124098 bytes).
+Output written on document.pdf (2 pages, 124355 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

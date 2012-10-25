@@ -90,15 +90,16 @@ situtation for biomedical repositories. Brain wraps and simplifies the interacti
 the configuration for advanced users.
 
 \section{Programmatic features}
+A purpose of Brain is to ease the manipulation of knowledge bases as well as increasing the production at which they can be developed.
 In practice, the implementation of OWL ontologies and knowledge bases can be done either in a programmatic way via the OWL-API or with the
 help of a visual tool such as Protege (itself built from the OWL-API). The graphical interface of Protege allows the user to focus 
-plainly on the generation of axioms rather than on the underlying programmatic implementation. 
-OWL axioms and expressions can indeed be entered 
+plainly on the generation of axioms rather than on the underlying programmatic implementation:
+OWL expressions can indeed be entered 
 with the user-friendly Manchester syntax and the name of the classes are displayed in a convenient way for instance. 
 More complex applications requiring a deeper control over the ontology
-can employ the OWL-API but it requires a fairly good understanding of Java and can be daunting for the new comers.
-The API deals in great details with all the aspects around ontology generation for semantic web purposes, nonetheless the level of detail 
-can be cumbersome for some applications. Brain aims at filling the gap between the OWL-API
+can take advantage the OWL-API but it requires a fairly good understanding of Java and can be daunting for the new comers.
+The API deals indeed in great details with all the aspects around ontology generation for semantic web purposes, nonetheless the 
+level of detail can be cumbersome for some of the biomedical applications. Brain aims at filling the gap between the OWL-API
 and graphical interfaces: It is designed as a facade, providing a series of convenience methods for the common
 use-cases encountered in the biomedical domain and leveraging the access to the OWL-API. 
 Table \ref{Tab:constructs} highlights some typical OWL constructs 
@@ -128,9 +129,10 @@ the one implemented in Protege. Powerful questions can be formulated over the kn
 away a complex interaction with the Java object provided by the OWL-API.
 
 \section{Conclusion}
-Why is brain interesting for the community
-tool to build KB scalable solution in order to preapre the next stage of data integration with KB reasoner driven and semantic web.
-
+Brain is a open-source Java library dedicated to users willing to build biomedical knowledge bases or OWL ontologies. 
+The library is centered on the EL profile, designed to be suitable and scalable for life science knowledge representation. 
+The convenience methods provided by Brain should simplify the development of biomedical knowledge bases and allow developers
+to increase their productivity while dealing with data integration challenges.
 
 \section*{Acknowledgement}
 blabalba
