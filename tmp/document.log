@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  26 OCT 2012 11:11
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  26 OCT 2012 11:43
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -352,39 +352,26 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 126.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 138.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 164.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 167.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
-Extra height:29.44545pt when 638.77792pt
-Extra height:29.44545pt when 639.77792pt
-Extra height:29.44545pt when 640.77792pt
-Extra height:0.0pt when 641.77792pt
-(2)Left:641.77792pt Right:646.55586pt Output:641.77792pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-(2)Left:646.55586pt Right:646.55586pt Output:646.55586pt
+Extra height:0.0pt when 646.77792pt
+(2)Left:646.77792pt Right:650.60744pt Output:646.77792pt
+(2)Left:650.60744pt Right:650.60744pt Output:650.60744pt
 - LAST -
 Extra skip:0.0pt
-Left:646.55586pt
-Right:646.55586pt
-Output:646.55586pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+Left:650.60744pt
+Right:650.60744pt
+Output:650.60744pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 211.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 214.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 211.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 214.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -407,11 +394,11 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  2682 strings out of 493848
  31273 string characters out of 1152822
- 114073 words of memory out of 3000000
+ 113094 words of memory out of 3000000
  5903 multiletter control sequences out of 15000+50000
  47334 words of font info for 99 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
- 36i,13n,26p,268b,300s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,13n,26p,268b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
@@ -424,7 +411,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 133751 bytes).
+Output written on document.pdf (2 pages, 133513 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

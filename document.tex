@@ -109,7 +109,19 @@ level of granularity can be cumbersome for some of the biomedical applications. 
 and graphical interfaces: It is designed as a facade, providing a series of convenience methods for the common
 use-cases encountered in the biomedical domain and leveraging the access to the OWL-API. 
 Table \ref{Tab:constructs} highlights some typical OWL constructs 
-with an example of implementation using Brain. The full list of supported constructs is available as supplementary material.
+with an example of implementation using Brain.
+The full list of supported constructs is available as supplementary material.
+
+Brain relies on the intuitive and explicit Manchester syntax to formulate OWL class expressions, just like in the Protege editor.
+The interaction with the OWL-API resolves around strings rather than Java objects, making Brain suitable to parse and answer requests in 
+the context of a web service or an OWL end-point for instance. Using strings of characters as input speeds as well the production 
+and flexibility of the code written to move to an OWL representation from a relational or flat file database for instance.
+The library supports the loading and referencing of external ontologies in order to integrate and reason
+over data coming from different sources. An important feature of Brain is the query mechanism, which is very similar to 
+the one implemented in Protege. Powerful questions can be formulated over the knowledge base using the Manchester syntax, abstracting
+away a complex interaction with the Java object provided by the OWL-API. An example of question answering over the Gene Ontology
+is compared against the traditionnal relational model in the supplementary material.
+
 \begin{table}[!h]
 \processtable{Example of some common OWL 2EL constructs written using the
 Manchester syntax alonside an example of implementation using Brain.\label{Tab:constructs}}
@@ -125,15 +137,6 @@ S SubPropertyChain: R1 o R2 & brain.chain("R1 o R2", "S");\\
 R Characteristics: Transitive & brain.transitive("R");\\\botrule
 \end{tabular}}{}
 \end{table}
-Brain relies on the intuitive and explicit Manchester syntax to formulate OWL class expressions, just like in the Protege editor.
-The interaction with the OWL-API resolves around strings rather than Java objects, making Brain suitable to parse and answer requests in 
-the context of a web service or an OWL end-point for instance. Using strings of characters as input speeds as well the production 
-and flexibility of the code written to move to an OWL representation from a relational or flat file database for instance.
-The library supports the loading and referencing of external ontologies in order to integrate and reason
-over data coming from different sources. An important feature of Brain is the query mechanism, which is very similar to 
-the one implemented in Protege. Powerful questions can be formulated over the knowledge base using the Manchester syntax, abstracting
-away a complex interaction with the Java object provided by the OWL-API. An example of question answering over the Gene Ontology
-is compared against the traditionnal relational model in supplementary figure XXX.
 
 \section{Conclusion}
 Brain is a open-source Java library dedicated to users willing to build biomedical knowledge bases or OWL ontologies. 
