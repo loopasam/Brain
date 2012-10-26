@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  25 OCT 2012 17:02
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  26 OCT 2012 10:35
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -322,38 +322,13 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 
-Package natbib Warning: Citation `elixir' on page 1 undefined on input line 45.
-
-
-
-Package natbib Warning: Citation `DL primer' on page 1 undefined on input line 
-48.
+Package natbib Warning: Citation `crosswell2012' on page 1 undefined on input l
+ine 45.
 
 
 Underfull \hbox (badness 5374) in paragraph at lines 40--52
 []\OT1/ptm/m/n/9 Relational databases hold most of the available structured
  []
-
-
-Package natbib Warning: Citation `rdf' on page 1 undefined on input line 58.
-
-
-Package natbib Warning: Citation `owl' on page 1 undefined on input line 62.
-
-
-Underfull \hbox (badness 1117) in paragraph at lines 54--73
-\OT1/ptm/m/n/9 as part of the data themselves (\OT1/ptm/b/n/9 ?\OT1/ptm/m/n/9 )
-. This representation relies
- []
-
-
-Underfull \hbox (badness 1496) in paragraph at lines 54--73
-\OT1/ptm/m/n/9 logic and has been designed to capture the knowledge of a
- []
-
-
-Package natbib Warning: Citation `el profiles' on page 1 undefined on input lin
-e 77.
 
 
 Underfull \hbox (badness 1097) in paragraph at lines 75--94
@@ -364,11 +339,6 @@ it/9 axioms
 
 Underfull \hbox (badness 1509) in paragraph at lines 75--94
 \OT1/ptm/m/n/9 query mechanisms surpassing the Structured Query Language
- []
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 75--94
-\OT1/ptm/m/n/9 offers the possibility to run some reasoning tasks in parallel.
  []
 
 LaTeX Font Info:    Try loading font information for OMS+phv on input line 94.
@@ -430,10 +400,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2673 strings out of 493848
- 31101 string characters out of 1152822
+ 2669 strings out of 493848
+ 31074 string characters out of 1152822
  103086 words of memory out of 3000000
- 5896 multiletter control sequences out of 15000+50000
+ 5892 multiletter control sequences out of 15000+50000
  44572 words of font info for 96 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
  36i,13n,26p,268b,300s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -449,7 +419,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 126787 bytes).
+Output written on document.pdf (2 pages, 126776 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

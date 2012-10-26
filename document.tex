@@ -42,10 +42,10 @@ extracted from scientific literature by manual curation with the help of text-mi
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
 the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. In order to leverage further 
 more the existing information, the current trend is at data integration and interoperability, with large projects such as 
-ELIXIR \citep{elixir} leading the way.
+ELIXIR \citep{crosswell2012} leading the way.
 The underlying idea assumes that increasingly complex biomedical challenges such as finding new treatments for diseases could be better 
 addressed by combining  and integrating the content of independent repositories. 
-Knowledge bases \citep{DL primer}, a concept coming from computer science, 
+Knowledge bases \citep{}, a concept coming from computer science, 
 could be a solution to improve the interoperability and the value of the data yet no framework is available at the time of writting for 
 the biomedical domain. Brain, the library presented in this manuscript addresses this matter and provides a simplified 
 interface dedicated to handle and query biomedical knowledge bases.
@@ -55,11 +55,11 @@ Traditional relational databases are an obstacle to realize a large-scale data i
 interoperability: The schema structuring the data is indeed very repository-specific which limits the combination of the 
 native content with external data in an efficient and meaningful fashion. In order to address this issue, 
 a series a standard forming the semantic web have been developped. One of them, the Resources Description 
-Framework (RDF) enables the exposition of the underlying structure as part of the data themselves \citep{rdf}. This
+Framework (RDF) enables the exposition of the underlying structure as part of the data themselves \citep{}. This
 representation relies on triples as building block, composed as \emph{subject - relation - object} which serves to
 describe the data as well as their types. More complicated data structures, such as sub-class or
 transitive relationships can be further expressed via another standard, the Web Ontology Language (OWL). OWL derives from description logic and
-has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{owl}. 
+has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{}. 
 This feature makes it particularly 
 interesting from the point of view of life science, as a lot of ontologies and classification have been devellopped since the origin of 
 the discipline. OWL is often expressed in combination with RDF in order to reveal the underlying schema of the data, but 
@@ -74,7 +74,7 @@ Then will be discussed the main features implemented by the library in regards t
 \section{Scalability and complexity}
 Knowledge representation in the biomedical domain differs from other discipline, because of the type and abundance of
 information that can possibly be interconnected. Brain appreciates this aspect and focuses on a particular profile of OWL, called EL
-which consists of a subset of the constructs available in the original language \citep{el profiles}. This profile is
+which consists of a subset of the constructs available in the original language \citep{}. This profile is
 designed to be \emph{tractable}, meaning that the constructs available have a polynomial complexity, easier to compute than the full 
 version of OWL. 
 These constructs are called \emph{axioms} and are the fundamental block behind OWL knowledge bases.
@@ -84,8 +84,8 @@ some implicit information, enabling powerful query mechanisms surpassing the Str
 Brain is supporting primarily the OWL 2EL profile for its computational properties, as it is suitable for real-life biomedical applications, 
 where millions of axioms could be potentially extracted from a repository such as Chembl.
 Moreover, the profile is expressive enough for a good portion of the biomedical knowledge: Most of the ontologies such as the Gene Ontology or 
-Chebi are already included in this profile and any relational model can be easely converted and represented using OWL 2EL, opening doors
-for large scale meaningful data integration.
+the Chemical Entities of Biological Interest ontology are already included in this profile and any relational model can be easely 
+converted and represented using OWL 2EL, opening doors for large scale meaningful data integration.
 Brain builds on the top of Elk, a fast reasonner dedicated to EL ontologies. Elk shows very good performances at classifying 
 large datasets and is implemented in a multi-threaded friendly way. It indeed offers the possibility to run some reasoning tasks in parallel.
 Clusters or multicore architecture can therefore scale the speed of reasoning as more data are added to the knowledge base, common
