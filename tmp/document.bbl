@@ -1,9 +1,50 @@
 \begin{thebibliography}{}
 
-\bibitem[Bauer {\em et~al.}(2007)Bauer, Klau, and Reinert]{Boffelli03}
-Bauer, M., Klau, G.~W., and Reinert, K. (2007).
-\newblock {Accurate multiple sequence-structure alignment of RNA sequences
-  using combinatorial optimization.}
-\newblock {\em BMC Bioinformatics\/}, {\bf 8}, 271.
+\bibitem[Crosswell and Thornton(2012)Crosswell and Thornton]{Crosswell2012}
+Crosswell, L.~C. and Thornton, J.~M. (2012).
+\newblock {ELIXIR: a distributed infrastructure for European biological data.}
+\newblock {\em Trends Biotechnol.}, {\bf 30}, 241----242.
+
+\bibitem[{Frank Manola} and {Eric Miller}(2004){Frank Manola} and {Eric
+  Miller}]{FrankManola}
+{Frank Manola} and {Eric Miller} (2004).
+\newblock {RDF Primer}.
+
+\bibitem[Kr\"{o}tzsch {\em et~al.}(2012)Kr\"{o}tzsch, Simanˇ, and
+  Horrocks]{Krotzsch2012}
+Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
+\newblock {A Description Logic Primer}.
+\newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
+
+\bibitem[{Matthew Horridge} and {Sean Bechhofer}(2011){Matthew Horridge} and
+  {Sean Bechhofer}]{MatthewHorridge2011}
+{Matthew Horridge} and {Sean Bechhofer} (2011).
+\newblock {The OWL API: A Java API for OWL Ontologies.}
+\newblock {\em Semantic Web Journal\/}, pages 11--21.
+
+\bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
+  Lutz]{Motik2009}
+Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
+\newblock {OWL 2 Web Ontology Language Profiles}.
+\newblock {\em Language\/}, {\bf 2009}(October), 1--53.
+
+\bibitem[{Stanford Center for Biomedical Informatics Research}(2012){Stanford
+  Center for Biomedical Informatics
+  Research}]{StanfordCenterforBiomedicalInformaticsResearch}
+{Stanford Center for Biomedical Informatics Research} (2012).
+\newblock {Prot\'{e}g\'{e} Project}.
+
+\bibitem[{W3C OWL Working Group}(2009){W3C OWL Working
+  Group}]{W3COWLWorkingGroup}
+{W3C OWL Working Group} (2009).
+\newblock {OWL 2 Web Ontology Language Document Overview}.
+
+\bibitem[{Yevgeny Kazakov} {\em et~al.}(2011){Yevgeny Kazakov}, {Markus
+  Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
+{Yevgeny Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}
+  (2011).
+\newblock {Concurrent Classification of EL Ontologies}.
+\newblock {\em Proceedings of the 10th International Semantic Web Conference
+  (ISWC'11)\/}, {\bf 7032}.
 
 \end{thebibliography}

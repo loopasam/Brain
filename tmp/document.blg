@@ -1,66 +1,66 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: document.aux
 The style file: natbib.bst
-Illegal, another \bibstyle command---line 8 of file document.aux
+Illegal, another \bibstyle command---line 15 of file document.aux
  : \bibstyle
  :          {achemnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 9 of file document.aux
+Illegal, another \bibstyle command---line 16 of file document.aux
  : \bibstyle
  :          {plainnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 10 of file document.aux
+Illegal, another \bibstyle command---line 17 of file document.aux
  : \bibstyle
  :          {abbrv}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 11 of file document.aux
+Illegal, another \bibstyle command---line 18 of file document.aux
  : \bibstyle
  :          {bioinformatics}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 12 of file document.aux
+Illegal, another \bibstyle command---line 19 of file document.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
 Database file #1: document.bib
-You've used 1 entry,
+You've used 8 entries,
             2378 wiz_defined-function locations,
-            533 strings with 4306 characters,
-and the built_in function-call counts, 483 in all, are:
-= -- 44
-> -- 28
-< -- 0
-+ -- 8
-- -- 8
-* -- 45
-:= -- 90
-add.period$ -- 5
-call.type$ -- 1
-change.case$ -- 6
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 20
-empty$ -- 30
-format.name$ -- 9
-if$ -- 92
+            574 strings with 5345 characters,
+and the built_in function-call counts, 3463 in all, are:
+= -- 351
+> -- 190
+< -- 6
++ -- 54
+- -- 54
+* -- 291
+:= -- 621
+add.period$ -- 29
+call.type$ -- 8
+change.case$ -- 51
+chr.to.int$ -- 8
+cite$ -- 8
+duplicate$ -- 138
+empty$ -- 205
+format.name$ -- 68
+if$ -- 678
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 4
-pop$ -- 6
+missing$ -- 5
+newline$ -- 40
+num.names$ -- 32
+pop$ -- 47
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 51
 quote$ -- 0
-skip$ -- 13
+skip$ -- 107
 stack$ -- 0
-substring$ -- 23
-swap$ -- 4
-text.length$ -- 0
+substring$ -- 189
+swap$ -- 27
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 9
+type$ -- 72
 warning$ -- 0
-while$ -- 4
+while$ -- 33
 width$ -- 0
-write$ -- 15
+write$ -- 97
 (There were 5 error messages)

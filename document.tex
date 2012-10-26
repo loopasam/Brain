@@ -42,10 +42,10 @@ extracted from scientific literature by manual curation with the help of text-mi
 structured data is most important, as the curated information can then be classified, managed and queried more easily. Databases facilitate
 the re-use of previous work in a computer-friendly manner and support the biomedical knowledge to scale-up. In order to leverage further 
 more the existing information, the current trend is at data integration and interoperability, with large projects such as 
-ELIXIR \citep{crosswell2012} leading the way.
+ELIXIR \citep{Crosswell2012} leading the way.
 The underlying idea assumes that increasingly complex biomedical challenges such as finding new treatments for diseases could be better 
 addressed by combining  and integrating the content of independent repositories. 
-Knowledge bases \citep{}, a concept coming from computer science, 
+Knowledge bases, a concept coming from computer science (see \citealp{Krotzsch2012} for an introduction), 
 could be a solution to improve the interoperability and the value of the data yet no framework is available at the time of writting for 
 the biomedical domain. Brain, the library presented in this manuscript addresses this matter and provides a simplified 
 interface dedicated to handle and query biomedical knowledge bases.
@@ -55,15 +55,15 @@ Traditional relational databases are an obstacle to realize a large-scale data i
 interoperability: The schema structuring the data is indeed very repository-specific which limits the combination of the 
 native content with external data in an efficient and meaningful fashion. In order to address this issue, 
 a series a standard forming the semantic web have been developped. One of them, the Resources Description 
-Framework (RDF) enables the exposition of the underlying structure as part of the data themselves \citep{}. This
+Framework (RDF) enables the exposition of the underlying structure as part of the data themselves \citep{FrankManola}. This
 representation relies on triples as building block, composed as \emph{subject - relation - object} which serves to
 describe the data as well as their types. More complicated data structures, such as sub-class or
 transitive relationships can be further expressed via another standard, the Web Ontology Language (OWL). OWL derives from description logic and
-has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{}. 
+has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{W3COWLWorkingGroup}. 
 This feature makes it particularly 
 interesting from the point of view of life science, as a lot of ontologies and classification have been devellopped since the origin of 
 the discipline. OWL is often expressed in combination with RDF in order to reveal the underlying schema of the data, but 
-it can also be used as such, as a computer implementation of description logic. 
+it can also be used as such, as an implementation of description logic for computers. 
 Knowledge bases and ontologies can therefore be built without being necessarly expressed as RDF triples while still preserving all the 
 advantages in regards to data integration and interoperability.
 Brain aims at facilitating the construction and manipulation of 
@@ -74,7 +74,7 @@ Then will be discussed the main features implemented by the library in regards t
 \section{Scalability and complexity}
 Knowledge representation in the biomedical domain differs from other discipline, because of the type and abundance of
 information that can possibly be interconnected. Brain appreciates this aspect and focuses on a particular profile of OWL, called EL
-which consists of a subset of the constructs available in the original language \citep{}. This profile is
+which consists of a subset of the constructs available in the original language \citep{Motik2009}. This profile is
 designed to be \emph{tractable}, meaning that the constructs available have a polynomial complexity, easier to compute than the full 
 version of OWL. 
 These constructs are called \emph{axioms} and are the fundamental block behind OWL knowledge bases.
@@ -82,11 +82,12 @@ Axioms assert the facts and relations present in the knowledge base and are unde
 Based on the logical structure of the axioms, the reasoner is indeed capable of deriving new facts from the asserted ones as well as retrieving
 some implicit information, enabling powerful query mechanisms surpassing the Structured Query Language (SQL) expressivity. 
 Brain is supporting primarily the OWL 2EL profile for its computational properties, as it is suitable for real-life biomedical applications, 
-where millions of axioms could be potentially extracted from a repository such as Chembl.
+where millions of axioms could be potentially extracted from a repository such as ChEMBL.
 Moreover, the profile is expressive enough for a good portion of the biomedical knowledge: Most of the ontologies such as the Gene Ontology or 
 the Chemical Entities of Biological Interest ontology are already included in this profile and any relational model can be easely 
 converted and represented using OWL 2EL, opening doors for large scale meaningful data integration.
-Brain builds on the top of Elk, a fast reasonner dedicated to EL ontologies. Elk shows very good performances at classifying 
+Brain builds on the top of Elk, a fast reasonner dedicated to EL ontologies \citep{YevgenyKazakov2011}. Elk shows very good 
+performances at classifying 
 large datasets and is implemented in a multi-threaded friendly way. It indeed offers the possibility to run some reasoning tasks in parallel.
 Clusters or multicore architecture can therefore scale the speed of reasoning as more data are added to the knowledge base, common
 situtation for biomedical repositories. Brain wraps and simplifies the interaction with Elk while still leaving the possibility to fine tune 
@@ -94,15 +95,17 @@ the configuration for advanced users.
 
 \section{Programmatic features}
 A purpose of Brain is to ease the manipulation of knowledge bases as well as increasing the production at which they can be developed.
-In practice, the implementation of OWL ontologies and knowledge bases can be done either in a programmatic way via the OWL-API or with the
-help of a visual tool such as Protege (itself built from the OWL-API). The graphical interface of Protege allows the user to focus 
+In practice, the implementation of OWL ontologies and knowledge bases can be done either in a programmatic way 
+via the OWL-API \citep{MatthewHorridge2011} or with the
+help of a visual tool such as Protege \citep{StanfordCenterforBiomedicalInformaticsResearch}. 
+The graphical interface of Protege allows the user to focus 
 plainly on the generation of axioms rather than on the underlying programmatic implementation:
 OWL expressions can indeed be entered 
 with the user-friendly Manchester syntax and the name of the classes are displayed in a convenient way for instance. 
 More complex applications requiring a deeper control over the ontology
 can take advantage the OWL-API but it requires a fairly good understanding of Java and can be daunting for the new comers.
 The API deals indeed in great details with all the aspects around ontology generation for semantic web purposes, nonetheless the 
-level of detail can be cumbersome for some of the biomedical applications. Brain aims at filling the gap between the OWL-API
+level of granularity can be cumbersome for some of the biomedical applications. Brain aims at filling the gap between the OWL-API
 and graphical interfaces: It is designed as a facade, providing a series of convenience methods for the common
 use-cases encountered in the biomedical domain and leveraging the access to the OWL-API. 
 Table \ref{Tab:constructs} highlights some typical OWL constructs 
@@ -129,7 +132,8 @@ and flexibility of the code written to move to an OWL representation from a rela
 The library supports the loading and referencing of external ontologies in order to integrate and reason
 over data coming from different sources. An important feature of Brain is the query mechanism, which is very similar to 
 the one implemented in Protege. Powerful questions can be formulated over the knowledge base using the Manchester syntax, abstracting
-away a complex interaction with the Java object provided by the OWL-API.
+away a complex interaction with the Java object provided by the OWL-API. An example of question answering over the Gene Ontology
+is compared against the traditionnal relational model in supplementary figure XXX.
 
 \section{Conclusion}
 Brain is a open-source Java library dedicated to users willing to build biomedical knowledge bases or OWL ontologies. 
@@ -138,19 +142,70 @@ The convenience methods provided by Brain should simplify the development of bio
 to increase their productivity while dealing with data integration challenges.
 
 \section*{Acknowledgement}
-blabalba
 \paragraph{Funding\textcolon}
 This work was supported by …
  
-% \bibliographystyle{natbib}
-% \bibliographystyle{achemnat}
-% \bibliographystyle{plainnat}
-% \bibliographystyle{abbrv}
-% \bibliographystyle{bioinformatics}
-% 
-% \bibliographystyle{plain}
-% 
-% \bibliography{document}
+%  \bibliographystyle{natbib}
+%  \bibliographystyle{achemnat}
+%  \bibliographystyle{plainnat}
+%  \bibliographystyle{abbrv}
+%  \bibliographystyle{bioinformatics}
+%  
+%  \bibliographystyle{plain}
+%  
+%  \bibliography{document}
+
+
+\begin{thebibliography}{}
+
+\bibitem[Crosswell and Thornton(2012)Crosswell and Thornton]{Crosswell2012}
+Crosswell, L.~C. and Thornton, J.~M. (2012).
+\newblock {ELIXIR: a distributed infrastructure for European biological data.}
+\newblock {\em Trends Biotechnol.}, {\bf 30}, 241----242.
+
+\bibitem[{Frank Manola} and {Eric Miller}(2004){Frank Manola} and {Eric
+  Miller}]{FrankManola}
+{Frank Manola} and {Eric Miller} (2004).
+\newblock {RDF Primer}.
+
+\bibitem[Kr\"{o}tzsch {\em et~al.}(2012)Kr\"{o}tzsch, Simanˇ, and
+  Horrocks]{Krotzsch2012}
+Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
+\newblock {A Description Logic Primer}.
+\newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
+
+\bibitem[{Matthew Horridge} and {Sean Bechhofer}(2011){Matthew Horridge} and
+  {Sean Bechhofer}]{MatthewHorridge2011}
+{Matthew Horridge} and {Sean Bechhofer} (2011).
+\newblock {The OWL API: A Java API for OWL Ontologies.}
+\newblock {\em Semantic Web Journal\/}, pages 11--21.
+
+\bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
+  Lutz]{Motik2009}
+Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
+\newblock {OWL 2 Web Ontology Language Profiles}.
+\newblock {\em Language\/}, {\bf 2009}(October), 1--53.
+
+\bibitem[{Stanford Center for Biomedical Informatics Research}(2012){Stanford
+  Center for Biomedical Informatics
+  Research}]{StanfordCenterforBiomedicalInformaticsResearch}
+{Stanford Center for Biomedical Informatics Research} (2012).
+\newblock {Prot\'{e}g\'{e} Project}.
+
+\bibitem[{W3C OWL Working Group}(2009){W3C OWL Working
+  Group}]{W3COWLWorkingGroup}
+{W3C OWL Working Group} (2009).
+\newblock {OWL 2 Web Ontology Language Document Overview}.
+
+\bibitem[{Yevgeny Kazakov} {\em et~al.}(2011){Yevgeny Kazakov}, {Markus
+  Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
+{Yevgeny Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}
+  (2011).
+\newblock {Concurrent Classification of EL Ontologies}.
+\newblock {\em Proceedings of the 10th International Semantic Web Conference
+  (ISWC'11)\/}, {\bf 7032}.
+
+\end{thebibliography}
 
 
 \end{document}
