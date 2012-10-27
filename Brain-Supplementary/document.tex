@@ -42,5 +42,34 @@ individual inequality & a \neq b & a DifferentFrom: b & Not supported yet\\[1ex]
 \hline\hline
 \end{tabular}}{}
 \end{table}
-  
+
+\begin{table}[h]
+\caption{Comparison SQL vs OWL}
+\centering
+{\begin{tabular}{c|c|c}
+\hline\hline
+
+ & \textbf{Relational Model (SQL)} & \textbf{OWL (via Brain)} \\ \hline
+
+\begin{tabular}[c]{@{}c@{}}
+Query: \\ regulators of 'blood coagulation'
+\end{tabular} &
+
+\begin{tabular}[c]{@{}c@{}}
+SELECT DISTINCT * FROM term\\
+ INNER JOIN graph\_path AS g \\
+ ON (term.id=g.term1\_id \\
+ AND g.relationship\_type\_id=21) \\
+ INNER JOIN term AS r \\
+ ON (r.id=g.term2\_id)\\
+WHERE term.name='blood coagulation' \\
+AND distance \textless \textgreater \vspace{} 0 ;\\ 
+\end{tabular} &
+\begin{tabular}[c]{@{}c@{}}
+brain.getSubClasses( \\ "RO\_0002211 some GO\_0007596",\\ false); 
+\end{tabular} \\ \hline
+pouyet & foo & bar \\
+\hline\hline
+\end{tabular}}{} 
+\end{table}
 \end{document}
