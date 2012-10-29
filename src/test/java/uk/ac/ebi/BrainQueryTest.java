@@ -36,10 +36,20 @@ public class BrainQueryTest {
 	public void dispose() {
 		brain.sleep();
 	}
-	
+
 	@Test
-	public void getUnsatisfiableClasses() {
-		System.out.println("no classes");
+	public void getUnsatisfiableClasses() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("A");
+		brain.addClass("B");
+		brain.addClass("C");
+		brain.disjointClasses("A", "B");
+		brain.subClassOf("C", "A");
+		brain.subClassOf("C", "B");
+		brain.sleep();
+		brain.classify();
+		assertEquals(1, brain.getUnsatisfiableClasses().size());
+		brain.sleep();
 	}
 
 	@Test
