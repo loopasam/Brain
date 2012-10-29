@@ -3,10 +3,10 @@
  */
 package uk.ac.ebi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +15,8 @@ import org.junit.Test;
 import uk.ac.ebi.brain.core.Brain;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
+
+
 
 /**
  * @author Samuel Croset
@@ -33,6 +35,11 @@ public class BrainQueryTest {
 	@After
 	public void dispose() {
 		brain.sleep();
+	}
+	
+	@Test
+	public void getUnsatisfiableClasses() {
+		System.out.println("no classes");
 	}
 
 	@Test
