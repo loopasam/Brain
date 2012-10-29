@@ -21,7 +21,7 @@
 
 <meta charset='utf-8'>
 <script
-	src='http://ebi-slides-template.googlecode.com/svn/trunk/slides.js'></script>
+    src='http://ebi-slides-template.googlecode.com/svn/trunk/slides.js'></script>
 </head>
 
 <style>
@@ -33,248 +33,151 @@
 
 <body style='display: none'>
 
-	<section class='slides layout-regular template-ebi'>
+    <section class="slides layout-regular template-ebi-light">
 
-		<!-- Your slides (<article>s) go here. Delete or comment out the
+        <!-- Your slides (<article>s) go here. Delete or comment out the
            slides below. -->
 
 
-		<article class='biglogo'></article>
+        <article class='biglogo'></article>
 
-		<article>
-			<h1>
-				Title Goes Here Up <br> To Two Lines
-			</h1>
-			<p>
-				John Smith <br> October 10, 2011
-			</p>
-		</article>
+        <article>
+            <h1>Brain-1.1</h1>
+            <h3>Biomedical Knowledge Manipulation</h3>
+            <p>
+                Samuel Croset <br> November 25, 2012
+            </p>
+        </article>
 
-		<article>
-			<p>This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text.</p>
-			<p>There is more text just underneath.</p>
-		</article>
+        <article>
+            <h3>Motivations</h3>
+            <ul>
+                <li>A library to solve my own problems: Web
+                    Ontology Language (OWL) manipulation</li>
+                <li>Allows to focus on biomedical questions: <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2EL</a></li>
+                <li>Fast and scalable reasoner: <a href="https://code.google.com/p/elk-reasoner/">Elk</a></li>
+                <li>In-between <a href="http://protege.stanford.edu/">Protege</a> and the <a href="http://owlapi.sourceforge.net/">OWL-API</a></li>
+                <li>OWL ontologies and knowledge bases (description
+                    logic)</li>
+                <li>Enhanced productivity</li>
+                <li>Java</li>
+            </ul>
+        </article>
 
-		<article>
-			<h3>Simple slide with header and text</h3>
-			<p>This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text.</p>
-			<p>
-				There is more text just underneath with a
-				<code>code sample: 5px</code>
-				.
-			</p>
-		</article>
+        <article>
+            <h3>Example of axiom</h3>
+            <p>Natural language:</p>
+            <p>
+                <code>A nucleus is part of some cells.</code>
+            </p>
+            <p>Description logic:</p>
+            <p>
+                <code>Nucleus ⊆ ∃part-of.Cell</code>
+            </p>
+            <p>OWL (Manchester syntax):</p>
+            <p>
+                <code>Nucleus subClassOf part-of some Cell</code>
+            </p>
+        </article>
 
-		<article class='smaller'>
-			<h3>Simple slide with header and text (small font)</h3>
-			<p>This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text. This is a slide with just text. This is a slide with just
-				text.</p>
-			<p>
-				There is more text just underneath with a
-				<code>code sample: 5px</code>
-				.
-			</p>
-		</article>
 
-		<article>
-			<h3>Slide with bullet points and a longer title, just because we
-				can make it longer</h3>
-			<ul>
-				<li>Use this template to create your presentation</li>
-				<li>Use the provided color palette, box and arrow graphics, and
-					chart styles</li>
-				<li>Instructions are provided to assist you in using this
-					presentation template effectively</li>
-			</ul>
-		</article>
+        <article class='smaller'>
+            <h3>OWL-API implementation</h3>
+            <section>
+                <pre>
+//Create a manager and define the base IRI for the ontology
+// and prepare a factory
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+String base = "http://www.example.org/";
+OWLOntology ontology = manager.createOntology(IRI.create(base + "ontology.owl"));
+OWLDataFactory factory = manager.getOWLDataFactory();
 
-		<article>
-			<h3>Slide with bullet points that builds</h3>
-			<ul class="build">
-				<li>This is an example of a list</li>
-				<li>The list items fade in</li>
-				<li>Last one!</li>
-			</ul>
+//Declare the classes
+OWLClass nucleus = factory.getOWLClass(IRI.create(base + "Nucleus"));
+OWLClass cell = factory.getOWLClass(IRI.create(base + "Cell"));
+OWLObjectProperty partOf = 
+        factory.getOWLObjectProperty(IRI.create(base + "part-of"));
+OWLClassExpression partOfSomeCell = factory.getOWLObjectSomeValuesFrom(partOf,cell);
 
-			<div class="build">
-				<p>Any element with child nodes can build.</p>
-				<p>It doesn't have to be a list.</p>
-			</div>
-		</article>
+//Add the axiom to the ontology
+OWLSubClassOfAxiom axiom = factory.getOWLSubClassOfAxiom(nucleus, partOfSomeCell);
+AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+manager.applyChange(addAxiom);
 
-		<article class='smaller'>
-			<h3>Slide with bullet points (small font)</h3>
-			<ul>
-				<li>Use this template to create your presentation
-				<li>Use the provided color palette, box and arrow graphics, and
-					chart styles
-				<li>Instructions are provided to assist you in using this
-					presentation template effectively
-			</ul>
-		</article>
-
-		<article>
-			<h3>Slide with a table</h3>
-
-			<table>
-				<tr>
-					<th>Name
-					<th>Database
-				<tr>
-					<td>John Smith
-					<td>Uniprot
-				<tr>
-					<td>Pierre Paul
-					<td>Interpro
-			</table>
-		</article>
-
-		<article class='smaller'>
-			<h3>Slide with a table (smaller text)</h3>
-
-			<table>
-				<tr>
-					<th>Name
-					<th>Database
-				<tr>
-					<td>John Smith
-					<td>Uniprot
-				<tr>
-					<td>Pierre Paul
-					<td>Interpro
-			</table>
-		</article>
-
-		<article>
-			<h3>Styles</h3>
-			<ul>
-				<li><span class='red'>red stuff</span>
-				<li><span class='blue'>blue stuff</span>
-				<li><span class='green'>green stuff</span>
-				<li><span class='yellow'>yellow stuff</span>
-				<li><span class='black'>black stuff</span>
-				<li><span class='white'>white stuff</span>
-				<li><b>bold stuff</b> and <i>italic stuff</i>
-			</ul>
-		</article>
-
-		<article>
-			<h2>John's slide</h2>
-		</article>
-
-		<article>
-			<h3>Slide with an image</h3>
-			<p>
-				<img style='height: 500px' src='images/example-graph.png'>
-			</p>
-			<div class='source'>Source: Google</div>
-		</article>
-
-		<article>
-			<h3>Slide with an image (centered)</h3>
-			<p>
-				<img class='centered' style='height: 500px'
-					src='images/example-graph.png'>
-			</p>
-			<div class='source'>Source: Google</div>
-		</article>
-
-		<article class='fill'>
-			<h3>Image filling the slide (with optional header)</h3>
-			<p>
-				<img src='images/example-cat.jpg'>
-			</p>
-			<div class='source white'>Source: lion.com</div>
-		</article>
-
-		<article>
-			<h3>This slide has some code</h3>
-			<section>
-				<pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+//Save
+manager.saveOntology(ontology, IRI.create("file:/home/samuel/Desktop/ontology.owl"));
 </pre>
-			</section>
-		</article>
+            </section>
+        </article>
 
-		<article class='smaller'>
-			<h3>This slide has some code (small font)</h3>
-			<section>
-				<pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
+        <article class='smaller'>
+            <h3>OWL-API default output (RDF/XML)</h3>
+            <section>
+                <pre>
+&lt;?xml version="1.0"?&gt;
+&lt;rdf:RDF xmlns="http://www.example.org/ontology.owl#"
+     xml:base="http://www.example.org/ontology.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+    &lt;owl:Ontology rdf:about="http://www.example.org/ontology.owl"/&gt;
+
+    &lt;owl:ObjectProperty rdf:about="http://www.example.org/part-of"/&gt;
+    
+    &lt;owl:Class rdf:about="http://www.example.org/Cell"/&gt;
+    
+    &lt;owl:Class rdf:about="http://www.example.org/Nucleus"&gt;
+        &lt;rdfs:subClassOf&gt;
+            &lt;owl:Restriction&gt;
+                &lt;owl:onProperty rdf:resource="http://www.example.org/part-of"/&gt;
+                &lt;owl:someValuesFrom rdf:resource="http://www.example.org/Cell"/&gt;
+            &lt;/owl:Restriction&gt;
+        &lt;/rdfs:subClassOf&gt;
+    &lt;/owl:Class&gt;
+&lt;/rdf:RDF&gt;
+           </pre>
+            </section>
+        </article>
+        
+        <article class='smaller'>
+            <h3>OWL-API reasoning with Elk</h3>
+            <section>
+                <pre>
+OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+File file = new File("/home/samuel/Desktop/ontology.owl");
+OWLOntology ontology = manager.loadOntologyFromOntologyDocument(file);
+
+String base = "http://www.example.org/";
+OWLDataFactory factory = manager.getOWLDataFactory();
+OWLClass cell = factory.getOWLClass(IRI.create(base + "Cell"));
+OWLObjectProperty partOf = factory.getOWLObjectProperty(IRI.create(base + "part-of"));
+OWLClassExpression partOfSomeCell = factory.getOWLObjectSomeValuesFrom(partOf,cell);
+OWLClass temporary = factory.getOWLClass(IRI.create("temp"));
+OWLEquivalentClassesAxiom axiom = factory.getOWLEquivalentClassesAxiom(temporary, partOfSomeCell);
+AddAxiom addAxiom = new AddAxiom(ontology, axiom);
+manager.applyChange(addAxiom);
+
+OWLReasonerFactory reasonerFactory = new ElkReasonerFactory();
+OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
+reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+
+Set<OWLClass> subClasses = reasoner.getSubClasses(temporary, false).getFlattened();
+for (OWLClass subClass : subClasses) {
+System.out.println("subClass: " + subClass);
+}
+
+reasoner.dispose();
 </pre>
-			</section>
-		</article>
+            </section>
+        </article>
 
-		<article>
-			<q> The best way to predict the future is to invent it. </q>
-			<div class='author'>Alan Kay</div>
-		</article>
 
-		<article class='smaller'>
-			<q> A distributed system is one in which the failure of a
-				computer you didn’t even know existed can render your own computer
-				unusable. </q>
-			<div class='author'>Leslie Lamport</div>
-		</article>
+        <article class='nobackground'>
+            <iframe src='http://www.ebi.ac.uk/gxa/'></iframe>
+        </article>
 
-		<article class='nobackground'>
-			<h3>A slide with an embed + title</h3>
-
-			<iframe src='http://www.ebi.ac.uk/gxa/'></iframe>
-		</article>
-
-		<article class='nobackground'>
-			<iframe src='http://www.ebi.ac.uk/gxa/'></iframe>
-		</article>
-
-		<article class='fill'>
-			<h3>Full-slide embed with (optional) slide title on top</h3>
-			<iframe src='http://www.ebi.ac.uk/gxa/'></iframe>
-		</article>
-
-		<article>
-			<h3>Thank you!</h3>
-
-			<ul>
-				<li><a href='http://www.ebi.ac.uk/gxa/'>ebi.ac.uk</a>
-			</ul>
-		</article>
-
-	</section>
+    </section>
 
 </body>
 </html>
