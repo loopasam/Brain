@@ -54,9 +54,14 @@
             <ul>
                 <li>A library to solve my own problems: Web
                     Ontology Language (OWL) manipulation</li>
-                <li>Allows to focus on biomedical questions: <a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2EL</a></li>
-                <li>Fast and scalable reasoner: <a href="https://code.google.com/p/elk-reasoner/">Elk</a></li>
-                <li>In-between <a href="http://protege.stanford.edu/">Protege</a> and the <a href="http://owlapi.sourceforge.net/">OWL-API</a></li>
+                <li>Allows to focus on biomedical questions: <a
+                    href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL
+                        2EL</a></li>
+                <li>Fast and scalable reasoner: <a
+                    href="https://code.google.com/p/elk-reasoner/">Elk</a></li>
+                <li>In-between <a
+                    href="http://protege.stanford.edu/">Protege</a> and
+                    the <a href="http://owlapi.sourceforge.net/">OWL-API</a></li>
                 <li>OWL ontologies and knowledge bases (description
                     logic)</li>
                 <li>Enhanced productivity</li>
@@ -139,42 +144,154 @@ manager.saveOntology(ontology, IRI.create("file:/home/samuel/Desktop/ontology.ow
            </pre>
             </section>
         </article>
-        
+
         <article class='smaller'>
-            <h3>OWL-API reasoning with Elk</h3>
+            <h3>Reasoning with Elk and the OWL-API</h3>
             <section>
                 <pre>
 OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 File file = new File("/home/samuel/Desktop/ontology.owl");
 OWLOntology ontology = manager.loadOntologyFromOntologyDocument(file);
-
 String base = "http://www.example.org/";
 OWLDataFactory factory = manager.getOWLDataFactory();
+//Prepare the anonymous query "part-of some Cell"
 OWLClass cell = factory.getOWLClass(IRI.create(base + "Cell"));
-OWLObjectProperty partOf = factory.getOWLObjectProperty(IRI.create(base + "part-of"));
+OWLObjectProperty partOf = 
+        factory.getOWLObjectProperty(IRI.create(base + "part-of"));
 OWLClassExpression partOfSomeCell = factory.getOWLObjectSomeValuesFrom(partOf,cell);
 OWLClass temporary = factory.getOWLClass(IRI.create("temp"));
-OWLEquivalentClassesAxiom axiom = factory.getOWLEquivalentClassesAxiom(temporary, partOfSomeCell);
+OWLEquivalentClassesAxiom axiom = 
+        factory.getOWLEquivalentClassesAxiom(temporary, partOfSomeCell);
 AddAxiom addAxiom = new AddAxiom(ontology, axiom);
 manager.applyChange(addAxiom);
-
+//Creates the reasoner
 OWLReasonerFactory reasonerFactory = new ElkReasonerFactory();
 OWLReasoner reasoner = reasonerFactory.createReasoner(ontology);
 reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
-
-Set<OWLClass> subClasses = reasoner.getSubClasses(temporary, false).getFlattened();
+//Get the descendant classes of "part-of some Cell"
+Set&lt;OWLClass&gt; subClasses = reasoner.getSubClasses(temporary, false).getFlattened();
 for (OWLClass subClass : subClasses) {
-System.out.println("subClass: " + subClass);
+  System.out.println("subClass: " + subClass);
 }
-
 reasoner.dispose();
 </pre>
             </section>
         </article>
 
+        <article>
+            <h3>Results using the OWL-API</h3>
+            <p>
+                <code>subClass:
+                    &lt;http://www.example.org/Nucleus&gt;</code>
+                <code>subClass: owl:Nothing</code>
+            </p>
+        </article>
+
+        <article>
+            <h3>Brain implementation</h3>
+            <section>
+                <pre>
+Brain brain = new Brain();
+brain.addClass("Nucleus");
+brain.addClass("Cell");
+brain.addObjectProperty("part-of");
+brain.subClassOf("Nucleus", "part-of some Cell");
+brain.save("/home/samuel/Desktop/ontology.owl");
+            </pre>
+            </section>
+        </article>
+
+        <article class='smaller'>
+            <h3>Query using the Brain</h3>
+            <section>
+                <pre>
+Prefix: : &lt;brain#&gt;
+Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+Prefix: rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+Prefix: xml: &lt;http://www.w3.org/XML/1998/namespace&gt;
+Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+Prefix: rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+Ontology: &lt;brain.owl&gt;
+
+ObjectProperty: part-of
+    
+Class: owl:Thing
+    
+Class: Cell
+
+Class: Nucleus
+
+  SubClassOf: 
+    part-of some Cell
+            </pre>
+            </section>
+        </article>
+
+        <article>
+            <h3>Query using the Brain</h3>
+            <section>
+                <pre>
+Brain brain = new Brain();
+brain.learn("/home/samuel/Desktop/ontology.owl");
+List&lt;String&gt; subClasses = 
+        brain.getSubClasses("part-of some Cell", false);
+for (String subClass : subClasses) {
+  System.out.println("subClass: " + subClass);
+}
+brain.sleep();
+            </pre>
+            </section>
+            <p>
+                Result: <br />
+                <code>subClass: Nucleus</code>
+            </p>
+        </article>
+
+        <article>
+            <h3>Main features of Brain</h3>
+            <ul>
+                <li>Dedicated to OWL 2EL ontologies</li>
+                <li>Facade for the OWL-API, wrapping the Elk
+                    reasoner</li>
+                <li>Unique ontology</li>
+                <li>Unique names</li>
+                <li>Type less</li>
+                <li>Error-handling driven</li>
+                <li>Ready for web-services or OWL end-points</li>
+            </ul>
+        </article>
+
+        <article>
+            <h3>Links</h3>
+            <p>
+            <ul>
+                <li><a href="http://loopasam.github.com/Brain/">Website</a></li>
+                <li><a
+                    href="https://github.com/loopasam/Brain/wiki">Documentation</a></li>
+                <li><a
+                    href="https://github.com/loopasam/Brain/wiki/Examples">Examples</a></li>
+                <li><a href="http://samuelcroset.com/contact">Questions/Feature
+                        request</a></li>
+            </ul>
+            </p>
+            <hr/>
+            <p>
+                Maven Central Repository:<br />
+                <section>
+                    <pre>
+&lt;dependency&gt;
+  &lt;groupId&gt;uk.ac.ebi.brain&lt;/groupId&gt;
+  &lt;artifactId&gt;Brain&lt;/artifactId&gt;
+  &lt;version&gt;1.1&lt;/version&gt;
+&lt;/dependency&gt;
+        </pre>
+                </section>
+            </p>
+        </article>
 
         <article class='nobackground'>
-            <iframe src='http://www.ebi.ac.uk/gxa/'></iframe>
+            <iframe src='https://github.com/loopasam/Brain/wiki'></iframe>
         </article>
 
     </section>
