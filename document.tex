@@ -45,19 +45,19 @@ biomedical knowledge. In order to leverage further
 the existing information, the current trend is towards coordinated data integration and interoperability, with large projects such as 
 ELIXIR \citep{Crosswell2012} leading the way.
 The underlying idea assumes that more complex biomedical challenges, such as finding new treatments for diseases, could be better 
-addressed by combining  and integrating the content of independent specialized repositories. 
+addressed by combining and integrating the content of independent specialized repositories. 
 Knowledge-bases, a concept coming from computer science (see \citealp{Krotzsch2012} for an introduction), 
 could be a solution to improve the interoperability and the value of the data yet no framework is available at the time of writing for 
 the biomedical domain. Brain - the software library presented in this manuscript addresses this matter and provides a simplified 
 interface dedicated to handle and query biomedical knowledge-bases.
 
 \section{Knowledge-bases}
-Traditional relational databases are often an obstacle in realizing a large-scale data integration, 
+Traditional relational databases are often an obstacle in realizing large-scale data integration, 
 mostly because of their lack of support for 
 interoperability: The schema structuring the data is usually repository-specific which limits the combination of the 
 native content with external data in an efficient, flexible and meaningful fashion. 
 In order to address this issue, 
-a series of community standards forming the \emph{semantic web} have been developed. These standards provides the means to better model
+a series of community standards forming the \emph{semantic web} have been developed. These standards provide the means to better model
 the domain knowledge and to facilitate data exchange and interoperability at a global scale.
 One of them, the Resources Description 
 Framework (RDF) enables the exposition of the underlying structure as part of the data themselves \citep{FrankManola}. This
@@ -113,7 +113,7 @@ OWL expressions can be entered
 with the user-friendly Manchester syntax \citep{Horridge2006} and the name of the classes are displayed in a convenient way. 
 More complex applications requiring a deeper control over the ontology
 can take advantage the OWL-API but requires proficiency in Java and can be daunting for casual users.
-The API deals with all the aspects around ontology generation for semantic web purposes, nonetheless the 
+The API deals with all the aspects around ontology generation for semantic web purposes nonetheless the 
 level of granularity can be cumbersome for some of the biomedical applications. Brain aims at filling the gap between the OWL-API
 and graphical interfaces: It is implemented as a facade, providing a series of convenience methods for common
 use-cases encountered in the biomedical domain and leveraging the access to the OWL-API. 
@@ -129,7 +129,7 @@ away complex interaction with the Java object provided by the OWL-API. An exampl
 is compared against a traditional SQL query in the supplementary material.
 
 \section{Conclusion}
-Brain is a open-source Java library designed to build and query biomedical knowledge-bases or OWL ontologies.
+Brain is an open-source Java library designed to build and query biomedical knowledge-bases or OWL ontologies.
 The library is centered on the EL profile, designed to be suitable and scalable for life-science knowledge representation. 
 The convenience methods provided by Brain should simplify the development of biomedical knowledge-bases and allow developers
 to increase their productivity while dealing with data integration challenges.
