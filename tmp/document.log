@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  27 OCT 2012 16:05
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  30 OCT 2012 11:22
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -320,63 +320,64 @@ figures/data
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 39.
 
-Underfull \hbox (badness 5374) in paragraph at lines 40--52
-[]\OT1/ptm/m/n/9 Relational databases hold most of the available structured
+Underfull \hbox (badness 1675) in paragraph at lines 40--53
+\OT1/ptm/m/n/9 facilitate the re-use of previous work in a computer-friendly
  []
 
 
-Underfull \hbox (badness 1189) in paragraph at lines 40--52
-\OT1/ptm/m/n/9 better addressed by combining and integrating the content of
+Underfull \hbox (badness 1194) in paragraph at lines 55--79
+\OT1/ptm/m/n/9 repository-specific which limits the combination of the native
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 54--73
-\OT1/ptm/m/n/9 as a lot of ontologies and classification have been developed
+Underfull \hbox (badness 4582) in paragraph at lines 81--103
+[]\OT1/ptm/m/n/9 Knowledge representation in the biomedical domain differs
  []
 
 
-Underfull \hbox (badness 1215) in paragraph at lines 54--73
-\OT1/ptm/m/n/9 can therefore be built without being necessarily expressed as
+Underfull \hbox (badness 2351) in paragraph at lines 81--103
+\OT1/ptm/m/n/9 of information that can potentially be interconnected. Brain
  []
 
 
-Underfull \hbox (badness 1286) in paragraph at lines 75--95
-\OT1/ptm/m/n/9 scale the speed of reasoning as more data are added to the
+Underfull \hbox (badness 1701) in paragraph at lines 81--103
+\OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9 , 2000) or the Chemical Entities of Biolog
+ical Interest
  []
 
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 95.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 103.
+
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 103.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 138.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 167.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
-Extra height:0.0pt when 646.77792pt
-(2)Left:646.77792pt Right:650.60744pt Output:646.77792pt
-(2)Left:650.60744pt Right:650.60744pt Output:650.60744pt
+Extra height:19.09793pt when 628.52318pt
+Extra height:19.09793pt when 629.52318pt
+Extra height:0.0pt when 630.52318pt
+(2)Left:630.52318pt Right:626.04636pt Output:630.52318pt
 - LAST -
 Extra skip:0.0pt
-Left:650.60744pt
-Right:650.60744pt
-Output:650.60744pt
+Left:630.52318pt
+Right:626.04636pt
+Output:630.52318pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 214.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 235.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 214.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 235.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -397,13 +398,13 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2682 strings out of 493848
- 31273 string characters out of 1152822
- 113085 words of memory out of 3000000
- 5903 multiletter control sequences out of 15000+50000
- 47334 words of font info for 99 fonts, out of 3000000 for 9000
+ 2679 strings out of 493848
+ 31245 string characters out of 1152822
+ 117016 words of memory out of 3000000
+ 5901 multiletter control sequences out of 15000+50000
+ 45075 words of font info for 94 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
- 36i,13n,26p,268b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,13n,26p,290b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
@@ -416,7 +417,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 133522 bytes).
+Output written on document.pdf (2 pages, 135421 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1,14 +1,57 @@
 \begin{thebibliography}{}
 
+\bibitem[Ashburner {\em et~al.}(2000)Ashburner, Ball, Blake, Botstein, Butler,
+  Cherry, Davis, Dolinski, Dwight, Eppig, Harris, Hill, Issel-Tarver,
+  Kasarskis, Lewis, Matese, Richardson, Ringwald, Rubin, and
+  Sherlock]{Ashburner2000}
+Ashburner, M., Ball, C.~A., Blake, J.~A., Botstein, D., Butler, H., Cherry,
+  J.~M., Davis, A.~P., Dolinski, K., Dwight, S.~S., Eppig, J.~T., Harris,
+  M.~A., Hill, D.~P., Issel-Tarver, L., Kasarskis, A., Lewis, S., Matese,
+  J.~C., Richardson, J.~E., Ringwald, M., Rubin, G.~M., and Sherlock, G.
+  (2000).
+\newblock {Gene Ontology: tool for the unification of biology}.
+\newblock {\em Nature Genetics\/}, {\bf 25}(1), 25--29.
+
 \bibitem[Crosswell and Thornton(2012)Crosswell and Thornton]{Crosswell2012}
 Crosswell, L.~C. and Thornton, J.~M. (2012).
 \newblock {ELIXIR: a distributed infrastructure for European biological data.}
 \newblock {\em Trends Biotechnol.}, {\bf 30}, 241----242.
 
-\bibitem[{Frank Manola} and {Eric Miller}(2004){Frank Manola} and {Eric
-  Miller}]{FrankManola}
-{Frank Manola} and {Eric Miller} (2004).
-\newblock {RDF Primer}.
+\bibitem[{De Matos} {\em et~al.}(2010){De Matos}, Alc\'{a}ntara, Dekker, Ennis,
+  Hastings, Haug, Spiteri, Turner, and Steinbeck]{DeMatos2010}
+{De Matos}, P., Alc\'{a}ntara, R., Dekker, A., Ennis, M., Hastings, J., Haug,
+  K., Spiteri, I., Turner, S., and Steinbeck, C. (2010).
+\newblock {Chemical Entities of Biological Interest: an update}.
+\newblock {\em Nucleic Acids Research\/}, {\bf 38}(Database issue), D249--D254.
+
+\bibitem[Gaulton {\em et~al.}(2012)Gaulton, Bellis, Bento, Chambers, Davies,
+  Hersey, Light, McGlinchey, Michalovich, Al-Lazikani, and
+  Overington]{Gaulton2012}
+Gaulton, A., Bellis, L.~J., Bento, A.~P., Chambers, J., Davies, M., Hersey, A.,
+  Light, Y., McGlinchey, S., Michalovich, D., Al-Lazikani, B., and Overington,
+  J.~P. (2012).
+\newblock {ChEMBL: a large-scale bioactivity database for drug discovery}.
+\newblock {\em Nucleic Acids Research\/}, {\bf 40}(Database issue), D1100--7.
+
+\bibitem[{Horridge} and {Bechhofer}(2011){Horridge} and
+  {Bechhofer}]{MatthewHorridge2011}
+{Horridge} and {Bechhofer} (2011).
+\newblock {The OWL API: A Java API for OWL Ontologies.}
+\newblock {\em Semantic Web Journal\/}, pages 11--21.
+
+\bibitem[Horridge {\em et~al.}(2006)Horridge, Drummond, Goodwin, Rector,
+  Stevens, and Wang]{Horridge2006}
+Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., and Wang,
+  H.~H. (2006).
+\newblock {The Manchester OWL Syntax}.
+\newblock {\em Syntax\/}, {\bf 216}, 10--11.
+
+\bibitem[{Kazakov} {\em et~al.}(2011){Kazakov}, {Markus Kr\"{o}tzsch}, and
+  {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
+{Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k} (2011).
+\newblock {Concurrent Classification of EL Ontologies}.
+\newblock {\em Proceedings of the 10th International Semantic Web Conference
+  (ISWC'11)\/}, {\bf 7032}.
 
 \bibitem[Kr\"{o}tzsch {\em et~al.}(2012)Kr\"{o}tzsch, Simanˇ, and
   Horrocks]{Krotzsch2012}
@@ -16,11 +59,9 @@ Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
 \newblock {A Description Logic Primer}.
 \newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
 
-\bibitem[{Matthew Horridge} and {Sean Bechhofer}(2011){Matthew Horridge} and
-  {Sean Bechhofer}]{MatthewHorridge2011}
-{Matthew Horridge} and {Sean Bechhofer} (2011).
-\newblock {The OWL API: A Java API for OWL Ontologies.}
-\newblock {\em Semantic Web Journal\/}, pages 11--21.
+\bibitem[{Manola} and {Miller}(2004){Manola} and {Miller}]{FrankManola}
+{Manola} and {Miller} (2004).
+\newblock {RDF Primer}.
 
 \bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
   Lutz]{Motik2009}
@@ -38,13 +79,5 @@ Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
   Group}]{W3COWLWorkingGroup}
 {W3C OWL Working Group} (2009).
 \newblock {OWL 2 Web Ontology Language Document Overview}.
-
-\bibitem[{Yevgeny Kazakov} {\em et~al.}(2011){Yevgeny Kazakov}, {Markus
-  Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
-{Yevgeny Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k}
-  (2011).
-\newblock {Concurrent Classification of EL Ontologies}.
-\newblock {\em Proceedings of the 10th International Semantic Web Conference
-  (ISWC'11)\/}, {\bf 7032}.
 
 \end{thebibliography}
