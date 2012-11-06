@@ -1112,6 +1112,7 @@ public class Brain {
 	 * @throws ExistingEntityException 
 	 */
 	public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
+		System.out.println("learning");
 		OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();
 		OWLOntology newOnto;
 		if(isExternalEntity(pathToOntology)){
@@ -1132,10 +1133,17 @@ public class Brain {
 
 		SimpleShortFormProvider sf = new SimpleShortFormProvider();
 		Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
-		BidirectionalShortFormProviderAdapter bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
-		for (String shortFromNewOnto : bidiShortFormProvider.getShortForms()) {
+		BidirectionalShortFormProviderAdapter newBidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
+		for (String shortFromNewOnto : newBidiShortFormProvider.getShortForms()) {
 			if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
-				if(!shortFromNewOnto.equals("Thing")){
+				OWLEntity existingEntity = this.bidiShortFormProvider.getEntity(shortFromNewOnto);
+				OWLEntity newEntity = newBidiShortFormProvider.getEntity(shortFromNewOnto);
+				boolean identicalEntities = false;
+				if(newEntity.getIRI().equals(existingEntity.getIRI())){
+					identicalEntities = true;
+				}
+
+				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
 					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
 				}
 
