@@ -223,6 +223,12 @@ public class Brain {
 			throw new NewOntologyException(e);
 		}
 
+		this.shortFormProvider = new SimpleShortFormProvider();
+		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
+		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
+		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
+
+
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
 		if(numberOfWorkers != -1){
@@ -594,10 +600,12 @@ public class Brain {
 	 * Update the shortform registry (this.bidiShortFormProvider).
 	 */
 	private void update() {
-		this.shortFormProvider = new SimpleShortFormProvider();
-		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
-		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
-		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
+		//TODO stays there atm, prevent memory leaks.
+		//Code should be good as such
+		//		this.shortFormProvider = new SimpleShortFormProvider();
+		//		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
+		//		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
+		//		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 		this.reasoner.flush();
 		this.isClassified = false;
 	}

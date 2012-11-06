@@ -107,6 +107,18 @@ public class BrainQueryTest {
 		assertEquals(1, subClasses.size());
 	}
 
+	@Test(expected = ClassExpressionException.class)
+	public void getAnonymousClassesErrorNewOntology() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("A");
+		brain.addClass("B");
+		brain.addObjectProperty("part-of");
+		brain.subClassOf("B", "part-of some C");
+		List<String> subClasses = brain.getSubClasses("part-of some A", true);
+		assertEquals(1, subClasses.size());
+	}
+
+
 	@Test
 	public void getSuperClassesTest() throws BrainException {
 		List<String> superClasses = brain.getSuperClasses("C", false);
