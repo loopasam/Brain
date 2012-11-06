@@ -1112,7 +1112,6 @@ public class Brain {
 	 * @throws ExistingEntityException 
 	 */
 	public void learn(String pathToOntology) throws NewOntologyException, ExistingEntityException {
-		System.out.println("learning");
 		OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();
 		OWLOntology newOnto;
 		if(isExternalEntity(pathToOntology)){
@@ -1139,12 +1138,13 @@ public class Brain {
 				OWLEntity existingEntity = this.bidiShortFormProvider.getEntity(shortFromNewOnto);
 				OWLEntity newEntity = newBidiShortFormProvider.getEntity(shortFromNewOnto);
 				boolean identicalEntities = false;
-				if(newEntity.getIRI().equals(existingEntity.getIRI())){
+				if(newEntity.getIRI().equals(existingEntity.getIRI()) && newEntity.getEntityType().equals(existingEntity.getEntityType())){
 					identicalEntities = true;
 				}
 
 				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
-					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists.");
+					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists and is of different type or has a" +
+							"different prefix.");
 				}
 
 			}
@@ -1153,6 +1153,7 @@ public class Brain {
 		for (OWLAxiom newAxiom : newOnto.getAxioms()) {
 			this.manager.addAxiom(this.ontology, newAxiom);
 		}
+
 		update();
 	}
 
@@ -1372,6 +1373,63 @@ public class Brain {
 	public void sleep() {
 		this.reasoner.dispose();
 		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+	}
+
+	/**
+	 * Checks if the class is already inside the brain. Useful while
+	 * parsing in order to avoid errors.
+	 * @return whether the class is known or not.
+	 */
+	public boolean knowsClass(String owlClass) {
+		try {
+			this.getOWLClass(owlClass);
+			return true;
+		} catch (NonExistingClassException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Checks if the object property is already inside the brain. Useful while
+	 * parsing in order to avoid errors.
+	 * @return whether the class is known or not.
+	 */
+	public boolean knowsObjectProperty(String owlObjectProperty) {
+		try {
+			this.getOWLObjectProperty(owlObjectProperty);
+			return true;
+		}catch(NonExistingObjectPropertyException e){
+			return false;
+		}
+	}
+
+	/**
+	 * Checks if the data property is already inside the brain. Useful while
+	 * parsing in order to avoid errors.
+	 * @return whether the class is known or not.
+	 */
+	public boolean knowsDataProperty(String owlDataProperty) {
+		try {
+			this.getOWLDataProperty(owlDataProperty);
+			return true;
+		}catch(NonExistingDataPropertyException e){
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Checks if the annotation property is already inside the brain. Useful while
+	 * parsing in order to avoid errors.
+	 * @return whether the class is known or not.
+	 */
+	public boolean knowsAnnotationProperty(String owlAnnotationProperty) {
+		try {
+			this.getOWLAnnotationProperty(owlAnnotationProperty);
+			return true;
+		}catch(NonExistingAnnotationPropertyException e){
+			return false;
+		}
 	}
 
 }

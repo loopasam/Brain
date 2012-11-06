@@ -15,6 +15,8 @@ import org.junit.Test;
 import uk.ac.ebi.brain.core.Brain;
 import uk.ac.ebi.brain.error.BrainException;
 import uk.ac.ebi.brain.error.ClassExpressionException;
+import uk.ac.ebi.brain.error.ExistingClassException;
+import uk.ac.ebi.brain.error.ExistingEntityException;
 
 
 
@@ -23,6 +25,8 @@ import uk.ac.ebi.brain.error.ClassExpressionException;
  *
  */
 public class BrainQueryTest {
+
+	//TODO knows class
 
 	Brain brain;
 
@@ -162,6 +166,20 @@ public class BrainQueryTest {
 	}
 
 	@Test
+	public void knowsTest() {
+		boolean knowsClass = brain.knowsClass("M");
+		assertEquals(true, knowsClass);
+		boolean notknowsClass = brain.knowsClass("POUET");
+		assertEquals(false, notknowsClass);
+		boolean notknowsObjectProperty = brain.knowsObjectProperty("part-of");
+		assertEquals(true, notknowsObjectProperty);
+		boolean notknowsDataProperty = brain.knowsDataProperty("age");
+		assertEquals(false, notknowsDataProperty);
+		boolean notknowsAnnotationProperty = brain.knowsAnnotationProperty("testing");
+		assertEquals(true, notknowsAnnotationProperty);
+	}
+
+	@Test
 	public void getLabelTest() throws BrainException {
 		String label = brain.getLabel("A");
 		assertEquals("pouet", label);
@@ -183,12 +201,27 @@ public class BrainQueryTest {
 		brain.save("src/test/resources/output.owl");	
 	}
 
+	@Test(expected = ExistingClassException.class)
+	public void learnSupportsIdenticalIRIs() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("http://www.example.org/N");
+		brain.learn("src/test/resources/dev.owl");
+		brain.addClass("M");
+	}
+
+	@Test(expected = ExistingEntityException.class)
+	public void learnSupportsIdenticalIRIsButNotForDifferentTypes() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("http://www.example.org/part-of");
+		brain.learn("src/test/resources/dev.owl");
+	}
+
+
 	@Test
 	public void learnOntologyFromTheWeb() throws BrainException {
 		Brain brain = new Brain();
 		brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/demo.owl");
 		assertNotNull(brain.getOWLClass("Cell"));
-
 	}
 
 	@Test
