@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  31 OCT 2012 11:12
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  7 NOV 2012 12:02
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -222,125 +222,119 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 \MPnumerator=\count110
 \everyMPtoPDFconversion=\toks31
 )
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 18.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 17.
  (/usr/share/texmf-texlive/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <9> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <9> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <9> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <19> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <19> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 18.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 17.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <16> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 18.
-LaTeX Font Info:    Calculating math sizes for size <13> on input line 18.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 17.
+LaTeX Font Info:    Calculating math sizes for size <13> on input line 17.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 18.
+(Font)              size <12> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 18.
+(Font)              size <6> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13> not available
-(Font)              size <12> substituted on input line 18.
+(Font)              size <12> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.5> not available
-(Font)              size <6> substituted on input line 18.
+(Font)              size <6> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13> not available
-(Font)              size <12> substituted on input line 18.
+(Font)              size <12> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 18.
+(Font)              size <6> substituted on input line 17.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 18.
+LaTeX Font Info:    Try loading font information for U+msa on input line 17.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 18.
+LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <9.09996> on input line 18.
+LaTeX Font Info:    Calculating math sizes for size <9.09996> on input line 17.
 
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.54997> not available
-(Font)              size <5> substituted on input line 18.
+(Font)              size <5> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.54997> not available
-(Font)              size <5> substituted on input line 18.
+(Font)              size <5> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.54997> not available
-(Font)              size <5> substituted on input line 18.
+(Font)              size <5> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 18.
+(Font)              size <7> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <7.5> not available
-(Font)              size <7> substituted on input line 18.
+(Font)              size <7> substituted on input line 17.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 18.
+(Font)              size <7> substituted on input line 17.
 
 
-Underfull \hbox (badness 10000) detected at line 18
+Underfull \hbox (badness 10000) detected at line 17
 []
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 22.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 21.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 38.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
 
-Underfull \hbox (badness 1194) in paragraph at lines 55--80
+Underfull \hbox (badness 1194) in paragraph at lines 60--85
 \OT1/ptm/m/n/9 repository-specific which limits the combination of the native
  []
 
 
-Underfull \hbox (badness 4582) in paragraph at lines 82--105
+Underfull \hbox (badness 4582) in paragraph at lines 87--110
 []\OT1/ptm/m/n/9 Knowledge representation in the biomedical domain differs
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 82--105
+Underfull \hbox (badness 2351) in paragraph at lines 87--110
 \OT1/ptm/m/n/9 of information that can potentially be interconnected. Brain
  []
 
-
-Underfull \hbox (badness 1701) in paragraph at lines 82--105
-\OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9 , 2000) or the Chemical Entities of Biolog
-ical Interest
- []
-
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 105.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 110.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 105.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
@@ -348,22 +342,22 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 165.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 170.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
-Extra height:19.09793pt when 639.52318pt
-Extra height:19.09793pt when 640.52318pt
-Extra height:0.0pt when 641.52318pt
-(2)Left:641.52318pt Right:636.09793pt Output:641.52318pt
+Extra height:19.09793pt when 644.02318pt
+Extra height:0.0pt when 645.02318pt
+(2)Left:645.02318pt Right:645.09793pt Output:645.02318pt
+(2)Left:645.09793pt Right:645.09793pt Output:645.09793pt
 - LAST -
 Extra skip:0.0pt
-Left:641.52318pt
-Right:636.09793pt
-Output:641.52318pt
+Left:645.09793pt
+Right:645.09793pt
+Output:645.09793pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 237.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 246.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 237.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 246.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -384,10 +378,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2679 strings out of 493848
- 31245 string characters out of 1152822
- 117394 words of memory out of 3000000
- 5901 multiletter control sequences out of 15000+50000
+ 2680 strings out of 493848
+ 31255 string characters out of 1152822
+ 118654 words of memory out of 3000000
+ 5902 multiletter control sequences out of 15000+50000
  45075 words of font info for 94 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
  36i,13n,26p,290b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -403,7 +397,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 135189 bytes).
+Output written on document.pdf (2 pages, 135067 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
