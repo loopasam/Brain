@@ -60,6 +60,7 @@ import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
+import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
@@ -600,7 +601,7 @@ public class Brain {
 	 * Update the shortform registry (this.bidiShortFormProvider).
 	 */
 	private void update() {
-		//TODO stays there atm, prevent memory leaks.
+		//stays there atm, prevent memory leaks.
 		//Code should be good as such
 		//		this.shortFormProvider = new SimpleShortFormProvider();
 		//		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
@@ -1162,7 +1163,19 @@ public class Brain {
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
-		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+		try {
+			if(this.configuration == null){
+				this.reasoner.dispose();
+				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+			}else{
+				this.reasoner.dispose();
+				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+			}
+			
+		}catch(IllegalConfigurationException e) {
+			e.printStackTrace();
+		}
+
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 		this.isClassified = true;
 	}
@@ -1207,6 +1220,7 @@ public class Brain {
 	 * @throws ClassExpressionException 
 	 */
 	public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
+
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		Set<OWLClass> subClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
@@ -1372,7 +1386,12 @@ public class Brain {
 	 */
 	public void sleep() {
 		this.reasoner.dispose();
-		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+		if(this.configuration == null){
+			this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+		}else{
+			this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+		}
+		
 	}
 
 	/**
@@ -1416,8 +1435,8 @@ public class Brain {
 			return false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Checks if the annotation property is already inside the brain. Useful while
 	 * parsing in order to avoid errors.

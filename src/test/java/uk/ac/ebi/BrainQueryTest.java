@@ -26,8 +26,6 @@ import uk.ac.ebi.brain.error.ExistingEntityException;
  */
 public class BrainQueryTest {
 
-	//TODO knows class
-
 	Brain brain;
 
 	@Before
@@ -40,7 +38,7 @@ public class BrainQueryTest {
 	public void dispose() {
 		brain.sleep();
 	}
-
+	
 	@Test
 	public void getUnsatisfiableClasses() throws BrainException {
 		Brain brain = new Brain();
