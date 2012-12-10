@@ -5,12 +5,15 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxClassExpressionParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxOntologyFormat;
 import org.semanticweb.elk.owlapi.ElkReasonerConfiguration;
@@ -64,6 +67,7 @@ import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.util.AnnotationValueShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
@@ -104,6 +108,7 @@ public class Brain {
 	private ShortFormProvider shortFormProvider;
 	private BidirectionalShortFormProvider bidiShortFormProvider;
 	private OWLEntityChecker entityChecker;
+	private ShortFormEntityChecker labelChecker;
 	private DefaultPrefixManager prefixManager;
 	public OWLDatatype INTEGER;
 	public OWLDatatype FLOAT;
@@ -111,6 +116,9 @@ public class Brain {
 	public static final String DEFAULT_PREFIX = "brain#";
 	private boolean isClassified;
 	private ElkReasonerConfiguration configuration;
+
+
+	private AnnotationValueShortFormProvider annoSFP;
 
 	public OWLOntology getOntology() {
 		return ontology;
@@ -157,6 +165,12 @@ public class Brain {
 	public OWLEntityChecker getEntityChecker() {
 		return entityChecker;
 	}
+	public ShortFormEntityChecker getLabelChecker() {
+		return labelChecker;
+	}
+	public void setLabelChecker(ShortFormEntityChecker labelChecker) {
+		this.labelChecker = labelChecker;
+	}
 	public void setEntityChecker(OWLEntityChecker entityChecker) {
 		this.entityChecker = entityChecker;
 	}
@@ -195,9 +209,9 @@ public class Brain {
 	}
 
 	/**
-	 * @param string
-	 * @param string2
-	 * @param i
+	 * @param prefix
+	 * @param ontologyIri
+	 * @param numberOfWorkers
 	 * @throws BadPrefixException 
 	 * @throws NewOntologyException 
 	 */
@@ -224,11 +238,23 @@ public class Brain {
 			throw new NewOntologyException(e);
 		}
 
-		this.shortFormProvider = new SimpleShortFormProvider();
+		//Initiation for the shortForm mapping
+		this.shortFormProvider = new SimpleShortFormProvider();		
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 
+		//Initiation for the label mapping
+		//TODO
+
+		//TODO test de tout init quand ca query pour un label - no chache here it seems
+		//TODO can be removed
+		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
+
+		this.annoSFP = new AnnotationValueShortFormProvider(rdfsLabels, new HashMap<OWLAnnotationProperty, 
+				List<String>>(), this.manager);
+
+		this.labelChecker = new ShortFormEntityChecker(new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.annoSFP));
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
@@ -601,12 +627,6 @@ public class Brain {
 	 * Update the shortform registry (this.bidiShortFormProvider).
 	 */
 	private void update() {
-		//stays there atm, prevent memory leaks.
-		//Code should be good as such
-		//		this.shortFormProvider = new SimpleShortFormProvider();
-		//		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
-		//		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
-		//		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 		this.reasoner.flush();
 		this.isClassified = false;
 	}
@@ -1023,6 +1043,20 @@ public class Brain {
 		return owlClassExpression;
 	}
 
+	//TODO the doc
+	private OWLClassExpression parseLabelClassExpression(String labelClassExpression) throws ClassExpressionException {
+		// TODO Auto-generated method stub
+		OWLClassExpression owlClassExpression = null;
+		ManchesterOWLSyntaxClassExpressionParser parser = getLabelParser(labelClassExpression);
+		try {
+			owlClassExpression = parser.parse(labelClassExpression);
+		} catch (ParserException e) {
+			throw new ClassExpressionException(e);
+		}
+		return owlClassExpression;
+	}
+
+
 	/**
 	 * Converts a string into an OWLObjectPropertyExpression. If a problem is encountered, an error is thrown.
 	 * @param objectPropertyExpression
@@ -1087,6 +1121,14 @@ public class Brain {
 		return parser;
 	}
 
+	//TODO doc
+	private ManchesterOWLSyntaxClassExpressionParser getLabelParser(String labelClassExpression) {
+		// TODO Auto-generated method stub
+		ManchesterOWLSyntaxClassExpressionParser parser = new ManchesterOWLSyntaxClassExpressionParser(this.factory, this.labelChecker);
+		return parser;
+	}
+
+
 	/**
 	 * Save the ontology at the specified location.
 	 * @param path
@@ -1147,13 +1189,22 @@ public class Brain {
 					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists and is of different type or has a" +
 							"different prefix.");
 				}
-
 			}
 		}
 
+		//Transfer all the axioms from the old ontology into the new one
 		for (OWLAxiom newAxiom : newOnto.getAxioms()) {
 			this.manager.addAxiom(this.ontology, newAxiom);
 		}
+
+		//TODO
+		//Update the list of labels
+		//		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
+		//		this.annoSFP = new AnnotationValueShortFormProvider(rdfsLabels, new HashMap<OWLAnnotationProperty, 
+		//				List<String>>(), this.manager);
+		//		Set<OWLOntology> mergedImportsClosure = this.ontology.getImportsClosure();
+		//		BidirectionalShortFormProviderAdapter bidi = new BidirectionalShortFormProviderAdapter(this.manager, mergedImportsClosure, this.annoSFP);
+		//		this.setLabelChecker(new ShortFormEntityChecker(bidi));
 
 		update();
 	}
@@ -1171,7 +1222,7 @@ public class Brain {
 				this.reasoner.dispose();
 				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
 			}
-			
+
 		}catch(IllegalConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -1220,8 +1271,14 @@ public class Brain {
 	 * @throws ClassExpressionException 
 	 */
 	public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
-
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+		return getSubClasses(owlClassExpression, direct);
+	}
+
+
+	//Get the subclasses from an expression
+	private List<String> getSubClasses(OWLClassExpression owlClassExpression, boolean direct) {
+		// TODO Auto-generated method stub
 		Set<OWLClass> subClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
@@ -1238,6 +1295,13 @@ public class Brain {
 		return sortClasses(subClasses);
 	}
 
+	//TODO finish the method and do the doc
+	public List<String> getSubClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
+		// TODO Auto-generated method stub
+		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
+		return getSubClasses(owlClassExpression, direct);
+	}
+
 	/**
 	 * Returns the list of super classes from the expression.
 	 * The second parameter is a flag telling whether only the direct classes
@@ -1247,8 +1311,15 @@ public class Brain {
 	 * @return superClasses
 	 * @throws ClassExpressionException 
 	 */
+	//TODO like for subalcces
 	public List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+		return getSuperClasses(owlClassExpression, direct);
+	}
+
+	//TODO doc
+	private List<String> getSuperClasses(OWLClassExpression owlClassExpression, boolean direct) {
+		// TODO Auto-generated method stub
 		Set<OWLClass> superClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
@@ -1265,14 +1336,26 @@ public class Brain {
 		return sortClasses(superClasses);
 	}
 
+	public List<String> getSuperClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
+		// TODO Auto-generated method stub
+		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
+		return getSuperClasses(owlClassExpression, direct);
+	}
+
+
 	/**
 	 * Retrieves the named equivalent classes corresponding to the class expression
 	 * @return equivalentClasses
 	 * @throws ClassExpressionException 
 	 * @throws ClassExpressionException 
 	 */
+	//TODO like for subclasses
 	public List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+		return getEquivalentClasses(owlClassExpression);
+	}
+
+	private List<String> getEquivalentClasses(OWLClassExpression owlClassExpression) {
 		Set<OWLClass> equivalentClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
@@ -1289,6 +1372,12 @@ public class Brain {
 		return sortClasses(equivalentClasses);
 	}
 
+
+	public List<String> getEquivalentClassesFromLabel(String labelClassExpression) throws ClassExpressionException {
+		// TODO Auto-generated method stub
+		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
+		return getEquivalentClasses(owlClassExpression);
+	}
 
 	/**
 	 * Removes any class. Should be used to remove temporary classes used for expressions only at the moment.
@@ -1391,7 +1480,7 @@ public class Brain {
 		}else{
 			this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
 		}
-		
+
 	}
 
 	/**
@@ -1447,6 +1536,16 @@ public class Brain {
 			this.getOWLAnnotationProperty(owlAnnotationProperty);
 			return true;
 		}catch(NonExistingAnnotationPropertyException e){
+			return false;
+		}
+	}
+
+	//TODO the doc
+	public Object isLabelClassExpression(String labelClassExpression) {
+		try {
+			parseLabelClassExpression(labelClassExpression);
+			return true;
+		} catch (ClassExpressionException e) {
 			return false;
 		}
 	}

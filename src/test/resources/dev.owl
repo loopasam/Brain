@@ -20,10 +20,10 @@ AnnotationProperty: rdfs:isDefinedBy
 AnnotationProperty: rdfs:label
 
     
-AnnotationProperty: rdfs:comment
+AnnotationProperty: testing
 
     
-AnnotationProperty: testing
+AnnotationProperty: rdfs:comment
 
     
 Datatype: xsd:string
@@ -59,6 +59,12 @@ Class: O
         part-of some M
     
     
+Class: Z
+
+    EquivalentTo: 
+        A
+    
+    
 Class: M
 
     EquivalentTo: 
@@ -86,6 +92,15 @@ Class: L
         K
     
     
+Class: ID01
+
+    Annotations: 
+        rdfs:label "tail"^^xsd:string
+    
+    SubClassOf: 
+        part-of some ID03
+    
+    
 Class: I
 
     SubClassOf: 
@@ -101,10 +116,28 @@ Class: J
 Class: G
 
     
+Class: ID03
+
+    Annotations: 
+        rdfs:label "animal"^^xsd:string
+    
+    SubClassOf: 
+        owl:Thing
+    
+    
 Class: H
 
     SubClassOf: 
         G
+    
+    
+Class: ID02
+
+    Annotations: 
+        rdfs:label "dog"^^xsd:string
+    
+    SubClassOf: 
+        ID03
     
     
 Class: F
@@ -146,5 +179,8 @@ Class: A
         testing "whatever"^^xsd:string,
         rdfs:comment "comment attached to the class"^^xsd:string,
         rdfs:isDefinedBy "something"^^xsd:string
+    
+    EquivalentTo: 
+        Z
     
     

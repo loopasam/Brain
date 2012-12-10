@@ -38,7 +38,7 @@ public class BrainQueryTest {
 	public void dispose() {
 		brain.sleep();
 	}
-	
+
 	@Test
 	public void getUnsatisfiableClasses() throws BrainException {
 		Brain brain = new Brain();
@@ -124,7 +124,7 @@ public class BrainQueryTest {
 	@Test
 	public void getSuperClassesTest() throws BrainException {
 		List<String> superClasses = brain.getSuperClasses("C", false);
-		assertEquals(3, superClasses.size());
+		assertEquals(4, superClasses.size());
 		List<String> superClasses1 = brain.getSuperClasses("C", true);
 		assertEquals(1, superClasses1.size());
 	}
@@ -134,6 +134,36 @@ public class BrainQueryTest {
 		List<String> equivalentClasses = brain.getEquivalentClasses("M");
 		assertEquals(1, equivalentClasses.size());
 		assertEquals("N", equivalentClasses.get(0));
+	}
+
+	@Test
+	public void getSubClassesFromLabelTest() throws BrainException {
+		List<String> subClasses = brain.getSubClassesFromLabel("animal", false);
+		assertEquals(2, subClasses.size());
+		assertEquals("ID02", subClasses.get(0));
+		assertEquals("R", subClasses.get(1));
+
+		List<String> subClasses1 = brain.getSubClassesFromLabel("part-of some animal", false);
+		assertEquals(2, subClasses1.size());
+		assertEquals("ID01", subClasses1.get(0));
+	}
+
+	@Test
+	public void getSuperClassesFromLabelTest() throws BrainException {
+		List<String> superClasses = brain.getSuperClassesFromLabel("animal", false);
+		assertEquals(1, superClasses.size());
+		assertEquals("Thing", superClasses.get(0));
+
+		List<String> subClasses1 = brain.getSuperClassesFromLabel("part-of some animal", false);
+		assertEquals(1, subClasses1.size());
+		assertEquals("Thing", subClasses1.get(0));
+	}
+
+	@Test
+	public void getEquivalentClassesFromLabelTest() throws BrainException {
+		List<String> equivalentClasses = brain.getEquivalentClassesFromLabel("pouet");
+		assertEquals(1, equivalentClasses.size());
+		assertEquals("Z", equivalentClasses.get(0));
 	}
 
 	@Test
@@ -161,6 +191,15 @@ public class BrainQueryTest {
 		assertEquals(false, isSuperClass1);
 		boolean isSuperClass2 = brain.isSuperClass("part-of some K", "Q", false);
 		assertEquals(true, isSuperClass2);
+	}
+	
+	@Test
+	public void isLabelClassExpression(){
+		assertEquals(true, brain.isLabelClassExpression("animal"));
+		assertEquals(true, brain.isLabelClassExpression("part-of some animal"));
+		assertEquals(true, brain.isLabelClassExpression("part-of some A"));
+		assertEquals(false, brain.isLabelClassExpression("part_of some A"));
+		assertEquals(false, brain.isLabelClassExpression("aminal"));
 	}
 
 	@Test
