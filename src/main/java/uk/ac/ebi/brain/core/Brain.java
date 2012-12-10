@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxClassExpressionParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxOntologyFormat;
 import org.semanticweb.elk.owlapi.ElkReasonerConfiguration;
@@ -239,22 +238,19 @@ public class Brain {
 		}
 
 		//Initiation for the shortForm mapping
-		this.shortFormProvider = new SimpleShortFormProvider();		
+		//TODO should be able to put it in the block only (no 'this')
+		this.shortFormProvider = new SimpleShortFormProvider();	
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 
 		//Initiation for the label mapping
 		//TODO
-
-		//TODO test de tout init quand ca query pour un label - no chache here it seems
-		//TODO can be removed
-		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
-
-		this.annoSFP = new AnnotationValueShortFormProvider(rdfsLabels, new HashMap<OWLAnnotationProperty, 
-				List<String>>(), this.manager);
-
-		this.labelChecker = new ShortFormEntityChecker(new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.annoSFP));
+		//		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
+		//		ShortFormProvider sfp = new AnnotationValueShortFormProvider(rdfsLabels, 
+		//				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
+		//		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(sfp);
+		//		this.labelChecker = new ShortFormEntityChecker(bidiLabel);
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
@@ -1044,12 +1040,13 @@ public class Brain {
 	}
 
 	//TODO the doc
-	private OWLClassExpression parseLabelClassExpression(String labelClassExpression) throws ClassExpressionException {
+	public OWLClassExpression parseLabelClassExpression(String labelClassExpression) throws ClassExpressionException {
 		// TODO Auto-generated method stub
+
 		OWLClassExpression owlClassExpression = null;
-		ManchesterOWLSyntaxClassExpressionParser parser = getLabelParser(labelClassExpression);
+		ManchesterOWLSyntaxEditorParser parser = getLabelParser(labelClassExpression);
 		try {
-			owlClassExpression = parser.parse(labelClassExpression);
+			owlClassExpression = parser.parseClassExpression();
 		} catch (ParserException e) {
 			throw new ClassExpressionException(e);
 		}
@@ -1122,9 +1119,21 @@ public class Brain {
 	}
 
 	//TODO doc
-	private ManchesterOWLSyntaxClassExpressionParser getLabelParser(String labelClassExpression) {
+	private ManchesterOWLSyntaxEditorParser getLabelParser(String labelClassExpression) {
 		// TODO Auto-generated method stub
-		ManchesterOWLSyntaxClassExpressionParser parser = new ManchesterOWLSyntaxClassExpressionParser(this.factory, this.labelChecker);
+		//TODO ne pas mettre ici mais plutot dans le constructor
+		//TODO clarifying that
+		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
+		ShortFormProvider sfp = new AnnotationValueShortFormProvider(rdfsLabels, 
+				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
+		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(this.manager.getOntologies(), sfp);
+		ShortFormEntityChecker labelChecker = new ShortFormEntityChecker(bidiLabel);
+
+
+		//TODO can stay there
+		ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(this.factory, labelClassExpression);
+		parser.setOWLEntityChecker(labelChecker);
+		parser.setDefaultOntology(this.ontology);
 		return parser;
 	}
 
@@ -1536,16 +1545,6 @@ public class Brain {
 			this.getOWLAnnotationProperty(owlAnnotationProperty);
 			return true;
 		}catch(NonExistingAnnotationPropertyException e){
-			return false;
-		}
-	}
-
-	//TODO the doc
-	public Object isLabelClassExpression(String labelClassExpression) {
-		try {
-			parseLabelClassExpression(labelClassExpression);
-			return true;
-		} catch (ClassExpressionException e) {
 			return false;
 		}
 	}

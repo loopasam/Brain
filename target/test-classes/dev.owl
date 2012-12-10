@@ -29,6 +29,9 @@ AnnotationProperty: rdfs:comment
 Datatype: xsd:string
 
     
+Datatype: rdfs:Literal
+
+    
 ObjectProperty: part-of
 
     Characteristics: 
@@ -57,12 +60,6 @@ Class: O
 
     EquivalentTo: 
         part-of some M
-    
-    
-Class: Z
-
-    EquivalentTo: 
-        A
     
     
 Class: M
@@ -182,5 +179,14 @@ Class: A
     
     EquivalentTo: 
         Z
+    
+    
+Class: Z
+
+    Annotations: 
+        rdfs:label "'pouet pouet'"^^xsd:string
+    
+    EquivalentTo: 
+        A
     
     

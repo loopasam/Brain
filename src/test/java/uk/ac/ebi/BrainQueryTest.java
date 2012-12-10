@@ -136,8 +136,16 @@ public class BrainQueryTest {
 		assertEquals("N", equivalentClasses.get(0));
 	}
 
+	@Test(expected = ClassExpressionException.class)
+	public void errorsWhenQueryingForLabel() throws BrainException {
+		List<String> subClasses = brain.getSubClasses("ID01", false);
+		assertEquals(1, subClasses.size());
+		@SuppressWarnings("unused")
+		List<String> subClasses1 = brain.getSubClassesFromLabel("ID01", false);
+	}
+
 	@Test
-	public void getSubClassesFromLabelTest() throws BrainException {
+	public void getSubClassesFromLabelTest() throws BrainException {		
 		List<String> subClasses = brain.getSubClassesFromLabel("animal", false);
 		assertEquals(2, subClasses.size());
 		assertEquals("ID02", subClasses.get(0));
@@ -146,6 +154,13 @@ public class BrainQueryTest {
 		List<String> subClasses1 = brain.getSubClassesFromLabel("part-of some animal", false);
 		assertEquals(2, subClasses1.size());
 		assertEquals("ID01", subClasses1.get(0));
+	}
+
+	@Test
+	public void getFromSpaceSeparatedLabels() throws BrainException {
+		List<String> equivalents = brain.getEquivalentClassesFromLabel("'pouet pouet'");
+		assertEquals(1, equivalents.size());
+		assertEquals("A", equivalents.get(0));
 	}
 
 	@Test
@@ -191,15 +206,6 @@ public class BrainQueryTest {
 		assertEquals(false, isSuperClass1);
 		boolean isSuperClass2 = brain.isSuperClass("part-of some K", "Q", false);
 		assertEquals(true, isSuperClass2);
-	}
-	
-	@Test
-	public void isLabelClassExpression(){
-		assertEquals(true, brain.isLabelClassExpression("animal"));
-		assertEquals(true, brain.isLabelClassExpression("part-of some animal"));
-		assertEquals(true, brain.isLabelClassExpression("part-of some A"));
-		assertEquals(false, brain.isLabelClassExpression("part_of some A"));
-		assertEquals(false, brain.isLabelClassExpression("aminal"));
 	}
 
 	@Test
