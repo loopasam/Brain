@@ -107,7 +107,6 @@ public class Brain {
 	private ShortFormProvider shortFormProvider;
 	private BidirectionalShortFormProvider bidiShortFormProvider;
 	private OWLEntityChecker entityChecker;
-	private ShortFormEntityChecker labelChecker;
 	private DefaultPrefixManager prefixManager;
 	public OWLDatatype INTEGER;
 	public OWLDatatype FLOAT;
@@ -160,12 +159,6 @@ public class Brain {
 	}
 	public OWLEntityChecker getEntityChecker() {
 		return entityChecker;
-	}
-	public ShortFormEntityChecker getLabelChecker() {
-		return labelChecker;
-	}
-	public void setLabelChecker(ShortFormEntityChecker labelChecker) {
-		this.labelChecker = labelChecker;
 	}
 	public void setEntityChecker(OWLEntityChecker entityChecker) {
 		this.entityChecker = entityChecker;
@@ -240,14 +233,6 @@ public class Brain {
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
-
-		//Initiation for the label mapping
-		//TODO
-		//		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
-		//		ShortFormProvider sfp = new AnnotationValueShortFormProvider(rdfsLabels, 
-		//				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
-		//		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(sfp);
-		//		this.labelChecker = new ShortFormEntityChecker(bidiLabel);
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
@@ -1039,7 +1024,6 @@ public class Brain {
 	//TODO the doc
 	public OWLClassExpression parseLabelClassExpression(String labelClassExpression) throws ClassExpressionException {
 		// TODO Auto-generated method stub
-
 		OWLClassExpression owlClassExpression = null;
 		ManchesterOWLSyntaxEditorParser parser = getLabelParser(labelClassExpression);
 		try {
@@ -1118,16 +1102,16 @@ public class Brain {
 	//TODO doc
 	private ManchesterOWLSyntaxEditorParser getLabelParser(String labelClassExpression) {
 		// TODO Auto-generated method stub
-		//TODO ne pas mettre ici mais plutot dans le constructor
-		//TODO clarifying that
+		//TODO has to be done this way because no listener there :-(
+		//Does not create listenning object, no memory leaks!!!
 		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
 		ShortFormProvider sfp = new AnnotationValueShortFormProvider(rdfsLabels, 
 				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
 		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(this.manager.getOntologies(), sfp);
+
+		//TODO faire le field mieux avec getters et setters
 		ShortFormEntityChecker labelChecker = new ShortFormEntityChecker(bidiLabel);
 
-
-		//TODO can stay there
 		ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(this.factory, labelClassExpression);
 		parser.setOWLEntityChecker(labelChecker);
 		parser.setDefaultOntology(this.ontology);
@@ -1215,24 +1199,58 @@ public class Brain {
 		update();
 	}
 
+
+	/**
+	 * Load an external ontology from it's IRI or from a local file.
+	 * @param pathToOntology
+	 * @throws NewOntologyException 
+	 * @throws ExistingEntityException 
+	 */
+	//TODO doc and comments
+	public void learn(Brain brainToLearn) throws ExistingEntityException {
+
+		for (String shortFromNewOnto : brainToLearn.getBidiShortFormProvider().getShortForms()) {
+			if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
+				OWLEntity existingEntity = this.bidiShortFormProvider.getEntity(shortFromNewOnto);
+				OWLEntity newEntity = brainToLearn.getBidiShortFormProvider().getEntity(shortFromNewOnto);
+				boolean identicalEntities = false;
+				if(newEntity.getIRI().equals(existingEntity.getIRI()) && newEntity.getEntityType().equals(existingEntity.getEntityType())){
+					identicalEntities = true;
+				}
+
+				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
+					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists and is of different type or has a" +
+							"different prefix.");
+				}
+			}
+		}
+
+		//Transfer all the axioms from the old ontology into the new one
+		for (OWLAxiom newAxiom : brainToLearn.getOntology().getAxioms()) {
+			this.manager.addAxiom(this.ontology, newAxiom);
+		}
+
+		update();
+	}
+
 	/**
 	 * Classify the ontology. It is usually the most expensive
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
 		//TODO seems useless
-//		try {
-//			if(this.configuration == null){
-//				this.reasoner.dispose();
-//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
-//			}else{
-//				this.reasoner.dispose();
-//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
-//			}
-//
-//		}catch(IllegalConfigurationException e) {
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			if(this.configuration == null){
+		//				this.reasoner.dispose();
+		//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+		//			}else{
+		//				this.reasoner.dispose();
+		//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+		//			}
+		//
+		//		}catch(IllegalConfigurationException e) {
+		//			e.printStackTrace();
+		//		}
 
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 		this.isClassified = true;

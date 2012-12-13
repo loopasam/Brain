@@ -140,7 +140,7 @@ public class BrainQueryTest {
 		List<String> subClasses = brain.getSubClasses("ID01", false);
 		assertEquals(1, subClasses.size());
 		@SuppressWarnings("unused")
-		List<String> subClasses1 = brain.getSubClassesFromLabel("ID01", false);
+		List<String> subClasses1 = brain.getSubClassesFromLabel("ID011", false);
 	}
 
 	@Test
@@ -154,7 +154,7 @@ public class BrainQueryTest {
 		assertEquals(2, subClasses1.size());
 		assertEquals("ID01", subClasses1.get(0));
 	}
-
+	
 	@Test
 	public void getFromSpaceSeparatedLabels() throws BrainException {
 		List<String> equivalents = brain.getEquivalentClassesFromLabel("'pouet pouet'");
@@ -258,13 +258,32 @@ public class BrainQueryTest {
 		brain.learn("src/test/resources/dev.owl");
 	}
 
-
 	@Test
 	public void learnOntologyFromTheWeb() throws BrainException {
 		Brain brain = new Brain();
 		brain.learn("https://raw.github.com/loopasam/Brain/master/src/test/resources/demo.owl");
 		assertNotNull(brain.getOWLClass("Cell"));
 	}
+
+	@Test
+	public void learnFromOtherBrainTest() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("A");
+		Brain brain1 = new Brain();
+		brain1.learn(brain);
+		assertNotNull(brain1.getOWLClass("A"));
+	}
+
+	@Test(expected = ExistingEntityException.class)
+	public void learnFromOtherBrainErrorTest() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("http://example.org/A");
+		brain.addClass("B");
+		Brain brain1 = new Brain();
+		brain1.addClass("A");
+		brain1.learn(brain);
+	}
+
 
 	@Test
 	public void getTopClass() throws BrainException {
