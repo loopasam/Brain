@@ -116,9 +116,6 @@ public class Brain {
 	private boolean isClassified;
 	private ElkReasonerConfiguration configuration;
 
-
-	private AnnotationValueShortFormProvider annoSFP;
-
 	public OWLOntology getOntology() {
 		return ontology;
 	}
@@ -1223,18 +1220,19 @@ public class Brain {
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
-		try {
-			if(this.configuration == null){
-				this.reasoner.dispose();
-				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
-			}else{
-				this.reasoner.dispose();
-				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
-			}
-
-		}catch(IllegalConfigurationException e) {
-			e.printStackTrace();
-		}
+		//TODO seems useless
+//		try {
+//			if(this.configuration == null){
+//				this.reasoner.dispose();
+//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+//			}else{
+//				this.reasoner.dispose();
+//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+//			}
+//
+//		}catch(IllegalConfigurationException e) {
+//			e.printStackTrace();
+//		}
 
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 		this.isClassified = true;
@@ -1489,7 +1487,7 @@ public class Brain {
 		}else{
 			this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
 		}
-
+		this.isClassified = false;
 	}
 
 	/**

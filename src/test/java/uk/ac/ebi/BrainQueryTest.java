@@ -49,7 +49,6 @@ public class BrainQueryTest {
 		brain.subClassOf("C", "A");
 		brain.subClassOf("C", "B");
 		brain.sleep();
-		brain.classify();
 		assertEquals(1, brain.getUnsatisfiableClasses().size());
 		brain.sleep();
 	}
