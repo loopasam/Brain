@@ -1229,7 +1229,6 @@ public class Brain {
 
 		//Keep the prefix information if present
 		//TODO some doc
-		//TODO some TEST !!Important
 		for (String prefix : brainToLearn.getPrefixManager().getPrefixNames()) {
 			if(!this.prefixManager.containsPrefixMapping(prefix)){
 				prefix(brainToLearn.getPrefixManager().getPrefix(prefix), prefix.replaceAll(":", ""));

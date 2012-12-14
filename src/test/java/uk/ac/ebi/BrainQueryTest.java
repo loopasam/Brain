@@ -67,6 +67,18 @@ public class BrainQueryTest {
 		List<String> violations = brain.getElProfileViolations();
 		assertEquals(0, violations.size());
 	}
+	
+	@Test
+	public void prefixesAndLearnTest() throws BrainException {
+		Brain newBrain = new Brain();
+		newBrain.addClass("http://whatever.com/TEST_A");
+		newBrain.prefix("http://whatever.com/", "whatever");
+		brain.prefix("http://www.example.org/", "example");
+		brain.learn(newBrain);
+		assertEquals("http://whatever.com/", brain.getPrefixManager().getPrefix("whatever:"));
+		assertEquals("http://www.example.org/", brain.getPrefixManager().getPrefix("example:"));
+	}
+
 
 	@Test
 	public void classifyTest() {
