@@ -154,7 +154,7 @@ public class BrainQueryTest {
 		assertEquals(2, subClasses1.size());
 		assertEquals("ID01", subClasses1.get(0));
 	}
-	
+
 	@Test
 	public void getFromSpaceSeparatedLabels() throws BrainException {
 		List<String> equivalents = brain.getEquivalentClassesFromLabel("'pouet pouet'");

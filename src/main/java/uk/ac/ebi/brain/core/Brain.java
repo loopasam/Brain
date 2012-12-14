@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +61,6 @@ import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.profiles.OWL2ELProfile;
 import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.OWLProfileViolation;
-import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
@@ -73,6 +71,7 @@ import org.semanticweb.owlapi.util.DefaultPrefixManager;
 import org.semanticweb.owlapi.util.OWLEntityRemover;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
+import org.semanticweb.owlapi.vocab.PrefixOWLOntologyFormat;
 
 import uk.ac.ebi.brain.error.BadNameException;
 import uk.ac.ebi.brain.error.BadPrefixException;
@@ -86,9 +85,9 @@ import uk.ac.ebi.brain.error.ExistingEntityException;
 import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
 import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingAnnotationPropertyException;
+import uk.ac.ebi.brain.error.NonExistingClassException;
 import uk.ac.ebi.brain.error.NonExistingDataPropertyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
-import uk.ac.ebi.brain.error.NonExistingClassException;
 import uk.ac.ebi.brain.error.NonExistingObjectPropertyException;
 import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
 import uk.ac.ebi.brain.error.StorageException;
@@ -1109,7 +1108,6 @@ public class Brain {
 				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
 		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(this.manager.getOntologies(), sfp);
 
-		//TODO faire le field mieux avec getters et setters
 		ShortFormEntityChecker labelChecker = new ShortFormEntityChecker(bidiLabel);
 
 		ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(this.factory, labelClassExpression);
@@ -1182,19 +1180,23 @@ public class Brain {
 			}
 		}
 
+		//TODO learn method should handle prefixes
+		//Keep the prefix information if present 
+		OWLOntologyFormat format = newManager.getOntologyFormat(newOnto);
+		if (format.isPrefixOWLOntologyFormat()) {
+			PrefixOWLOntologyFormat newPrefixesFormat = format.asPrefixOWLOntologyFormat();
+			Set<String> newPrefixes = newPrefixesFormat.getPrefixNames();
+			for (String prefix : newPrefixes) {
+				if(!this.prefixManager.containsPrefixMapping(prefix)){
+					prefix(newPrefixesFormat.getPrefix(prefix), prefix.replaceAll(":", ""));
+				}
+			}
+		}
+
 		//Transfer all the axioms from the old ontology into the new one
 		for (OWLAxiom newAxiom : newOnto.getAxioms()) {
 			this.manager.addAxiom(this.ontology, newAxiom);
 		}
-
-		//TODO
-		//Update the list of labels
-		//		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
-		//		this.annoSFP = new AnnotationValueShortFormProvider(rdfsLabels, new HashMap<OWLAnnotationProperty, 
-		//				List<String>>(), this.manager);
-		//		Set<OWLOntology> mergedImportsClosure = this.ontology.getImportsClosure();
-		//		BidirectionalShortFormProviderAdapter bidi = new BidirectionalShortFormProviderAdapter(this.manager, mergedImportsClosure, this.annoSFP);
-		//		this.setLabelChecker(new ShortFormEntityChecker(bidi));
 
 		update();
 	}
@@ -1225,13 +1227,22 @@ public class Brain {
 			}
 		}
 
+		//Keep the prefix information if present
+		//TODO some doc
+		//TODO some TEST !!Important
+		for (String prefix : brainToLearn.getPrefixManager().getPrefixNames()) {
+			if(!this.prefixManager.containsPrefixMapping(prefix)){
+				prefix(brainToLearn.getPrefixManager().getPrefix(prefix), prefix.replaceAll(":", ""));
+			}
+		}
+
 		//Transfer all the axioms from the old ontology into the new one
 		for (OWLAxiom newAxiom : brainToLearn.getOntology().getAxioms()) {
 			this.manager.addAxiom(this.ontology, newAxiom);
 		}
-
 		update();
 	}
+
 
 	/**
 	 * Classify the ontology. It is usually the most expensive
