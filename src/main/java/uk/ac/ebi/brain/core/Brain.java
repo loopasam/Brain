@@ -1305,7 +1305,7 @@ public class Brain {
 	 * @return subClasses
 	 * @throws ClassExpressionException 
 	 */
-	public List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
+	public synchronized List<String> getSubClasses(String classExpression, boolean direct) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		return getSubClasses(owlClassExpression, direct);
 	}
@@ -1348,7 +1348,7 @@ public class Brain {
 	 * @throws ClassExpressionException 
 	 */
 	//TODO like for subalcces
-	public List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
+	public synchronized List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		return getSuperClasses(owlClassExpression, direct);
 	}
@@ -1372,7 +1372,7 @@ public class Brain {
 		return sortClasses(superClasses);
 	}
 
-	public List<String> getSuperClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
+	public synchronized List<String> getSuperClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
 		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getSuperClasses(owlClassExpression, direct);
@@ -1386,7 +1386,7 @@ public class Brain {
 	 * @throws ClassExpressionException 
 	 */
 	//TODO like for subclasses
-	public List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
+	public synchronized List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		return getEquivalentClasses(owlClassExpression);
 	}
@@ -1409,7 +1409,7 @@ public class Brain {
 	}
 
 
-	public List<String> getEquivalentClassesFromLabel(String labelClassExpression) throws ClassExpressionException {
+	public synchronized List<String> getEquivalentClassesFromLabel(String labelClassExpression) throws ClassExpressionException {
 		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getEquivalentClasses(owlClassExpression);
