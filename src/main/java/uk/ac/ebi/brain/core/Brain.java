@@ -1331,7 +1331,8 @@ public class Brain {
 	}
 
 	//TODO finish the method and do the doc
-	public List<String> getSubClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
+	//TODO synchronized on key methods
+	public synchronized List<String> getSubClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
 		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getSubClasses(owlClassExpression, direct);

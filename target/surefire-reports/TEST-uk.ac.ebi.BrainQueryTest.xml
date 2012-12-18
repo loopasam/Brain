@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="3" errors="0" skipped="0" tests="31" name="uk.ac.ebi.BrainQueryTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/i386"/>
+    <property name="java.vm.version" value="20.10-b01"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.rmi.server.randomIDs" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/samuel/git/Brain"/>
+    <property name="java.runtime.version" value="1.6.0_35-b10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="classworlds.conf" value="/usr/share/maven2/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="3.2.0-23-generic"/>
+    <property name="user.home" value="/home/samuel"/>
+    <property name="user.timezone" value="Europe/London"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="samuel"/>
+    <property name="java.class.path" value="/usr/share/maven2/boot/classworlds.jar"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher &quot;assembly:assembly&quot;"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_35"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/resources.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/rt.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/jsse.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/jce.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/charsets.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/java-6-sun-1.6.0.35/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="/usr/share/maven2"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.378" classname="uk.ac.ebi.BrainQueryTest" name="getUnsatisfiableClasses"/>
+  <testcase time="0.05" classname="uk.ac.ebi.BrainQueryTest" name="reStart"/>
+  <testcase time="0.052" classname="uk.ac.ebi.BrainQueryTest" name="owlProfileTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="prefixesAndLearnTest"/>
+  <testcase time="0.027" classname="uk.ac.ebi.BrainQueryTest" name="classifyTest"/>
+  <testcase time="0.032" classname="uk.ac.ebi.BrainQueryTest" name="getDirectSubClassesTest"/>
+  <testcase time="0.03" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectSubClassesTest"/>
+  <testcase time="0.047" classname="uk.ac.ebi.BrainQueryTest" name="getDirectAnonymousSubClassesTest"/>
+  <testcase time="0.041" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectAnonymousSubClassesTest"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesNewOntology"/>
+  <testcase time="0.019" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesErrorNewOntology"/>
+  <testcase time="0.032" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesTest"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesTest"/>
+  <testcase time="0.029" classname="uk.ac.ebi.BrainQueryTest" name="errorsWhenQueryingForLabel"/>
+  <testcase time="0.03" classname="uk.ac.ebi.BrainQueryTest" name="getSubClassesFromLabelTest"/>
+  <testcase time="0.02" classname="uk.ac.ebi.BrainQueryTest" name="getFromSpaceSeparatedLabels"/>
+  <testcase time="0.027" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesFromLabelTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesFromLabelTest"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentAnonClassesTest"/>
+  <testcase time="0.035" classname="uk.ac.ebi.BrainQueryTest" name="isSubClassTest"/>
+  <testcase time="0.034" classname="uk.ac.ebi.BrainQueryTest" name="isSuperClassTest"/>
+  <testcase time="0.016" classname="uk.ac.ebi.BrainQueryTest" name="knowsTest"/>
+  <testcase time="0.015" classname="uk.ac.ebi.BrainQueryTest" name="getLabelTest"/>
+  <testcase time="0.022" classname="uk.ac.ebi.BrainQueryTest" name="learnFromLocalFile"/>
+  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIs"/>
+  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIsButNotForDifferentTypes"/>
+  <testcase time="1.81" classname="uk.ac.ebi.BrainQueryTest" name="learnOntologyFromTheWeb"/>
+  <testcase time="0.017" classname="uk.ac.ebi.BrainQueryTest" name="learnFromOtherBrainTest"/>
+  <testcase time="0.015" classname="uk.ac.ebi.BrainQueryTest" name="learnFromOtherBrainErrorTest"/>
+  <testcase time="0.014" classname="uk.ac.ebi.BrainQueryTest" name="getTopClass"/>
+  <testcase time="0.023" classname="uk.ac.ebi.BrainQueryTest" name="getUnstatisfiableClasses"/>
+</testsuite>
