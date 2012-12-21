@@ -196,6 +196,48 @@ public class Brain {
 		this(DEFAULT_PREFIX, "brain.owl", -1);
 	}
 
+
+	/**
+	 * Creates a Brain instance from an ontology object.
+	 * This method is useful for people with a pre-loaded ontology
+	 * @throws BadPrefixException 
+	 * @throws NewOntologyException 
+	 */
+	public Brain(OWLOntology ontology) throws NewOntologyException {
+
+		this.prefixManager = new DefaultPrefixManager(DEFAULT_PREFIX);
+		
+		this.manager = ontology.getOWLOntologyManager();
+		this.ontology = ontology;
+		
+		this.factory = this.manager.getOWLDataFactory();
+
+		this.shortFormProvider = new SimpleShortFormProvider();	
+		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
+		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
+		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
+		
+		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
+
+		this.reasonerFactory = new ElkReasonerFactory();
+		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
+
+		this.isClassified = false;
+
+		this.INTEGER = this.factory.getIntegerOWLDatatype();
+		this.FLOAT = this.factory.getFloatOWLDatatype();
+		this.BOOLEAN = this.factory.getBooleanOWLDatatype();
+		update();
+		try {
+			this.addClass("http://www.w3.org/2002/07/owl#Thing");
+		} catch (BrainException e) {
+			//If the class throws an error it's no biggie
+			//The top class was already present in the loaded
+			//ontology
+		}
+	}
+
+
 	/**
 	 * @param prefix
 	 * @param ontologyIri
@@ -304,6 +346,11 @@ public class Brain {
 	 * @throws BadNameException 
 	 */
 	private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {
+		//TODO do the same for other methods -IMPORTANT
+		if(this.ontology.containsClassInSignature(IRI.create(className))){
+			throw new ExistingClassException("The class already '"+ className +"' already exists.");
+		}
+		//End TODO
 		validateExternalEntity(className);
 		OWLClass owlClass = this.factory.getOWLClass(IRI.create(className));
 		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -1180,8 +1227,7 @@ public class Brain {
 			}
 		}
 
-		//TODO learn method should handle prefixes
-		//Keep the prefix information if present 
+		//Keep the prefix information if present
 		OWLOntologyFormat format = newManager.getOntologyFormat(newOnto);
 		if (format.isPrefixOWLOntologyFormat()) {
 			PrefixOWLOntologyFormat newPrefixesFormat = format.asPrefixOWLOntologyFormat();
@@ -1194,9 +1240,7 @@ public class Brain {
 		}
 
 		//Transfer all the axioms from the old ontology into the new one
-		for (OWLAxiom newAxiom : newOnto.getAxioms()) {
-			this.manager.addAxiom(this.ontology, newAxiom);
-		}
+		this.manager.addAxioms(this.ontology, newOnto.getAxioms());
 
 		update();
 	}
@@ -1235,10 +1279,7 @@ public class Brain {
 			}
 		}
 
-		//Transfer all the axioms from the old ontology into the new one
-		for (OWLAxiom newAxiom : brainToLearn.getOntology().getAxioms()) {
-			this.manager.addAxiom(this.ontology, newAxiom);
-		}
+		this.manager.addAxioms(this.ontology, brainToLearn.getOntology().getAxioms());
 		update();
 	}
 
@@ -1248,20 +1289,6 @@ public class Brain {
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
-		//TODO seems useless
-		//		try {
-		//			if(this.configuration == null){
-		//				this.reasoner.dispose();
-		//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
-		//			}else{
-		//				this.reasoner.dispose();
-		//				this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
-		//			}
-		//
-		//		}catch(IllegalConfigurationException e) {
-		//			e.printStackTrace();
-		//		}
-
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 		this.isClassified = true;
 	}
@@ -1454,7 +1481,7 @@ public class Brain {
 	private List<String> sortClasses(Set<OWLClass> classes) {
 		List<String> listClasses = new ArrayList<String>();
 		for (OWLClass owlClass : classes) {
-			if(!owlClass.isBottomEntity()){
+			if(!owlClass.isOWLNothing()){
 				listClasses.add(this.bidiShortFormProvider.getShortForm(owlClass));
 			}
 		}

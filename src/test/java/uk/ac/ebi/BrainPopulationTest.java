@@ -5,11 +5,18 @@ package uk.ac.ebi;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import uk.ac.ebi.brain.core.Brain;
 import uk.ac.ebi.brain.error.BadNameException;
@@ -19,7 +26,9 @@ import uk.ac.ebi.brain.error.ClassExpressionException;
 import uk.ac.ebi.brain.error.DataPropertyExpressionException;
 import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingDataPropertyException;
+import uk.ac.ebi.brain.error.ExistingEntityException;
 import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
+import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
 import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
 
@@ -334,6 +343,16 @@ public class BrainPopulationTest {
 		brain.addClass("A");
 		brain.addClass("http://www.example.com/B");
 		brain.save("src/test/resources/prefix.owl");	
+	}
+
+	@Test
+	public void contructorFromOntologyTest() throws OWLOntologyCreationException, ClassExpressionException, NewOntologyException, ExistingEntityException, BadPrefixException{
+		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+		OWLOntology ontology = man.loadOntologyFromOntologyDocument(new File("src/test/resources/dev.owl"));
+		Brain brain = new Brain(ontology);
+		List<String> subClasses = brain.getSubClasses("G", false);
+		brain.sleep();
+		assertEquals(3, subClasses.size());
 	}
 
 	@Test
