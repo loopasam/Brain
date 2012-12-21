@@ -196,7 +196,6 @@ public class Brain {
 		this(DEFAULT_PREFIX, "brain.owl", -1);
 	}
 
-
 	/**
 	 * Creates a Brain instance from an ontology object.
 	 * This method is useful for people with a pre-loaded ontology
@@ -206,17 +205,17 @@ public class Brain {
 	public Brain(OWLOntology ontology) throws NewOntologyException {
 
 		this.prefixManager = new DefaultPrefixManager(DEFAULT_PREFIX);
-		
+
 		this.manager = ontology.getOWLOntologyManager();
 		this.ontology = ontology;
-		
+
 		this.factory = this.manager.getOWLDataFactory();
 
 		this.shortFormProvider = new SimpleShortFormProvider();	
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
-		
+
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
 		this.reasonerFactory = new ElkReasonerFactory();
@@ -346,11 +345,9 @@ public class Brain {
 	 * @throws BadNameException 
 	 */
 	private OWLClass addExternalClass(String className) throws ExistingClassException, BadNameException {
-		//TODO do the same for other methods -IMPORTANT
 		if(this.ontology.containsClassInSignature(IRI.create(className))){
 			throw new ExistingClassException("The class already '"+ className +"' already exists.");
 		}
-		//End TODO
 		validateExternalEntity(className);
 		OWLClass owlClass = this.factory.getOWLClass(IRI.create(className));
 		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -489,6 +486,9 @@ public class Brain {
 	 * @throws BadNameException 
 	 */
 	private OWLObjectProperty addExternalObjectProperty(String objectPropertyName) throws BadNameException, ExistingObjectPropertyException {
+		if(this.ontology.containsObjectPropertyInSignature(IRI.create(objectPropertyName))){
+			throw new ExistingObjectPropertyException("The object property already '"+ objectPropertyName +"' already exists.");
+		}
 		validateExternalEntity(objectPropertyName);
 		OWLObjectProperty owlObjectProperty = this.factory.getOWLObjectProperty(IRI.create(objectPropertyName));
 		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -554,6 +554,9 @@ public class Brain {
 	 * @throws BadNameException 
 	 */
 	private OWLDataProperty addExternalDataProperty(String dataPropertyName) throws BadNameException, ExistingDataPropertyException {
+		if(this.ontology.containsDataPropertyInSignature(IRI.create(dataPropertyName))){
+			throw new ExistingDataPropertyException("The data property already '"+ dataPropertyName +"' already exists.");
+		}
 		validateExternalEntity(dataPropertyName);
 		OWLDataProperty owlDataProperty = this.factory.getOWLDataProperty(IRI.create(dataPropertyName));
 		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -619,6 +622,9 @@ public class Brain {
 	 * @throws BadNameException 
 	 */
 	private OWLAnnotationProperty addExternalAnnotationProperty(String annotationPropertyName) throws BadNameException, ExistingAnnotationPropertyException {
+		if(this.ontology.containsAnnotationPropertyInSignature(IRI.create(annotationPropertyName))){
+			throw new ExistingAnnotationPropertyException("The annotation property already '"+ annotationPropertyName +"' already exists.");
+		}
 		validateExternalEntity(annotationPropertyName);
 		OWLAnnotationProperty owlAnnotationProperty = this.factory.getOWLAnnotationProperty(IRI.create(annotationPropertyName));
 		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
@@ -1241,7 +1247,6 @@ public class Brain {
 
 		//Transfer all the axioms from the old ontology into the new one
 		this.manager.addAxioms(this.ontology, newOnto.getAxioms());
-
 		update();
 	}
 
