@@ -1,4 +1,5 @@
 Prefix: : <brain#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
 Prefix: owl: <http://www.w3.org/2002/07/owl#>
 Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix: xml: <http://www.w3.org/XML/1998/namespace>
@@ -10,26 +11,21 @@ Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 Ontology: <brain.owl>
 
 
-AnnotationProperty: rdfs:seeAlso
-
-    
-AnnotationProperty: rdfs:isDefinedBy
-
-    
-AnnotationProperty: rdfs:comment
-
-    
-Datatype: xsd:string
+ObjectProperty: part-of
 
     
 Class: owl:Thing
 
     
+Class: Cell
+
+    
 Class: A
 
-    Annotations: 
-        rdfs:isDefinedBy "is defined by that"^^xsd:string,
-        rdfs:comment "his is a comment"^^xsd:string,
-        rdfs:seeAlso "see also there"^^xsd:string
+    
+Class: Nucleus
+
+    SubClassOf: 
+        part-of some Cell
     
     
