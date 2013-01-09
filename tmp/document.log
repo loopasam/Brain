@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  7 NOV 2012 15:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  9 JAN 2013 15:23
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -314,51 +314,78 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
 
-Underfull \hbox (badness 1194) in paragraph at lines 60--85
-\OT1/ptm/m/n/9 repository-specific which limits the combination of the native
+Underfull \hbox (badness 1127) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 Logic and has been designed to capture the knowledge of a
  []
 
 
-Underfull \hbox (badness 4582) in paragraph at lines 87--110
-[]\OT1/ptm/m/n/9 Knowledge representation in the biomedical domain differs
+Underfull \hbox (badness 2005) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 (GO - Ashburner \OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9 , 2000) or 
+the Chemical Entities of
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 87--110
-\OT1/ptm/m/n/9 of information that can potentially be interconnected. Brain
+Underfull \hbox (badness 1286) in paragraph at lines 80--82
+[]\OT1/ptm/m/n/9 An instance of a Brain object hold a reference to only one
  []
 
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 110.
 
+Underfull \hbox (badness 1924) in paragraph at lines 80--82
+\OT1/ptm/m/n/9 knowledge base. It is yet possible to import some external
+ []
+
+
+Underfull \hbox (badness 3612) in paragraph at lines 87--91
+[]\OT1/ptm/m/n/9 The interaction with the library relies on the user-friendly
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 91.
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no † in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no ˆ in font ptmr7t!
+Missing character: There is no ƒ in font ptmr7t!
+
+Underfull \hbox (badness 5475) in paragraph at lines 111--119
+[][]\OT1/ptm/m/n/9 OWL expressions can be entered with the user-friendly
+ []
+
+
+Underfull \hbox (badness 1789) in paragraph at lines 111--119
+\OT1/ptm/m/n/9 Manchester syntax (Horridge \OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9
+ , 2006) and the name of
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 170.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
-Extra height:19.09793pt when 622.02318pt
-Extra height:19.09793pt when 623.02318pt
-Extra height:0.0pt when 624.02318pt
-(2)Left:624.02318pt Right:624.04636pt Output:624.02318pt
-(2)Left:624.04636pt Right:624.04636pt Output:624.04636pt
+Extra height:0.0pt when 535.02318pt
+(2)Left:535.02318pt Right:535.04636pt Output:535.02318pt
+(2)Left:535.04636pt Right:535.04636pt Output:535.04636pt
 - LAST -
 Extra skip:0.0pt
-Left:624.04636pt
-Right:624.04636pt
-Output:624.04636pt
+Left:535.04636pt
+Right:535.04636pt
+Output:535.04636pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 246.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 239.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 246.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 239.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -379,11 +406,11 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2680 strings out of 493848
- 31255 string characters out of 1152822
- 116970 words of memory out of 3000000
- 5902 multiletter control sequences out of 15000+50000
- 45075 words of font info for 94 fonts, out of 3000000 for 9000
+ 2685 strings out of 493848
+ 31311 string characters out of 1152822
+ 111208 words of memory out of 3000000
+ 5906 multiletter control sequences out of 15000+50000
+ 47334 words of font info for 99 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
  36i,13n,26p,290b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
@@ -398,7 +425,7 @@ uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
 /share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 135047 bytes).
+Output written on document.pdf (2 pages, 136085 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
