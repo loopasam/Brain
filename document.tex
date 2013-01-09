@@ -72,17 +72,18 @@ clusters or multicore architecture can scale the speed of reasoning as more data
 Brain wraps and simplifies the interaction with Elk while still leaving the possibility to fine tune
 the configuration for advanced users.
 
-\section{Programmatic features}
+\section{Library features}
 Brain is implemented as a facade, leveraging the access to the OWL-API and providing a series of convenience methods for common
 use-cases encountered in the biomedical domain. In order to simplify the interaction with the OWL-API, Brain has been designed according to
-a series of concepts described below.
+a series of features described below.
 \subsection{Unique ontology}
 An instance of a Brain object hold a reference to only one knowledge base. It is yet possible to import some external ontologies, either
-stored locally or via a network but Brain will always merge the added information to the existing ontology.
-\subsection{Unique names}
-The names of OWL entities handled by a Brain object have to be unique. This choice is 
-is motivated by the fact that Brain hides as much as possible the cumbersome interaction with prefixes,
-IRI and URIs.
+stored locally or via a network but Brain will always merge the added information to the existing knowledge base.
+\subsection{Unique short form names}
+The names (short forms) of OWL entities handled by a Brain object have to be unique. It is for example not possible to add
+an OWL class http://www.example.org/Cell to the ontology if an OWL entity with short form ``Cell'' already exists.
+Despite being in contradiction with some fundamental Semantic Web principles, this design prevent ambiguous queries and integration when 
+short forms are used and hides as much as possible the cumbersome interaction with prefixes and Internationalized Resource Identifiers (IRI).
 \subsection{Typeless interaction}
 The interaction with the library relies on the user-friendly Manchester syntax entered as string \citep{Horridge2006}. 
 This choice permits to move away from the cumbersome creation of Java objects and is particularly suitable in a web server environment where
@@ -92,41 +93,30 @@ and flexibility of the code written to move to an OWL representation from a rela
 Because the interaction with Brain is built around strings rather than Java objects, a special care has to be put on
 exceptions handling in order to safely maintain the correct execution of the program. Brain throws different types of error tailored 
 to the operation performed by the user. This feature is mandatory in large applications and helps to maintain the consistency of the underlying
-knowledge base.
-
-
-Example of axiom implemented using Brain
-
-Natural language: A nucleus is part of some cells.
-
-Description Logic: Nucleus ⊆ ∃part-of.Cell
-
-OWL (Manchester syntax): Nucleus subClassOf part-of some Cell
-
-Brain implementation:
-
-
-
-
-OWL expressions can be entered
-with the user-friendly Manchester syntax \citep{Horridge2006} and the name of the classes are displayed in a convenient way.
-More complex applications, requiring a deeper control over the ontology,
-can take advantage the OWL-API but require proficiency in Java and can be daunting for casual users.
-OWL-API deals with all aspects of ontology generation for semantic web purposes, nonetheless the
-level of granularity can be cumbersome for some biomedical applications. Brain aims at filling the gap between the OWL-API
-and graphical interfaces: It is implemented as a facade, providing a series of convenience methods for common
-use-cases encountered in the biomedical domain and leveraging the access to the OWL-API.
-
-The full list of currently supported constructs is available in the supplementary material.
-Brain relies on the intuitive and explicit Manchester syntax to formulate OWL class expressions, just as in the Protege editor.
-The interaction with the OWL-API centers around strings handling rather than Java objects, making Brain suitable to parse and answer requests in
-the context of a web service or an OWL end-point for instance. Using strings as input also speeds the production
-and flexibility of the code written to move to an OWL representation from a relational or flat-file database for example.
-The library supports the loading and referencing of external ontologies in order to integrate and reason
-over data from different sources. An important feature of Brain is the query mechanism, which is similar to
-that implemented in Protege. Powerful questions can be formulated over the knowledge-base using the Manchester syntax, abstracting
+knowledge base or to program a handling in case of problem.
+\subsection{Knowledge integration}
+An interesting feature brought by the Semantic Web and OWL is the possibility to merge information based
+on the unique IRI of the entities described. The library supports the loading and integration of external knowledge bases as well as 
+references to external entities. Data from different sources can therefore be easily connected and reason over by Brain.
+\subsection{Querying}
+Brain is oriented towards efficient querying of OWL knowledge bases.
+Powerful questions can be formulated over the knowledge base using the Manchester syntax, abstracting
 away complex interaction with the Java object provided by the OWL-API. An example of question answering over the GO using Brain
 is compared against a traditional SQL query in the supplementary material.
+
+\begin{figure}[h]
+\begin{verbatim}
+Example of axiom implemented using Brain
+Natural language: A nucleus is part of some cells.
+Description Logic: Nucleus ⊆ ∃part-of.Cell
+OWL (Manchester syntax): Nucleus subClassOf part-of some Cell
+Brain implementation:
+\end{verbatim}
+\caption{Example of axiom implemented using Brain}
+\end{figure}
+
+The full list of currently supported constructs is available in the supplementary material.
+
 
 \section{Conclusion}
 Brain is an open-source Java library designed to build and query biomedical knowledge bases or OWL ontologies.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  9 JAN 2013 15:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  9 JAN 2013 17:10
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -334,58 +334,155 @@ Underfull \hbox (badness 1924) in paragraph at lines 80--82
 \OT1/ptm/m/n/9 knowledge base. It is yet possible to import some external
  []
 
-
-Underfull \hbox (badness 3612) in paragraph at lines 87--91
-[]\OT1/ptm/m/n/9 The interaction with the library relies on the user-friendly
- []
-
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 91.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 87.
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no † in font ptmr7t!
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no ˆ in font ptmr7t!
-Missing character: There is no ƒ in font ptmr7t!
-
-Underfull \hbox (badness 5475) in paragraph at lines 111--119
-[][]\OT1/ptm/m/n/9 OWL expressions can be entered with the user-friendly
+Underfull \hbox (badness 3612) in paragraph at lines 88--92
+[]\OT1/ptm/m/n/9 The interaction with the library relies on the user-friendly
  []
 
 
-Underfull \hbox (badness 1789) in paragraph at lines 111--119
-\OT1/ptm/m/n/9 Manchester syntax (Horridge \OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9
- , 2006) and the name of
+Underfull \hbox (badness 1314) in paragraph at lines 102--106
+\OT1/ptm/m/n/9 base using the Manchester syntax, abstracting away complex
  []
 
+
+Underfull \hbox (badness 1852) in paragraph at lines 102--106
+\OT1/ptm/m/n/9 example of question answering over the GO using Brain is
+ []
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 108.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Overfull \hbox (26.9997pt too wide) in paragraph at lines 114--114
+[]\OT1/pcr/m/n/9 Natural language: A nucleus is part of some cells.[] 
+ []
+
+Missing character: There is no â in font pcrr7t!
+Missing character: There is no † in font pcrr7t!
+Missing character: There is no â in font pcrr7t!
+Missing character: There is no ˆ in font pcrr7t!
+Missing character: There is no ƒ in font pcrr7t!
+
+Overfull \hbox (86.39963pt too wide) in paragraph at lines 114--114
+[]\OT1/pcr/m/n/9 OWL (Manchester syntax): Nucleus subClassOf part-of some Cell[
+] 
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 115.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
-Extra height:0.0pt when 535.02318pt
-(2)Left:535.02318pt Right:535.04636pt Output:535.02318pt
-(2)Left:535.04636pt Right:535.04636pt Output:535.04636pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:64.09793pt when 531.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:64.09793pt when 532.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:64.09793pt when 533.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 534.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 535.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 536.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 537.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 538.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 539.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 540.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 541.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 542.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 543.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 544.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 545.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 546.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 547.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 548.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 549.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:55.09793pt when 550.87262pt
+Extra height:0.0pt when 551.87262pt
+(2)Left:551.87262pt Right:491.04636pt Output:551.87262pt
 - LAST -
 Extra skip:0.0pt
-Left:535.04636pt
-Right:535.04636pt
-Output:535.04636pt
+Left:551.87262pt
+Right:491.04636pt
+Output:551.87262pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 239.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 229.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 239.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 229.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -406,11 +503,11 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2685 strings out of 493848
- 31311 string characters out of 1152822
- 111208 words of memory out of 3000000
- 5906 multiletter control sequences out of 15000+50000
- 47334 words of font info for 99 fonts, out of 3000000 for 9000
+ 2725 strings out of 493848
+ 31846 string characters out of 1152822
+ 108729 words of memory out of 3000000
+ 5940 multiletter control sequences out of 15000+50000
+ 49475 words of font info for 103 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
  36i,13n,26p,290b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
@@ -419,15 +516,15 @@ e1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
 fonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
 6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
 share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-
-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/typ
-e1/urw/helvetic/uhvbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/
-uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr
-/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
-es/utmri8a.pfb>
-Output written on document.pdf (2 pages, 136085 bytes).
+texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type
+1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uh
+vbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/s
+hare/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-texli
+ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
+imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on document.pdf (2 pages, 149438 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
