@@ -1,4 +1,5 @@
 \documentclass{bioinfo}
+\usepackage{fancyvrb}
 \copyrightyear{2005}
 \pubyear{2005}
 
@@ -105,14 +106,29 @@ away complex interaction with the Java object provided by the OWL-API. An exampl
 is compared against a traditional SQL query in the supplementary material.
 
 \begin{figure}[h]
-\begin{verbatim}
-Example of axiom implemented using Brain
-Natural language: A nucleus is part of some cells.
-Description Logic: Nucleus ⊆ ∃part-of.Cell
-OWL (Manchester syntax): Nucleus subClassOf part-of some Cell
-Brain implementation:
-\end{verbatim}
-\caption{Example of axiom implemented using Brain}
+\begingroup
+\fontsize{7pt}{8pt}\selectfont
+\begin{Verbatim}[frame=single]
+//You will always need a Brain object
+Brain brain = new Brain();
+//Add the OWL classes
+brain.addClass("Nucleus");
+brain.addClass("Cell");
+//Add the OWL object property
+brain.addObjectProperty("part-of");
+//Declare the axiom
+brain.subClassOf("Nucleus", "part-of some Cell");
+//Query the knowledge-base for indirect subclasses of an expression
+List<String> subClasses = brain.getSubClasses("part-of some Cell", false);
+//Free the resources used by the reasoner
+brain.sleep();
+//Save the ontology
+brain.save("your/path/to/ontology.owl");
+\end{Verbatim}
+\endgroup
+\caption{Example of commented implementation of an axiom using Brain; axiom expressed in natural language:
+ \textit{The nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
+ \textit{Nucleus subClassOf part-of some Cell.}}
 \end{figure}
 
 The full list of currently supported constructs is available in the supplementary material.
