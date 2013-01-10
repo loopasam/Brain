@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  27 OCT 2012 15:44
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 14:36
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -272,7 +272,7 @@ my insertion and my current dilemma will both disappear.
 <inserted text> 
                 $
 l.21 complement & \neg
-                       C & not C & Not supported (Not in EL profile\\[1ex]
+                       C & not C & Not supported (Not in EL profile)\\[1ex]
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -280,7 +280,7 @@ you left one out. Proceed, with fingers crossed.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
 l.21 complement & \neg C &
-                           not C & Not supported (Not in EL profile\\[1ex]
+                           not C & Not supported (Not in EL profile)\\[1ex]
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -291,7 +291,7 @@ deleted material, e.g., by typing `I$}'.
 <inserted text> 
                 $
 l.21 complement & \neg C &
-                           not C & Not supported (Not in EL profile\\[1ex]
+                           not C & Not supported (Not in EL profile)\\[1ex]
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -299,7 +299,7 @@ you left one out. Proceed, with fingers crossed.
 <inserted text> 
                 }
 l.21 complement & \neg C &
-                           not C & Not supported (Not in EL profile\\[1ex]
+                           not C & Not supported (Not in EL profile)\\[1ex]
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -309,7 +309,45 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.22 universal restriction & \forall
+l.22 existential restriction & \exists
+                                       R.C & P some C & Not supported (Not i...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<template> \unskip \hfil }
+                          \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
+l.22 existential restriction & \exists R.C &
+                                             P some C & Not supported (Not i...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.22 existential restriction & \exists R.C &
+                                             P some C & Not supported (Not i...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.22 existential restriction & \exists R.C &
+                                             P some C & Not supported (Not i...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.23 universal restriction & \forall
                                      R.C & P only C & Not supported (Not in ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -317,7 +355,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.22 universal restriction & \forall R.C &
+l.23 universal restriction & \forall R.C &
                                            P only C & Not supported (Not in ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -328,7 +366,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.22 universal restriction & \forall R.C &
+l.23 universal restriction & \forall R.C &
                                            P only C & Not supported (Not in ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -336,7 +374,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.22 universal restriction & \forall R.C &
+l.23 universal restriction & \forall R.C &
                                            P only C & Not supported (Not in ...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -347,7 +385,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.29 concept inclusion & C \sqsubseteq
+l.30 concept inclusion & C \sqsubseteq
                                        D & C SubClassOf: D & brain.subClassO...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -355,7 +393,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.29 concept inclusion & C \sqsubseteq D &
+l.30 concept inclusion & C \sqsubseteq D &
                                            C SubClassOf: D & brain.subClassO...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -366,7 +404,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.29 concept inclusion & C \sqsubseteq D &
+l.30 concept inclusion & C \sqsubseteq D &
                                            C SubClassOf: D & brain.subClassO...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -374,7 +412,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.29 concept inclusion & C \sqsubseteq D &
+l.30 concept inclusion & C \sqsubseteq D &
                                            C SubClassOf: D & brain.subClassO...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -385,7 +423,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.30 concept equivalence & C \equiv
+l.31 concept equivalence & C \equiv
                                     D & C EquivalentTo: D & brain.equivalent...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -393,7 +431,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.30 concept equivalence & C \equiv D &
+l.31 concept equivalence & C \equiv D &
                                         C EquivalentTo: D & brain.equivalent...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -404,7 +442,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.30 concept equivalence & C \equiv D &
+l.31 concept equivalence & C \equiv D &
                                         C EquivalentTo: D & brain.equivalent...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -412,7 +450,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.30 concept equivalence & C \equiv D &
+l.31 concept equivalence & C \equiv D &
                                         C EquivalentTo: D & brain.equivalent...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -423,7 +461,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.31 concept disjointness & C\sqcap
+l.32 concept disjointness & C\sqcap
                                     D \sqsubseteq \bot & C DisjointWith: D &...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -431,7 +469,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.31 ...isjointness & C\sqcap D \sqsubseteq \bot &
+l.32 ...isjointness & C\sqcap D \sqsubseteq \bot &
                                                    C DisjointWith: D & brain...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -442,7 +480,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.31 ...isjointness & C\sqcap D \sqsubseteq \bot &
+l.32 ...isjointness & C\sqcap D \sqsubseteq \bot &
                                                    C DisjointWith: D & brain...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -450,7 +488,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.31 ...isjointness & C\sqcap D \sqsubseteq \bot &
+l.32 ...isjointness & C\sqcap D \sqsubseteq \bot &
                                                    C DisjointWith: D & brain...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -461,7 +499,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.33 role inclusion & R \sqsubseteq
+l.34 role inclusion & R \sqsubseteq
                                     S & R SubPropertyOf: S & brain.subProper...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -469,7 +507,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.33 role inclusion & R \sqsubseteq S &
+l.34 role inclusion & R \sqsubseteq S &
                                         R SubPropertyOf: S & brain.subProper...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -480,7 +518,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.33 role inclusion & R \sqsubseteq S &
+l.34 role inclusion & R \sqsubseteq S &
                                         R SubPropertyOf: S & brain.subProper...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -488,7 +526,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.33 role inclusion & R \sqsubseteq S &
+l.34 role inclusion & R \sqsubseteq S &
                                         R SubPropertyOf: S & brain.subProper...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -499,7 +537,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.34 role equivalence & R \equiv
+l.35 role equivalence & R \equiv
                                  S & R EquivalentTo: S & brain.equivalentPro...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -507,7 +545,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.34 role equivalence & R \equiv S &
+l.35 role equivalence & R \equiv S &
                                      R EquivalentTo: S & brain.equivalentPro...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -518,7 +556,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.34 role equivalence & R \equiv S &
+l.35 role equivalence & R \equiv S &
                                      R EquivalentTo: S & brain.equivalentPro...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -526,7 +564,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.34 role equivalence & R \equiv S &
+l.35 role equivalence & R \equiv S &
                                      R EquivalentTo: S & brain.equivalentPro...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -537,7 +575,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.35 complex role inclusion & R1\circ
+l.36 complex role inclusion & R1\circ
                                       R2 \sqsubseteq S & S SubPropertyChain:...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -545,7 +583,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.35 ...ole inclusion & R1\circ R2 \sqsubseteq S &
+l.36 ...ole inclusion & R1\circ R2 \sqsubseteq S &
                                                    S SubPropertyChain: R1 o ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -556,7 +594,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.35 ...ole inclusion & R1\circ R2 \sqsubseteq S &
+l.36 ...ole inclusion & R1\circ R2 \sqsubseteq S &
                                                    S SubPropertyChain: R1 o ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -564,7 +602,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.35 ...ole inclusion & R1\circ R2 \sqsubseteq S &
+l.36 ...ole inclusion & R1\circ R2 \sqsubseteq S &
                                                    S SubPropertyChain: R1 o ...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -575,7 +613,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.36 role transitivity & R \circ
+l.37 role transitivity & R \circ
                                  R \sqsubseteq R & Characteristics: Transiti...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -583,7 +621,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.36 role transitivity & R \circ R \sqsubseteq R &
+l.37 role transitivity & R \circ R \sqsubseteq R &
                                                    Characteristics: Transiti...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -594,7 +632,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.36 role transitivity & R \circ R \sqsubseteq R &
+l.37 role transitivity & R \circ R \sqsubseteq R &
                                                    Characteristics: Transiti...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -602,7 +640,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.36 role transitivity & R \circ R \sqsubseteq R &
+l.37 role transitivity & R \circ R \sqsubseteq R &
                                                    Characteristics: Transiti...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -613,7 +651,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.41 individual inequality & a \neq
+l.42 individual inequality & a \neq
                                     b & a DifferentFrom: b & Not supported y...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -621,7 +659,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.41 individual inequality & a \neq b &
+l.42 individual inequality & a \neq b &
                                         a DifferentFrom: b & Not supported y...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -632,7 +670,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.41 individual inequality & a \neq b &
+l.42 individual inequality & a \neq b &
                                         a DifferentFrom: b & Not supported y...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -640,7 +678,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.41 individual inequality & a \neq b &
+l.42 individual inequality & a \neq b &
                                         a DifferentFrom: b & Not supported y...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -649,16 +687,16 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (9.1011pt too wide) in paragraph at lines 12--44
+Overfull \hbox (9.1011pt too wide) in paragraph at lines 12--45
  [][][] 
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 72.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 73.
 (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 72.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 73.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -669,7 +707,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Here is how much of TeX's memory you used:
  645 strings out of 493848
  8823 string characters out of 1152822
- 67968 words of memory out of 3000000
+ 68968 words of memory out of 3000000
  3983 multiletter control sequences out of 15000+50000
  4553 words of font info for 17 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -680,7 +718,7 @@ mf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb>
-Output written on document.pdf (2 pages, 73314 bytes).
+Output written on document.pdf (2 pages, 73660 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

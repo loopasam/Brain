@@ -18,7 +18,8 @@ intersection & C\sqcap D & C and D & brain.equivalentClasses("A","C and D");\\[1
 top concept & \top & owl:Thing & brain.getOWLClass("Thing");\\[1ex]
 bottom concept & \bot & owl:Nothing & brain.getUnsatisfiableClasses();\\[1ex]
 union & C\sqcup D & C or D & Not supported (Not in EL profile)\\[1ex]
-complement & \neg C & not C & Not supported (Not in EL profile\\[1ex]
+complement & \neg C & not C & Not supported (Not in EL profile)\\[1ex]
+existential restriction & \exists R.C & P some C & Not supported (Not in EL profile)\\[1ex]
 universal restriction & \forall R.C & P only C & Not supported (Not in EL profile)\\[1ex] \hline
 \multicolumn{4}{c}{\textbf{Roles}}\\[2ex] \hline
 atomic role & R & ObjectProperty: P & brain.addObjectProperty("P");\\[1ex] \hline
@@ -72,15 +73,15 @@ WHERE term.name='blood coagulation' \\
 AND distance \textless \textgreater \vspace{0cm} 0 ;\\ 
 \end{tabular} &
 \begin{tabular}[c]{@{}c@{}}
-brain.getSubClasses( \\ "RO\_0002211 some GO\_0007596",\\ false); 
+brain.getSubClasses( \\ ``RO\_0002211 some GO\_0007596",\\ false); 
 \end{tabular} \\[1ex] \hline
 
 Method of retrieval & 
 \begin{tabular}[c]{@{}c@{}}
-Iteration over extra tables \\ pre-prepared storing all \\ the possible links (closure graph)
+Iteration over \\ additional tables storing all \\ the possible links (closure graph)
 \end{tabular} &
 \begin{tabular}[c]{@{}c@{}}
-Automated OWL reasoning \\ over the ontology/knowledge base
+Automated reasoning \\ over the knowledge base \\ using an abstract OWL expression
 \end{tabular} \\[1ex] \hline
 
 \hline\hline
