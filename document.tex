@@ -20,7 +20,7 @@ John Overington\,$^{1}$ and Dietrich Rebholz-Schuhmann\,$^{1}$}
 \begin{abstract}
 
 \section{Summary:}
-Brain is a software library facilitating the creation and manipulation of ontologies and knowledge-bases represented in the
+Brain is a Java software library facilitating the creation and manipulation of ontologies and knowledge-bases represented in the
 Web Ontology Language (OWL).
 
 \section{Availability and Implementation:}
@@ -76,7 +76,8 @@ the configuration for advanced users.
 \section{Library features}
 Brain is implemented as a facade, leveraging the access to the OWL-API and providing a series of convenience methods for common
 use-cases encountered in the biomedical domain. In order to simplify the interaction with the OWL-API, Brain has been designed according to
-a series of features described below.
+a series of features described below. The full list of currently supported constructs is available in the supplementary material and in
+the library documentation.
 \subsection{Unique ontology}
 An instance of a Brain object hold a reference to only one knowledge base. It is yet possible to import some external ontologies, either
 stored locally or via a network but Brain will always merge the added information to the existing knowledge base.
@@ -85,11 +86,43 @@ The names (short forms) of OWL entities handled by a Brain object have to be uni
 an OWL class http://www.example.org/Cell to the ontology if an OWL entity with short form ``Cell'' already exists.
 Despite being in contradiction with some fundamental Semantic Web principles, this design prevent ambiguous queries and integration when 
 short forms are used and hides as much as possible the cumbersome interaction with prefixes and Internationalized Resource Identifiers (IRI).
+
+\begin{figure}[h]
+\begingroup
+\fontsize{7pt}{8pt}\selectfont
+\begin{Verbatim}[frame=single]
+//Creation of the Brain instance
+Brain brain = new Brain();
+//Add the OWL classes to the knowledge base
+brain.addClass("Nucleus");
+brain.addClass("Cell");
+//Add the OWL object property
+brain.addObjectProperty("part-of");
+//Declare the axiom. Note that expressions in 
+//Manchester syntax can be used directly.
+brain.subClassOf("Nucleus", "part-of some Cell");
+
+//Query the knowledge base for the indirect
+//subclasses of an OWL class expression
+List<String> subClasses = 
+    brain.getSubClasses("part-of some Cell", false);
+//Free the resources used by the reasoner
+brain.sleep();
+//Save the ontology
+brain.save("your/path/to/ontology.owl");
+\end{Verbatim}
+\endgroup
+\caption{Implementation example in Java of an axiom using Brain; The axiom expressed in natural language:
+ \textit{A nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
+ \textit{Nucleus subClassOf part-of some Cell.}}
+\end{figure}
+
 \subsection{Typeless interaction}
 The interaction with the library relies on the user-friendly Manchester syntax entered as string \citep{Horridge2006}. 
 This choice permits to move away from the cumbersome creation of Java objects and is particularly suitable in a web server environment where
 requests are likely to be typeless. Using strings as input also speeds the production
-and flexibility of the code written to move to an OWL representation from a relational or flat-file database for example.
+and flexibility of the code written to move to an OWL representation from a relational or flat-file database for example. Figure 1 provides
+an example of axiom implementation uing the Manchester syntax.
 \subsection{Error-handling}
 Because the interaction with Brain is built around strings rather than Java objects, a special care has to be put on
 exceptions handling in order to safely maintain the correct execution of the program. Brain throws different types of error tailored 
@@ -102,144 +135,29 @@ references to external entities. Data from different sources can therefore be ea
 \subsection{Querying}
 Brain is oriented towards efficient querying of OWL knowledge bases.
 Powerful questions can be formulated over the knowledge base using the Manchester syntax, abstracting
-away complex interaction with the Java object provided by the OWL-API. An example of question answering over the GO using Brain
+away complex interaction with the Java object provided by the OWL-API (illustrated in Figure 1).
+An example of question answering over the GO using Brain
 is compared against a traditional SQL query in the supplementary material.
-
-\begin{figure}[h]
-\begingroup
-\fontsize{7pt}{8pt}\selectfont
-\begin{Verbatim}[frame=single]
-//You will always need a Brain object
-Brain brain = new Brain();
-//Add the OWL classes
-brain.addClass("Nucleus");
-brain.addClass("Cell");
-//Add the OWL object property
-brain.addObjectProperty("part-of");
-//Declare the axiom
-brain.subClassOf("Nucleus", "part-of some Cell");
-//Query the knowledge-base for indirect subclasses of an expression
-List<String> subClasses = brain.getSubClasses("part-of some Cell", false);
-//Free the resources used by the reasoner
-brain.sleep();
-//Save the ontology
-brain.save("your/path/to/ontology.owl");
-\end{Verbatim}
-\endgroup
-\caption{Example of commented implementation of an axiom using Brain; axiom expressed in natural language:
- \textit{The nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
- \textit{Nucleus subClassOf part-of some Cell.}}
-\end{figure}
-
-The full list of currently supported constructs is available in the supplementary material.
-
 
 \section{Conclusion}
 Brain is an open-source Java library designed to build and query biomedical knowledge bases or OWL ontologies.
 The library is centered on the EL profile, and designed to be suitable and scalable for biomedical knowledge representation.
-The convenience methods provided by Brain should simplify the development of biomedical knowledge-bases and allow developers
+The convenience methods provided by Brain should simplify the development of biomedical knowledge bases and allow developers
 to increase their productivity while effectively dealing with data integration challenges.
 
 \section*{Acknowledgement}
 \paragraph{Funding\textcolon}
 This work was supported by funding from the EMBL member states. Samuel Croset is a member of Darwin College, University of Cambridge.
 
-% \bibliographystyle{natbib}
-% \bibliographystyle{achemnat}
-% \bibliographystyle{plainnat}
-% \bibliographystyle{abbrv}
-% \bibliographystyle{bioinformatics}
-% 
-% \bibliographystyle{plain}
-% 
-% \bibliography{document}
+\bibliographystyle{natbib}
+\bibliographystyle{achemnat}
+\bibliographystyle{plainnat}
+\bibliographystyle{abbrv}
+\bibliographystyle{bioinformatics}
 
-\begin{thebibliography}{}
+\bibliographystyle{plain}
 
-\bibitem[Ashburner {\em et~al.}(2000)Ashburner, Ball, Blake, Botstein, Butler,
-  Cherry, Davis, Dolinski, Dwight, Eppig, Harris, Hill, Issel-Tarver,
-  Kasarskis, Lewis, Matese, Richardson, Ringwald, Rubin, and
-  Sherlock]{Ashburner2000}
-Ashburner, M., Ball, C.~A., Blake, J.~A., Botstein, D., Butler, H., Cherry,
-  J.~M., Davis, A.~P., Dolinski, K., Dwight, S.~S., Eppig, J.~T., Harris,
-  M.~A., Hill, D.~P., Issel-Tarver, L., Kasarskis, A., Lewis, S., Matese,
-  J.~C., Richardson, J.~E., Ringwald, M., Rubin, G.~M., and Sherlock, G.
-  (2000).
-\newblock {Gene Ontology: tool for the unification of biology}.
-\newblock {\em Nature Genetics\/}, {\bf 25}(1), 25--29.
+ \bibliography{document}
 
-\bibitem[Crosswell and Thornton(2012)Crosswell and Thornton]{Crosswell2012}
-Crosswell, L.~C. and Thornton, J.~M. (2012).
-\newblock {ELIXIR: a distributed infrastructure for European biological data.}
-\newblock {\em Trends Biotechnol.}, {\bf 30}, 241----242.
-
-\bibitem[{De Matos} {\em et~al.}(2010){De Matos}, Alc\'{a}ntara, Dekker, Ennis,
-  Hastings, Haug, Spiteri, Turner, and Steinbeck]{DeMatos2010}
-{De Matos}, P., Alc\'{a}ntara, R., Dekker, A., Ennis, M., Hastings, J., Haug,
-  K., Spiteri, I., Turner, S., and Steinbeck, C. (2010).
-\newblock {Chemical Entities of Biological Interest: an update}.
-\newblock {\em Nucleic Acids Research\/}, {\bf 38}(Database issue), D249--D254.
-
-\bibitem[Gaulton {\em et~al.}(2012)Gaulton, Bellis, Bento, Chambers, Davies,
-  Hersey, Light, McGlinchey, Michalovich, Al-Lazikani, and
-  Overington]{Gaulton2012}
-Gaulton, A., Bellis, L.~J., Bento, A.~P., Chambers, J., Davies, M., Hersey, A.,
-  Light, Y., McGlinchey, S., Michalovich, D., Al-Lazikani, B., and Overington,
-  J.~P. (2012).
-\newblock {ChEMBL: a large-scale bioactivity database for drug discovery}.
-\newblock {\em Nucleic Acids Research\/}, {\bf 40}(Database issue), D1100--7.
-
-\bibitem[{Horridge} and {Bechhofer}(2011){Horridge} and
-  {Bechhofer}]{MatthewHorridge2011}
-{Horridge} and {Bechhofer} (2011).
-\newblock {The OWL API: A Java API for OWL Ontologies.}
-\newblock {\em Semantic Web Journal\/}, pages 11--21.
-
-\bibitem[Horridge {\em et~al.}(2006)Horridge, Drummond, Goodwin, Rector,
-  Stevens, and Wang]{Horridge2006}
-Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., and Wang,
-  H.~H. (2006).
-\newblock {The Manchester OWL Syntax}.
-\newblock {\em Syntax\/}, {\bf 216}, 10--11.
-
-\bibitem[{Kazakov} {\em et~al.}(2011){Kazakov}, {Markus Kr\"{o}tzsch}, and
-  {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
-{Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k} (2011).
-\newblock {Concurrent Classification of EL Ontologies}.
-\newblock {\em Proceedings of the 10th International Semantic Web Conference
-  (ISWC'11)\/}, {\bf 7032}.
-
-\bibitem[Kr\"{o}tzsch {\em et~al.}(2012)Kr\"{o}tzsch, Simanˇ, and
-  Horrocks]{Krotzsch2012}
-Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
-\newblock {A Description Logic Primer}.
-\newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
-
-\bibitem[{Manola} and {Miller}(2004){Manola} and {Miller}]{FrankManola}
-{Manola} and {Miller} (2004).
-\newblock {RDF Primer}.
-
-\bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
-  Lutz]{Motik2009}
-Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
-\newblock {OWL 2 Web Ontology Language Profiles}.
-\newblock {\em Language\/}, {\bf 2009}(October), 1--53.
-
-\bibitem[Mungall(2012)Mungall]{MungallC}
-Mungall (2012).
-\newblock {OWLTools}.
-
-\bibitem[{Stanford Center for Biomedical Informatics Research}(2012){Stanford
-  Center for Biomedical Informatics
-  Research}]{StanfordCenterforBiomedicalInformaticsResearch}
-{Stanford Center for Biomedical Informatics Research} (2012).
-\newblock {Prot\'{e}g\'{e} Project}.
-
-\bibitem[{W3C OWL Working Group}(2009){W3C OWL Working
-  Group}]{W3COWLWorkingGroup}
-{W3C OWL Working Group} (2009).
-\newblock {OWL 2 Web Ontology Language Document Overview}.
-
-\end{thebibliography}
-
+% insert document.bbl here
 \end{document}

@@ -12,11 +12,6 @@ Ashburner, M., Ball, C.~A., Blake, J.~A., Botstein, D., Butler, H., Cherry,
 \newblock {Gene Ontology: tool for the unification of biology}.
 \newblock {\em Nature Genetics\/}, {\bf 25}(1), 25--29.
 
-\bibitem[Crosswell and Thornton(2012)Crosswell and Thornton]{Crosswell2012}
-Crosswell, L.~C. and Thornton, J.~M. (2012).
-\newblock {ELIXIR: a distributed infrastructure for European biological data.}
-\newblock {\em Trends Biotechnol.}, {\bf 30}, 241----242.
-
 \bibitem[{De Matos} {\em et~al.}(2010){De Matos}, Alc\'{a}ntara, Dekker, Ennis,
   Hastings, Haug, Spiteri, Turner, and Steinbeck]{DeMatos2010}
 {De Matos}, P., Alc\'{a}ntara, R., Dekker, A., Ennis, M., Hastings, J., Haug,
@@ -58,10 +53,6 @@ Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., and Wang,
 Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
 \newblock {A Description Logic Primer}.
 \newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
-
-\bibitem[{Manola} and {Miller}(2004){Manola} and {Miller}]{FrankManola}
-{Manola} and {Miller} (2004).
-\newblock {RDF Primer}.
 
 \bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
   Lutz]{Motik2009}
