@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 14:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 17:08
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -381,20 +381,13 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:37.09793pt when 640.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:37.09793pt when 641.59514pt
-Extra height:0.0pt when 642.59514pt
-(2)Left:642.59514pt Right:633.09793pt Output:642.59514pt
+Extra height:0.0pt when 645.09514pt
+(2)Left:645.09514pt Right:642.09793pt Output:645.09514pt
 - LAST -
 Extra skip:0.0pt
-Left:642.59514pt
-Right:633.09793pt
-Output:642.59514pt
+Left:645.09514pt
+Right:642.09793pt
+Output:645.09514pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
 (Font)              Font shape `OT1/phv/b/it' tried instead on input line 168.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
@@ -421,7 +414,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  3098 strings out of 493848
  37653 string characters out of 1152822
- 123545 words of memory out of 3000000
+ 123737 words of memory out of 3000000
  6305 multiletter control sequences out of 15000+50000
  51159 words of font info for 105 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -438,7 +431,7 @@ vbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/s
 hare/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 152412 bytes).
+Output written on document.pdf (2 pages, 152657 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

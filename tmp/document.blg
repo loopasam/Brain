@@ -1,30 +1,30 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: document.aux
 The style file: natbib.bst
-Illegal, another \bibstyle command---line 20 of file document.aux
+Illegal, another \bibstyle command---line 19 of file document.aux
  : \bibstyle
  :          {achemnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 21 of file document.aux
+Illegal, another \bibstyle command---line 20 of file document.aux
  : \bibstyle
  :          {plainnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 22 of file document.aux
+Illegal, another \bibstyle command---line 21 of file document.aux
  : \bibstyle
  :          {abbrv}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 23 of file document.aux
+Illegal, another \bibstyle command---line 22 of file document.aux
  : \bibstyle
  :          {bioinformatics}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 24 of file document.aux
+Illegal, another \bibstyle command---line 23 of file document.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
 Database file #1: document.bib
 You've used 11 entries,
             2378 wiz_defined-function locations,
-            604 strings with 6729 characters,
+            604 strings with 6797 characters,
 and the built_in function-call counts, 5847 in all, are:
 = -- 497
 > -- 473

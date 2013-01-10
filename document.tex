@@ -79,7 +79,7 @@ Brain is implemented as a facade leveraging the access to the OWL-API and provid
 use-cases encountered in the biomedical domain. In order to simplify the interaction with the OWL-API, Brain follows
 a series of features described below. The full list of currently supported constructs and methods is available in the
  supplementary material and in the online documentation.
-\subsection{Unique ontology}
+\subsection{Unique knowledge base}
 An instance of a Brain object hold a reference to only one knowledge base. It is yet possible to import some external ontologies, either
 stored locally or via a network but Brain will always merge the added information to the existing knowledge base.
 \subsection{Unique short form names}
@@ -114,7 +114,7 @@ brain.sleep();
 brain.save("your/path/to/ontology.owl");
 \end{Verbatim}
 \endgroup
-\caption{Implementation example in Java of an axiom using Brain; The axiom expressed in natural language:
+\caption{Implementation example in Java of an axiom using Brain; the axiom expressed in natural language:
  \textit{A nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
  \textit{Nucleus subClassOf part-of some Cell.}}
 \end{figure}
