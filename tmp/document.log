@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 11:59
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 13:59
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -337,11 +337,6 @@ the Chemical Entities of
  []
 
 
-Underfull \hbox (badness 1199) in paragraph at lines 78--82
-\OT1/ptm/m/n/9 use-cases encountered in the biomedical domain. In order to
- []
-
-
 Underfull \hbox (badness 1286) in paragraph at lines 83--85
 []\OT1/ptm/m/n/9 An instance of a Brain object hold a reference to only one
  []
@@ -351,11 +346,7 @@ Underfull \hbox (badness 1924) in paragraph at lines 83--85
 \OT1/ptm/m/n/9 knowledge base. It is yet possible to import some external
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Font Info:    Try loading font information for OMS+phv on input line 90.
-
 (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
@@ -373,20 +364,15 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 94.
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 118.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 119.
 
-Underfull \hbox (badness 3612) in paragraph at lines 122--127
+Underfull \hbox (badness 3612) in paragraph at lines 123--128
 []\OT1/ptm/m/n/9 The interaction with the library relies on the user-friendly
  []
 
 
-Underfull \hbox (badness 1314) in paragraph at lines 137--142
-\OT1/ptm/m/n/9 base using the Manchester syntax, abstracting away complex
- []
-
-
-Underfull \hbox (badness 2689) in paragraph at lines 137--142
-\OT1/ptm/m/n/9 interaction with the Java object provided by the OWL-API
+Underfull \hbox (badness 2310) in paragraph at lines 139--146
+[]\OT1/ptm/m/n/9 Brain is oriented towards efficient querying of OWL 2 EL
  []
 
 (./document.bbl
@@ -397,50 +383,22 @@ Missing character: There is no ‡ in font ptmr7t!
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:28.09793pt when 625.59514pt
+Extra height:37.09793pt when 640.59514pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:28.09793pt when 626.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:28.09793pt when 627.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:28.09793pt when 628.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:28.09793pt when 629.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:19.09793pt when 630.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:19.09793pt when 631.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:19.09793pt when 632.59514pt
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-Extra height:19.09793pt when 633.59514pt
-Extra height:0.0pt when 634.59514pt
-(2)Left:634.59514pt Right:612.04636pt Output:634.59514pt
+Extra height:37.09793pt when 641.59514pt
+Extra height:0.0pt when 642.59514pt
+(2)Left:642.59514pt Right:633.09793pt Output:642.59514pt
 - LAST -
 Extra skip:0.0pt
-Left:634.59514pt
-Right:612.04636pt
-Output:634.59514pt
+Left:642.59514pt
+Right:633.09793pt
+Output:642.59514pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 164.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 168.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 164.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 168.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -463,7 +421,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  3098 strings out of 493848
  37653 string characters out of 1152822
- 122038 words of memory out of 3000000
+ 123545 words of memory out of 3000000
  6305 multiletter control sequences out of 15000+50000
  51159 words of font info for 105 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -480,7 +438,7 @@ vbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/s
 hare/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 151944 bytes).
+Output written on document.pdf (2 pages, 152412 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
