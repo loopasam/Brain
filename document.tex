@@ -34,15 +34,14 @@ The documentation is available at https://github.com/loopasam/Brain/wiki.
 \section{Supplementary information:}
 Supported features and a comparative table are available at the journal's web site. Some supplementary examples are also available
 in the online documentation.
-
 \end{abstract}
 \section{Motivation}
 Knowledge bases, a concept from computer science (see \citealp{Krotzsch2012} for an introduction),
 could be a solution to improve the interoperability and the value of the large amount of biomedical information available online.
 At the time of writing, a few options are available to handle such knowledge bases: Complex
 libraries as the OWL-API \citep{MatthewHorridge2011} or didactic graphical user interfaces such as
-Protege \citep{StanfordCenterforBiomedicalInformaticsResearch} and TopBraid Composer (ref). An intermediary framework,
-OWLTools \citep{MungallC},
+Protege \citep{StanfordCenterforBiomedicalInformaticsResearch} and TopBraid Composer \citep{TopQuadrant}. 
+An intermediary framework, OWLTools \citep{MungallC},
 provides some methods to query biomedical ontologies, but the interaction with the library is mostly done via command-lines which
 limits the scale of projects that can be build with it.
 Brain - the Java software library presented in this manuscript addresses this matter and provides a comprehensive and simplified
@@ -50,7 +49,6 @@ interface, dedicated to the programmatic creation and query of biomedical knowle
 graphical user interfaces and the OWL-API and is particularly usefull to develop web applications.
 Brain has a particular focus on the EL profile of OWL, as it covers the majority of biomedical
 use-cases and unlocks good performances and scalability. 
-
 \section{Scalable knowledge bases}
 The Web Ontology Language (OWL) derives from Description Logic and
 has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{W3COWLWorkingGroup}.
@@ -73,7 +71,6 @@ large datasets and offers the possibility to run some reasoning tasks in paralle
 clusters or multicore architecture can scale the speed of reasoning as more data are added to the knowledge base.
 Brain wraps and simplifies the interaction with Elk while still leaving the possibility to fine tune
 the configuration for advanced users. Figure 1 shows an example of query using the Elk reasoner.
-
 \section{Library features}
 Brain is implemented as a facade leveraging the access to the OWL-API and providing a series of convenience methods for common
 use-cases encountered in the biomedical domain. In order to simplify the interaction with the OWL-API, Brain follows
@@ -85,7 +82,7 @@ stored locally or via a network but Brain will always merge the added informatio
 \subsection{Unique short form names}
 The names (short forms) of OWL entities handled by a Brain object have to be unique. It is for instance not possible to add
 an OWL class such as http://www.example.org/Cell to the ontology if an OWL entity with the short form ``Cell'' already exists.
-Despite being in contradiction with some Semantic Web principles, this design prevent ambiguous queries and integration
+Despite being in contradiction with some Semantic Web principles, this design prevents ambiguous queries and integration
 and hides as much as possible the cumbersome interaction with prefixes and Internationalized Resource Identifiers (IRI).
 
 \begin{figure}[h]
@@ -102,10 +99,9 @@ brain.addObjectProperty("part-of");
 //Declare the axiom. Note that expressions in 
 //Manchester syntax can be used directly:
 brain.subClassOf("Nucleus", "part-of some Cell");
-//Integrate the content of external knowledge base:
+//Integrate the content of an external knowledge base:
 brain.learn("http://example.org/bar.owl");
-//Query the knowledge base for the indirect
-//subclasses of an OWL class expression:
+//Query the knowledge base for indirect subclasses:
 List<String> subClasses = 
     brain.getSubClasses("part-of some Cell", false);
 //Free the resources used by the reasoner:
@@ -118,7 +114,6 @@ brain.save("your/path/to/ontology.owl");
  \textit{A nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
  \textit{Nucleus subClassOf part-of some Cell.}}
 \end{figure}
-
 \subsection{Typeless interaction}
 The interaction with the library relies on the user-friendly Manchester syntax entered as string \citep{Horridge2006}. 
 This choice permits to move away from the creation of Java objects and is particularly suitable in a web server set-up where
@@ -143,7 +138,6 @@ Powerful questions can be formulated using the Manchester syntax, abstracting
 away complex interaction with the Java objects provided by the OWL-API (illustrated in Figure 1).
 An example of question answering over the GO using Brain
 is compared against a traditional SQL query in the supplementary material.
-
 \section{Conclusion}
 Brain is an open-source Java library designed to build and query biomedical knowledge bases or OWL ontologies.
 The library is centered on the EL profile, and designed to be suitable and scalable for biomedical knowledge representation.
