@@ -1,99 +1,27 @@
 package uk.ac.ebi.brain.core;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.net.*;
+import java.util.*;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
-import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxOntologyFormat;
-import org.semanticweb.elk.owlapi.ElkReasonerConfiguration;
-import org.semanticweb.elk.owlapi.ElkReasonerFactory;
+import org.coode.owlapi.manchesterowlsyntax.*;
+import org.semanticweb.elk.owlapi.*;
 import org.semanticweb.elk.reasoner.config.ReasonerConfiguration;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.expression.OWLEntityChecker;
-import org.semanticweb.owlapi.expression.ParserException;
-import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
-import org.semanticweb.owlapi.model.AddAxiom;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLDataPropertyDomainAxiom;
-import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
-import org.semanticweb.owlapi.model.OWLDataPropertyRangeAxiom;
-import org.semanticweb.owlapi.model.OWLDatatype;
-import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
-import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
-import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
-import org.semanticweb.owlapi.model.OWLEquivalentDataPropertiesAxiom;
-import org.semanticweb.owlapi.model.OWLEquivalentObjectPropertiesAxiom;
-import org.semanticweb.owlapi.model.OWLFunctionalDataPropertyAxiom;
-import org.semanticweb.owlapi.model.OWLLiteral;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
-import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
-import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyFormat;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import org.semanticweb.owlapi.model.OWLReflexiveObjectPropertyAxiom;
-import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
-import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
-import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
-import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
-import org.semanticweb.owlapi.model.PrefixManager;
-import org.semanticweb.owlapi.profiles.OWL2ELProfile;
-import org.semanticweb.owlapi.profiles.OWLProfileReport;
-import org.semanticweb.owlapi.profiles.OWLProfileViolation;
-import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.util.AnnotationValueShortFormProvider;
-import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
-import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
-import org.semanticweb.owlapi.util.DefaultPrefixManager;
-import org.semanticweb.owlapi.util.OWLEntityRemover;
-import org.semanticweb.owlapi.util.ShortFormProvider;
-import org.semanticweb.owlapi.util.SimpleShortFormProvider;
+import org.semanticweb.owlapi.expression.*;
+import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.profiles.*;
+import org.semanticweb.owlapi.reasoner.*;
+import org.semanticweb.owlapi.util.*;
 import org.semanticweb.owlapi.vocab.PrefixOWLOntologyFormat;
 
-import uk.ac.ebi.brain.error.BadNameException;
-import uk.ac.ebi.brain.error.BadPrefixException;
-import uk.ac.ebi.brain.error.BrainException;
-import uk.ac.ebi.brain.error.ClassExpressionException;
-import uk.ac.ebi.brain.error.DataPropertyExpressionException;
-import uk.ac.ebi.brain.error.ExistingAnnotationPropertyException;
-import uk.ac.ebi.brain.error.ExistingClassException;
-import uk.ac.ebi.brain.error.ExistingDataPropertyException;
-import uk.ac.ebi.brain.error.ExistingEntityException;
-import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
-import uk.ac.ebi.brain.error.NewOntologyException;
-import uk.ac.ebi.brain.error.NonExistingAnnotationPropertyException;
-import uk.ac.ebi.brain.error.NonExistingClassException;
-import uk.ac.ebi.brain.error.NonExistingDataPropertyException;
-import uk.ac.ebi.brain.error.NonExistingEntityException;
-import uk.ac.ebi.brain.error.NonExistingObjectPropertyException;
-import uk.ac.ebi.brain.error.ObjectPropertyExpressionException;
-import uk.ac.ebi.brain.error.StorageException;
+import uk.ac.ebi.brain.error.*;
 
 /**
- * Facade class to access the OWL-API.
+ * Facade class to manipulate the OWL-API.
+ * The documentation is available at https://github.com/loopasam/Brain/wiki
  * @author Samuel Croset
  */
 public class Brain {
@@ -103,7 +31,6 @@ public class Brain {
 	private OWLOntologyManager manager;
 	private OWLDataFactory factory;
 	private OWLReasonerFactory reasonerFactory;
-	private ShortFormProvider shortFormProvider;
 	private BidirectionalShortFormProvider bidiShortFormProvider;
 	private OWLEntityChecker entityChecker;
 	private DefaultPrefixManager prefixManager;
@@ -117,51 +44,61 @@ public class Brain {
 	public OWLOntology getOntology() {
 		return ontology;
 	}
+	
+	@Deprecated
 	public void setOntology(OWLOntology ontology) {
 		this.ontology = ontology;
 	}
 	public OWLReasoner getReasoner() {
 		return reasoner;
 	}
+	
+	@Deprecated
 	public void setReasoner(OWLReasoner reasoner) {
 		this.reasoner = reasoner;
 	}
 	public OWLOntologyManager getManager() {
 		return manager;
 	}
+	
+	@Deprecated
 	public void setManager(OWLOntologyManager manager) {
 		this.manager = manager;
 	}
 	public OWLDataFactory getFactory() {
 		return factory;
 	}
+	
+	@Deprecated
 	public void setFactory(OWLDataFactory factory) {
 		this.factory = factory;
 	}
 	public OWLReasonerFactory getReasonerFactory() {
 		return reasonerFactory;
 	}
+	
+	@Deprecated
 	public void setReasonerFactory(OWLReasonerFactory reasonerFactory) {
 		this.reasonerFactory = reasonerFactory;
-	}
-	public ShortFormProvider getShortFormProvider() {
-		return shortFormProvider;
-	}
-	public void setShortFormProvider(ShortFormProvider shortFormProvider) {
-		this.shortFormProvider = shortFormProvider;
 	}
 	public BidirectionalShortFormProvider getBidiShortFormProvider() {
 		return bidiShortFormProvider;
 	}
+	
+	@Deprecated
 	public void setBidiShortFormProvider(BidirectionalShortFormProvider bidiShortFormProvider) {
 		this.bidiShortFormProvider = bidiShortFormProvider;
 	}
 	public OWLEntityChecker getEntityChecker() {
 		return entityChecker;
 	}
+	
+	@Deprecated
 	public void setEntityChecker(OWLEntityChecker entityChecker) {
 		this.entityChecker = entityChecker;
 	}
+	
+	@Deprecated
 	public void setPrefixManager(DefaultPrefixManager prefixManager) {
 		this.prefixManager = prefixManager;
 	}
@@ -169,6 +106,7 @@ public class Brain {
 		return prefixManager;
 	}
 
+	@Deprecated
 	public void setClassified(boolean isClassified) {
 		this.isClassified = isClassified;
 	}
@@ -177,7 +115,9 @@ public class Brain {
 	}
 
 	/**
-	 * Creates a Brain instance with the specified prefix and ontology IRI
+	 * Creates a Brain instance with the specified prefix and ontology IRI.
+	 * The OWL entities created will inherit from this prefix.
+	 * The number of working threads for reasoning is set to the maximum (default).
 	 * @param prefix
 	 * @param ontologyIri
 	 * @throws BadPrefixException 
@@ -188,7 +128,8 @@ public class Brain {
 	}
 
 	/**
-	 * Creates a Brain instance with the a default prefix and ontology IRI.
+	 * Creates a Brain instance with the a default prefix (<brain#>) and ontology IRI (<brain.owl>).
+	 * The number of working threads for reasoning is set to the maximum (default).
 	 * @throws BadPrefixException 
 	 * @throws NewOntologyException 
 	 */
@@ -198,7 +139,11 @@ public class Brain {
 
 	/**
 	 * Creates a Brain instance from an ontology object.
-	 * This method is useful for people with a pre-loaded ontology
+	 * This method is useful for people with a pre-loaded ontology in memory and willing
+	 * to quickly create a Brain instance from it.
+	 * The default prefix (<brain#>) and ontology IRI (<brain.owl>) are used.
+	 * The number of working threads for reasoning is set to the maximum (default).
+	 * @param ontology
 	 * @throws BadPrefixException 
 	 * @throws NewOntologyException 
 	 */
@@ -211,9 +156,9 @@ public class Brain {
 
 		this.factory = this.manager.getOWLDataFactory();
 
-		this.shortFormProvider = new SimpleShortFormProvider();	
+		ShortFormProvider shortFormProvider = new SimpleShortFormProvider();	
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
-		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
+		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
@@ -230,14 +175,17 @@ public class Brain {
 		try {
 			this.addClass("http://www.w3.org/2002/07/owl#Thing");
 		} catch (BrainException e) {
-			//If the class throws an error it's no biggie
-			//The top class was already present in the loaded
+			//If the class throws an error it's no big deal.
+			//It means that the top class was already present in the loaded
 			//ontology
 		}
 	}
 
 
 	/**
+	 * Creates a Brain instance with the specified prefix and ontology IRI.
+	 * The OWL entities created will inherit from this prefix.
+	 * The number of working threads for reasoning is set to the passed value (numberOfWorkers parameter).
 	 * @param prefix
 	 * @param ontologyIri
 	 * @param numberOfWorkers
@@ -267,11 +215,9 @@ public class Brain {
 			throw new NewOntologyException(e);
 		}
 
-		//Initiation for the shortForm mapping
-		//TODO should be able to put it in the block only (no 'this')
-		this.shortFormProvider = new SimpleShortFormProvider();	
+		ShortFormProvider shortFormProvider = new SimpleShortFormProvider();	
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
-		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, this.shortFormProvider);
+		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
@@ -300,7 +246,16 @@ public class Brain {
 	}
 
 	/**
-	 * Declare a prefix mapping.
+	 * Declare a prefix mapping. Will be used when the ontology is serialized
+	 * (.owl file). Example of usage:
+	 * <code>
+	 * <pre>
+	 * {@code
+	 * Brain brain = new Brain();
+	 * brain.prefix("http://www.example.org/", "example");
+	 * }
+	 * </pre>
+	 * </code>
 	 * @param longForm
 	 * @param abbreviation
 	 */
@@ -309,7 +264,10 @@ public class Brain {
 	}
 
 	/**
-	 * Add an OWL class to the ontology.
+	 * Add an OWL class to the ontology. An OWLClass
+	 * object is returned. The input value can either be
+	 * the short form of the class or the full IRI. Examples or input
+	 * parameter: "http://example.org/MyClass" or "MyClass".
 	 * @param className
 	 * @return owlClass
 	 * @throws ExistingClassException 
@@ -391,7 +349,7 @@ public class Brain {
 	}
 
 	/**
-	 * Declare an OWL entity in the ontology.
+	 * Declare (register) an OWL entity in the ontology.
 	 * @param owlEntity
 	 */
 	private void declare(OWLEntity owlEntity) {
@@ -450,7 +408,10 @@ public class Brain {
 	}
 
 	/**
-	 * Add an OWL object property to the ontology.
+	 * Add an OWL object property to the ontology. An OWLObjectProperty
+	 * object is returned. The input value can either be
+	 * the short form of the property or the full IRI. Examples or input
+	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param objectPropertyName
 	 * @return owlObjectProperty
 	 * @throws ExistingObjectPropertyException 
@@ -518,7 +479,10 @@ public class Brain {
 	}
 
 	/**
-	 * Add an OWL data property to the ontology.
+	 * Add an OWL data property to the ontology. An OWLDataProperty
+	 * object is returned. The input value can either be
+	 * the short form of the property or the full IRI. Examples or input
+	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param dataPropertyName
 	 * @return owlDataProperty
 	 * @throws ExistingDataPropertyException 
@@ -586,7 +550,10 @@ public class Brain {
 	}
 
 	/**
-	 * Add an OWL annotation property to the ontology.
+	 * Add an OWL annotation property to the ontology. An OWLAnnotationProperty
+	 * object is returned. The input value can either be
+	 * the short form of the property or the full IRI. Examples or input
+	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param annotationProperty
 	 * @return owlAnnotationProperty
 	 * @throws ExistingDataPropertyException 
@@ -653,6 +620,7 @@ public class Brain {
 		update();
 	}
 
+	//TODO continue the doc from here
 	/**
 	 * Update the shortform registry (this.bidiShortFormProvider).
 	 */
@@ -1253,7 +1221,6 @@ public class Brain {
 
 	/**
 	 * Load an external ontology from it's IRI or from a local file.
-	 * @param pathToOntology
 	 * @throws NewOntologyException 
 	 * @throws ExistingEntityException 
 	 */
