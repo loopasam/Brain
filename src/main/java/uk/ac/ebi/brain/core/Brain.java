@@ -44,7 +44,7 @@ public class Brain {
 	public OWLOntology getOntology() {
 		return ontology;
 	}
-	
+
 	@Deprecated
 	public void setOntology(OWLOntology ontology) {
 		this.ontology = ontology;
@@ -52,7 +52,7 @@ public class Brain {
 	public OWLReasoner getReasoner() {
 		return reasoner;
 	}
-	
+
 	@Deprecated
 	public void setReasoner(OWLReasoner reasoner) {
 		this.reasoner = reasoner;
@@ -60,7 +60,7 @@ public class Brain {
 	public OWLOntologyManager getManager() {
 		return manager;
 	}
-	
+
 	@Deprecated
 	public void setManager(OWLOntologyManager manager) {
 		this.manager = manager;
@@ -68,7 +68,7 @@ public class Brain {
 	public OWLDataFactory getFactory() {
 		return factory;
 	}
-	
+
 	@Deprecated
 	public void setFactory(OWLDataFactory factory) {
 		this.factory = factory;
@@ -76,7 +76,7 @@ public class Brain {
 	public OWLReasonerFactory getReasonerFactory() {
 		return reasonerFactory;
 	}
-	
+
 	@Deprecated
 	public void setReasonerFactory(OWLReasonerFactory reasonerFactory) {
 		this.reasonerFactory = reasonerFactory;
@@ -84,7 +84,7 @@ public class Brain {
 	public BidirectionalShortFormProvider getBidiShortFormProvider() {
 		return bidiShortFormProvider;
 	}
-	
+
 	@Deprecated
 	public void setBidiShortFormProvider(BidirectionalShortFormProvider bidiShortFormProvider) {
 		this.bidiShortFormProvider = bidiShortFormProvider;
@@ -92,12 +92,12 @@ public class Brain {
 	public OWLEntityChecker getEntityChecker() {
 		return entityChecker;
 	}
-	
+
 	@Deprecated
 	public void setEntityChecker(OWLEntityChecker entityChecker) {
 		this.entityChecker = entityChecker;
 	}
-	
+
 	@Deprecated
 	public void setPrefixManager(DefaultPrefixManager prefixManager) {
 		this.prefixManager = prefixManager;
@@ -266,7 +266,7 @@ public class Brain {
 	/**
 	 * Add an OWL class to the ontology. An OWLClass
 	 * object is returned. The input value can either be
-	 * the short form of the class or the full IRI. Examples or input
+	 * the short form of the class or the full IRI. Examples of input
 	 * parameter: "http://example.org/MyClass" or "MyClass".
 	 * @param className
 	 * @return owlClass
@@ -410,7 +410,7 @@ public class Brain {
 	/**
 	 * Add an OWL object property to the ontology. An OWLObjectProperty
 	 * object is returned. The input value can either be
-	 * the short form of the property or the full IRI. Examples or input
+	 * the short form of the property or the full IRI. Examples of input
 	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param objectPropertyName
 	 * @return owlObjectProperty
@@ -481,7 +481,7 @@ public class Brain {
 	/**
 	 * Add an OWL data property to the ontology. An OWLDataProperty
 	 * object is returned. The input value can either be
-	 * the short form of the property or the full IRI. Examples or input
+	 * the short form of the property or the full IRI. Examples of input
 	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param dataPropertyName
 	 * @return owlDataProperty
@@ -552,7 +552,7 @@ public class Brain {
 	/**
 	 * Add an OWL annotation property to the ontology. An OWLAnnotationProperty
 	 * object is returned. The input value can either be
-	 * the short form of the property or the full IRI. Examples or input
+	 * the short form of the property or the full IRI. Examples of input
 	 * parameter: "http://example.org/MyProperty" or "MyProperty".
 	 * @param annotationProperty
 	 * @return owlAnnotationProperty
@@ -620,9 +620,9 @@ public class Brain {
 		update();
 	}
 
-	//TODO continue the doc from here
 	/**
-	 * Update the shortform registry (this.bidiShortFormProvider).
+	 * Set the reasoner is the not classified state and flush it.
+	 * A classification will have to be redone.
 	 */
 	private void update() {
 		this.reasoner.flush();
@@ -630,9 +630,9 @@ public class Brain {
 	}
 
 	/**
-	 * Returns the OWL class corresponding to the input string.
+	 * Returns the OWL class corresponding to the input string (short form).
 	 * @param className
-	 * @return entity
+	 * @return owlClass
 	 * @throws NonExistingClassException 
 	 */
 	public OWLClass getOWLClass(String className) throws NonExistingClassException {
@@ -645,9 +645,9 @@ public class Brain {
 	}
 
 	/**
-	 * Returns the OWL annotation property corresponding to the input string.
+	 * Returns the OWL annotation property corresponding to the input string (short form).
 	 * @param propertyName
-	 * @return entity
+	 * @return owlAnnotationProperty
 	 * @throws NonExistingAnnotationPropertyException 
 	 */
 	public OWLAnnotationProperty getOWLAnnotationProperty(String propertyName) throws NonExistingAnnotationPropertyException {
@@ -660,9 +660,9 @@ public class Brain {
 	}
 
 	/**
-	 * Returns the OWL object property corresponding to the input string.
+	 * Returns the OWL object property corresponding to the input string (short form).
 	 * @param objectPropertyName
-	 * @return entity
+	 * @return owlObjectProperty
 	 * @throws NonExistingObjectPropertyException 
 	 */
 	public OWLObjectProperty getOWLObjectProperty(String objectPropertyName) throws NonExistingObjectPropertyException {
@@ -675,9 +675,9 @@ public class Brain {
 	}
 
 	/**
-	 * Returns the OWL data property corresponding to the input string.
+	 * Returns the OWL data property corresponding to the input string (short form).
 	 * @param dataPropertyName
-	 * @return entity
+	 * @return owlDataProperty
 	 * @throws NonExistingDataPropertyException 
 	 */
 	public OWLDataProperty getOWLDataProperty(String dataPropertyName) throws NonExistingDataPropertyException {
@@ -1041,9 +1041,16 @@ public class Brain {
 		return owlClassExpression;
 	}
 
-	//TODO the doc
+
+	/**
+	 * Converts a string representing an OWL class expression with labels into 
+	 * an OWLClassExpression object. If a problem is 
+	 * encountered, an error is thrown.
+	 * @param labelClassExpression
+	 * @return owlClassExpression
+	 * @throws ClassExpressionException 
+	 */
 	public OWLClassExpression parseLabelClassExpression(String labelClassExpression) throws ClassExpressionException {
-		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = null;
 		ManchesterOWLSyntaxEditorParser parser = getLabelParser(labelClassExpression);
 		try {
@@ -1119,18 +1126,17 @@ public class Brain {
 		return parser;
 	}
 
-	//TODO doc
+	/**
+	 * Instantiate a new Manchester syntax parser for labels.
+	 * @param labelClassExpression
+	 * @return parser
+	 */
 	private ManchesterOWLSyntaxEditorParser getLabelParser(String labelClassExpression) {
-		// TODO Auto-generated method stub
-		//TODO has to be done this way because no listener there :-(
-		//Does not create listenning object, no memory leaks!!!
 		List<OWLAnnotationProperty> rdfsLabels = Arrays.asList(this.factory.getRDFSLabel());
 		ShortFormProvider sfp = new AnnotationValueShortFormProvider(rdfsLabels, 
 				Collections.<OWLAnnotationProperty, List<String>> emptyMap(), this.manager);
 		BidirectionalShortFormProvider bidiLabel = new BidirectionalShortFormProviderAdapter(this.manager.getOntologies(), sfp);
-
 		ShortFormEntityChecker labelChecker = new ShortFormEntityChecker(bidiLabel);
-
 		ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(this.factory, labelClassExpression);
 		parser.setOWLEntityChecker(labelChecker);
 		parser.setDefaultOntology(this.ontology);
@@ -1140,6 +1146,7 @@ public class Brain {
 
 	/**
 	 * Save the ontology at the specified location.
+	 * The ontology is serialized using Manchester syntax.
 	 * @param path
 	 * @throws StorageException 
 	 */
@@ -1158,7 +1165,8 @@ public class Brain {
 	}
 
 	/**
-	 * Load an external ontology from it's IRI or from a local file.
+	 * Load an external ontology from it's IRI or from a local file
+	 * and merge it with the current ontology.
 	 * @param pathToOntology
 	 * @throws NewOntologyException 
 	 * @throws ExistingEntityException 
@@ -1214,17 +1222,19 @@ public class Brain {
 		}
 
 		//Transfer all the axioms from the old ontology into the new one
+		//Bottleneck
 		this.manager.addAxioms(this.ontology, newOnto.getAxioms());
 		update();
 	}
 
 
 	/**
-	 * Load an external ontology from it's IRI or from a local file.
+	 * Load another brain object. The axioms are extracted
+	 * and merged with the current one.
+	 * 
 	 * @throws NewOntologyException 
 	 * @throws ExistingEntityException 
 	 */
-	//TODO doc and comments
 	public void learn(Brain brainToLearn) throws ExistingEntityException {
 
 		for (String shortFromNewOnto : brainToLearn.getBidiShortFormProvider().getShortForms()) {
@@ -1244,7 +1254,6 @@ public class Brain {
 		}
 
 		//Keep the prefix information if present
-		//TODO some doc
 		for (String prefix : brainToLearn.getPrefixManager().getPrefixNames()) {
 			if(!this.prefixManager.containsPrefixMapping(prefix)){
 				prefix(brainToLearn.getPrefixManager().getPrefix(prefix), prefix.replaceAll(":", ""));
@@ -1298,7 +1307,9 @@ public class Brain {
 	/**
 	 * Returns the list of subclasses from the expression.
 	 * The second parameter is a flag telling whether only the direct classes
-	 * should be returned.
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
 	 * @param classExpression
 	 * @param direct
 	 * @return subClasses
@@ -1309,10 +1320,15 @@ public class Brain {
 		return getSubClasses(owlClassExpression, direct);
 	}
 
-
-	//Get the subclasses from an expression
+	/**
+	 * Returns the list of subclasses from the OWL expression.
+	 * The second parameter is a flag telling whether only the direct classes
+	 * should be returned.
+	 * @param owlClassExpression
+	 * @param direct
+	 * @return subClasses
+	 */
 	private List<String> getSubClasses(OWLClassExpression owlClassExpression, boolean direct) {
-		// TODO Auto-generated method stub
 		Set<OWLClass> subClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
@@ -1329,10 +1345,19 @@ public class Brain {
 		return sortClasses(subClasses);
 	}
 
-	//TODO finish the method and do the doc
-	//TODO synchronized on key methods
+
+	/**
+	 * Returns the list of subclasses from the label expression.
+	 * The second parameter is a flag telling whether only the direct classes
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
+	 * @param labelClassExpression
+	 * @param direct
+	 * @return subClasses
+	 * @throws ClassExpressionException 
+	 */
 	public synchronized List<String> getSubClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
-		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getSubClasses(owlClassExpression, direct);
 	}
@@ -1340,21 +1365,28 @@ public class Brain {
 	/**
 	 * Returns the list of super classes from the expression.
 	 * The second parameter is a flag telling whether only the direct classes
-	 * should be returned.
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
 	 * @param classExpression
 	 * @param direct
 	 * @return superClasses
 	 * @throws ClassExpressionException 
 	 */
-	//TODO like for subalcces
 	public synchronized List<String> getSuperClasses(String classExpression, boolean direct) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		return getSuperClasses(owlClassExpression, direct);
 	}
 
-	//TODO doc
+	/**
+	 * Returns the list of super classes from the OWL expression.
+	 * The second parameter is a flag telling whether only the direct classes
+	 * should be returned.
+	 * @param owlClassExpression
+	 * @param direct
+	 * @return subClasses
+	 */
 	private List<String> getSuperClasses(OWLClassExpression owlClassExpression, boolean direct) {
-		// TODO Auto-generated method stub
 		Set<OWLClass> superClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
@@ -1371,25 +1403,45 @@ public class Brain {
 		return sortClasses(superClasses);
 	}
 
+
+	/**
+	 * Returns the list of super classes from the label expression.
+	 * The second parameter is a flag telling whether only the direct classes
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
+	 * @param labelClassExpression
+	 * @param direct
+	 * @return superClasses
+	 * @throws ClassExpressionException 
+	 */
 	public synchronized List<String> getSuperClassesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
-		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getSuperClasses(owlClassExpression, direct);
 	}
 
 
 	/**
-	 * Retrieves the named equivalent classes corresponding to the class expression
+	 * Retrieves the named equivalent classes corresponding to the class expression.
+	 * The method is synchronized in order to avoid concurrency problems 
+	 * that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
 	 * @return equivalentClasses
 	 * @throws ClassExpressionException 
 	 * @throws ClassExpressionException 
 	 */
-	//TODO like for subclasses
 	public synchronized List<String> getEquivalentClasses(String classExpression) throws ClassExpressionException {
 		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
 		return getEquivalentClasses(owlClassExpression);
 	}
 
+
+	/**
+	 * Returns the list of equivalent classes from the OWL expression.
+	 * should be returned.
+	 * @param owlClassExpression
+	 * @return equivalentClasses
+	 */
 	private List<String> getEquivalentClasses(OWLClassExpression owlClassExpression) {
 		Set<OWLClass> equivalentClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
@@ -1407,9 +1459,16 @@ public class Brain {
 		return sortClasses(equivalentClasses);
 	}
 
-
+	/**
+	 * Retrieves the named equivalent classes corresponding to the label class expression.
+	 * The method is synchronized in order to avoid concurrency problems 
+	 * that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
+	 * @return equivalentClasses
+	 * @throws ClassExpressionException 
+	 * @throws ClassExpressionException 
+	 */
 	public synchronized List<String> getEquivalentClassesFromLabel(String labelClassExpression) throws ClassExpressionException {
-		// TODO Auto-generated method stub
 		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
 		return getEquivalentClasses(owlClassExpression);
 	}
@@ -1446,7 +1505,7 @@ public class Brain {
 	}
 
 	/**
-	 * Sort the classes based on their shortForms.
+	 * Sort the classes based on their short forms.
 	 * @param classes
 	 * @return listClasses
 	 */
@@ -1491,9 +1550,8 @@ public class Brain {
 	}
 
 	/**
-	 * Returns the unsatisfiable classes (no possible instances).
+	 * Returns the unsatisfiable classes (aka no possible instances).
 	 * @return unsatisfiableClasses
-	 * @throws ClassExpressionException 
 	 */
 	public List<String> getUnsatisfiableClasses() {
 		if(!this.isClassified){
@@ -1519,7 +1577,7 @@ public class Brain {
 	}
 
 	/**
-	 * Checks if the class is already inside the brain. Useful while
+	 * Checks if the class (short form) is already inside the brain. Useful while
 	 * parsing in order to avoid errors.
 	 * @return whether the class is known or not.
 	 */
@@ -1533,7 +1591,7 @@ public class Brain {
 	}
 
 	/**
-	 * Checks if the object property is already inside the brain. Useful while
+	 * Checks if the object property (short form) is already inside the brain. Useful while
 	 * parsing in order to avoid errors.
 	 * @return whether the class is known or not.
 	 */
@@ -1559,7 +1617,6 @@ public class Brain {
 			return false;
 		}
 	}
-
 
 	/**
 	 * Checks if the annotation property is already inside the brain. Useful while
