@@ -1,3 +1,12 @@
+**Brain** helps you to quickly and easily buid OWL ontologies and knowledge bases. It aims at bridging the gap
+ between graphical user interfaces (GUI) such as [Protege](http://protege.stanford.edu/) and the 
+ [OWL-API](http://owlapi.sourceforge.net/).
+
+The library is
+useful to develop Semantic Web applications and particularly suited for the biomedical domain.
+Brain wraps the interaction with the OWL-API an relies on [Elk](http://elk-reasoner.googlecode.com/) 
+for reasoning tasks.
+
 # Features
 
 ## Manchester syntax support
