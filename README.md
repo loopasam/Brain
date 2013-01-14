@@ -1,18 +1,26 @@
-# Brain
+# Features
 
-Brain is a facade for the OWL-API, wrapping the Elk reasoner for
- reasoning task, such as query or consistency checking.
+## Manchester syntax support
+The interaction with Brain is done with the user friendly Manchester syntax.
+Brain exposes a series of method to help you validate and transform strings of
+characters into OWL expressions.
 
-Brain has been designed with biomedical knowledge in mind, which can 
-expressed as ontology or knowledge-base using the Web Ontology Language (OWL). 
-Biomedical knowledge-bases are usually very large and mostly focused on the 
-TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following
- an OWL 2 EL profile, suitable for fast reasoning (decidable in polynomial time).
+## Web Application development
+Brain has been created for Semantic Web application developers. The library is thread-safe
+which allows you to handle ontologies in a web server setting.
 
-The initial goal of Brain is to 
-provide a simplified interaction with the OWL-API to analyse 
-biological data-sets and manipulate ontologies. Brain aims also at bridging the gap 
-between Description Logic and Biology.
+## Scalability
+
+OWL is a very demanding in terms of computing, but thanks to the 
+[OWL 2 EL](https://github.com/loopasam/Brain/wiki/OWL-2-EL) profile, it is possible to
+thread reasoning some tasks in parallel (Elk reasoner). Brain therefore supports the OWL 2 EL to help you
+build scalable solutions.
+
+## Query
+OWL knowledge bases can be easily queried with Brain. Powerful
+questions can be quickly answered with the help of the Elk reasoner.
+Brain accepts the formulation of queries from labels as well as from class
+expressions.
 
 # Documentation
 
