@@ -36,21 +36,39 @@
 
 <h3>Summary</h3>
 <p>
-Brain is a facade for the <a href="http://owlapi.sourceforge.net/">OWL-API</a>, wrapping 
-the <a href="https://code.google.com/p/elk-reasoner/">Elk reasoner</a> for reasoning task, such as query
- or consistency checking.
- </p>
- <p>
- Brain has been designed with biomedical knowledge in mind, which can expressed
-  as ontology or knowledge-base using the <a href="http://en.wikipedia.org/wiki/Web_Ontology_Language">Web Ontology Language</a> (OWL). Biomedical knowledge-bases are usually very large and mostly focused 
-  on the TBox (lots of classes, few instances). Biomedical ontologies are therefore very often following an OWL 2 EL 
-  profile, suitable for fast reasoning (decidable in polynomial time).
-  </p>
-  <p>
-  The initial goal of Brain is to provide a simplified 
-  interaction with the OWL-API to analyse biological data-sets and manipulate ontologies. Brain aims also at
-  bridging the gap between Description Logic and Biology.
+Brain helps you to quickly and easily buid OWL ontologies and knowledge bases. It aims at bridging the gap
+ between graphical user interfaces (GUI) such as <a href="http://protege.stanford.edu/">Protege</a> and the 
+ <a href="http://owlapi.sourceforge.net/">OWL-API</a>.
 </p>
+<p>
+The library is
+useful to develop Semantic Web applications and particularly suited for the biomedical domain.
+Brain wraps the interaction with the OWL-API an relies on <a href="https://code.google.com/p/elk-reasoner/">Elk</a>
+for reasoning tasks.
+ </p>
+
+<h3>Features</h3>
+
+<h4>Manchester syntax support</h4>
+The interaction with Brain is done with the user friendly Manchester syntax.
+Brain exposes a series of method to help you validate and transform strings of
+characters into OWL expressions.
+
+<h4>Web Application development</h4>
+Brain has been created for Semantic Web application developers. The library is thread-safe
+which allows you to handle ontologies in a web server setting.
+
+<h4>Scalability</h4>
+OWL is a very demanding in terms of computing, but thanks to the 
+<a href="https://github.com/loopasam/Brain/wiki/OWL-2-EL">OWL 2 EL</a> profile, it is possible to
+thread reasoning some tasks in parallel (Elk reasoner). Brain therefore supports the OWL 2 EL to help you
+build scalable solutions.
+
+<h4>Query</h4>
+OWL knowledge bases can be easily queried with Brain. Powerful
+questions can be quickly answered with the help of the Elk reasoner.
+Brain accepts the formulation of queries from labels as well as from class
+expressions.
 
 <h3>Example of axiom</h3>
 
