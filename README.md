@@ -1,3 +1,5 @@
+# Brain - Library for biomedical knowledge manipulation
+
 **Brain** helps you to quickly and easily buid OWL ontologies and knowledge bases. It aims at bridging the gap
  between graphical user interfaces (GUI) such as [Protege](http://protege.stanford.edu/) and the 
  [OWL-API](http://owlapi.sourceforge.net/).
