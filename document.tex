@@ -20,7 +20,7 @@ John Overington\,$^{1}$ and Dietrich Rebholz-Schuhmann\,$^{1}$}
 \begin{abstract}
 
 \section{Summary:}
-Brain is a Java software library facilitating the creation and manipulation of ontologies and knowledge bases represented in the
+Brain is a Java software library facilitating the manipulation and creation of ontologies and knowledge bases represented with the
 Web Ontology Language (OWL).
 
 \section{Availability and Implementation:}
@@ -40,15 +40,15 @@ Knowledge bases, a concept from computer science (see \citealp{Krotzsch2012} for
 could be a solution to improve the interoperability and the value of the large amount of biomedical information available online.
 At the time of writing, a few options are available to handle such knowledge bases: Complex
 libraries as the OWL-API \citep{MatthewHorridge2011} or didactic graphical user interfaces such as
-Protege \citep{StanfordCenterforBiomedicalInformaticsResearch} and TopBraid Composer \citep{TopQuadrant}. 
+Protege \citep{StanfordCenterforBiomedicalInformaticsResearch} or TopBraid Composer \citep{TopQuadrant}. 
 An intermediary framework, OWLTools \citep{MungallC},
-provides some methods to query biomedical ontologies, but the interaction with the library is mostly done via command-lines which
-limits the scale of projects that can be build with it.
-Brain - the Java software library presented in this manuscript addresses this matter and provides a comprehensive and simplified
+provides some methods to query biomedical ontologies, but the interaction with the library is mostly done \emph{via} command-lines which
+limits the scale of projects that can be built with it.
+Brain - the Java software library presented in this manuscript addresses these issues and provides a comprehensive and simplified
 interface, dedicated to the programmatic creation and query of biomedical knowledge bases. The library aims at bridging the gap between
-graphical user interfaces and the OWL-API and is particularly usefull to develop web applications.
+graphical user interfaces and the OWL-API and is particularly useful to develop web applications.
 Brain has a particular focus on the EL profile of OWL, as it covers the majority of biomedical
-use-cases and unlocks good performances and scalability. 
+use-cases and unlocks good reasoning performances and scalability. 
 \section{Scalable knowledge bases}
 The Web Ontology Language (OWL) derives from Description Logic and
 has been designed to capture the knowledge of a domain of interest in the form of a structured vocabulary \citep{W3COWLWorkingGroup}.
@@ -75,9 +75,9 @@ the configuration for advanced users. Figure 1 shows an example of query using t
 Brain is implemented as a facade leveraging the access to the OWL-API and providing a series of convenience methods for common
 use-cases encountered in the biomedical domain. In order to simplify the interaction with the OWL-API, Brain follows
 a series of features described below. The full list of currently supported constructs and methods is available in the
- supplementary material and in the online documentation.
+supplementary material and in the online documentation.
 \subsection{Unique knowledge base}
-An instance of a Brain object hold a reference to only one knowledge base. It is yet possible to import some external ontologies, either
+An instance of a Brain object holds a reference to only one knowledge base. It is yet possible to import some external ontologies, either
 stored locally or via a network but Brain will always merge the added information to the existing knowledge base.
 \subsection{Unique short form names}
 The names (short forms) of OWL entities handled by a Brain object have to be unique. It is for instance not possible to add
@@ -117,8 +117,8 @@ brain.save("your/path/to/ontology.owl");
 \subsection{Typeless interaction}
 The interaction with the library relies on the user-friendly Manchester syntax entered as string \citep{Horridge2006}. 
 This choice permits to move away from the creation of Java objects and is particularly suitable in a web server set-up where
-requests are likely to be some typeless text. Using strings as input also speeds the production
-and flexibility of the code written to move from a relational or flat-file database to an OWL representation for example. Figure 1 provides
+requests are likely to be some typeless characters. Using strings as input also speeds the production
+and flexibility of the code written, when moving from a relational database to an OWL representation for example. Figure 1 provides
 an example of axiom implementation using the Manchester syntax.
 \subsection{Error-handling}
 Because the interaction with Brain is built around strings rather than Java objects, a special care has to be put on
@@ -148,15 +148,99 @@ to increase their productivity while effectively dealing with data integration c
 \paragraph{Funding\textcolon}
 This work was supported by funding from the EMBL member states. Samuel Croset is a member of Darwin College, University of Cambridge.
 
-\bibliographystyle{natbib}
-\bibliographystyle{achemnat}
-\bibliographystyle{plainnat}
-\bibliographystyle{abbrv}
-\bibliographystyle{bioinformatics}
-
-\bibliographystyle{plain}
-
- \bibliography{document}
+% \bibliographystyle{natbib}
+% \bibliographystyle{achemnat}
+% \bibliographystyle{plainnat}
+% \bibliographystyle{abbrv}
+% \bibliographystyle{bioinformatics}
+% 
+% \bibliographystyle{plain}
+% 
+%  \bibliography{document}
 
 % insert document.bbl here
+
+\begin{thebibliography}{}
+
+\bibitem[Ashburner {\em et~al.}(2000)Ashburner, Ball, Blake, Botstein, Butler,
+  Cherry, Davis, Dolinski, Dwight, Eppig, Harris, Hill, Issel-Tarver,
+  Kasarskis, Lewis, Matese, Richardson, Ringwald, Rubin, and
+  Sherlock]{Ashburner2000}
+Ashburner, M., Ball, C.~A., Blake, J.~A., Botstein, D., Butler, H., Cherry,
+  J.~M., Davis, A.~P., Dolinski, K., Dwight, S.~S., Eppig, J.~T., Harris,
+  M.~A., Hill, D.~P., Issel-Tarver, L., Kasarskis, A., Lewis, S., Matese,
+  J.~C., Richardson, J.~E., Ringwald, M., Rubin, G.~M., and Sherlock, G.
+  (2000).
+\newblock {Gene Ontology: tool for the unification of biology}.
+\newblock {\em Nature Genetics\/}, {\bf 25}(1), 25--29.
+
+\bibitem[{De Matos} {\em et~al.}(2010){De Matos}, Alc\'{a}ntara, Dekker, Ennis,
+  Hastings, Haug, Spiteri, Turner, and Steinbeck]{DeMatos2010}
+{De Matos}, P., Alc\'{a}ntara, R., Dekker, A., Ennis, M., Hastings, J., Haug,
+  K., Spiteri, I., Turner, S., and Steinbeck, C. (2010).
+\newblock {Chemical Entities of Biological Interest: an update}.
+\newblock {\em Nucleic Acids Research\/}, {\bf 38}(Database issue), D249--D254.
+
+\bibitem[Gaulton {\em et~al.}(2012)Gaulton, Bellis, Bento, Chambers, Davies,
+  Hersey, Light, McGlinchey, Michalovich, Al-Lazikani, and
+  Overington]{Gaulton2012}
+Gaulton, A., Bellis, L.~J., Bento, A.~P., Chambers, J., Davies, M., Hersey, A.,
+  Light, Y., McGlinchey, S., Michalovich, D., Al-Lazikani, B., and Overington,
+  J.~P. (2012).
+\newblock {ChEMBL: a large-scale bioactivity database for drug discovery}.
+\newblock {\em Nucleic Acids Research\/}, {\bf 40}(Database issue), D1100--7.
+
+\bibitem[{Horridge} and {Bechhofer}(2011){Horridge} and
+  {Bechhofer}]{MatthewHorridge2011}
+{Horridge} and {Bechhofer} (2011).
+\newblock {The OWL API: A Java API for OWL Ontologies.}
+\newblock {\em Semantic Web Journal\/}, pages 11--21.
+
+\bibitem[Horridge {\em et~al.}(2006)Horridge, Drummond, Goodwin, Rector,
+  Stevens, and Wang]{Horridge2006}
+Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., and Wang,
+  H.~H. (2006).
+\newblock {The Manchester OWL Syntax}.
+\newblock {\em Syntax\/}, {\bf 216}, 10--11.
+
+\bibitem[{Kazakov} {\em et~al.}(2011){Kazakov}, {Markus Kr\"{o}tzsch}, and
+  {Franti\v{s}ek Siman\v{c}\'{\i}k}]{YevgenyKazakov2011}
+{Kazakov}, {Markus Kr\"{o}tzsch}, and {Franti\v{s}ek Siman\v{c}\'{\i}k} (2011).
+\newblock {Concurrent Classification of EL Ontologies}.
+\newblock {\em Proceedings of the 10th International Semantic Web Conference
+  (ISWC'11)\/}, {\bf 7032}.
+
+\bibitem[Kr\"{o}tzsch {\em et~al.}(2012)Kr\"{o}tzsch, Simanˇ, and
+  Horrocks]{Krotzsch2012}
+Kr\"{o}tzsch, M., Simanˇ, F., and Horrocks, I. (2012).
+\newblock {A Description Logic Primer}.
+\newblock {\em Language\/}, {\bf abs/1201.4}(January), 1--16.
+
+\bibitem[Motik {\em et~al.}(2009)Motik, Grau, Horrocks, Wu, Fokoue, and
+  Lutz]{Motik2009}
+Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
+\newblock {OWL 2 Web Ontology Language Profiles}.
+\newblock {\em Language\/}, {\bf 2009}(October), 1--53.
+
+\bibitem[Mungall(2012)Mungall]{MungallC}
+Mungall (2012).
+\newblock {OWLTools - http://code.google.com/p/owltools/}.
+
+\bibitem[{Stanford Center for Biomedical Informatics Research}(2012){Stanford
+  Center for Biomedical Informatics
+  Research}]{StanfordCenterforBiomedicalInformaticsResearch}
+{Stanford Center for Biomedical Informatics Research} (2012).
+\newblock {Prot\'{e}g\'{e} Project - http://protege.stanford.edu/}.
+
+\bibitem[TopQuadrant(2013)TopQuadrant]{TopQuadrant}
+TopQuadrant (2013).
+\newblock {TopBraid Composer - www.topbraidcomposer.com/}.
+
+\bibitem[{W3C OWL Working Group}(2009){W3C OWL Working
+  Group}]{W3COWLWorkingGroup}
+{W3C OWL Working Group} (2009).
+\newblock {OWL 2 Web Ontology Language Document Overview}.
+
+\end{thebibliography}
+
 \end{document}
