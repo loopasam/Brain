@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  15 JAN 2013 09:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  15 JAN 2013 09:50
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -368,14 +368,24 @@ Underfull \hbox (badness 2189) in paragraph at lines 39--52
  []
 
 
-Underfull \hbox (badness 1127) in paragraph at lines 53--74
-\OT1/ptm/m/n/9 Logic and has been designed to capture the knowledge of a
+Underfull \hbox (badness 2707) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 Logic and has been designed to capture the knowledge of
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 53--74
-\OT1/ptm/m/n/9 (GO - Ashburner \OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9 , 2000) or 
-the Chemical Entities of
+Underfull \hbox (badness 1442) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 a domain of interest in the form of a structured vocabulary
+ []
+
+
+Underfull \hbox (badness 1939) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 (http://www.w3.org/TR/owl2-overview/). This feature makes it
+ []
+
+
+Underfull \hbox (badness 1199) in paragraph at lines 53--74
+\OT1/ptm/m/n/9 such as ChEMBL (Gaulton \OT1/ptm/m/it/9 et al.\OT1/ptm/m/n/9 , 2
+012). Moreover, the EL
  []
 
 
@@ -416,45 +426,59 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 174.
 Missing character: There is no Ë in font ptmr7t!
 Missing character: There is no ‡ in font ptmr7t!
+Extra height:20.51544pt when 619.3039pt
+Extra height:20.51544pt when 620.3039pt
+Extra height:20.51544pt when 621.3039pt
+Extra height:20.51544pt when 622.3039pt
+Extra height:20.51544pt when 623.3039pt
+Extra height:20.51544pt when 624.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 627.59514pt
+Extra height:20.51544pt when 625.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 628.59514pt
+Extra height:20.51544pt when 626.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 629.59514pt
+Extra height:20.51544pt when 627.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 630.59514pt
+Extra height:20.51544pt when 628.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 631.59514pt
+Extra height:20.51544pt when 629.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 632.59514pt
+Extra height:20.51544pt when 630.3039pt
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Extra height:37.09793pt when 633.59514pt
-Extra height:0.0pt when 634.59514pt
-(2)Left:634.59514pt Right:616.04636pt Output:634.59514pt
+Extra height:20.51544pt when 631.3039pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:20.51544pt when 632.3039pt
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Extra height:20.51544pt when 633.3039pt
+Extra height:0.0pt when 634.3039pt
+(2)Left:634.3039pt Right:599.46387pt Output:634.3039pt
 - LAST -
 Extra skip:0.0pt
-Left:634.59514pt
-Right:616.04636pt
-Output:634.59514pt
+Left:634.3039pt
+Right:599.46387pt
+Output:634.3039pt
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 232.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 227.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 232.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 227.
 
 Overfull \hbox (261.0pt too wide) has occurred while \output is active
 [][][] 
@@ -477,7 +501,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  3090 strings out of 493848
  37525 string characters out of 1152822
- 121990 words of memory out of 3000000
+ 120800 words of memory out of 3000000
  6300 multiletter control sequences out of 15000+50000
  51159 words of font info for 105 fonts, out of 3000000 for 9000
  718 hyphenation exceptions out of 8191
@@ -494,7 +518,7 @@ vbo8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/s
 hare/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on document.pdf (2 pages, 152424 bytes).
+Output written on document.pdf (2 pages, 152365 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
