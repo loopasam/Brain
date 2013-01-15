@@ -1,66 +1,66 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: document.aux
 The style file: natbib.bst
-Illegal, another \bibstyle command---line 20 of file document.aux
+Illegal, another \bibstyle command---line 17 of file document.aux
  : \bibstyle
  :          {achemnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 21 of file document.aux
+Illegal, another \bibstyle command---line 18 of file document.aux
  : \bibstyle
  :          {plainnat}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 22 of file document.aux
+Illegal, another \bibstyle command---line 19 of file document.aux
  : \bibstyle
  :          {abbrv}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 23 of file document.aux
+Illegal, another \bibstyle command---line 20 of file document.aux
  : \bibstyle
  :          {bioinformatics}
 I'm skipping whatever remains of this command
-Illegal, another \bibstyle command---line 24 of file document.aux
+Illegal, another \bibstyle command---line 21 of file document.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
 Database file #1: document.bib
-You've used 12 entries,
+You've used 9 entries,
             2378 wiz_defined-function locations,
-            608 strings with 6870 characters,
-and the built_in function-call counts, 6132 in all, are:
-= -- 528
-> -- 484
-< -- 6
-+ -- 148
-- -- 148
-* -- 600
-:= -- 1140
-add.period$ -- 47
-call.type$ -- 12
-change.case$ -- 73
-chr.to.int$ -- 12
-cite$ -- 12
-duplicate$ -- 212
-empty$ -- 323
-format.name$ -- 162
-if$ -- 1160
+            596 strings with 6526 characters,
+and the built_in function-call counts, 5277 in all, are:
+= -- 435
+> -- 451
+< -- 3
++ -- 139
+- -- 139
+* -- 549
+:= -- 969
+add.period$ -- 41
+call.type$ -- 9
+change.case$ -- 55
+chr.to.int$ -- 9
+cite$ -- 9
+duplicate$ -- 176
+empty$ -- 272
+format.name$ -- 150
+if$ -- 998
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 8
-newline$ -- 59
-num.names$ -- 48
-pop$ -- 70
+newline$ -- 47
+num.names$ -- 36
+pop$ -- 55
 preamble$ -- 1
-purify$ -- 73
+purify$ -- 55
 quote$ -- 0
-skip$ -- 149
+skip$ -- 119
 stack$ -- 0
-substring$ -- 309
-swap$ -- 41
+substring$ -- 273
+swap$ -- 38
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 81
 warning$ -- 0
-while$ -- 51
+while$ -- 42
 width$ -- 0
-write$ -- 146
+write$ -- 116
 (There were 5 error messages)

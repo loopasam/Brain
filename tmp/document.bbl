@@ -60,20 +60,6 @@ Motik, B., Grau, B.~C., Horrocks, I., Wu, Z., Fokoue, A., and Lutz, C. (2009).
 \newblock {OWL 2 Web Ontology Language Profiles}.
 \newblock {\em Language\/}, {\bf 2009}(October), 1--53.
 
-\bibitem[Mungall(2012)Mungall]{MungallC}
-Mungall (2012).
-\newblock {OWLTools - http://code.google.com/p/owltools/}.
-
-\bibitem[{Stanford Center for Biomedical Informatics Research}(2012){Stanford
-  Center for Biomedical Informatics
-  Research}]{StanfordCenterforBiomedicalInformaticsResearch}
-{Stanford Center for Biomedical Informatics Research} (2012).
-\newblock {Prot\'{e}g\'{e} Project - http://protege.stanford.edu/}.
-
-\bibitem[TopQuadrant(2013)TopQuadrant]{TopQuadrant}
-TopQuadrant (2013).
-\newblock {TopBraid Composer - www.topbraidcomposer.com/}.
-
 \bibitem[{W3C OWL Working Group}(2009){W3C OWL Working
   Group}]{W3COWLWorkingGroup}
 {W3C OWL Working Group} (2009).
