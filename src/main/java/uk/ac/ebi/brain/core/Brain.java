@@ -163,6 +163,13 @@ public class Brain {
 
 		Logger.getLogger("org.semanticweb.elk").setLevel(Level.OFF);
 
+		//TODO test
+//		this.configuration = new ElkReasonerConfiguration();
+//		this.configuration.getElkConfiguration().setParameter(ReasonerConfiguration.NUM_OF_WORKING_THREADS, Integer.toString(4));
+//		this.reasonerFactory = new ElkReasonerFactory();
+//		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology, this.configuration);
+		//TODO end test
+		
 		this.reasonerFactory = new ElkReasonerFactory();
 		this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
 
@@ -1567,6 +1574,7 @@ public class Brain {
 	 * by a fresh one. Re-classification is needed before re-querying.
 	 */
 	public void sleep() {
+		this.reasoner.flush();
 		this.reasoner.dispose();
 		if(this.configuration == null){
 			this.reasoner = this.getReasonerFactory().createReasoner(this.ontology);
