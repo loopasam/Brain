@@ -39,12 +39,12 @@
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
 			<artifactId>owlapi-api</artifactId>
-			<version>3.4</version>
+			<version>3.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.semanticweb.elk</groupId>
 			<artifactId>elk-owlapi</artifactId>
-			<version>0.3.1</version>
+			<version>0.3.2</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -81,4 +81,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 </project>
