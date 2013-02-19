@@ -19,7 +19,7 @@ top concept & \top & owl:Thing & brain.getOWLClass("Thing");\\[1ex]
 bottom concept & \bot & owl:Nothing & brain.getUnsatisfiableClasses();\\[1ex]
 union & C\sqcup D & C or D & Not supported (Not in EL profile)\\[1ex]
 complement & \neg C & not C & Not supported (Not in EL profile)\\[1ex]
-existential restriction & \exists R.C & P some C & Not supported (Not in EL profile)\\[1ex]
+existential restriction & \exists R.C & P some C & brain.subClassOf("A", "P some C");\\[1ex]
 universal restriction & \forall R.C & P only C & Not supported (Not in EL profile)\\[1ex] \hline
 \multicolumn{4}{c}{\textbf{Roles}}\\[2ex] \hline
 atomic role & R & ObjectProperty: P & brain.addObjectProperty("P");\\[1ex] \hline

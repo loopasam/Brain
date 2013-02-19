@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  10 JAN 2013 14:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  19 FEB 2013 18:42
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -310,7 +310,7 @@ my insertion and my current dilemma will both disappear.
 <inserted text> 
                 $
 l.22 existential restriction & \exists
-                                       R.C & P some C & Not supported (Not i...
+                                       R.C & P some C & brain.subClassOf("A"...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -318,7 +318,7 @@ you left one out. Proceed, with fingers crossed.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
 l.22 existential restriction & \exists R.C &
-                                             P some C & Not supported (Not i...
+                                             P some C & brain.subClassOf("A"...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -329,7 +329,7 @@ deleted material, e.g., by typing `I$}'.
 <inserted text> 
                 $
 l.22 existential restriction & \exists R.C &
-                                             P some C & Not supported (Not i...
+                                             P some C & brain.subClassOf("A"...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -337,7 +337,7 @@ you left one out. Proceed, with fingers crossed.
 <inserted text> 
                 }
 l.22 existential restriction & \exists R.C &
-                                             P some C & Not supported (Not i...
+                                             P some C & brain.subClassOf("A"...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -718,7 +718,7 @@ mf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb>
-Output written on document.pdf (2 pages, 73660 bytes).
+Output written on document.pdf (2 pages, 73667 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
