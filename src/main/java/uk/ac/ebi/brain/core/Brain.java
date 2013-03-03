@@ -1284,6 +1284,9 @@ public class Brain {
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
+		//TODO temporary solution - reasoner must be flushed after changes, either is done in each method
+		//or it's done now of checked at least - like it should have an update() after addig each axioms
+		this.reasoner.flush();
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
 		this.isClassified = true;
 	}
@@ -1346,14 +1349,18 @@ public class Brain {
 		Set<OWLClass> subClasses = null;
 		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
 		if(owlClassExpression.isAnonymous()){
+			System.out.println("is anonymous expressions!");
 			OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
 			this.classify();
 			subClasses = this.reasoner.getSubClasses(anonymousClass, direct).getFlattened();
 			removeTemporaryAnonymousClass(anonymousClass);
 		}else{
+			System.out.println("Is not anonymous expression! checking classfied...");
 			if(!this.isClassified){
+				System.out.println("classified: " + this.isClassified);
 				this.classify();
 			}
+			System.out.println("is classiffied after methiod: " + this.isClassified);
 			subClasses = this.reasoner.getSubClasses(owlClassExpression, direct).getFlattened();
 		}
 		return sortClasses(subClasses);

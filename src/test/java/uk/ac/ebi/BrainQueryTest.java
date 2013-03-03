@@ -38,6 +38,20 @@ public class BrainQueryTest {
 	public void dispose() {
 		brain.sleep();
 	}
+	
+	@Test
+	public void getNamedSubClass() throws BrainException {
+		Brain brain = new Brain();
+		brain.addClass("Animal");
+		brain.addClass("Lion");
+		brain.subClassOf("Lion", "Animal");
+		System.out.println("Get Lion...");
+		brain.getSubClasses("Animal", false);
+		System.out.println("done---------------------");
+		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
+		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
+		
+	}
 
 	@Test
 	public void getUnsatisfiableClasses() throws BrainException {
