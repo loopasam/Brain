@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.751" errors="0" skipped="0" tests="31" name="uk.ac.ebi.BrainQueryTest">
+<testsuite failures="0" time="2.462" errors="0" skipped="0" tests="32" name="uk.ac.ebi.BrainQueryTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.35/jre/lib/i386"/>
@@ -57,35 +57,36 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.044" classname="uk.ac.ebi.BrainQueryTest" name="getUnsatisfiableClasses"/>
-  <testcase time="0.037" classname="uk.ac.ebi.BrainQueryTest" name="reStart"/>
+  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="getNamedSubClass"/>
+  <testcase time="0.034" classname="uk.ac.ebi.BrainQueryTest" name="getUnsatisfiableClasses"/>
+  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="reStart"/>
   <testcase time="0.032" classname="uk.ac.ebi.BrainQueryTest" name="owlProfileTest"/>
-  <testcase time="0.017" classname="uk.ac.ebi.BrainQueryTest" name="prefixesAndLearnTest"/>
+  <testcase time="0.016" classname="uk.ac.ebi.BrainQueryTest" name="prefixesAndLearnTest"/>
   <testcase time="0.023" classname="uk.ac.ebi.BrainQueryTest" name="classifyTest"/>
-  <testcase time="0.027" classname="uk.ac.ebi.BrainQueryTest" name="getDirectSubClassesTest"/>
-  <testcase time="0.023" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectSubClassesTest"/>
-  <testcase time="0.036" classname="uk.ac.ebi.BrainQueryTest" name="getDirectAnonymousSubClassesTest"/>
+  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="getDirectSubClassesTest"/>
+  <testcase time="0.038" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectSubClassesTest"/>
+  <testcase time="0.041" classname="uk.ac.ebi.BrainQueryTest" name="getDirectAnonymousSubClassesTest"/>
   <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getIndirectAnonymousSubClassesTest"/>
-  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesNewOntology"/>
+  <testcase time="0.021" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesNewOntology"/>
   <testcase time="0.019" classname="uk.ac.ebi.BrainQueryTest" name="getAnonymousClassesErrorNewOntology"/>
-  <testcase time="0.035" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesTest"/>
-  <testcase time="0.021" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesTest"/>
-  <testcase time="0.035" classname="uk.ac.ebi.BrainQueryTest" name="errorsWhenQueryingForLabel"/>
-  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="getSubClassesFromLabelTest"/>
-  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getFromSpaceSeparatedLabels"/>
-  <testcase time="0.031" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesFromLabelTest"/>
-  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesFromLabelTest"/>
-  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentAnonClassesTest"/>
-  <testcase time="0.037" classname="uk.ac.ebi.BrainQueryTest" name="isSubClassTest"/>
-  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="isSuperClassTest"/>
-  <testcase time="0.019" classname="uk.ac.ebi.BrainQueryTest" name="knowsTest"/>
-  <testcase time="0.014" classname="uk.ac.ebi.BrainQueryTest" name="getLabelTest"/>
-  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnFromLocalFile"/>
-  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIs"/>
-  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIsButNotForDifferentTypes"/>
-  <testcase time="0.951" classname="uk.ac.ebi.BrainQueryTest" name="learnOntologyFromTheWeb"/>
+  <testcase time="0.022" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesTest"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesTest"/>
+  <testcase time="0.029" classname="uk.ac.ebi.BrainQueryTest" name="errorsWhenQueryingForLabel"/>
+  <testcase time="0.03" classname="uk.ac.ebi.BrainQueryTest" name="getSubClassesFromLabelTest"/>
+  <testcase time="0.023" classname="uk.ac.ebi.BrainQueryTest" name="getFromSpaceSeparatedLabels"/>
+  <testcase time="0.025" classname="uk.ac.ebi.BrainQueryTest" name="getSuperClassesFromLabelTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentClassesFromLabelTest"/>
+  <testcase time="0.027" classname="uk.ac.ebi.BrainQueryTest" name="getEquivalentAnonClassesTest"/>
+  <testcase time="0.033" classname="uk.ac.ebi.BrainQueryTest" name="isSubClassTest"/>
+  <testcase time="0.026" classname="uk.ac.ebi.BrainQueryTest" name="isSuperClassTest"/>
+  <testcase time="0.013" classname="uk.ac.ebi.BrainQueryTest" name="knowsTest"/>
+  <testcase time="0.013" classname="uk.ac.ebi.BrainQueryTest" name="getLabelTest"/>
+  <testcase time="0.022" classname="uk.ac.ebi.BrainQueryTest" name="learnFromLocalFile"/>
+  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIs"/>
+  <testcase time="0.022" classname="uk.ac.ebi.BrainQueryTest" name="learnSupportsIdenticalIRIsButNotForDifferentTypes"/>
+  <testcase time="1.696" classname="uk.ac.ebi.BrainQueryTest" name="learnOntologyFromTheWeb"/>
   <testcase time="0.014" classname="uk.ac.ebi.BrainQueryTest" name="learnFromOtherBrainTest"/>
-  <testcase time="0.019" classname="uk.ac.ebi.BrainQueryTest" name="learnFromOtherBrainErrorTest"/>
-  <testcase time="0.016" classname="uk.ac.ebi.BrainQueryTest" name="getTopClass"/>
-  <testcase time="0.024" classname="uk.ac.ebi.BrainQueryTest" name="getUnstatisfiableClasses"/>
+  <testcase time="0.012" classname="uk.ac.ebi.BrainQueryTest" name="learnFromOtherBrainErrorTest"/>
+  <testcase time="0.012" classname="uk.ac.ebi.BrainQueryTest" name="getTopClass"/>
+  <testcase time="0.022" classname="uk.ac.ebi.BrainQueryTest" name="getUnstatisfiableClasses"/>
 </testsuite>

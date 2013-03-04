@@ -45,9 +45,7 @@ public class BrainQueryTest {
 		brain.addClass("Animal");
 		brain.addClass("Lion");
 		brain.subClassOf("Lion", "Animal");
-		System.out.println("Get Lion...");
 		brain.getSubClasses("Animal", false);
-		System.out.println("done---------------------");
 		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
 		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
 		
