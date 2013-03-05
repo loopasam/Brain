@@ -1,3 +1,0 @@
-Dear Reviewers,
-
-Thanks for the constructive feedback we have received. Following your recommendations we have extensively revised the manuscript in order to focus it more on the actual characteristics of the library. As suggested, the excessive background information as well as the claims and arguments about databases and RDF have been removed from the text too in order to allocate more space for a concrete example (see Figure 1). A more detailed explanation of the available features (section 3) should satisfy the comments of the reviewers (data integration, usage of strings, error handling and examples).
