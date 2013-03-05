@@ -33,27 +33,82 @@ Brain relies on ELK for reasoning tasks. The open source project is available at
 \keywords{OWL2 EL, library, Java, Manchester syntax}
 \end{abstract}
 
-\section{Motivation}
+\section{Introduction}
+\subsection{OWL2 EL}
+The second version of the Web Ontology Language (OWL2) introduces a series of profiles: OWL2 EL, RL and QL.
+These profiles are subsets of the full OWL2 specification and have been designed to match the requirements of particular case scenarios.
+Profiles are defined by the type of axioms and constructs they support: For instance the OWL2 EL profile, which has been 
+created for the biomedical domain, does not allow 
+disjunctions or cardinality restrictions. This limited expressivity however enables the implementation of fast reasoning algorithms which can
+handle large data as it is required by the application domain. In this document we will present the core features of a 
+Java library, Brain, dedicated to support the OWL2 EL families.
 
-OWL2 --> profiles
-profiles --> limited set of axioms, suited for a particular task
-OWL2 EL --> suited for biomedical ontologies
-lots of classes, very few individuals
+\subsection{Motivation}
+The biomedical domain is particularly interesting for the OWL community because of the richness and variety of the ontologies it contains.
+The majority of them such as the Gene Ontology (GO) or SNOMED CT are very large but they are fortunately following 
+the EL profile, which enables the use of recent and fast reasoners such as ELK.
+Because of these improvements in the reasoning speed over big biomedical knowledge bases, 
+it becomes nowadays possible to build web applications or to perform biological analysis relying heavely of OWL queries performed against
+an ontology of interest. These taks are traditionnaly done either via a graphical user interface (GUI) such as Protege or programmed
+using the OWL-API and the Java language. GUIs are wonderful to develop toy examples, but they are not suited to develop very large 
+ontologies as the ones faced in life sciences, potentially containing millions of axioms. The OWL-API is solid solution to build
+applications but it could be daunting for new comers or users with little experience in Java. OWLTools is an intermediary solution for the
+biomedical domain, but the interaction with this library is mostly done by command lines with impairs the developement of larger projects.
+In order to address these issues, we have developped Brain, a facade on the top of the OWL-API. The library facilitates the
+manipulation of OWL2 EL ontologies, specially in a web server setting. 
+Brain is already used in production as a back-end engine for web applications such as the Virtual Fly Brain or the Functional 
+Therapeutic Chemical Classification System.
 
-Traditionaly interation with OWL2 is via Protege or OWL-API
-no inbetweem aside OWLtools. Dedicated to fast implementation
-- nothing for the web, yet it's semantic web
+\section{Features}
 
 
 
+\subsection{Availability}
 
-dedicated to the web
-multi threaded environement
-intetraction with strings
-easy to query
-presentation OWL2 EL profile.
+maven, jar with dependencies
+code source on github
 
-\section{}
+presentation of the core features of the lib
+
+Unique ontology
+
+Basically, a instance of a Brain object hold a reference to only one 
+ontology (also called knowledge-base). You can of course import some external 
+ontologies, refer to external terms, but at the end it will resolve to only one ontology.
+
+Unique names
+
+The names of OWL entities handled by a Brain object have to be unique. 
+This is motivated by the fact that Brain hides as much as possible the cumbersome
+ interaction with prefixes, IRI and URIs. Everything resolves to names.
+
+Typeless
+
+The interaction with the ontology is done via strings (type-less). 
+Expressions and queries are formulated in Manchester syntax. It results 
+in less and more explicit code.
+
+Error-handling driven
+
+Because the interaction with Brain is built around strings rather than Java objects, 
+special care has to be put on exception handling, in order to preserve the consistency. Brain 
+throws a lot of possible exceptions, depending the type of operation you want to carry. 
+All exceptions are subclasses of BrainException.
+
+Queries
+
+integration
+
+\section{Example of implementation}
+
+nucleus axiom longer 
+
+VBF use case + FTC
+
+\section{Conclusion}
+
+future direction --> SVG graphs in dev, add individuals, etc..
+
 
 % ---- Bibliography ----
 %
