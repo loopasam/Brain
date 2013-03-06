@@ -40,8 +40,8 @@ These profiles are subsets of the full OWL2 specification and have been designed
 Profiles are defined by the type of axioms and constructs they support: For instance the OWL2 EL profile, which has been 
 created for the biomedical domain, does not allow 
 disjunctions or cardinality restrictions. This limited expressivity however enables the implementation of fast reasoning algorithms which can
-handle large data as it is required by the application domain. In this document we will present the core features of a 
-Java library, Brain, dedicated to support the OWL2 EL families.
+handle well large data as it is required by the application domain. In this document we will present the core features of a 
+Java library, Brain, dedicated to support the OWL2 EL families and oriented toward biomedical knowledge manipulation.
 
 \subsection{Motivation}
 The biomedical domain is particularly interesting for the OWL community because of the richness and variety of the ontologies it contains.
@@ -49,26 +49,23 @@ The majority of them such as the Gene Ontology (GO) or SNOMED CT are very large 
 the EL profile, which enables the use of recent and fast reasoners such as ELK.
 Because of these improvements in the reasoning speed over big biomedical knowledge bases, 
 it becomes nowadays possible to build web applications or to perform biological analysis relying heavely of OWL queries performed against
-an ontology of interest. These taks are traditionnaly done either via a graphical user interface (GUI) such as Protege or programmed
-using the OWL-API and the Java language. GUIs are wonderful to develop toy examples, but they are not suited to develop very large 
+an ontology of interest. This is traditionnaly done either via a graphical user interface (GUI) such as Protege or programmed
+using the OWL-API and the Java language. GUIs are wonderful to develop toy examples, but they are not suited to handle very large 
 ontologies as the ones faced in life sciences, potentially containing millions of axioms. The OWL-API is solid solution to build
 applications but it could be daunting for new comers or users with little experience in Java. OWLTools is an intermediary solution for the
 biomedical domain, but the interaction with this library is mostly done by command lines with impairs the developement of larger projects.
-In order to address these issues, we have developped Brain, a facade on the top of the OWL-API. The library facilitates the
-manipulation of OWL2 EL ontologies, specially in a web server setting. 
-Brain is already used in production as a back-end engine for web applications such as the Virtual Fly Brain or the Functional 
-Therapeutic Chemical Classification System.
+In order to ease the interaction with OWL2 EL we have developped Brain, a facade on the top of the OWL-API. The library facilitates the
+manipulation of EL ontologies, specially in a web server setting. 
+Brain is already successfully used in production as a back-end engine for web applications 
+such as the Virtual Fly Brain or the Functional Therapeutic Chemical Classification System.
 
 \section{Features}
-
-
+The rest of the document will present the core features of Brain as well as an example of axiom implementation. 
 
 \subsection{Availability}
-
-maven, jar with dependencies
-code source on github
-
-presentation of the core features of the lib
+The source code of the library is open and freely available at https://github.com/loopasam/Brain/ under an Apache License 2.0.
+Brain binaries are also distributed on Maven or directly dowloadable as a jar file including all the dependencies.
+The documentation providing concrete examples can be accessed and edited at https://github.com/loopasam/Brain/wiki.
 
 Unique ontology
 

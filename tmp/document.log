@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  5 MAR 2013 17:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.15)  6 MAR 2013 10:26
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -160,11 +160,22 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (73.37733pt too wide) in paragraph at lines 66--69
+[]\OT1/cmr/m/n/10 The source code of the li-brary is open and freely avail-able
+ at https://github.com/loopasam/Brain/
+ []
+
+
+Overfull \hbox (107.54405pt too wide) in paragraph at lines 66--69
+\OT1/cmr/m/n/10 tion pro-vid-ing con-crete ex-am-ples can be ac-cessed and edit
+ed at https://github.com/loopasam/Brain/wiki. 
+ []
+
 [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 138.
+(Font)              <9> on input line 135.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 138.
+(Font)              <6> on input line 135.
  [3] (./document.aux) ) 
 Here is how much of TeX's memory you used:
  647 strings out of 493848
@@ -173,7 +184,7 @@ Here is how much of TeX's memory you used:
  3980 multiletter control sequences out of 15000+50000
  8362 words of font info for 30 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 29i,7n,21p,260b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,7n,21p,260b,194s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
@@ -182,7 +193,7 @@ ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
 9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on document.pdf (3 pages, 120307 bytes).
+Output written on document.pdf (3 pages, 121019 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
