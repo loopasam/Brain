@@ -1,7 +1,8 @@
 \documentclass{llncs}
 %
 \usepackage{makeidx}  % allows for indexgeneration
-%
+\usepackage{fancyvrb}
+
 \begin{document}
 %
 \frontmatter          % for the preliminaries
@@ -48,7 +49,7 @@ The biomedical domain is particularly interesting for the OWL community because 
 The majority of them such as the Gene Ontology (GO) or SNOMED CT are very large but they are fortunately following 
 the EL profile, which enables the use of recent and fast reasoners such as ELK.
 Because of these improvements in the reasoning speed over big biomedical knowledge bases, 
-it becomes nowadays possible to build web applications or to perform biological analysis relying heavely of OWL queries performed against
+it becomes nowadays possible to build web applications or to perform biological analysis relying heavily on OWL queries performed against
 an ontology of interest. This is traditionnaly done either via a graphical user interface (GUI) such as Protege or programmed
 using the OWL-API and the Java language. GUIs are wonderful to develop toy examples, but they are not suited to handle very large 
 ontologies as the ones faced in life sciences, potentially containing millions of axioms. The OWL-API is solid solution to build
@@ -60,52 +61,125 @@ Brain is already successfully used in production as a back-end engine for web ap
 such as the Virtual Fly Brain or the Functional Therapeutic Chemical Classification System.
 
 \section{Features}
-The rest of the document will present the core features of Brain as well as an example of axiom implementation. 
+The rest of the document will present the core features of Brain as well as an example of axiom implementation.
+The main idea behind Brain is to prevent ambiguous situations to happen while creating an ontology and to simplify 
+the interaction with biomedical knowledge bases. Brain is implemented following a pattern facade: 
+It wraps the interaction with the OWL-API and the ELK reasoner by providing some convenience methods.
+The wrapped softwares yet remain accessible for operation un-implemented by Brain.
 
 \subsection{Availability}
 The source code of the library is open and freely available at https://github.com/loopasam/Brain/ under an Apache License 2.0.
 Brain binaries are also distributed on Maven or directly dowloadable as a jar file including all the dependencies.
 The documentation providing concrete examples can be accessed and edited at https://github.com/loopasam/Brain/wiki.
 
-Unique ontology
+\subsection{Manchester syntax interaction}
+The interaction with Brain resolves only to the Manchester syntax expressed as Java strings.
+This notation is user friendly and already widely used inside Protege. It allows to focus on the OWL axioms rather than on the programming.
+The advantage of working with strings as input rather than with more complicated Java objects appears in a web application context:
+HTTP messaging can indeed be easily parsed and interpreted in order to quickly build an OWL end-point for instance.
+A list of OWL queries for instance is also easier to maintain, read and understand when represented with the Manchester syntax.
 
-Basically, a instance of a Brain object hold a reference to only one 
-ontology (also called knowledge-base). You can of course import some external 
-ontologies, refer to external terms, but at the end it will resolve to only one ontology.
+\subsection{Unique ontology}
+One of the core design decision behind the library was to enforce the users to work with only one ontology.
+This simplification helps the user to focus on one knowledge base at the time and remove any ambiguity that could be present while
+dealing with scattered entities. It is yet possible to import and load external ontologies
+and entities, but Brain merge any new axioms into one single knowledge base.
 
-Unique names
+\subsection{Unique short form names}
+Brain also enforces OWL entities to have a unique short form names. This choice was made in order to prevent ambiguity while using 
+the Manchester syntax to formulate OWL expressions. For instance the short forms of the OWL entities http://example.org/Cat and
+http://semanticweb.org/Cat will be the same: Cat. It leads to problems when an expression is formulated with the Manchester syntax later
+on using the short form name. The entity Cat is indeed ambigous in this case. This issue is avoided by Brain and an exception is thrown 
+when a potentially dangerous situation occurs. This choice is not exactly inline with some of the Semantic Web philosophy, but it
+seems likely to work in the biomedical domain, where entity identifiers are most of the time preceded by a unique prefix. For example
+the short form names of the Gene Ontology classes all start with the prefix "GO\_", uniquely identifying the biomedical resource.
+Note that this design is not against the unique name assumption: It is still possible that different names refer to the same entities.
 
-The names of OWL entities handled by a Brain object have to be unique. 
-This is motivated by the fact that Brain hides as much as possible the cumbersome
- interaction with prefixes, IRI and URIs. Everything resolves to names.
+\subsection{Error-handling driven}
+As presented before, Brain enforces some constraints in order to prevent some errors with OWL logic later on. 
+A lot of different types of errors
+can be thrown in order to alert the user that a problem exists in the underlying ontology. 
+A special care had also to be put when interacting with expressions entered as strings. Problems encoutered when creating or querying
+the ontology are made explicit to the developer in order to preserve the consistency of the underlying knowledge base.
 
-Typeless
+\subsection{Queries}
+A common use-case for OWL ontologies is running queries over them in order to retrieve some implicit information. An OWL query is a
+standard OWL class expression in the context of Brain. The ELK reasoner is handling classification and query tasks. The classification
+of the ontology is triggered only when absolutely needed and transparent to the user (lazy initialization). Queries are also formulated
+using the Manchester syntax and it is possible to use the label (rdfs:label) of OWL entities to enter the query expression, as featured
+in Protege. Queries are thread-safe: For instance the simultaneous queries of two users will be handled by Brain.
+This characteristic is important in concurrent web server setting for instance.
 
-The interaction with the ontology is done via strings (type-less). 
-Expressions and queries are formulated in Manchester syntax. It results 
-in less and more explicit code.
-
-Error-handling driven
-
-Because the interaction with Brain is built around strings rather than Java objects, 
-special care has to be put on exception handling, in order to preserve the consistency. Brain 
-throws a lot of possible exceptions, depending the type of operation you want to carry. 
-All exceptions are subclasses of BrainException.
-
-Queries
-
-integration
+\subsection{Limitations}
+The methods present in the library are strongly driven from real world use-cases and requirements from users. However some important 
+features are still missing: Individuals are not currently supported for example. Despite not being oriented towards OWL individuals, OWL2 EL
+ontologies are yet sometimes using them. This drawback will be addressed in a coming release.
 
 \section{Example of implementation}
 
-nucleus axiom longer 
+The easiest way to understand the interaction with Brain is probably by looking at a concrete example. 
+This section will present the implementation
+of a biomedical axiom using the library. The features discussed before are illustrated in Figure 1.
+The interested reader can find more examples at https://github.com/loopasam/Brain/wiki/Examples.
 
-VBF use case + FTC
+\begin{figure}[h]
+\begingroup
+\fontsize{10pt}{9pt}\selectfont
+\begin{Verbatim}[frame=single]
+//Creation of a fresh Brain instance.
+//All the operations will be done via this object.
+Brain brain = new Brain();
+
+//Add some OWL classes to the ontology.
+//Short forms or full URIs can be used, but 
+//the short forms have to be unique.
+brain.addClass("Nucleus");
+brain.addClass("http://example.org/Cell");
+
+//Add an OWL object property to the ontology
+brain.addObjectProperty("part-of");
+
+//Declare a complex axiom (partial existential restriction).
+//Note that OWL expressions in 
+//Manchester syntax can be used directly for the axiom
+//assertion. If the classes used in the expression were
+//missing, an error will be thrown (not shown here).
+brain.subClassOf("Nucleus", "part-of some Cell");
+
+//Integrate the content of an external knowledge base
+//with the current ontology.
+brain.learn("http://example.org/bar.owl");
+
+//Query the knowledge base for indirect subclasses
+//with the help of the ELK reasoner.
+//Note that the classification initialization is
+//transparent to the user.
+List<String> subClasses = 
+		brain.getSubClasses("part-of some Cell", false);
+
+//Free the resources cached by the reasoner.
+//Due to ELK implementation, allows 
+//efficient multi-threaded reasoning.
+brain.sleep();
+
+//Save the ontology as a file
+//using the Manchester syntax.
+brain.save("your/path/to/ontology.owl");
+\end{Verbatim}
+\endgroup
+\caption{Implementation example in Java of an axiom using Brain; the axiom expressed in natural language:
+ \textit{A nucleus is part of some cells}. Same axiom described in OWL using the Manchester syntax: 
+ \textit{Nucleus subClassOf part-of some Cell.}}
+\end{figure}
 
 \section{Conclusion}
-
-future direction --> SVG graphs in dev, add individuals, etc..
-
+Brain is a Java library leveraging the interation with the OWL-API and the ELK reasoner. The library is dedicated to OWL2 EL ontologies
+and provide an interface to manipulate and query biomedical knowledge bases. The library has been designed to build web applications
+and to perform biomedical analysis relying heavely on a reasoner.
+Some features will be added in future releases, such as
+individual support. New functionnalities are also currently implemented, such as the generation of scalable vector graphics (SVG) representing
+the OWL class taxonomies from the underlying ontology. Brain is already stably used in some real life biomedical applications and new
+use-cases from the biomedical community will guide the further developements of the library.
 
 % ---- Bibliography ----
 %
