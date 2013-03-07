@@ -38,7 +38,7 @@ Brain relies on ELK for reasoning tasks. The open source project is available at
 \subsection{OWL2 EL}
 The second version of the Web Ontology Language (OWL2) introduces a series of profiles: OWL2 EL, RL and QL.
 These profiles are subsets of the full OWL2 specification and have been designed to match the requirements of particular case scenarios.
-Profiles are defined by the type of axioms and constructs they support: For instance the OWL2 EL profile, which has been 
+Profiles are defined by the type of axioms and constructs they support: For instance the EL profile, which has been 
 created for the biomedical domain, does not allow 
 disjunctions or cardinality restrictions. This limited expressivity however enables the implementation of fast reasoning algorithms which can
 handle well large data as it is required by the application domain. In this document we will present the core features of a 
@@ -46,12 +46,13 @@ Java library, Brain, dedicated to support the OWL2 EL families and oriented towa
 
 \subsection{Motivation}
 The biomedical domain is particularly interesting for the OWL community because of the richness and variety of the ontologies it contains.
-The majority of them such as the Gene Ontology (GO) or SNOMED CT are very large but they are fortunately following 
-the EL profile, which enables the use of recent and fast reasoners such as ELK.
-Because of these improvements in the reasoning speed over big biomedical knowledge bases, 
+The majority of resources such as the Gene Ontology (GO) or SNOMED CT are very large but they are fortunately in line with 
+the EL profile.
+Driven by the recent improvements in the reasoning speed over big biomedical knowledge bases, with reasoners such as ELK,
 it becomes nowadays possible to build web applications or to perform biological analysis relying heavily on OWL queries performed against
-an ontology of interest. This is traditionnaly done either via a graphical user interface (GUI) such as Protege or programmed
-using the OWL-API and the Java language. GUIs are wonderful to develop toy examples, but they are not suited to handle very large 
+an ontology of interest. 
+The options available to undertake such tasks span from graphical user interfaces (GUI) such as Protege to application programming interfaces as
+the OWL-API. GUIs are wonderful to develop toy examples, but they are not suited to handle very large 
 ontologies as the ones faced in life sciences, potentially containing millions of axioms. The OWL-API is solid solution to build
 applications but it could be daunting for new comers or users with little experience in Java. OWLTools is an intermediary solution for the
 biomedical domain, but the interaction with this library is mostly done by command lines with impairs the developement of larger projects.
