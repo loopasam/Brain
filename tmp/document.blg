@@ -7,45 +7,46 @@ Warning--to sort, need author or key in vfb
 Warning--to sort, need author or key in ftc
 Warning--to sort, need author or key in github
 Warning--to sort, need author or key in wiki
-You've used 12 entries,
+Warning--to sort, need author or key in examples
+You've used 13 entries,
             2785 wiz_defined-function locations,
-            646 strings with 6257 characters,
-and the built_in function-call counts, 4975 in all, are:
-= -- 365
-> -- 189
+            649 strings with 6334 characters,
+and the built_in function-call counts, 5209 in all, are:
+= -- 382
+> -- 190
 < -- 6
-+ -- 80
++ -- 81
 - -- 68
-* -- 288
-:= -- 605
-add.period$ -- 11
-call.type$ -- 12
-change.case$ -- 77
+* -- 296
+:= -- 623
+add.period$ -- 12
+call.type$ -- 13
+change.case$ -- 81
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 431
-empty$ -- 456
+cite$ -- 19
+duplicate$ -- 455
+empty$ -- 488
 format.name$ -- 72
-if$ -- 1066
+if$ -- 1122
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 103
-newline$ -- 41
+int.to.str$ -- 13
+missing$ -- 108
+newline$ -- 44
 num.names$ -- 14
-pop$ -- 247
+pop$ -- 265
 preamble$ -- 1
-purify$ -- 58
+purify$ -- 60
 quote$ -- 0
-skip$ -- 132
+skip$ -- 141
 stack$ -- 0
-substring$ -- 178
-swap$ -- 236
+substring$ -- 185
+swap$ -- 246
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
-warning$ -- 5
+type$ -- 52
+warning$ -- 6
 while$ -- 27
-width$ -- 14
-write$ -- 110
-(There were 5 warnings)
+width$ -- 15
+write$ -- 118
+(There were 6 warnings)
