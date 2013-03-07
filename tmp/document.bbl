@@ -1,0 +1,58 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+
+\bibitem{wiki}
+{Documentation Brain}. \url{https://github.com/loopasam/Brain/wiki}, [Online;
+  accessed 07-March-2013]
+
+\bibitem{ftc}
+{Functional Therapeutic Chemical Classification System}.
+  \url{https://www.ebi.ac.uk/chembl/ftc}, [Online; accessed 07-March-2013]
+
+\bibitem{owltools}
+{OWLTools}. \url{http://code.google.com/p/owltools}, [Online; accessed
+  07-March-2013]
+
+\bibitem{github}
+{Source Code Brain}. \url{https://github.com/loopasam/Brain/}, [Online;
+  accessed 07-March-2013]
+
+\bibitem{vfb}
+{Virtual Fly Brain}. \url{http://www.virtualflybrain.org/}, [Online; accessed
+  07-March-2013]
+
+\bibitem{Ashburner2000}
+Ashburner, M., Ball, C.A., Blake, J.A., Botstein, D., Butler, H., Cherry, J.M.,
+  Davis, A.P., Dolinski, K., Dwight, S.S., Eppig, J.T., Harris, M.A., Hill,
+  D.P., Issel-Tarver, L., Kasarskis, A., Lewis, S., Matese, J.C., Richardson,
+  J.E., Ringwald, M., Rubin, G.M., Sherlock, G.: {Gene Ontology: tool for the
+  unification of biology}. Nature Genetics  25(1),  25--29 (2000),
+  \url{http://dx.doi.org/10.1038/75556}
+
+\bibitem{MatthewHorridge2011}
+{Horridge}, {Bechhofer}: {The OWL API: A Java API for OWL Ontologies.} Semantic
+  Web Journal pp. 11--21 (2011)
+
+\bibitem{Horridge2006}
+Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., Wang, H.H.:
+  {The Manchester OWL Syntax}. Syntax  216,  10--11 (2006),
+  \url{http://dblp.uni-trier.de/rec/bibtex/conf/owled/HorridgeDGRSW06}
+
+\bibitem{snomed}
+IHTSDO: {SNOMED CT}. \url{http://www.ihtsdo.org/snomed-ct/}, [Online; accessed
+  07-March-2013]
+
+\bibitem{YevgenyKazakov2011}
+{Kazakov}, {Markus Kr\"{o}tzsch}, {Franti\v{s}ek Siman\v{c}\'{\i}k}:
+  {Concurrent Classification of EL Ontologies}. Proceedings of the 10th
+  International Semantic Web Conference (ISWC'11)  7032 (2011)
+
+\bibitem{tawny}
+Lord, P.: {The Semantic Web takes Wing: Programming Ontologies with Tawny-OWL}
+
+\bibitem{protege}
+NCBO: {Protege}. \url{http://protege.stanford.edu/}, [Online; accessed
+  07-March-2013]
+
+\end{thebibliography}

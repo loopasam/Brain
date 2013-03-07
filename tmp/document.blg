@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: document.aux
+The style file: splncs03.bst
+Database file #1: document.bib
+Warning--to sort, need author or key in owltools
+Warning--to sort, need author or key in vfb
+Warning--to sort, need author or key in ftc
+Warning--to sort, need author or key in github
+Warning--to sort, need author or key in wiki
+You've used 12 entries,
+            2785 wiz_defined-function locations,
+            646 strings with 6257 characters,
+and the built_in function-call counts, 4975 in all, are:
+= -- 365
+> -- 189
+< -- 6
++ -- 80
+- -- 68
+* -- 288
+:= -- 605
+add.period$ -- 11
+call.type$ -- 12
+change.case$ -- 77
+chr.to.int$ -- 0
+cite$ -- 17
+duplicate$ -- 431
+empty$ -- 456
+format.name$ -- 72
+if$ -- 1066
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 103
+newline$ -- 41
+num.names$ -- 14
+pop$ -- 247
+preamble$ -- 1
+purify$ -- 58
+quote$ -- 0
+skip$ -- 132
+stack$ -- 0
+substring$ -- 178
+swap$ -- 236
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 5
+while$ -- 27
+width$ -- 14
+write$ -- 110
+(There were 5 warnings)
