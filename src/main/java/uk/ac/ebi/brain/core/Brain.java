@@ -1660,10 +1660,8 @@ public class Brain {
 		float intersection = 0;
 		List<String> superClasses1 = this.getSuperClasses(class1, false);
 		superClasses1.add(class1);
-		System.out.println(superClasses1);
 		List<String> superClasses2 = this.getSuperClasses(class2, false);
 		superClasses2.add(class2);
-		System.out.println(superClasses2);
 
 		float sizeSet1 = 0;
 		float sizeSet2 = superClasses2.size();
@@ -1677,9 +1675,7 @@ public class Brain {
 		}
 		
 		float union = intersection + sizeSet2 + sizeSet1;
-		System.out.println("union: " + union);
 		float index = intersection/union;
-		System.out.println("intersection: " + intersection);
 		return index;
 	}
 
