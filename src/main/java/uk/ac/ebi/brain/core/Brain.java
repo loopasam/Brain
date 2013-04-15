@@ -1647,4 +1647,40 @@ public class Brain {
 		}
 	}
 
+	/**
+	 * Calculates the Jaccard index between two classes of the ontology.
+	 * The super classes of each classes are compared...
+	 * http://en.wikipedia.org/wiki/Jaccard_index
+	 * http://webwhompers.com/set-theory.html
+	 * @return The Jaccard index
+	 * @throws ClassExpressionException 
+	 */
+	//TODO finish the doc
+	public float getJaccardSimilarityIndex(String class1, String class2) throws ClassExpressionException {
+		float intersection = 0;
+		List<String> superClasses1 = this.getSuperClasses(class1, false);
+		superClasses1.add(class1);
+		System.out.println(superClasses1);
+		List<String> superClasses2 = this.getSuperClasses(class2, false);
+		superClasses2.add(class2);
+		System.out.println(superClasses2);
+
+		float sizeSet1 = 0;
+		float sizeSet2 = superClasses2.size();
+		for (String superClass1 : superClasses1) {
+			if(superClasses2.contains(superClass1)){
+				intersection++;
+				sizeSet2--;
+			}else{
+				sizeSet1++;
+			}
+		}
+		
+		float union = intersection + sizeSet2 + sizeSet1;
+		System.out.println("union: " + union);
+		float index = intersection/union;
+		System.out.println("intersection: " + intersection);
+		return index;
+	}
+
 }
