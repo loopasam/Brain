@@ -1673,7 +1673,50 @@ public class Brain {
 				sizeSet1++;
 			}
 		}
-		
+
+		float union = intersection + sizeSet2 + sizeSet1;
+		float index = intersection/union;
+		return index;
+	}
+
+	//TODO doc
+	//Groupwise similarity coefficient
+	public float getJaccardSimilarityIndex(List<String> classes1, List<String> classes2) throws ClassExpressionException {
+		List<String> allClasses1 = new ArrayList<String>();
+		List<String> allClasses2 = new ArrayList<String>();
+
+		for (String class1 : classes1) {
+			List<String> superClasses1 = this.getSuperClasses(class1, false);
+			superClasses1.add(class1);
+			for (String superClass1 : superClasses1) {
+				if(!allClasses1.contains(superClass1)){
+					allClasses1.add(superClass1);
+				}
+			}
+		}
+
+		for (String class2 : classes2) {
+			List<String> superClasses2 = this.getSuperClasses(class2, false);
+			superClasses2.add(class2);
+			for (String superClass2 : superClasses2) {
+				if(!allClasses2.contains(superClass2)){
+					allClasses2.add(superClass2);
+				}
+			}
+		}
+
+		float intersection = 0;
+		float sizeSet1 = 0;
+		float sizeSet2 = allClasses2.size();
+		for (String superClass1 : allClasses1) {
+			if(allClasses2.contains(superClass1)){
+				intersection++;
+				sizeSet2--;
+			}else{
+				sizeSet1++;
+			}
+		}
+
 		float union = intersection + sizeSet2 + sizeSet1;
 		float index = intersection/union;
 		return index;
