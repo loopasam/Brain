@@ -2,51 +2,52 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: document.aux
 The style file: splncs03.bst
 Database file #1: document.bib
+Warning--to sort, need author or key in owlprofile
 Warning--to sort, need author or key in owltools
 Warning--to sort, need author or key in vfb
 Warning--to sort, need author or key in ftc
 Warning--to sort, need author or key in github
 Warning--to sort, need author or key in wiki
 Warning--to sort, need author or key in examples
-You've used 13 entries,
+You've used 14 entries,
             2785 wiz_defined-function locations,
-            649 strings with 6334 characters,
-and the built_in function-call counts, 5209 in all, are:
-= -- 382
-> -- 190
+            653 strings with 6480 characters,
+and the built_in function-call counts, 5443 in all, are:
+= -- 399
+> -- 191
 < -- 6
-+ -- 81
++ -- 82
 - -- 68
-* -- 296
-:= -- 623
-add.period$ -- 12
-call.type$ -- 13
-change.case$ -- 81
+* -- 304
+:= -- 641
+add.period$ -- 13
+call.type$ -- 14
+change.case$ -- 85
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 455
-empty$ -- 488
+cite$ -- 21
+duplicate$ -- 479
+empty$ -- 520
 format.name$ -- 72
-if$ -- 1122
+if$ -- 1178
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 108
-newline$ -- 44
+int.to.str$ -- 14
+missing$ -- 113
+newline$ -- 47
 num.names$ -- 14
-pop$ -- 265
+pop$ -- 283
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 62
 quote$ -- 0
-skip$ -- 141
+skip$ -- 150
 stack$ -- 0
-substring$ -- 185
-swap$ -- 246
+substring$ -- 192
+swap$ -- 256
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
-warning$ -- 6
+type$ -- 56
+warning$ -- 7
 while$ -- 27
-width$ -- 15
-write$ -- 118
-(There were 6 warnings)
+width$ -- 16
+write$ -- 126
+(There were 7 warnings)

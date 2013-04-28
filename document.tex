@@ -32,12 +32,13 @@ Brain relies on ELK for reasoning tasks. The open source project is available at
 
 \section{Introduction}
 \subsection{OWL2 EL}
-The second version of the Web Ontology Language (OWL2) introduces a series of profiles: OWL2 EL, RL and QL.
+The second version of the Web Ontology Language (OWL2) introduces a series of profiles: OWL2 EL, RL and QL \cite{owlprofile}.
 These profiles are subsets of the full OWL2 specification and have been designed to match the requirements of particular case scenarios.
 Profiles are defined by the type of axioms and constructs they support: For instance the EL profile, which has been 
-created for the biomedical domain, does not allow 
-disjunctions or cardinality restrictions. This limited expressivity however enables the implementation of fast reasoning algorithms which can
-handle well large data as it is required by the application domain. In this document we will present the core features of a 
+inspired from biomedical ontologies, does not allow 
+disjunctions or cardinality restrictions among other things. 
+This limited expressivity however enables the implementation of fast reasoning algorithms which can
+handle large amount of data as it is required by the application domain. In this document we will present the core features of a 
 Java library, Brain, dedicated to support the OWL2 EL families and oriented toward biomedical knowledge manipulation. Another description
 of the library is being published at the time of writting in a biomedical journal. This manuscript aims at publicising the work to the
 OWLED workshop 2013 audience.
@@ -53,13 +54,15 @@ The options available to undertake such tasks span from graphical user interface
 programming interfaces as
 the OWL-API \cite{MatthewHorridge2011}. GUIs are wonderful to develop toy examples, but they are not suited to handle very large 
 ontologies as the ones faced in life sciences, potentially containing millions of axioms. The OWL-API is solid solution to build
-applications but it could be daunting for new comers or users with little experience in Java.
+applications but it could be daunting for new comers or users with little experience in Java or OWL.
 OWLTools \cite{owltools} is an intermediary option for the
-biomedical domain, but the interaction with this library is mostly done by command lines which impairs the development of larger projects.
-Tawny-OWL \cite{tawny} provides an alternative programmatic environment to develop OWL ontologies using Closure, but the project does
-not address web application development issues.
+biomedical domain as 
+Tawny-OWL \cite{tawny}. Both of these libraries provide an alternative programmatic environment to develop OWL ontologies 
+using either Java or Closure. These projects however do
+not address web application development issues: Indeed in such a setting, when a reasoner is used to query an ontology based on requests
+from users, a special care as to be put on the management of concurrency.
 In order to ease the interaction with OWL2 EL ontologies we have developed Brain, a facade on the top of the OWL-API. 
-The library facilitates the manipulation of EL ontologies, specially in a web server setting. 
+The library facilitates the manipulation of EL ontologies, specially in a web server cocurrent environment. 
 Brain is already successfully used in production as a back-end engine for web applications 
 such as the Virtual Fly Brain \cite{vfb} or the Functional Therapeutic Chemical Classification System \cite{ftc}.
 

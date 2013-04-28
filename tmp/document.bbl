@@ -14,6 +14,10 @@
 {Functional Therapeutic Chemical Classification System}.
   \url{https://www.ebi.ac.uk/chembl/ftc}, [Online; accessed 07-March-2013]
 
+\bibitem{owlprofile}
+{OWL 2 Web Ontology Language Profiles (Second Edition)}.
+  \url{http://www.w3.org/TR/owl2-profiles/}, [Online; accessed 25-April-2013]
+
 \bibitem{owltools}
 {OWLTools}. \url{http://code.google.com/p/owltools}, [Online; accessed
   07-March-2013]
@@ -47,16 +51,16 @@ Horridge, M., Drummond, N., Goodwin, J., Rector, A., Stevens, R., Wang, H.H.:
 IHTSDO: {SNOMED CT}. \url{http://www.ihtsdo.org/snomed-ct/}, [Online; accessed
   07-March-2013]
 
-\bibitem{YevgenyKazakov2011}
-{Kazakov}, {Markus Kr\"{o}tzsch}, {Franti\v{s}ek Siman\v{c}\'{\i}k}:
-  {Concurrent Classification of EL Ontologies}. Proceedings of the 10th
-  International Semantic Web Conference (ISWC'11)  7032 (2011)
-
 \bibitem{tawny}
 Lord, P.: {The Semantic Web takes Wing: Programming Ontologies with Tawny-OWL}
 
 \bibitem{protege}
 NCBO: {Protege}. \url{http://protege.stanford.edu/}, [Online; accessed
   07-March-2013]
+
+\bibitem{YevgenyKazakov2011}
+{Yevgeny Kazakov}, {Markus Kr\"{o}tzsch}, {Franti\v{s}ek Siman\v{c}\'{\i}k}:
+  {Concurrent Classification of EL Ontologies}. Proceedings of the 10th
+  International Semantic Web Conference (ISWC'11)  7032 (2011)
 
 \end{thebibliography}
