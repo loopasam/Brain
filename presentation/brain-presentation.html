@@ -17,7 +17,7 @@
 
 <html>
 <head>
-<title>Presentation EBI</title>
+<title>Brain 1.4.1</title>
 
 <meta charset='utf-8'>
 <script
@@ -42,32 +42,65 @@
         <article class='biglogo'></article>
 
         <article>
-            <h1>Brain-1.2</h1>
-            <h3>Biomedical Knowledge Manipulation</h3>
+            <h1>Brain-1.4.1</h1>
+            <br>
+            <h3>A library for the OWL2 EL profile</h3>
             <p>
-                Samuel Croset <br> November 27, 2012
+                <u>Samuel Croset</u>, John Overington, Dietrich Rebholz-Schuhmann 
+            </p>
+            <p>
+	        	May 26, 2013 - <a href="http://www.ebi.ac.uk/~jupp/owled2013/index.html">OWLED 2013</a>
             </p>
         </article>
+        
+        <article>
+          <h3>Ontologies and biomedical analyses</h3>
+        <p>
+          <img class='centered' style='height: 520px' src='heatmap.png'>
+        </p>
+        <div class='source'>
+          Comparison of drug's mode of action similarities (with current therapeutic indications)
+        </div>
+      </article>
+
 
         <article>
             <h3>Motivations</h3>
             <ul>
-                <li>A library to solve my own problems: Web
-                    Ontology Language (OWL) manipulation</li>
-                <li>Allows to focus on biomedical questions: <a
-                    href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL
-                        2EL</a></li>
-                <li>Fast and scalable reasoner: <a
-                    href="https://code.google.com/p/elk-reasoner/">Elk</a></li>
-                <li>In-between <a
-                    href="http://protege.stanford.edu/">Protege</a> and
+                <li><a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2EL</a> enables a new type of biomedical data analyses</li>
+                <li>Fast and scalable reasoning with <a href="https://code.google.com/p/elk-reasoner/">ELK</a></li>
+                <li>Lots of query answering on integrated data</li>
+                <li>Being able to handle various formats (CSV, XML, etc...)</li>
+                <li>Something in-between <a href="http://protege.stanford.edu/">Protege</a> and
                     the <a href="http://owlapi.sourceforge.net/">OWL-API</a></li>
-				<li>More control than with <a
-                    href="http://code.google.com/p/owltools/">OWLTools</a></li>
-                <li>OWL ontologies and knowledge bases (description
-                    logic)</li>
-                <li>Enhanced productivity</li>
-                <li>Java</li>
+				<li>More control than with <a href="http://code.google.com/p/owltools/">OWLTools</a></li>
+                <li>Ontologies as web application backend (<a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a>)</li>
+                <li>(Practicing Java)</li>
+            </ul>
+        </article>
+
+        <article>
+            <h3>Brain - What is it?</h3>
+            <ul>
+            	<li>Java library for the OWL2 EL profile (biomedical domain)</li>
+            	<li><a href="http://en.wikipedia.org/wiki/Facade_pattern">Facade pattern</a> over the OWL-API and ELK 
+            	(simplified interface to a larger body of code)</li>
+            	<li>OWL queries and reasoning</li>
+				<li>(Thread safe) for web applications</li>
+				<li>Extra features: Semantic similarity, graph export...</li>
+            </ul>
+        </article>
+        
+        <article>
+            <h3>Design of the library</h3>
+            <ul>
+            	<li><b>Unique ontology (knowledge base):</b> Keeping it simple</li>
+            	<li><b>Unique names:</b> Prevent ambiguities when working with shortforms. Biomedical names are often unique identifiers 
+            	(<code>GO_0001820</code>
+            	or <code>P04637</code>)</li>
+            	<li><b>Manchester syntax:</b> Typeless interaction, expressions are entered as strings (<code>"drug that positively-perturbs some Pyridoxal kinase"</code>)</li>
+				<li><b>Error-handling driven:</b> If there is a problem, I want to know it</li>
+				<li><b>Concurrency management:</b> Synchronization of "dangerous" methods (not perfect but works)</li>
             </ul>
         </article>
 
@@ -77,9 +110,9 @@
             <p>
                 <code>A nucleus is part of some cells.</code>
             </p>
-            <p>Description logic:</p>
+            <p>Description logics:</p>
             <p>
-                <code>Nucleus ⊆ ∃part-of.Cell</code>
+                <code>Nucleus ⊑ ∃part-of.Cell</code>
             </p>
             <p>OBO (without identifiers):</p>
             <p>
@@ -98,7 +131,7 @@ relationship: part_of Cell</pre>
 
 
         <article class='smaller'>
-            <h3>OWL-API implementation</h3>
+            <h3>OWL-API implementation of the axiom</h3>
             <section>
                 <pre>
 //Create a manager and define the base IRI for the ontology
@@ -126,38 +159,22 @@ manager.saveOntology(ontology, IRI.create("file:/home/samuel/Desktop/ontology.ow
             </section>
         </article>
 
-        <article class='smaller'>
-            <h3>OWL-API default output (RDF/XML)</h3>
+        <article>
+            <h3>Brain implementation of the axiom</h3>
             <section>
                 <pre>
-&lt;?xml version="1.0"?&gt;
-&lt;rdf:RDF xmlns="http://www.example.org/ontology.owl#"
-     xml:base="http://www.example.org/ontology.owl"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
-    &lt;owl:Ontology rdf:about="http://www.example.org/ontology.owl"/&gt;
-
-    &lt;owl:ObjectProperty rdf:about="http://www.example.org/part-of"/&gt;
-    
-    &lt;owl:Class rdf:about="http://www.example.org/Cell"/&gt;
-    
-    &lt;owl:Class rdf:about="http://www.example.org/Nucleus"&gt;
-        &lt;rdfs:subClassOf&gt;
-            &lt;owl:Restriction&gt;
-                &lt;owl:onProperty rdf:resource="http://www.example.org/part-of"/&gt;
-                &lt;owl:someValuesFrom rdf:resource="http://www.example.org/Cell"/&gt;
-            &lt;/owl:Restriction&gt;
-        &lt;/rdfs:subClassOf&gt;
-    &lt;/owl:Class&gt;
-&lt;/rdf:RDF&gt;
-           </pre>
+Brain brain = new Brain();
+brain.addClass("Nucleus");
+brain.addClass("Cell");
+brain.addObjectProperty("part-of");
+brain.subClassOf("Nucleus", "part-of some Cell");
+brain.save("/home/samuel/Desktop/ontology.owl");
+            </pre>
             </section>
         </article>
 
         <article class='smaller'>
-            <h3>Reasoning with Elk and the OWL-API</h3>
+            <h3>Reasoning with ELK and the OWL-API</h3>
             <section>
                 <pre>
 OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -190,73 +207,93 @@ reasoner.dispose();
         </article>
 
         <article>
-            <h3>Results using the OWL-API</h3>
-            <p>
-                <code>subClass:
-                    &lt;http://www.example.org/Nucleus&gt;</code>
-                <code>subClass: owl:Nothing</code>
-            </p>
-        </article>
-
-        <article>
-            <h3>Brain implementation</h3>
-            <section>
-                <pre>
-Brain brain = new Brain();
-brain.addClass("Nucleus");
-brain.addClass("Cell");
-brain.addObjectProperty("part-of");
-brain.subClassOf("Nucleus", "part-of some Cell");
-brain.save("/home/samuel/Desktop/ontology.owl");
-            </pre>
-            </section>
-        </article>
-
-        <article class='smaller'>
-            <h3>Query using the Brain</h3>
-            <section>
-                <pre>
-Prefix: : &lt;brain#&gt;
-Prefix: owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-Prefix: rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-Prefix: xml: &lt;http://www.w3.org/XML/1998/namespace&gt;
-Prefix: xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-Prefix: rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-
-Ontology: &lt;brain.owl&gt;
-
-ObjectProperty: part-of
-    
-Class: owl:Thing
-    
-Class: Cell
-
-Class: Nucleus
-
-  SubClassOf: 
-    part-of some Cell
-            </pre>
-            </section>
-        </article>
-
-        <article>
-            <h3>Query using the Brain</h3>
+            <h3>Query using Brain</h3>
             <section>
                 <pre>
 Brain brain = new Brain();
 brain.learn("/home/samuel/Desktop/ontology.owl");
+
 List&lt;String&gt; subClasses = 
-        brain.getSubClasses("part-of some Cell", false);
+                    brain.getSubClasses("part-of some Cell", false);
+        
 for (String subClass : subClasses) {
   System.out.println("subClass: " + subClass);
 }
+
 brain.sleep();
             </pre>
             </section>
-            <p>
-                Result: <br />
-                <code>subClass: Nucleus</code>
-            </p>
+        </article>
+        
+        <article>
+            <h3>JUnit - Competency questions driven development</h3>
+            <section>
+                <pre>
+static Brain brain;
+	
+@BeforeClass
+public static void init() throws BrainException {
+  brain = new Brain();
+  brain.learn("/home/samuel/Desktop/ontology.owl");
+}
+	
+@Test
+public void testAxiom() throws ClassExpressionException {
+  //My knowledge base should be able to answer this
+  assertEquals("Nucleus", 
+          brain.getSubClasses("part-of some Cell", false).get(0));
+}
+            </pre>
+            </section>
+        </article>
+        
+        <article>
+            <h3>Web applications: <u>Model</u>-View-Controller</h3>
+            <section>
+              <pre>
+//Controller method routed from GET /{name}
+//Example: http://www.example.org/John
+public static void showUser(String name) {
+  //SQL query over the Model (relational database)
+  User user = User.find(
+   "SELECT DISTINCT user FROM User WHERE user.name=?", name).first();
+  render(user);
+}
+            </pre>
+            </section>
+            <section>
+            <pre>
+&lt;!-- View (HTML template) rendered on browser --&gt;
+&lt;h1&gt;Hello ${user.name}&lt;/h1&gt;
+            </pre>
+            </section>
+        </article>
+        
+        <article>
+            <h3>Web applications with Brain: <u>Model</u>-View-Controller</h3>
+            <section>
+              <pre>
+//Controller method routed from GET /{name}
+//Example: http://www.example.org/Cell
+public static void showOwlClass(String name) {
+  //OWL query over ontology
+  OWLClass owlClass = brain.getOWLClass(name);
+  List&lt;String&gt; parts = 
+               brain.getSubClasses("part-of some " + name, false);
+               
+  render(name, parts);
+}
+            </pre>
+            </section>
+            <section>
+            <pre>
+&lt;!-- View (HTML template) --&gt;
+&lt;h1&gt;OWL Class: ${name}&lt;/h1&gt;
+#{list items:parts, as:'part' }
+  &lt;div&gt;subClass: ${part}&lt;/div&gt;
+#{/list}
+            </pre>
+            </section>
         </article>
         
         <article>
@@ -265,51 +302,19 @@ brain.sleep();
         </article>
 
         <article>
-            <h3>Main features of Brain</h3>
+            <h3>Wrap-up</h3>
             <ul>
-                <li>Dedicated to OWL 2EL ontologies</li>
-                <li>Facade for the OWL-API, wrapping the Elk
-                    reasoner</li>
-                <li>Unique ontology</li>
-                <li>Unique names</li>
-                <li>Type less</li>
-                <li>Error-handling driven</li>
-                <li>Ready for web-services or OWL end-points</li>
-            </ul>
-        </article>
-
-        <article>
-            <h3>Links</h3>
-            <p>
-            <ul>
+            	<li>Currently used in production by a couple of projects: <a href="http://www.virtualflybrain.org/site/vfb_site/overview.htm">
+            	Virtual Fly Brain</a> and <a href="https://www.ebi.ac.uk/chembl/ftc">Functional Therapeutic Chemical Classification System</a></li>
                 <li>This presentation: <a href="http://bit.ly/SULODn">http://bit.ly/SULODn</a></li>
-                <li><a href="http://loopasam.github.com/Brain/">Website</a></li>
+                <li>Google for "brain owl library"</li>
                 <li><a
                     href="https://github.com/loopasam/Brain/wiki">Documentation</a></li>
                 <li><a href="http://samuelcroset.com/contact">Questions/Feature
                         request</a></li>
             </ul>
-            </p>
-            <hr />
-            <p>
-                Maven Central Repository:<br />
-                <section>
-                    <pre>
-&lt;dependency&gt;
-  &lt;groupId&gt;uk.ac.ebi.brain&lt;/groupId&gt;
-  &lt;artifactId&gt;Brain&lt;/artifactId&gt;
-  &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;
-        </pre>
-                </section>
-            </p>
+            <hr><h3>Thank you for your attention! Questions?</h3>
         </article>
-
-        <article class='fill'>
-            <iframe src='http://loopasam.github.com/Brain/'></iframe>
-        </article>
-
-
     </section>
 
 </body>
