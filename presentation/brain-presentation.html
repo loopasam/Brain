@@ -67,13 +67,13 @@
         <article>
             <h3>Motivations</h3>
             <ul>
-                <li><a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL 2EL</a> enables a new type of biomedical data analyses</li>
+            	<li>Description logics as methodology for analyses</li>
+                <li><a href="http://www.w3.org/TR/owl2-profiles/#OWL_2_EL">OWL2 EL</a> enables a new type of biomedical data analyses</li>
                 <li>Fast and scalable reasoning with <a href="https://code.google.com/p/elk-reasoner/">ELK</a></li>
-                <li>Lots of query answering on integrated data</li>
+                <li>Lots of query answering on integrated data - hard to maintain</li>
                 <li>Being able to handle various formats (CSV, XML, etc...)</li>
                 <li>Something in-between <a href="http://protege.stanford.edu/">Protege</a> and
                     the <a href="http://owlapi.sourceforge.net/">OWL-API</a></li>
-				<li>More control than with <a href="http://code.google.com/p/owltools/">OWLTools</a></li>
                 <li>Ontologies as web application backend (<a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a>)</li>
                 <li>(Practicing Java)</li>
             </ul>
@@ -85,7 +85,7 @@
             	<li>Java library for the OWL2 EL profile (biomedical domain)</li>
             	<li><a href="http://en.wikipedia.org/wiki/Facade_pattern">Facade pattern</a> over the OWL-API and ELK 
             	(simplified interface to a larger body of code)</li>
-            	<li>OWL queries and reasoning</li>
+            	<li>OWL queries and reasoning for biomedical analyses</li>
 				<li>(Thread safe) for web applications</li>
 				<li>Extra features: Semantic similarity, graph export...</li>
             </ul>
@@ -229,20 +229,18 @@ brain.sleep();
             <h3>JUnit - Competency questions driven development</h3>
             <section>
                 <pre>
-static Brain brain;
-	
-@BeforeClass
-public static void init() throws BrainException {
-  brain = new Brain();
-  brain.learn("/home/samuel/Desktop/ontology.owl");
-}
-	
 @Test
 public void testAxiom() throws ClassExpressionException {
   //My knowledge base should be able to answer this
   assertEquals("Nucleus", 
           brain.getSubClasses("part-of some Cell", false).get(0));
 }
+            </pre>
+            </section>
+<h3>Semantic similarity</h3>
+            <section>
+                <pre>
+float sim = brain.getJaccardSimilarityIndex("Nucleus", "Cell");
             </pre>
             </section>
         </article>
@@ -302,12 +300,12 @@ public static void showOwlClass(String name) {
         </article>
 
         <article>
-            <h3>Wrap-up</h3>
+            <h3>Conclusion</h3>
             <ul>
             	<li>Currently used in production by a couple of projects: <a href="http://www.virtualflybrain.org/site/vfb_site/overview.htm">
             	Virtual Fly Brain</a> and <a href="https://www.ebi.ac.uk/chembl/ftc">Functional Therapeutic Chemical Classification System</a></li>
                 <li>This presentation: <a href="http://bit.ly/SULODn">http://bit.ly/SULODn</a></li>
-                <li>Google for "brain owl library"</li>
+                <li>Search for "brain owl library"</li>
                 <li><a
                     href="https://github.com/loopasam/Brain/wiki">Documentation</a></li>
                 <li><a href="http://samuelcroset.com/contact">Questions/Feature
