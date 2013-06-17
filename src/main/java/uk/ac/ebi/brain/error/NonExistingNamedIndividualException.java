@@ -14,18 +14,15 @@
  */
 package uk.ac.ebi.brain.error;
 
+//TODO do the doc here
+
 /**
- * Exception thrown in case an object property couldn't be parsed.
+ * Exception thrown in case of non existing query for a named individual.
  * @author Samuel Croset
  */
 @SuppressWarnings("serial")
-public class ObjectPropertyExpressionException extends BrainException {
-
-	/**
-	 * @param e
-	 */
-	public ObjectPropertyExpressionException(Exception e) {
-		super(e);
+public class NonExistingNamedIndividualException extends NonExistingEntityException {
+	public NonExistingNamedIndividualException(String message) {
+		super(message);
 	}
-
 }

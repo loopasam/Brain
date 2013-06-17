@@ -19,7 +19,6 @@ import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingEntityException;
 
 
-
 /**
  * @author Samuel Croset
  *
@@ -38,7 +37,7 @@ public class BrainQueryTest {
 	public void dispose() {
 		brain.sleep();
 	}
-	
+
 	@Test
 	public void getNamedSubClass() throws BrainException {
 		Brain brain = new Brain();
@@ -48,8 +47,24 @@ public class BrainQueryTest {
 		brain.getSubClasses("Animal", false);
 		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
 		assertEquals(true, brain.getSubClasses("Animal", false).contains("Lion"));
-		
 	}
+
+	@Test
+	public void getNamedIndividual() throws BrainException {
+		Brain brain = new Brain();
+		brain.learn("src/test/resources/individuals.owl");
+		List<String>individuals = brain.getInstances("Human", false);
+		assertEquals(1, individuals.size());
+		assertEquals("Joe", individuals.get(0));
+		individuals = brain.getInstances("Human", true);
+		assertEquals(0, individuals.size());
+		individuals = brain.getInstances("Fireman", true);
+		assertEquals(1, individuals.size());
+		individuals = brain.getInstancesFromLabel("'a human'", false);
+		assertEquals(1, individuals.size());
+	}
+	
+	//TODO more test could be done regarding individuals - like anonymous class expressions (from label for instance)
 
 	@Test
 	public void getUnsatisfiableClasses() throws BrainException {
@@ -79,7 +94,7 @@ public class BrainQueryTest {
 		List<String> violations = brain.getElProfileViolations();
 		assertEquals(0, violations.size());
 	}
-	
+
 	@Test
 	public void prefixesAndLearnTest() throws BrainException {
 		Brain newBrain = new Brain();

@@ -21,8 +21,8 @@ package uk.ac.ebi.brain.error;
 @SuppressWarnings("serial")
 public class NonExistingClassException extends NonExistingEntityException {
 
-    public NonExistingClassException(String message) {
-	super(message);
-    }
+	public NonExistingClassException(String message) {
+		super(message);
+	}
 
 }

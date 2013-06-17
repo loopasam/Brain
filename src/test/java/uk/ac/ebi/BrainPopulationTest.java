@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -28,6 +29,7 @@ import uk.ac.ebi.brain.error.DataPropertyExpressionException;
 import uk.ac.ebi.brain.error.ExistingClassException;
 import uk.ac.ebi.brain.error.ExistingDataPropertyException;
 import uk.ac.ebi.brain.error.ExistingEntityException;
+import uk.ac.ebi.brain.error.ExistingNamedIndividualException;
 import uk.ac.ebi.brain.error.ExistingObjectPropertyException;
 import uk.ac.ebi.brain.error.NewOntologyException;
 import uk.ac.ebi.brain.error.NonExistingEntityException;
@@ -126,7 +128,50 @@ public class BrainPopulationTest {
 		brain.subClassOf("A", "B");
 		brain.save("src/test/resources/output.owl");
 	}
+	
+	@Test
+	public void addExternalIndividualTest() throws BrainException {
+		brain.addNamedIndividual("http://www.example.org/a");
+		assertEquals(true, brain.getOntology().containsIndividualInSignature(IRI.create("http://www.example.org/a")));
+		assertNotNull(brain.getOWLNamedIndividual("a"));
+	}
 
+	@Test(expected = BadNameException.class)
+	public void addNamedIndividualWithBadNameTest() throws BrainException {
+		brain.addClass("pouet pouet");
+	}
+
+	@Test(expected = ExistingNamedIndividualException.class)
+	public void addExistingNamedIndividualTest() throws BrainException{
+		brain.addNamedIndividual("a");
+		assertEquals(true, brain.getOntology().containsIndividualInSignature(IRI.create(brain.getPrefixManager().getDefaultPrefix() + "a")));
+		brain.addNamedIndividual("a");
+	}
+
+	@Test
+	public void getOwlNamedIndividualTest() throws BrainException {
+		OWLNamedIndividual owlClassA = brain.addNamedIndividual("a");
+		OWLNamedIndividual owlClassAprime = brain.getOWLNamedIndividual("a");
+		assertEquals(owlClassA, owlClassAprime);
+	}
+
+	@Test(expected = NonExistingEntityException.class)
+	public void getNonExsistingOwlNamedIndividualTest() throws NonExistingEntityException {
+		brain.getOWLNamedIndividual("a");
+	}
+	
+	@Test
+	public void individualAssertion() throws BrainException {
+		Brain brain = new Brain();
+		brain.addNamedIndividual("Joe");
+		brain.addClass("Human");
+		brain.addClass("Scientist");
+		brain.type("Human and Scientist", "Joe");
+		brain.getInstances("Human", false);
+		assertEquals(1, brain.getInstances("Human", false).size());
+	}
+	
+	
 	@Test
 	public void objectPropertyTest() throws BrainException {
 		brain.addObjectProperty("part-of");

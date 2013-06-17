@@ -22,8 +22,8 @@ package uk.ac.ebi.brain.error;
 @SuppressWarnings("serial")
 public class ExistingObjectPropertyException extends ExistingEntityException {
 
-    public ExistingObjectPropertyException(String message) {
-	super(message);
-    }
+	public ExistingObjectPropertyException(String message) {
+		super(message);
+	}
 
 }

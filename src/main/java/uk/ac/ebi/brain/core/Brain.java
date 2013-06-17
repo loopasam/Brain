@@ -395,6 +395,77 @@ public class Brain {
 	}
 
 	/**
+	 * Add an OWL named individual to the ontology. An OWLNamedIndividual
+	 * object is returned. The input value can either be
+	 * the short form of the property or the full IRI. Examples of input
+	 * parameter: "http://example.org/MyIndividual" or "MyIndividual".
+	 * @param individualName
+	 * @return owlNamedIndividual
+	 * @throws BadNameException 
+	 * @throws ExistingNamedIndividualException 
+	 */
+	public OWLNamedIndividual addNamedIndividual(String individualName) throws BadNameException, ExistingNamedIndividualException {
+		if(isExternalEntity(individualName)){
+			return addExternalIndividual(individualName);
+		}else{
+			try {
+				this.getOWLNamedIndividual(individualName);
+				throw new ExistingNamedIndividualException("The named individual '"+ individualName +"' already exists.");
+			} catch (NonExistingNamedIndividualException e) {
+				validate(individualName);
+				OWLNamedIndividual owlNamedIndividual = null;
+				try{
+					owlNamedIndividual = this.factory.getOWLNamedIndividual(individualName, this.prefixManager);
+				} catch(RuntimeException re) {
+					throw new BadNameException("The prefix you are using is not recognized. Use either no prefix or a valid URI. More info: " + re);
+				}
+				declare(owlNamedIndividual);
+				update();
+				return owlNamedIndividual;
+			}
+		}
+	}
+
+	/**
+	 * Add an external named individual to the ontology.
+	 * @param individualName
+	 * @return owlNamedIndividual
+	 * @throws ExistingNamedIndividualException 
+	 * @throws BadNameException 
+	 */
+	private OWLNamedIndividual addExternalIndividual(String individualName) throws ExistingNamedIndividualException, BadNameException {
+		if(this.ontology.containsIndividualInSignature(IRI.create(individualName))){
+			throw new ExistingNamedIndividualException("The named individual '"+ individualName +"' already exists.");
+		}
+		validateExternalEntity(individualName);
+		OWLNamedIndividual owlNamedIndividual = this.factory.getOWLNamedIndividual(IRI.create(individualName));
+		SimpleShortFormProvider shortFormProvider = new SimpleShortFormProvider();
+		String sf = shortFormProvider.getShortForm(owlNamedIndividual);
+		try {
+			this.getOWLNamedIndividual(sf);
+			removeExternalNamedIndividual(individualName);
+			throw new ExistingNamedIndividualException("A named individual as already the short form '"+ sf +"'. The short form cannot be re-used name as to be unique.");
+		} catch (NonExistingNamedIndividualException e) {
+			declare(owlNamedIndividual);
+			update();
+			return owlNamedIndividual;
+		}
+	}
+
+	/**
+	 * Remove an external OWL named individual from the ontology.
+	 * @param externalIndividual
+	 */
+	private void removeExternalNamedIndividual(String externalIndividual) {
+		OWLEntityRemover remover = new OWLEntityRemover(this.manager, Collections.singleton(this.ontology));
+		OWLNamedIndividual owlNamedIndividualToRemove = this.factory.getOWLNamedIndividual(IRI.create(externalIndividual));
+		owlNamedIndividualToRemove.accept(remover);
+		this.manager.applyChanges(remover.getChanges());
+		remover.reset();
+		update();
+	}
+
+	/**
 	 * Validate an external OWL entity.
 	 * @param entityIri
 	 * @throws BadNameException
@@ -659,6 +730,21 @@ public class Brain {
 	}
 
 	/**
+	 * Returns the named individual corresponding to the input string (short form).
+	 * @param individualName
+	 * @return namedIndividual
+	 * @throws NonExistingNamedIndividualException 
+	 */
+	public OWLNamedIndividual getOWLNamedIndividual(String individualName) throws NonExistingNamedIndividualException {
+		OWLEntity entity = this.bidiShortFormProvider.getEntity(individualName);
+		if(entity != null && entity.isOWLNamedIndividual()){
+			return (OWLNamedIndividual) entity;
+		}else{
+			throw new NonExistingNamedIndividualException("The entity '"+ individualName +"' does not exist or is not an OWL named individual.");
+		}
+	}
+
+	/**
 	 * Returns the OWL annotation property corresponding to the input string (short form).
 	 * @param propertyName
 	 * @return owlAnnotationProperty
@@ -741,6 +827,31 @@ public class Brain {
 		OWLDisjointClassesAxiom disjointClassAxiom = this.factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
 		addAxiom(disjointClassAxiom);
 	}
+	
+	/**
+	 * Assert a type to an individual (class assertion).
+	 * @param classExpression
+	 * @param individualName
+	 * @throws ClassExpressionException 
+	 * @throws NamedIndividualException 
+	 */
+	public void type(String classExpression, String individualName) throws ClassExpressionException, NamedIndividualException {
+		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+		OWLNamedIndividual owlIndividual = parseNamedIndividual(individualName);
+		OWLClassAssertionAxiom axiom = this.factory.getOWLClassAssertionAxiom(owlClassExpression, owlIndividual);
+		addAxiom(axiom);
+	}
+	
+	//Example with friend value bob to get mary as individual
+	//TODO all the individual axioms when available inside ELK
+	//same individuals
+	//different individuals
+	//object property assertion
+	// ^ available in ELK
+	//data property assertion
+	//neagtive object property assertion
+	//negative data property assertion
+
 
 	/**
 	 * Declare an transitive axiom.
@@ -1127,6 +1238,22 @@ public class Brain {
 		return owlObjectPropertyExpressions;
 	}
 
+	/**
+	 * Converts a string into an OWLNamedIndividual. If a problem is encountered, an error is thrown.
+	 * @param namedIndividual
+	 * @return owlNamedIndividual
+	 * @throws NamedIndividualException 
+	 */
+	private OWLNamedIndividual parseNamedIndividual(String namedIndividual) throws NamedIndividualException  {
+		OWLNamedIndividual owlNamedIndividual = null;
+		ManchesterOWLSyntaxEditorParser parser = getParser(namedIndividual);
+		try {
+			owlNamedIndividual = (OWLNamedIndividual) parser.parseIndividual();
+		} catch (ParserException e) {
+			throw new NamedIndividualException(e);
+		}
+		return owlNamedIndividual;
+	}
 
 	/**
 	 * Instantiate a new Manchester syntax parser.
@@ -1284,7 +1411,11 @@ public class Brain {
 	 * operation, so use it carefully!
 	 */
 	public void classify() {
+		//Maybe this is performance bottleneck. Elk implements as in 0.3.2 an lazy way to trigger the
+		//reasoning. Inside Brain the idea is to handle the reasoning separately, so we have to trigger the
+		//reclassification for each type.
 		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+		this.reasoner.precomputeInferences(InferenceType.CLASS_ASSERTIONS);
 		this.isClassified = true;
 	}
 
@@ -1532,6 +1663,78 @@ public class Brain {
 		}
 		Collections.sort(listClasses);
 		return listClasses;
+	}
+
+	/**
+	 * Sort the individuals based on their short forms.
+	 * @param individuals
+	 * @return listIndividuals
+	 */
+	private List<String> sortInstances(Set<OWLNamedIndividual> individuals) {
+		List<String> listIndividuals = new ArrayList<String>();
+		for (OWLNamedIndividual owlIndividual : individuals) {
+			listIndividuals.add(this.bidiShortFormProvider.getShortForm(owlIndividual));
+		}
+		Collections.sort(listIndividuals);
+		return listIndividuals;
+	}
+
+	/**
+	 * Returns the list of individuals from the expression.
+	 * The second parameter is a flag telling whether only the individuals 
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
+	 * @param classExpression
+	 * @param direct
+	 * @return individuals
+	 * @throws ClassExpressionException 
+	 */
+	public synchronized List<String> getInstances(String classExpression, boolean direct) throws ClassExpressionException {
+		OWLClassExpression owlClassExpression = parseClassExpression(classExpression);
+		return getInstances(owlClassExpression, direct);
+	}
+
+	/**
+	 * Returns the list of named individuals from the OWL expression.
+	 * The second parameter is a flag telling whether only the direct named individuals
+	 * should be returned.
+	 * @param owlClassExpression
+	 * @param direct
+	 * @return instances
+	 */
+	private List<String> getInstances(OWLClassExpression owlClassExpression, boolean direct) {
+		Set<OWLNamedIndividual> instances = null;
+		//Can be simplified once Elk would have implemented a better way to deal with anonymous classes
+		if(owlClassExpression.isAnonymous()){
+			OWLClass anonymousClass = getTemporaryAnonymousClass(owlClassExpression);
+			this.classify();
+			instances = this.reasoner.getInstances(anonymousClass, direct).getFlattened();
+			removeTemporaryAnonymousClass(anonymousClass);
+		}else{
+			if(!this.isClassified){
+				this.classify();
+			}
+			instances = this.reasoner.getInstances(owlClassExpression, direct).getFlattened();
+		}
+		return sortInstances(instances);
+	}
+
+
+	/**
+	 * Returns the list of instances (named individuals) from the label expression.
+	 * The second parameter is a flag telling whether only the direct individuals
+	 * should be returned. The method is synchronized in order
+	 * to avoid concurrency problems that could arise in threaded
+	 * environment (such as a web server with a shared Brain instance).
+	 * @param labelClassExpression
+	 * @param direct
+	 * @return instances
+	 * @throws ClassExpressionException 
+	 */
+	public synchronized List<String> getInstancesFromLabel(String labelClassExpression, boolean direct) throws ClassExpressionException {
+		OWLClassExpression owlClassExpression = parseLabelClassExpression(labelClassExpression);
+		return getInstances(owlClassExpression, direct);
 	}
 
 

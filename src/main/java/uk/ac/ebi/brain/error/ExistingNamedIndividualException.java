@@ -15,17 +15,13 @@
 package uk.ac.ebi.brain.error;
 
 /**
- * Exception thrown in case an object property couldn't be parsed.
+ * Exception thrown in case of a named individual is already present.
  * @author Samuel Croset
+ *
  */
 @SuppressWarnings("serial")
-public class ObjectPropertyExpressionException extends BrainException {
-
-	/**
-	 * @param e
-	 */
-	public ObjectPropertyExpressionException(Exception e) {
-		super(e);
+public class ExistingNamedIndividualException extends ExistingEntityException {
+	public ExistingNamedIndividualException(String message) {
+		super(message);
 	}
-
 }
