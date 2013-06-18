@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: uk.ac.ebi.BrainPopulationTest
 -------------------------------------------------------------------------------
-Tests run: 44, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.672 sec
+Tests run: 51, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.366 sec
