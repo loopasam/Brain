@@ -128,7 +128,7 @@ public class BrainPopulationTest {
 		brain.subClassOf("A", "B");
 		brain.save("src/test/resources/output.owl");
 	}
-	
+
 	@Test
 	public void addExternalIndividualTest() throws BrainException {
 		brain.addNamedIndividual("http://www.example.org/a");
@@ -159,7 +159,7 @@ public class BrainPopulationTest {
 	public void getNonExsistingOwlNamedIndividualTest() throws NonExistingEntityException {
 		brain.getOWLNamedIndividual("a");
 	}
-	
+
 	@Test
 	public void individualAssertion() throws BrainException {
 		Brain brain = new Brain();
@@ -170,8 +170,23 @@ public class BrainPopulationTest {
 		brain.getInstances("Human", false);
 		assertEquals(1, brain.getInstances("Human", false).size());
 	}
-	
-	
+
+	@Test
+	public void objectPropertyAssertionTest() throws BrainException {
+		Brain brain = new Brain();
+		brain.addNamedIndividual("joe");
+		brain.addNamedIndividual("mary");
+		brain.addObjectProperty("knows");
+		brain.objectPropertyAssertion("joe", "knows", "mary");
+		List<String> instances = brain.getInstances("knows value mary", false);
+		assertEquals(1, instances.size());
+		brain.transitive("knows");
+		brain.addNamedIndividual("bob");
+		brain.objectPropertyAssertion("bob", "knows", "joe");
+		List<String> instances2 = brain.getInstances("knows value mary", false);
+		assertEquals(2, instances2.size());
+	}
+
 	@Test
 	public void objectPropertyTest() throws BrainException {
 		brain.addObjectProperty("part-of");

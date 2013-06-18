@@ -827,7 +827,7 @@ public class Brain {
 		OWLDisjointClassesAxiom disjointClassAxiom = this.factory.getOWLDisjointClassesAxiom(classExpression1, classExpression2);
 		addAxiom(disjointClassAxiom);
 	}
-	
+
 	/**
 	 * Assert a type to an individual (class assertion).
 	 * @param classExpression
@@ -841,18 +841,30 @@ public class Brain {
 		OWLClassAssertionAxiom axiom = this.factory.getOWLClassAssertionAxiom(owlClassExpression, owlIndividual);
 		addAxiom(axiom);
 	}
+
+	/**
+	 * Assert a relation between two individuals (triple or fact).
+	 * @param subjectIndividual
+	 * @param objectProperty
+	 * @param objectIndividual
+	 * @throws ObjectPropertyExpressionException 
+	 * @throws NamedIndividualException 
+	 */
+	public void objectPropertyAssertion(String subjectIndividual, String objectProperty, String objectIndividual) throws ObjectPropertyExpressionException, NamedIndividualException {
+		OWLObjectPropertyExpression owlObjectProperty = parseObjectPropertyExpression(objectProperty);
+		OWLNamedIndividual owlSubjectIndividual = parseNamedIndividual(subjectIndividual);
+		OWLNamedIndividual owlObjectIndividual = parseNamedIndividual(objectIndividual);
+		OWLObjectPropertyAssertionAxiom axiom = this.factory.getOWLObjectPropertyAssertionAxiom(owlObjectProperty, owlSubjectIndividual, owlObjectIndividual);		
+		addAxiom(axiom);
+	}
+
+	//TODO implement axiom same individual once supported by ELK
+	//TODO implement axiom different individual once supported by ELK
+	//TODO implement axiom data property assertion once supported by ELK
+	//TODO implement axiom negative object property assertion once supported by ELK
+	//TODO implement axiom negative data property assertion once supported by ELK
 	
-	//Example with friend value bob to get mary as individual
-	//TODO all the individual axioms when available inside ELK
-	//same individuals
-	//different individuals
-	//object property assertion
-	// ^ available in ELK
-	//data property assertion
-	//neagtive object property assertion
-	//negative data property assertion
-
-
+	
 	/**
 	 * Declare an transitive axiom.
 	 * @param propertyExpression
