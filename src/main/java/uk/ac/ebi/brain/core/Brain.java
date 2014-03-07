@@ -863,8 +863,8 @@ public class Brain {
 	//TODO implement axiom data property assertion once supported by ELK
 	//TODO implement axiom negative object property assertion once supported by ELK
 	//TODO implement axiom negative data property assertion once supported by ELK
-	
-	
+
+
 	/**
 	 * Declare an transitive axiom.
 	 * @param propertyExpression
@@ -1079,6 +1079,45 @@ public class Brain {
 	public String getAnnotation(String entity, String annotationProperty) throws NonExistingEntityException {
 		OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
 		return this.getAnnotation(entity, owlAnnotationProperty);
+	}
+
+	/**
+	 * Retrieve the list of values for an annotation.
+	 * @param entity
+	 * @param annotationProperty
+	 * @throws NonExistingEntityException
+	 * @return content
+	 */
+	private List<String> getAnnotations(String entity, OWLAnnotationProperty annotationProperty) throws NonExistingEntityException {
+		if(this.bidiShortFormProvider.getEntity(entity) !=  null){
+			OWLEntity owlEntity = this.bidiShortFormProvider.getEntity(entity);
+			List<String> annotations = new ArrayList<String>();
+			Set<OWLAnnotation> owlAnnotations = owlEntity.getAnnotations(this.ontology, annotationProperty);
+			if(owlAnnotations.size() <= 0){
+				throw new NonExistingEntityException("The entity '"+entity+"' has no annotation of this type attached to it.");
+			}
+			for (OWLAnnotation annotation : owlAnnotations) {
+				if (annotation.getValue() instanceof OWLLiteral) {
+					OWLLiteral val = (OWLLiteral) annotation.getValue();
+					annotations.add(val.getLiteral());
+				}
+			}
+			return annotations;
+		}else{
+			throw new NonExistingEntityException("The entity '"+entity+"' does not exist.");
+		}
+	}
+
+	/**
+	 * Retrieve the list of values for an annotation.
+	 * @param entity
+	 * @param annotationProperty
+	 * @throws NonExistingEntityException
+	 * @return content
+	 */
+	public List<String> getAnnotations(String entity, String annotationProperty) throws NonExistingEntityException {
+		OWLAnnotationProperty owlAnnotationProperty = this.getOWLAnnotationProperty(annotationProperty);
+		return this.getAnnotations(entity, owlAnnotationProperty);
 	}
 
 	/**
@@ -1426,8 +1465,9 @@ public class Brain {
 		//Maybe this is performance bottleneck. Elk implements as in 0.3.2 an lazy way to trigger the
 		//reasoning. Inside Brain the idea is to handle the reasoning separately, so we have to trigger the
 		//reclassification for each type.
-		this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
-		this.reasoner.precomputeInferences(InferenceType.CLASS_ASSERTIONS);
+		//this.reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+		//this.reasoner.precomputeInferences(InferenceType.CLASS_ASSERTIONS);
+		this.reasoner.precomputeInferences();
 		this.isClassified = true;
 	}
 

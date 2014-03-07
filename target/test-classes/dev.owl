@@ -1,0 +1,199 @@
+Prefix: : <http://www.example.org/>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <http://www.example.org/public/example.owl>
+
+
+AnnotationProperty: rdfs:seeAlso
+
+    
+AnnotationProperty: rdfs:isDefinedBy
+
+    
+AnnotationProperty: rdfs:label
+
+    
+AnnotationProperty: testing
+
+    
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:string
+
+    
+Datatype: rdfs:Literal
+
+    
+ObjectProperty: part-of
+
+    Characteristics: 
+        Transitive
+    
+    
+Class: owl:Thing
+
+    DisjointWith: 
+        R
+    
+    
+Class: Q
+
+    SubClassOf: 
+        part-of some K
+    
+    
+Class: R
+
+    DisjointWith: 
+        owl:Thing
+    
+    
+Class: O
+
+    EquivalentTo: 
+        part-of some M
+    
+    
+Class: M
+
+    EquivalentTo: 
+        N
+    
+    
+Class: N
+
+    EquivalentTo: 
+        M
+    
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: K
+
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: L
+
+    SubClassOf: 
+        K
+    
+    
+Class: I
+
+    SubClassOf: 
+        part-of some L
+    
+    
+Class: ID01
+
+    Annotations: 
+        rdfs:label "tail"^^xsd:string
+    
+    SubClassOf: 
+        part-of some ID03
+    
+    
+Class: J
+
+    SubClassOf: 
+        I
+    
+    
+Class: ID03
+
+    Annotations: 
+        rdfs:label "animal"^^xsd:string
+    
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: G
+
+    Annotations: 
+        testing "value2",
+        testing "value1"
+    
+    
+Class: ID02
+
+    Annotations: 
+        rdfs:label "dog"^^xsd:string
+    
+    SubClassOf: 
+        ID03
+    
+    
+Class: H
+
+    SubClassOf: 
+        G
+    
+    
+Class: F
+
+    SubClassOf: 
+        E,
+        H
+    
+    
+Class: E
+
+    SubClassOf: 
+        D
+    
+    
+Class: D
+
+    SubClassOf: 
+        A
+    
+    
+Class: C
+
+    SubClassOf: 
+        B
+    
+    
+Class: B
+
+    SubClassOf: 
+        A
+    
+    
+Class: A
+
+    Annotations: 
+        rdfs:comment "comment attached to the class"^^xsd:string,
+        rdfs:isDefinedBy "something"^^xsd:string,
+        testing "whatever"^^xsd:string,
+        rdfs:seeAlso "bar"^^xsd:string,
+        rdfs:label "pouet"^^xsd:string
+    
+    EquivalentTo: 
+        Z
+    
+    
+Class: Z
+
+    Annotations: 
+        rdfs:label "'pouet pouet'"^^xsd:string
+    
+    EquivalentTo: 
+        A
+    
+    

@@ -1,9 +1,9 @@
-Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
-Prefix: owl: <http://www.w3.org/2002/07/owl#>
 Prefix: : <http://www.example.org/>
-Prefix: xml: <http://www.w3.org/XML/1998/namespace>
-Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 
@@ -24,6 +24,9 @@ AnnotationProperty: testing
 
     
 AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
 
     
 Datatype: xsd:string
@@ -89,6 +92,12 @@ Class: L
         K
     
     
+Class: I
+
+    SubClassOf: 
+        part-of some L
+    
+    
 Class: ID01
 
     Annotations: 
@@ -98,20 +107,11 @@ Class: ID01
         part-of some ID03
     
     
-Class: I
-
-    SubClassOf: 
-        part-of some L
-    
-    
 Class: J
 
     SubClassOf: 
         I
     
-    
-Class: G
-
     
 Class: ID03
 
@@ -122,10 +122,11 @@ Class: ID03
         owl:Thing
     
     
-Class: H
+Class: G
 
-    SubClassOf: 
-        G
+    Annotations: 
+        testing "value2",
+        testing "value1"
     
     
 Class: ID02
@@ -135,6 +136,12 @@ Class: ID02
     
     SubClassOf: 
         ID03
+    
+    
+Class: H
+
+    SubClassOf: 
+        G
     
     
 Class: F
@@ -171,11 +178,11 @@ Class: B
 Class: A
 
     Annotations: 
-        rdfs:seeAlso "bar"^^xsd:string,
-        rdfs:label "pouet"^^xsd:string,
-        testing "whatever"^^xsd:string,
         rdfs:comment "comment attached to the class"^^xsd:string,
-        rdfs:isDefinedBy "something"^^xsd:string
+        rdfs:isDefinedBy "something"^^xsd:string,
+        testing "whatever"^^xsd:string,
+        rdfs:seeAlso "bar"^^xsd:string,
+        rdfs:label "pouet"^^xsd:string
     
     EquivalentTo: 
         Z

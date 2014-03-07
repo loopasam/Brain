@@ -273,6 +273,14 @@ public class BrainQueryTest {
 		String testing = brain.getAnnotation("A", "testing");
 		assertEquals("whatever", testing);
 	}
+	
+	@Test
+	public void getAnnotationArrayTest() throws BrainException {
+		List<String> annotations = brain.getAnnotations("G", "testing");
+		assertEquals(2, annotations.size());
+		assertEquals("value2", annotations.get(0));
+		assertEquals("value1", annotations.get(1));
+	}
 
 	@Test
 	public void learnFromLocalFile() throws BrainException {
