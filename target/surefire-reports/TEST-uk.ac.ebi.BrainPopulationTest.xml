@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.353" errors="0" skipped="0" tests="51" name="uk.ac.ebi.BrainPopulationTest">
+<testsuite failures="0" time="1.356" errors="0" skipped="0" tests="51" name="uk.ac.ebi.BrainPopulationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-oracle/jre/lib/amd64"/>
@@ -60,55 +60,55 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.459" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalClassTest"/>
-  <testcase time="0.001" classname="uk.ac.ebi.BrainPopulationTest" name="addClassWithBadNameTest"/>
-  <testcase time="0" classname="uk.ac.ebi.BrainPopulationTest" name="addExistingClassTest"/>
-  <testcase time="0" classname="uk.ac.ebi.BrainPopulationTest" name="getOwlClassTest"/>
-  <testcase time="0.001" classname="uk.ac.ebi.BrainPopulationTest" name="getNonExsistingOwlClassTest"/>
-  <testcase time="0.06" classname="uk.ac.ebi.BrainPopulationTest" name="subClassOfTest"/>
+  <testcase time="0.452" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalClassTest"/>
+  <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addClassWithBadNameTest"/>
+  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="addExistingClassTest"/>
+  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="getOwlClassTest"/>
+  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="getNonExsistingOwlClassTest"/>
+  <testcase time="0.056" classname="uk.ac.ebi.BrainPopulationTest" name="subClassOfTest"/>
   <testcase time="0.015" classname="uk.ac.ebi.BrainPopulationTest" name="equivalentClassesTest"/>
   <testcase time="0.02" classname="uk.ac.ebi.BrainPopulationTest" name="disjointClassesTest"/>
-  <testcase time="0.015" classname="uk.ac.ebi.BrainPopulationTest" name="subClassOfErrorTest"/>
-  <testcase time="0.025" classname="uk.ac.ebi.BrainPopulationTest" name="saveOntology"/>
+  <testcase time="0.018" classname="uk.ac.ebi.BrainPopulationTest" name="subClassOfErrorTest"/>
+  <testcase time="0.019" classname="uk.ac.ebi.BrainPopulationTest" name="saveOntology"/>
   <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalIndividualTest"/>
   <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addNamedIndividualWithBadNameTest"/>
   <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addExistingNamedIndividualTest"/>
-  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="getOwlNamedIndividualTest"/>
+  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="getOwlNamedIndividualTest"/>
   <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="getNonExsistingOwlNamedIndividualTest"/>
-  <testcase time="0.119" classname="uk.ac.ebi.BrainPopulationTest" name="individualAssertion"/>
-  <testcase time="0.066" classname="uk.ac.ebi.BrainPopulationTest" name="objectPropertyAssertionTest"/>
-  <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="objectPropertyTest"/>
-  <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="redundantObjectPropertyTest"/>
-  <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalObjectPropertyTest"/>
+  <testcase time="0.128" classname="uk.ac.ebi.BrainPopulationTest" name="individualAssertion"/>
+  <testcase time="0.068" classname="uk.ac.ebi.BrainPopulationTest" name="objectPropertyAssertionTest"/>
+  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="objectPropertyTest"/>
+  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="redundantObjectPropertyTest"/>
+  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalObjectPropertyTest"/>
   <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="transitivePropertyTest"/>
   <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="unknownTransitivePropertyTest"/>
-  <testcase time="0.008" classname="uk.ac.ebi.BrainPopulationTest" name="reflexivePropertyTest"/>
-  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="dataPropertyTest"/>
-  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="existingDataPropertyTest"/>
-  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalDataPropertyTest"/>
+  <testcase time="0.011" classname="uk.ac.ebi.BrainPopulationTest" name="reflexivePropertyTest"/>
+  <testcase time="0.012" classname="uk.ac.ebi.BrainPopulationTest" name="dataPropertyTest"/>
+  <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="existingDataPropertyTest"/>
+  <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addExternalDataPropertyTest"/>
   <testcase time="0.009" classname="uk.ac.ebi.BrainPopulationTest" name="functionalDataPropertyTest"/>
   <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="functionalDataPropertyAssertionTest"/>
-  <testcase time="0.009" classname="uk.ac.ebi.BrainPopulationTest" name="domainTest"/>
+  <testcase time="0.007" classname="uk.ac.ebi.BrainPopulationTest" name="domainTest"/>
   <testcase time="0.01" classname="uk.ac.ebi.BrainPopulationTest" name="complexDomainTest"/>
   <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="rangeObjectPropertyTest"/>
   <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="rangeDataPropertyTest"/>
   <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="equivalentObjectPropertiesTest"/>
   <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="wrongEquivalentObjectPropertiesTest"/>
-  <testcase time="0.008" classname="uk.ac.ebi.BrainPopulationTest" name="equivalentDataPropertiesTest"/>
-  <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="mixedEquivalentPropertiesTest"/>
-  <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="subObjectPropertyTest"/>
-  <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="subDataPropertyTest"/>
-  <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="corruptedSubPropertyAseertionTest"/>
-  <testcase time="0.007" classname="uk.ac.ebi.BrainPopulationTest" name="ChainedPropertiesTest"/>
+  <testcase time="0.01" classname="uk.ac.ebi.BrainPopulationTest" name="equivalentDataPropertiesTest"/>
+  <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="mixedEquivalentPropertiesTest"/>
+  <testcase time="0.007" classname="uk.ac.ebi.BrainPopulationTest" name="subObjectPropertyTest"/>
+  <testcase time="0.008" classname="uk.ac.ebi.BrainPopulationTest" name="subDataPropertyTest"/>
+  <testcase time="0.007" classname="uk.ac.ebi.BrainPopulationTest" name="corruptedSubPropertyAseertionTest"/>
+  <testcase time="0.008" classname="uk.ac.ebi.BrainPopulationTest" name="ChainedPropertiesTest"/>
   <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="wrongChainedPropertiesTest"/>
   <testcase time="0.006" classname="uk.ac.ebi.BrainPopulationTest" name="labelTest"/>
-  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="externalAnnotationTest"/>
+  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="externalAnnotationTest"/>
   <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="annotationTest"/>
   <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="wrongAnnotationTest"/>
-  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="builtInAnnotationTest"/>
-  <testcase time="0.004" classname="uk.ac.ebi.BrainPopulationTest" name="prefixTest"/>
-  <testcase time="0.257" classname="uk.ac.ebi.BrainPopulationTest" name="contructorFromOntologyTest"/>
-  <testcase time="0.009" classname="uk.ac.ebi.BrainPopulationTest" name="addClassBivalentHandling"/>
-  <testcase time="0.003" classname="uk.ac.ebi.BrainPopulationTest" name="wrongPrefixTest"/>
+  <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="builtInAnnotationTest"/>
+  <testcase time="0.005" classname="uk.ac.ebi.BrainPopulationTest" name="prefixTest"/>
+  <testcase time="0.247" classname="uk.ac.ebi.BrainPopulationTest" name="contructorFromOntologyTest"/>
+  <testcase time="0.008" classname="uk.ac.ebi.BrainPopulationTest" name="addClassBivalentHandling"/>
+  <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="wrongPrefixTest"/>
   <testcase time="0.002" classname="uk.ac.ebi.BrainPopulationTest" name="addClassTest"/>
 </testsuite>
