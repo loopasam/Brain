@@ -1385,18 +1385,52 @@ public class Brain {
 		SimpleShortFormProvider sf = new SimpleShortFormProvider();
 		Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
 		BidirectionalShortFormProviderAdapter newBidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
+
+		//For each of the new shortForms, checks if it exists already in the existing one.
+		//throws an error if the same entity was found, otherwise carries on.
 		for (String shortFromNewOnto : newBidiShortFormProvider.getShortForms()) {
+
 			if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
+
+				//If the short form is already known, can be problematic, because multiple short forms can
+				//refer to the same entity. The code below is made to identify this.
+
 				OWLEntity existingEntity = this.bidiShortFormProvider.getEntity(shortFromNewOnto);
 				OWLEntity newEntity = newBidiShortFormProvider.getEntity(shortFromNewOnto);
+
 				boolean identicalEntities = false;
-				if(newEntity.getIRI().equals(existingEntity.getIRI()) && newEntity.getEntityType().equals(existingEntity.getEntityType())){
-					identicalEntities = true;
+				boolean identicalType = false;
+				boolean identicalIri = false;
+
+				//Compares the URI of the entities
+				if(newEntity.getIRI().equals(existingEntity.getIRI())){
+					identicalIri = true;
+				}
+
+				//Compares their types
+				if(newEntity.getEntityType().equals(existingEntity.getEntityType())){
+					identicalType = true;
+					if(identicalIri){
+						//If they have the same type and same name, therefore they are the same entities.
+						identicalEntities = true;
+					}
 				}
 
 				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
-					throw new ExistingEntityException("The entity '"+shortFromNewOnto+"' already exists and is of different type or has a" +
-							"different prefix.");
+					//A problem was identified: the new short form is not unique and refers in a different already existing entity.
+					String message = "Inside the file you are trying to load (" + pathToOntology + "), there's an entity with the short form '"+ shortFromNewOnto + "' (derived from " +
+							newEntity.getIRI() + ") which  already exists in the kwnoledge base.\n" +
+							"This short form currently refers to the existing entity '" + existingEntity.getIRI() + "'.\n" +
+									" Please make sure short forms are unique, otherwise you will have ambiguity problems when" +
+									" running queries later on.";
+
+					if(!identicalType && identicalIri){
+						message += " These two entities have the IRI, but different types. " +
+								"The type of the alsready existing one is '" + existingEntity.getEntityType() + "' and the type" +
+								" of the one to be learned is '" + newEntity.getEntityType() + "'.";
+					}
+
+					throw new ExistingEntityException(message);
 				}
 			}
 		}
