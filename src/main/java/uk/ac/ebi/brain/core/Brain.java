@@ -170,7 +170,7 @@ public class Brain {
 
 		this.factory = this.manager.getOWLDataFactory();
 
-		ShortFormProvider shortFormProvider = new SimpleShortFormProvider();	
+		ShortFormProvider shortFormProvider = new SimpleShortFormProvider();
 		Set<OWLOntology> importsClosure = this.ontology.getImportsClosure();
 		this.bidiShortFormProvider = new BidirectionalShortFormProviderAdapter(this.manager, importsClosure, shortFormProvider);
 		this.entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
@@ -1421,8 +1421,8 @@ public class Brain {
 					String message = "Inside the file you are trying to load (" + pathToOntology + "), there's an entity with the short form '"+ shortFromNewOnto + "' (derived from " +
 							newEntity.getIRI() + ") which  already exists in the kwnoledge base.\n" +
 							"This short form currently refers to the existing entity '" + existingEntity.getIRI() + "'.\n" +
-									" Please make sure short forms are unique, otherwise you will have ambiguity problems when" +
-									" running queries later on.";
+							" Please make sure short forms are unique, otherwise you will have ambiguity problems when" +
+							" running queries later on.";
 
 					if(!identicalType && identicalIri){
 						message += " These two entities have the IRI, but different types. " +
@@ -1431,6 +1431,114 @@ public class Brain {
 					}
 
 					throw new ExistingEntityException(message);
+				}
+			}
+		}
+
+		//Keep the prefix information if present
+		OWLOntologyFormat format = newManager.getOntologyFormat(newOnto);
+		if (format.isPrefixOWLOntologyFormat()) {
+			PrefixOWLOntologyFormat newPrefixesFormat = format.asPrefixOWLOntologyFormat();
+			Set<String> newPrefixes = newPrefixesFormat.getPrefixNames();
+			for (String prefix : newPrefixes) {
+				if(!this.prefixManager.containsPrefixMapping(prefix)){
+					prefix(newPrefixesFormat.getPrefix(prefix), prefix.replaceAll(":", ""));
+				}
+			}
+		}
+
+		//Transfer all the axioms from the old ontology into the new one
+		//Bottleneck
+		this.manager.addAxioms(this.ontology, newOnto.getAxioms());
+		update();
+	}
+
+	/**
+	 * Load an external ontology from it's IRI or from a local file
+	 * and merge it with the current ontology. In case the shortform is already used, Brain
+	 * re-uses the one already existing (first-come, first-served strategy). Brain will try do 
+	 * disambiguate shortform as much as possible, however, because this process is hacky by nature, the solution
+	 * might not be exactly accurate - so double check the results!
+	 * @param pathToOntology
+	 * @throws NewOntologyException 
+	 * @throws ExistingEntityException 
+	 */
+	public void learnAndDisambiguate(String pathToOntology) throws NewOntologyException, ExistingEntityException {
+		OWLOntologyManager newManager = OWLManager.createOWLOntologyManager();
+		OWLOntology newOnto;
+		if(isExternalEntity(pathToOntology)){
+			IRI iriOnto = IRI.create(pathToOntology);
+			try {
+				newOnto = newManager.loadOntologyFromOntologyDocument(iriOnto);
+			} catch (OWLOntologyCreationException e) {
+				throw new NewOntologyException(e);
+			}
+		}else{
+			File file = new File(pathToOntology);
+			try {
+				newOnto = newManager.loadOntologyFromOntologyDocument(file);
+			} catch (OWLOntologyCreationException e) {
+				throw new NewOntologyException(e);
+			}
+		}
+
+		SimpleShortFormProvider sf = new SimpleShortFormProvider();
+		Set<OWLOntology> importsClosure = newOnto.getImportsClosure();
+		BidirectionalShortFormProviderAdapter newBidiShortFormProvider = new BidirectionalShortFormProviderAdapter(newManager, importsClosure, sf);
+
+		//For each of the new shortForms, checks if it exists already in the existing one.
+		//throws an error if the same entity was found, otherwise carries on.
+		for (String shortFromNewOnto : newBidiShortFormProvider.getShortForms()) {
+
+			//check if the shortform is already known, to identify the problematic cases.
+			if(this.bidiShortFormProvider.getEntity(shortFromNewOnto) != null){
+
+				//If the short form is already known, can be problematic, because multiple short forms can
+				//refer to the same entity. This method tries to disambiguate the shortform using 
+				//a first-come first-served strategy: if an identical shortform is already detected, then it
+				//uses the already existing version rather than the new one, and prints a warning to the user.
+
+				OWLEntity existingEntity = this.bidiShortFormProvider.getEntity(shortFromNewOnto);
+				OWLEntity newEntity = newBidiShortFormProvider.getEntity(shortFromNewOnto);
+
+				boolean identicalEntities = false;
+				boolean identicalType = false;
+				boolean identicalIri = false;
+
+				//Compares the URI of the entities
+				if(newEntity.getIRI().equals(existingEntity.getIRI())){
+					identicalIri = true;
+				}
+
+				//Compares their types
+				if(newEntity.getEntityType().equals(existingEntity.getEntityType())){
+					identicalType = true;
+					if(identicalIri){
+						//If they have the same type and same name, therefore they are the same entities.
+						//No problem, just carries on with the checking.
+						identicalEntities = true;
+					}
+				}
+
+				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
+					//Should be an error in this case, impossible to disambiguate
+					if(!identicalType && identicalIri){
+						throw new ExistingEntityException(" These two entities have the same IRI, but different types. " +
+								"The type of the alsready existing one is '" + existingEntity.getEntityType() + "' and the type" +
+								" of the one to be learned is '" + newEntity.getEntityType() + "'.");
+					}else{
+						//Attempt to disambiguate, the entities have the same shortform and types, but different IRIs
+						//Covert all the new IRIs to the existing one
+						Set<OWLOntology> ontologies = new HashSet<OWLOntology>();
+						ontologies.add(newOnto);
+						OWLEntityRenamer renamer = new OWLEntityRenamer(newManager, ontologies);
+						IRI existingIri = existingEntity.getIRI();
+						IRI newIri = newEntity.getIRI();
+						//Replace the IRI of the conflicting new entity with the IRI already existing in the KB.
+						List<OWLOntologyChange> changes = renamer.changeIRI(newIri, existingIri);
+						//Applies the changes to the ontology
+						newManager.applyChanges(changes);
+					}
 				}
 			}
 		}
