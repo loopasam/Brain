@@ -1425,8 +1425,8 @@ public class Brain {
 							" running queries later on.";
 
 					if(!identicalType && identicalIri){
-						message += " These two entities have the IRI, but different types. " +
-								"The type of the alsready existing one is '" + existingEntity.getEntityType() + "' and the type" +
+						message += " These two entities have the IRI (" + existingEntity.getIRI() + "), but different types. " +
+								"The type of the already existing one is '" + existingEntity.getEntityType() + "' and the type" +
 								" of the one to be learned is '" + newEntity.getEntityType() + "'.";
 					}
 
@@ -1523,8 +1523,8 @@ public class Brain {
 				if(!shortFromNewOnto.equals("Thing") && !identicalEntities){
 					//Should be an error in this case, impossible to disambiguate
 					if(!identicalType && identicalIri){
-						throw new ExistingEntityException(" These two entities have the same IRI, but different types. " +
-								"The type of the alsready existing one is '" + existingEntity.getEntityType() + "' and the type" +
+						throw new ExistingEntityException(" These two entities (" + existingEntity.getIRI() + ") have the same IRI, but different types. " +
+								"The type of the already existing one is '" + existingEntity.getEntityType() + "' and the type" +
 								" of the one to be learned is '" + newEntity.getEntityType() + "'.");
 					}else{
 						//Attempt to disambiguate, the entities have the same shortform and types, but different IRIs
